@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using ABDH_Demo.Services.LinqClient;
+using ABDH_Demo.Models;
+namespace ABDH_Demo.Services
+{
+    public class DinhKemService
+    {
+        LinqClient.DinhKemDA _dinhkemDA = new DinhKemDA();
+        public List<tblDinhKem> GetDinhKems()
+        {
+            return _dinhkemDA.GetDinhKems();
+        }
+        public tblTaiLieu GetTailieuByID(int id)
+        {
+            return _dinhkemDA.GetTailieuByID(id);
+        }
+    }
+}

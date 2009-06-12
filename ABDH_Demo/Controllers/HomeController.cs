@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using ABDH_Demo.Services;
+using ABDH_Demo.Models;
+namespace ABDH_Demo.Controllers
+{
+    [HandleError]
+    public class HomeController : Controller
+    {
+        DinhKemService _service = new DinhKemService();
+        public ActionResult Index()
+        {
+            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+        public ActionResult List()
+        {
+            
+            List<tblDinhKem> list =  _service.GetDinhKems();
+            return View(list);
+        }
+        public ActionResult Edit(int id)
+        {
+            tblTaiLieu tailieu =  _service.GetTailieuByID(id);
+            return View(tailieu);
+        }
+
+        //
+        // POST: /Library/Edit/5
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                tblTaiLieu doc = _service.GetTailieuByID(id);
+                // TODO: Add update logic here
+                UpdateModel<tblTaiLieu>(doc, collection);
+                return RedirectToAction("List");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }
+    
+}
