@@ -44,7 +44,7 @@ namespace ABDH_Demo.Controllers
             {
                 tblTaiLieu doc = _service.GetTailieuByID(id);
                 // TODO: Add update logic here
-                UpdateModel<tblTaiLieu>(doc, collection);
+                //UpdateModel<tblTaiLieu>(doc, collection);
                 return RedirectToAction("List");
             }
             catch
