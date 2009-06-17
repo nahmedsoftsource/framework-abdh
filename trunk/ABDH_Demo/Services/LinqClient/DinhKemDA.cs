@@ -10,6 +10,7 @@ namespace ABDH_Demo.Services.LinqClient
     {
         public List<Models.tblDinhKem> GetDinhKems()
         {
+            GetMaxIDTailieu();
             ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
             
             var query = _libraryContext.tblDinhKems;
@@ -20,7 +21,9 @@ namespace ABDH_Demo.Services.LinqClient
         {
             ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
             var query = _libraryContext.tblTaiLieus.Where("TailieuID=@0", id);
-            return query.ToList().First();
+            if(query.ToList().Count > 0)
+              return query.ToList().First();
+            return new tblTaiLieu();
         }
         public void SaveTaiLieu(tblTaiLieu tailieu)
         {
@@ -40,6 +43,20 @@ namespace ABDH_Demo.Services.LinqClient
             tmp.VongDoi_EndDate = tailieu.VongDoi_EndDate;
             tmp.VongDoi_StartDate = tailieu.VongDoi_StartDate;
             _libraryContext.SubmitChanges();
+        }
+        public int GetMaxIDTailieu()
+        {
+          ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
+          var query = _libraryContext.tblTaiLieus.Max(ib=>ib.TaiLieuID);
+          return query;
+        }
+        public void InsertTailieu(tblTaiLieu tailieu)
+        {
+          int tailieuID = GetMaxIDTailieu();
+          tailieu.TaiLieuID = tailieuID + 1;
+          ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
+          _libraryContext.tblTaiLieus.InsertOnSubmit(tailieu);
+          _libraryContext.SubmitChanges();
         }
     }
 }

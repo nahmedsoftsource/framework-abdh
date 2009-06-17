@@ -14,8 +14,9 @@ namespace ABDH_Demo.Controllers
         public ActionResult Index()
         {
             ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
+            RedirectToAction("List");
             return View();
+
         }
 
         public ActionResult About()
@@ -30,6 +31,7 @@ namespace ABDH_Demo.Controllers
         }
         public ActionResult Edit(int id)
         {
+          
             tblTaiLieu tailieu =  _service.GetTailieuByID(id);
             return View(tailieu);
         }
@@ -40,19 +42,29 @@ namespace ABDH_Demo.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection collection)
         {
-          tblTaiLieu doc = _service.GetTailieuByID(id);
-          try
+          if (id != 0)
           {
-            
-            UpdateModel(doc);
-            // TODO: Add update logic here
-            //UpdateModel<tblTaiLieu>(doc, collection);
-            _service.SaveTaiLieu(doc);
-            return RedirectToAction("List");
+            tblTaiLieu doc = _service.GetTailieuByID(id);
+            try
+            {
+
+              UpdateModel(doc);
+              // TODO: Add update logic here
+              //UpdateModel<tblTaiLieu>(doc, collection);
+              _service.SaveTaiLieu(doc);
+              return RedirectToAction("List");
+            }
+            catch
+            {
+              return View(doc);
+            }
           }
-          catch
+          else
           {
-            return View(doc);
+            tblTaiLieu doc = new tblTaiLieu();
+            UpdateModel(doc);
+            _service.InsertTailieu(doc);
+            return RedirectToAction("List");
           }
         }
         public ActionResult Details(int id)
