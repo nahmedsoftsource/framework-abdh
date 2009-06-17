@@ -83,6 +83,7 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Home\Details.aspx" />
     <Content Include="Views\Home\Edit.aspx" />
     <Content Include="Views\Home\List.aspx" />
     <Content Include="Web.config" />
