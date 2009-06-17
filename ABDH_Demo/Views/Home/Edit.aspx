@@ -1,5 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ABDH_Demo.Models.tblTaiLieu>" %>
-
+<%@ Import Namespace= ABDH_Demo.Models%>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	Edit
 </asp:Content>
@@ -51,7 +51,12 @@
             </p>
             <p>
                 <label for="NhomTaiLieuID">NhomTaiLieuID:</label>
-                <%= Html.TextBox("NhomTaiLieuID", Model.NhomTaiLieuID) %>
+                
+                <%
+                  
+                  SelectList list = (SelectList)ViewData["NhomTaiLieu"];
+                %>
+                <%=Html.DropDownList("NhomTaiLieuID",ViewData["NhomTaiLieu"] as IEnumerable<SelectListItem>)%>
                 <%= Html.ValidationMessage("NhomTaiLieuID", "*") %>
             </p>
             <p>

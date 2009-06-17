@@ -9,6 +9,10 @@ namespace ABDH_Demo.Services
     public class DinhKemService
     {
         LinqClient.DinhKemDA _dinhkemDA = new DinhKemDA();
+        public List<Models.tblNhomTaiLieu> GetNhomTaiLieus()
+        {
+          return _dinhkemDA.GetNhomTaiLieus();
+        }
         public List<tblDinhKem> GetDinhKems()
         {
             return _dinhkemDA.GetDinhKems();
