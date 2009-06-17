@@ -21,5 +21,9 @@ namespace ABDH_Demo.Services
         {
            _dinhkemDA.SaveTaiLieu(tailieu);
         }
+        public void InsertTailieu(tblTaiLieu tailieu)
+        {
+          _dinhkemDA.InsertTailieu(tailieu);
+        }
     }
 }
