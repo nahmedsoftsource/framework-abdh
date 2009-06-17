@@ -8,9 +8,16 @@ namespace ABDH_Demo.Services.LinqClient
 {
     public class DinhKemDA
     {
+      public List<Models.tblNhomTaiLieu> GetNhomTaiLieus()
+      {
+        ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
+
+        var query = _libraryContext.tblNhomTaiLieus;
+
+        return query.ToList();
+      }
         public List<Models.tblDinhKem> GetDinhKems()
         {
-            GetMaxIDTailieu();
             ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
             
             var query = _libraryContext.tblDinhKems;

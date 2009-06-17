@@ -31,7 +31,7 @@ namespace ABDH_Demo.Controllers
         }
         public ActionResult Edit(int id)
         {
-          
+          ViewData["NhomTaiLieu"] = new SelectList( _service.GetNhomTaiLieus().AsEnumerable(),"NhomTaiLieuID", "TenNhomTaiLieu");
             tblTaiLieu tailieu =  _service.GetTailieuByID(id);
             return View(tailieu);
         }
@@ -40,7 +40,7 @@ namespace ABDH_Demo.Controllers
         // POST: /Library/Edit/5
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, [Bind(Exclude = "TaiLieuID")] tblTaiLieu tailieu, FormCollection collection)
         {
           if (id != 0)
           {
@@ -61,9 +61,7 @@ namespace ABDH_Demo.Controllers
           }
           else
           {
-            tblTaiLieu doc = new tblTaiLieu();
-            UpdateModel(doc);
-            _service.InsertTailieu(doc);
+            _service.InsertTailieu(tailieu);
             return RedirectToAction("List");
           }
         }
