@@ -14,11 +14,7 @@
 
         <fieldset>
             <legend>Fields</legend>
-            <p>
-                <label for="TaiLieuID">TaiLieuID:</label>
-                <%= Html.TextBox("TaiLieuID", Model.TaiLieuID) %>
-                <%= Html.ValidationMessage("TaiLieuID", "*") %>
-            </p>
+            
             <p>
                 <label for="MaTaiLieu">MaTaiLieu:</label>
                 <%= Html.TextBox("MaTaiLieu", Model.MaTaiLieu) %>

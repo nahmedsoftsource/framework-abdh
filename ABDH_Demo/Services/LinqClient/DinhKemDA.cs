@@ -57,12 +57,29 @@ namespace ABDH_Demo.Services.LinqClient
           var query = _libraryContext.tblTaiLieus.Max(ib=>ib.TaiLieuID);
           return query;
         }
+        public int GetMaxIDDinhKem()
+        {
+          ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
+          var query = _libraryContext.tblDinhKems.Max(dk => dk.DinhKemID);
+          return query;
+        }
         public void InsertTailieu(tblTaiLieu tailieu)
         {
           int tailieuID = GetMaxIDTailieu();
           tailieu.TaiLieuID = tailieuID + 1;
           ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
           _libraryContext.tblTaiLieus.InsertOnSubmit(tailieu);
+          _libraryContext.SubmitChanges();
+          tblDinhKem dinhkem = new tblDinhKem();
+          dinhkem.TaiLieuID = tailieuID;
+          InsertDinhKem(dinhkem);
+        }
+        public void InsertDinhKem(tblDinhKem dinhkem)
+        {
+          int dinhkemID = GetMaxIDDinhKem();
+          dinhkem.DinhKemID = dinhkemID + 1;
+          ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
+          _libraryContext.tblDinhKems.InsertOnSubmit(dinhkem);
           _libraryContext.SubmitChanges();
         }
     }
