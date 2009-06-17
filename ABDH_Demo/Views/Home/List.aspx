@@ -26,7 +26,7 @@
         <tr>
             <td>
                 <%= Html.ActionLink("Edit", "Edit", new { id=item.tblTaiLieu.TaiLieuID }) %> |
-                <%= Html.ActionLink("Details", "Details", new { id = item.tblTaiLieu.TaiLieuID })%>
+                <%= Html.ActionLink("Details", "Details", new { id=item.tblTaiLieu.TaiLieuID })%>
             </td>
             <td>
                 <%= Html.Encode(item.tblTaiLieu.MaTaiLieu) %>

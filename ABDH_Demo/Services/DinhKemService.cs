@@ -17,5 +17,9 @@ namespace ABDH_Demo.Services
         {
             return _dinhkemDA.GetTailieuByID(id);
         }
+        public void SaveTaiLieu(tblTaiLieu tailieu)
+        {
+           _dinhkemDA.SaveTaiLieu(tailieu);
+        }
     }
 }

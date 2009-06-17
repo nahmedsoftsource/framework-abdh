@@ -40,17 +40,25 @@ namespace ABDH_Demo.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            try
-            {
-                tblTaiLieu doc = _service.GetTailieuByID(id);
-                // TODO: Add update logic here
-                //UpdateModel<tblTaiLieu>(doc, collection);
-                return RedirectToAction("List");
-            }
-            catch
-            {
-                return View();
-            }
+          tblTaiLieu doc = _service.GetTailieuByID(id);
+          try
+          {
+            
+            UpdateModel(doc);
+            // TODO: Add update logic here
+            //UpdateModel<tblTaiLieu>(doc, collection);
+            _service.SaveTaiLieu(doc);
+            return RedirectToAction("List");
+          }
+          catch
+          {
+            return View(doc);
+          }
+        }
+        public ActionResult Details(int id)
+        {
+          tblTaiLieu tailieu = _service.GetTailieuByID(id);
+          return View(tailieu);
         }
     }
     

@@ -26,7 +26,19 @@ namespace ABDH_Demo.Services.LinqClient
         {
             ABDH_DemoDataContext _libraryContext = new ABDH_DemoDataContext();
             var query = _libraryContext.tblTaiLieus.Where("TailieuID=@0", tailieu.TaiLieuID);
-            //query.ToList(). = tailieu;
+            tblTaiLieu tmp = (tblTaiLieu)query.ToList().First();
+            tmp.MaTaiLieu = tailieu.MaTaiLieu;
+            tmp.NgonNgu = tailieu.NgonNgu;
+            tmp.NhomTaiLieuID = tailieu.NhomTaiLieuID;
+            tmp.SoLanXem = tailieu.SoLanXem;
+            tmp.TacGia = tailieu.TacGia;
+            tmp.TaiLieuID = tailieu.TaiLieuID;
+            tmp.TenTaiLieu = tailieu.TenTaiLieu;
+            tmp.TomTatNoiDung = tailieu.TomTatNoiDung;
+            tmp.TrangThaiTaiLieu = tailieu.TrangThaiTaiLieu;
+            tmp.TuKhoa = tailieu.TuKhoa;
+            tmp.VongDoi_EndDate = tailieu.VongDoi_EndDate;
+            tmp.VongDoi_StartDate = tailieu.VongDoi_StartDate;
             _libraryContext.SubmitChanges();
         }
     }
