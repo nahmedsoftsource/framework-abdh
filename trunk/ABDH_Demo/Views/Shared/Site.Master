@@ -5,6 +5,10 @@
 <head runat="server">
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl("~/Scripts/calendar/calendar-mos.css") %>" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src='<%= ResolveUrl("~/Scripts/calendar/calendar-mini.js") %>' type="text/javascript"></script>
+  <script type="text/javascript" src='<%= ResolveUrl("~/Scripts/calendar-loader.js") %>' type="text/javascript"></script>
+  <script type="text/javascript" src='<%= ResolveUrl("~/Scripts/calendar/lang/calendar-en.js") %>' type="text/javascript"></script>
 </head>
 
 <body>
