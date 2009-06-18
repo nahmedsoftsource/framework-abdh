@@ -63,14 +63,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BasePager.cs" />
+    <Compile Include="Common\DomainBase.cs" />
     <Compile Include="Common\IPager.cs" />
     <Compile Include="Common\Json.cs" />
+    <Compile Include="Common\Tool.cs" />
+    <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Configuration\DataClientProviderSection.cs" />
+    <Compile Include="Data\ConnectionContext.cs" />
+    <Compile Include="Data\ConnectionScope.cs" />
+    <Compile Include="Data\DataClientProvider.cs" />
+    <Compile Include="Data\IQueryExpression.cs" />
+    <Compile Include="Data\ISearchQuery.cs" />
+    <Compile Include="Data\ISortOrder.cs" />
+    <Compile Include="Data\Queries\QueryExpression.cs" />
+    <Compile Include="Data\Queries\SearchQuery.cs" />
+    <Compile Include="Data\Queries\SortOrder.cs" />
+    <Compile Include="Data\SearchCriteria.cs" />
+    <Compile Include="Data\SearchQueryBuilder.cs" />
+    <Compile Include="Data\TransactionContext.cs" />
+    <Compile Include="Data\TransactionScope.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="FrameWork\Scope.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -83,6 +101,7 @@
     <Compile Include="Services\DinhKemService.cs" />
     <Compile Include="Services\LinqClient\DinhKemDA.cs" />
     <Compile Include="Utility\BaseController.cs" />
+    <Compile Include="Utility\DialogCloseOption.cs" />
     <Compile Include="Utility\GridExtensions.cs" />
     <Compile Include="Utility\InputExtensions.cs" />
     <Compile Include="Utility\Javascripts\Javascript.cs" />
@@ -97,6 +116,7 @@
     <Compile Include="Utility\Pager\WebPager.cs" />
     <Compile Include="Utility\Reflection.cs" />
     <Compile Include="Utility\RemoteOption.cs" />
+    <Compile Include="Utility\Routing.cs" />
     <Compile Include="Utility\UIHelper.cs" />
   </ItemGroup>
   <ItemGroup>

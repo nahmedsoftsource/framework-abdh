@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ABDH_Demo.Data;
+using System.Web.Mvc;
+using ABDH_Demo.Common;
+using ABDH_Demo.Utility.Javascripts;
 
 namespace ABDH_Demo.Utility
 {
   public abstract class BaseController : System.Web.Mvc.Controller
   {
-    /*
+    
     #region Properties
     private ISearchQuery _searchQuery;
     protected ISearchQuery SearchQuery
@@ -197,7 +201,7 @@ namespace ABDH_Demo.Utility
 
       if (Request["ReloadURL"] != null && Request["ReloadID"] != null)
       {
-        ret += "parent." + Utility.Javascript.RemoteFunc(new RemoteOption
+        ret += "parent." + Javascript.RemoteFunc(new RemoteOption
         {
           URL = Request["ReloadURL"],
           Update = Request["ReloadID"]
@@ -220,36 +224,36 @@ namespace ABDH_Demo.Utility
     #endregion
 
     #region Overriden methods
-    protected override void OnException(ExceptionContext filterContext)
-    {
-      ExceptionHandler exHandler = ExceptionHandler.Handle(filterContext.Exception);
+//    protected override void OnException(ExceptionContext filterContext)
+//    {
+//      ExceptionHandler exHandler = ExceptionHandler.Handle(filterContext.Exception);
 
-      if (filterContext.ExceptionHandled)
-      {
-        return;
-      }
-#if DEBUG
-      exHandler.Message += Environment.NewLine + Environment.NewLine + filterContext.Exception.ToString();
-#endif
-      if (Request.IsAjaxRequest())
-      {
-        JsonResult result;
-        result = Json(new { message = exHandler.Message });
-        filterContext.HttpContext.Response.StatusCode = exHandler.HttpErrorCode;
-        filterContext.Result = result;
-      }
-      else
-      {
-        filterContext.Result = View("Error", exHandler);
-      }
-      filterContext.ExceptionHandled = true;
-      filterContext.HttpContext.Response.Clear();
-      filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
-      base.OnException(filterContext);
-    }
+//      if (filterContext.ExceptionHandled)
+//      {
+//        return;
+//      }
+//#if DEBUG
+//      exHandler.Message += Environment.NewLine + Environment.NewLine + filterContext.Exception.ToString();
+//#endif
+//      if (Request.IsAjaxRequest())
+//      {
+//        JsonResult result;
+//        result = Json(new { message = exHandler.Message });
+//        filterContext.HttpContext.Response.StatusCode = exHandler.HttpErrorCode;
+//        filterContext.Result = result;
+//      }
+//      else
+//      {
+//        filterContext.Result = View("Error", exHandler);
+//      }
+//      filterContext.ExceptionHandled = true;
+//      filterContext.HttpContext.Response.Clear();
+//      filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
+//      base.OnException(filterContext);
+//    }
 
     #endregion
 
-    */
+    
   }
 }
