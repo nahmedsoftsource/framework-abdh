@@ -1,6 +1,0 @@
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\bin\ABDH_Demo.dll
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\bin\ABDH_Demo.pdb
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\bin\Dynamic.dll
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\obj\Debug\ResolveAssemblyReference.cache
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\obj\Debug\ABDH_Demo.dll
-D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo\obj\Debug\ABDH_Demo.pdb
