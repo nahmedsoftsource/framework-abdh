@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ABDH_Demo.Services;
 using ABDH_Demo.Models;
+using ABDH_Demo.Data;
 namespace ABDH_Demo.Controllers
 {
     [HandleError]
@@ -25,7 +26,7 @@ namespace ABDH_Demo.Controllers
         }
         public ActionResult List()
         {
-            
+           
             List<tblDinhKem> list =  _service.GetDinhKems();
             return View(list);
         }
