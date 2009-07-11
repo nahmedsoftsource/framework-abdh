@@ -7,3 +7,12 @@ D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo.Tests\obj\Debug\ResolveAssem
 D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo.Tests\obj\Debug\ABDH_Demo.Tests.dll
 D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo.Tests\obj\Debug\ABDH_Demo.Tests.pdb
 D:\Working\Projects\Web_Project\ABDH_Demo\ABDH_Demo.Tests\bin\Debug\Dynamic.dll
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\ABDH_Demo.Tests.dll.config
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\ABDH_Demo.Tests.dll
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\ABDH_Demo.Tests.pdb
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\ABDH_Demo.dll
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\Dynamic.dll
+D:\Work\MVC\ABDH_Demo.Tests\bin\Debug\ABDH_Demo.pdb
+D:\Work\MVC\ABDH_Demo.Tests\obj\Debug\ResolveAssemblyReference.cache
+D:\Work\MVC\ABDH_Demo.Tests\obj\Debug\ABDH_Demo.Tests.dll
+D:\Work\MVC\ABDH_Demo.Tests\obj\Debug\ABDH_Demo.Tests.pdb
