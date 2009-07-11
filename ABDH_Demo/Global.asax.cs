@@ -27,6 +27,9 @@ namespace ABDH_Demo
         protected void Application_Start()
         {
             RegisterRoutes(RouteTable.Routes);
+
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new ThemeViewEngine());
         }
     }
 }
