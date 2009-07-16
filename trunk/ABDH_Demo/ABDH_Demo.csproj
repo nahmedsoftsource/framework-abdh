@@ -137,6 +137,7 @@
     <Compile Include="Utility\UIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\grunge_bg.jpg" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\calendar-loader.js" />
