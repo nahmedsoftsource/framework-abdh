@@ -5,12 +5,15 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body
 {
-    background-color: #5c87b2;
-    font-size: .75em;
-    font-family: Verdana, Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
-    color: #696969;
+	background-position: center top;
+	background-color: #FFF;
+	font-size: .75em;
+	font-family: Verdana, Helvetica, Sans-Serif;
+	margin: 0;
+	padding: 0;
+	color: #393939;
+	background-image: url(grunge_bg.jpg);
+	background-repeat: no-repeat;
 }
 
 a:link
@@ -84,7 +87,7 @@ first child of the left and right table columns */
 page width. Or, you can specify an exact pixel width. */
 .page
 {
-    width: 90%;
+    width: 950px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -135,7 +138,7 @@ ul#menu
     padding: 0 0 2px;
     position: relative;
     margin: 0;
-    text-align: right;
+    text-align: left;
 }
 
 ul#menu li
@@ -159,14 +162,15 @@ ul#menu li a
     font-weight: bold;
     text-decoration: none;
     line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
+    background-color: #99312A;
+    color: #FFF;
 }
 
 ul#menu li a:hover
 {
     background-color: #fff;
     text-decoration: none;
+    color: #333;
 }
 
 ul#menu li a:active
@@ -262,7 +266,7 @@ table th
 
 #menucontainer
 {
-    margin-top:40px;
+    margin-top:60px;
 }
 
 div#title
