@@ -28,8 +28,8 @@ namespace ABDH_Demo
         {
             RegisterRoutes(RouteTable.Routes);
 
-            ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new ThemeViewEngine());
+            //ViewEngines.Engines.Clear();
+           // ViewEngines.Engines.Add(new ThemeViewEngine());
         }
     }
 }
