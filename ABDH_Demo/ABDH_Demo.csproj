@@ -62,27 +62,12 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\ThemeViewEngine.cs" />
     <Compile Include="Common\BasePager.cs" />
     <Compile Include="Common\DomainBase.cs" />
     <Compile Include="Common\IPager.cs" />
     <Compile Include="Common\Json.cs" />
     <Compile Include="Common\Tool.cs" />
     <Compile Include="Common\Utility.cs" />
-    <Compile Include="Content\Default\Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\Default\Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Content\Red\Site.Master.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Content\Red\Site.Master.designer.cs">
-      <DependentUpon>Site.Master</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\Configuration\DataClientProviderSection.cs" />
@@ -182,10 +167,6 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Default\Site.css" />
-    <Content Include="Content\Default\Site.Master" />
-    <Content Include="Content\Red\Site.css" />
-    <Content Include="Content\Red\Site.Master" />
     <None Include="Models\ABDH_Demo.dbml.layout">
       <DependentUpon>ABDH_Demo.dbml</DependentUpon>
     </None>
@@ -193,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Code\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
