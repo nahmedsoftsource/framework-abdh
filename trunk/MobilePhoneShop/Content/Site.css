@@ -181,73 +181,6 @@ ul#menu li.selected a
     color: #000;
 }
 
-/* FORM LAYOUT ELEMENTS   
-----------------------------------------------------------*/
-
-fieldset 
-{
-    margin: 1em 0;
-    padding: 1em;
-    border: 1px solid #CCC;
-}
-
-fieldset p 
-{
-    margin: 2px 12px 10px 10px;
-}
-
-fieldset label 
-{
-    display: block;
-}
-
-fieldset label.inline 
-{
-    display: inline;
-}
-
-legend 
-{
-    font-size: 1.1em;
-    font-weight: 600;
-    padding: 2px 4px 8px 4px;
-}
-
-input[type="text"] 
-{
-    width: 200px;
-    border: 1px solid #CCC;
-}
-
-input[type="password"] 
-{
-    width: 200px;
-    border: 1px solid #CCC;
-}
-
-/* TABLE
-----------------------------------------------------------*/
-
-table 
-{
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
-}
-
-table td 
-{
-  padding: 5px;   
-  border: solid 1px #e8eef4;
-}
-
-table th
-{
-  padding: 6px 5px;
-  text-align: left;
-  background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
-}
-
 /* MISC  
 ----------------------------------------------------------*/
 .clear
@@ -265,7 +198,7 @@ table th
     margin-top:40px;
 }
 
-div#title
+#title
 {
     display:block;
     float:left;
@@ -291,12 +224,6 @@ div#title
 {
     color: white;
     text-decoration: underline;
-}
-
-#logindisplay a:hover
-{
-    color: white;
-    text-decoration: none;
 }
 
 .field-validation-error
