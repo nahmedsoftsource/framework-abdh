@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F0DEFF65-89C2-4663-A99E-23C995DAD94F}</ProjectGuid>
     <ProjectTypeGuids>{603c0e0b-db56-11dc-be95-000d561079b0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
@@ -55,16 +55,56 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BasePager.cs" />
+    <Compile Include="Common\DomainBase.cs" />
+    <Compile Include="Common\IPager.cs" />
+    <Compile Include="Common\Json.cs" />
+    <Compile Include="Common\Tool.cs" />
+    <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Data\Configuration\DataClientProviderSection.cs" />
+    <Compile Include="Data\ConnectionContext.cs" />
+    <Compile Include="Data\ConnectionScope.cs" />
+    <Compile Include="Data\DataClientProvider.cs" />
+    <Compile Include="Data\IQueryExpression.cs" />
+    <Compile Include="Data\ISearchQuery.cs" />
+    <Compile Include="Data\ISortOrder.cs" />
+    <Compile Include="Data\Queries\QueryExpression.cs" />
+    <Compile Include="Data\Queries\SearchQuery.cs" />
+    <Compile Include="Data\Queries\SortOrder.cs" />
+    <Compile Include="Data\SearchCriteria.cs" />
+    <Compile Include="Data\SearchQueryBuilder.cs" />
+    <Compile Include="Data\SearchResult.cs" />
+    <Compile Include="Data\TransactionContext.cs" />
+    <Compile Include="Data\TransactionScope.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="FrameWork\Scope.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\BaseController.cs" />
+    <Compile Include="Utility\DialogCloseOption.cs" />
+    <Compile Include="Utility\GridExtensions.cs" />
+    <Compile Include="Utility\InputExtensions.cs" />
+    <Compile Include="Utility\JavascriptHelper.cs" />
+    <Compile Include="Utility\Javascripts\AutoCompleteDataItem.cs" />
+    <Compile Include="Utility\Javascripts\AutoCompleteOption.cs" />
+    <Compile Include="Utility\Javascripts\Javascript.cs" />
+    <Compile Include="Utility\PagerExtensions.cs" />
+    <Compile Include="Utility\Pager\AjaxPaginationOption.cs" />
+    <Compile Include="Utility\Pager\ColumnCheckbox.cs" />
+    <Compile Include="Utility\Pager\ColumnOption.cs" />
+    <Compile Include="Utility\Pager\PagingOption.cs" />
+    <Compile Include="Utility\Pager\WebPager.cs" />
+    <Compile Include="Utility\Reflection.cs" />
+    <Compile Include="Utility\RemoteOption.cs" />
+    <Compile Include="Utility\Routing.cs" />
+    <Compile Include="Utility\UIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fontsize.css" />
@@ -200,6 +240,9 @@
           <IISUrl>
           </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
