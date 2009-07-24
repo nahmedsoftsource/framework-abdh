@@ -1,123 +1,224 @@
-<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title><%= Html.Encode(ViewData["Title"]) %></title>
+    <title>
+        <%= Html.Encode(ViewData["Title"]) %></title>
+
     <script src="../../Scripts/jquery-1.2.6.js"></script>
+
     <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-    <div id="page">
-        <div id="pageHeader">
-            <ul class="menu">
-                <li><a href="#">Sitemap</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="">Sign In</a></li>
-            </ul>
-            <div class="logo">
-            
-            </div>
-            <div class="searchbox">
-                Search : <input type="text" class="searchbox_textbox" /><input type="button" class="searchbox_btn" />
+    <div id="mainBdy">
+        <div id="header">
+            <div class="boxLogo">
+                <a href="#">
+                    <img src="../../Content/images/logo.jpg" /></a></div>
+            <div class="boxSearchTOp">
+                <div style="padding: 6px;">
+                    <input type="text" class="input floatLeft" style="width: 204px; height: 18px;" value="Tìm kiếm ..."
+                        onfocus="if(this.value=='Tìm kiếm ...'){this.value='';}" onblur="if(this.value==''){this.value='Tìm kiếm ...';}" />
+                    <input type="button" class="input floatLeft" style="width: 20px; height: 20px; cursor: pointer" />
+                </div>
             </div>
         </div>
-        <div id="navigation">
-            <ul class="menu">
-                <li><a href="">Home</a></li>
-                <li><a href="" class="active">Computer</a></li>
-                <li><a href="">Electronic</a></li>
-                <li><a href="">Accessories</a></li>
-                <li><a href="">Sales</a></li>
-                <li><a href="">My Cart</a></li>
-            </ul>
-        </div>
-        <div id="pageContent">
-            <div class="b">
-                <div class="left">
-                    <div class="submenu">
-                        <h2>Computer</h2>
-                        <ul class="f12">
-                            <li><a href="">Laptops</a></li>
-                            <li><a href="">Laptop Accessories</a></li>
-                            <li><a href="">Desktop Computers</a></li>
-                            <li><a href="">Apple</a></li>
-                            <li><a href="">Monitors</a></li>
-                            <li><a href="">Printers</a></li>
-                            <li><a href="">Drives & Storage</a></li>
-                            <li><a href="">Networking</a></li>
-                            <li><a href="">Software</a></li>
-                            <li><a href="">Computer Upgrades</a></li>
-                            <li><a href="">Computer Speakers</a></li>
-                            <li><a href="">Mice & Keyboards</a></li>
-                            <li><a href="">Webcams</a></li>
-                            <li><a href="">Computer Accessories</a></li>
-                            <li><a href="">Media</a></li>
-                            <li><a href="">Projects</a></li>
-                            <li><a href="">Scanners</a></li>
-                        </ul>
+        <div id="mainCtentBdyBtom">
+            <div id="mainCtentBdy">
+                <div class="banner">
+                    <a href="#">
+                        <img src="../../Content/images/banner.jpg" /></a></div>
+                <div class="barMenuTop">
+                    <div class="barMenuTopLeft">
+                        <div class="barMenuTopRight">
+                            <ul>
+                                <li><a class="selected" href="#"><span>Trang chủ</span></a></li>
+                                <li><a href="#"><span>GIới thiệu</span></a></li>
+                                <li><a href="#"><span>Tin tức</span></a></li>
+                                <li><a href="#"><span>Sản phẩm </span></a></li>
+                                <li><a href="#"><span>Tuyển dụng</span></a></li>
+                                <li><a href="#"><span>Ảnh công trình</span></a></li>
+                                <li><a href="#"><span>Liên hệ</span></a></li>
+                            </ul>
+                            <div class="boxLanguage">
+                                <a href="#" class="viet">&nbsp;</a> <a href="#" class="Eng">&nbsp;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="right">
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                <div id="mainColunmLeft" class="clear">
+                    <div id="mainMnuLeft">
+                        <div class="mainMnuLeftTOp">
+                            <div class="mainMnuLeftBtom">
+                                <div class="mainMnuContent">
+                                    <div class="barTabMnu">
+                                        <div class="barTabMnuLeft">
+                                            <div class="barTabMnuRight">
+                                                <div class="ctentBarTab">
+                                                    Sản phẩm
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contentMnu">
+                                        <asp:ContentPlaceHolder ID="RightMenu" runat="server"></asp:ContentPlaceHolder>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxNews" style="float: none;">
+                        <div class="boxNewsTop">
+                            <div class="boxNewsBtom">
+                                <div class="boxNewsCtent">
+                                    <div class="boxTabNews">
+                                        <div class="boxTabNewsLeft">
+                                            <div class="boxTabNewsRight">
+                                                <div class="ctentBarTab">
+                                                    Tin tức khuyến mãi
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="boxKhuyenmai">
+                                        <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server"></asp:ContentPlaceHolder>
+                                        <div class="paddingTb4 textRight fontsize11">
+                                            <a class="chitiet" href="#">Xem tiếp</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lienketweb  clear">
+                        <div style="padding-top: 10px;" class="bold color2 textLeft">
+                            Liên kết website
+                        </div>
+                        <div class="paddingTb4">
+                            <select style="width: 208px; height: 20px;">
+                                <option selected="selected">Dantri.com.vn</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="HotroOnline  clear">
+                        <div style="padding-top: 10px;" class="bold color2 textLeft paddingTb4">
+                            Hỗ trợ online
+                        </div>
+                        <div class="boxHtroOline">
+                            <div class="boxHtroOlineTop">
+                                <div class="boxHtroOlineBtom">
+                                    <div class="boxHtroOlineCtent">
+                                        <a href="#">
+                                            <img src="../../Content/images/online_003.gif" /></a>
+                                        <p class="bold">
+                                            <a class="color1" href="#">Nguyen_han</a></p>
+                                        <a href="#">
+                                            <img src="../../Content/images/online_002.gif" /></a>
+                                        <p class="bold">
+                                            <a class="color1" href="#">Nguyen_han</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxQcLeft">
+                        <a href="#">
+                            <img src="../../Content/images/index1_116.jpg" /></a>
+                    </div>
+                </div>
+                <div id="mainColunmRight">
+                    <div id="mainSlideNews">
+                        <div class="boxSlideShow">
+                            <div class="boxSlideShowTOP">
+                                <div class="boxSlideShowbtom">
+                                    <div class="boxSlideShowCtent">
+                                        <img src="../../Content/images/imgSlide.jpg" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxNews">
+                            <div class="boxNewsTop">
+                                <div class="boxNewsBtom">
+                                    <div class="boxNewsCtent">
+                                        <div class="boxTabNews">
+                                            <div class="boxTabNewsLeft">
+                                                <div class="boxTabNewsRight">
+                                                    <div class="ctentBarTab">
+                                                        TIn tức - Sự kiện
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clear">
+                                            <asp:ContentPlaceHolder ID="RiightNewsEvent" runat=server></asp:ContentPlaceHolder>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div id="mainCtentSpRight">
+                        <div class="barCterTab">
+                            <div class="barCterTabLleft">
+                                <div class="barCterTabRight">
+                                    <div style="line-height: 23px;" class="ctentBarTab">
+                                        Sản phẩm
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxCtentSp">
+                            <div class="boxCtentSpTop">
+                                <div class="boxCtentSpBtom">
+                                    <div class="boxCtentSpCtent">
+                                        <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="barCterTab">
+                            <div class="barCterTabLleft">
+                                <div class="barCterTabRight">
+                                    <div style="line-height: 23px;" class="ctentBarTab">
+                                        Giới thiệu
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxCtentSp">
+                            <div class="boxCtentSpTop">
+                                <div class="boxCtentSpBtom">
+                                    <div class="boxCtentSpCtent">
+                                        <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
+                                        </asp:ContentPlaceHolder>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                <div id="footer">
+                    <div class="floatLeft" style="width: 440px; line-height: 16px; padding-top: 6px;">
+                        <p class="bold">
+                            Allright: Aulacdesign media Co.,LTD
+                        </p>
+                        <p class="bold">
+                            Add:183 Hoa Bằng - Yên Hòa - Cầu Giấy - HN</p>
+                    </div>
+                    <div class="floatRight">
+                        <a href="http://aulacdesign.net">
+                            <img src="../../Content/images/logoalac.jpg" /></a></div>
                 </div>
             </div>
-        </div><div class="pageContentFooter"></div>
-        <div class="block margin_t_10">
-            <div class="h"></div>
-            <div class="b">
-                <div class="newsletter margin_l_10">
-                    <div class="cGray bold">Join Newsletter</div>
-                    <p class="f11">
-                        The weekly newsletter to help you learn more about technology and promotions.
-                        <input type="text" class="newsletter_text" /><input type="button" value="Subscribe" class="newsletter_btn"  />
-                    </p>
-                </div>
-                <div class="line"></div>
-                <div class="fLeft w180 margin_l_10">
-                    <div class="cGray bold">Product Categories</div>
-                    <ul class="list">
-                        <li><a href="">Computers</a></li>
-                        <li><a href="">Electronics</a></li>
-                        <li><a href="">Accessories</a></li>
-                        <li><a href="">Others</a></li>
-                    </ul>
-                </div>
-                <div class="fLeft w180">
-                    <div class="cGray bold">Customer Service</div>
-                    <ul class="list">
-                        <li><a href="">Help</a></li>
-                        <li><a href="">Contact Us</a></li>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Online Returns </a></li>
-                    </ul>
-                </div>
-                <div class="fLeft w180">
-                    <div class="cGray bold">Shopping Policy</div>
-                    <ul class="list">
-                        <li><a href="">Terms & Conditions</a></li>
-                        <li><a href="">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="fLeft w180">
-                    <div class="cGray bold">Your Order</div>
-                    <ul class="list">
-                        <li><a href="">Order Status</a></li>
-                        <li><a href="">Shipping & Delivery</a></li>
-                        <li><a href="">Store Pickup</a></li>
-                        <li><a href="">Find a Rebate</a></li>
-                        <li><a href="">Returns</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="f"></div>
-        </div>
-        <div id="pageFooter">
-            � 2009 MVC E-commerce. All Rights Reserved. Dev by <a href="http://www.protienshow.com/" target="_blank">Protienshow</a>
         </div>
     </div>
+    <input type="hidden" id="crrMenuID" name="crrMenuID" value="0" />
 </body>
 </html>
