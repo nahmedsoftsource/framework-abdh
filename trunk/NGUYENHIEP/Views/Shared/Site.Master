@@ -162,44 +162,10 @@
                         </div>
                     </div>
                     <div id="mainCtentSpRight">
-                        <div class="barCterTab">
-                            <div class="barCterTabLleft">
-                                <div class="barCterTabRight">
-                                    <div style="line-height: 23px;" class="ctentBarTab">
-                                        Sản phẩm
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="boxCtentSp">
-                            <div class="boxCtentSpTop">
-                                <div class="boxCtentSpBtom">
-                                    <div class="boxCtentSpCtent">
-                                        <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
+                        <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
                                         </asp:ContentPlaceHolder>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="barCterTab">
-                            <div class="barCterTabLleft">
-                                <div class="barCterTabRight">
-                                    <div style="line-height: 23px;" class="ctentBarTab">
-                                        Giới thiệu
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="boxCtentSp">
-                            <div class="boxCtentSpTop">
-                                <div class="boxCtentSpBtom">
-                                    <div class="boxCtentSpCtent">
-                                        <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
-                                        </asp:ContentPlaceHolder>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
+                    </asp:ContentPlaceHolder>
                     </div>
                 </div>
                 <div class="clear">
