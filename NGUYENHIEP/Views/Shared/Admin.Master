@@ -72,8 +72,10 @@
                 </div>
                 <div id="mainColunmRight">
                     <div id="mainCtentSpRight">
-                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                        <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
                                         </asp:ContentPlaceHolder>
+                        <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
+                    </asp:ContentPlaceHolder>
                     </div>
                 </div>
                 <div class="clear">
