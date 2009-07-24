@@ -1,0 +1,97 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>
+        <%= Html.Encode(ViewData["Title"]) %></title>
+
+    <script type="text/javascript" src="../../Scripts/jquery-1.3.2.js"></script>
+
+    <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="mainBdy">
+        <div id="header">
+            <div class="boxLogo">
+                <a href="#">
+                    <img src="../../Content/images/logo.jpg" /></a></div>
+            <div class="boxSearchTOp">
+                <div style="padding: 6px;">
+                    <input type="text" class="input floatLeft" style="width: 204px; height: 18px;" value="Tìm kiếm ..."
+                        onfocus="if(this.value=='Tìm kiếm ...'){this.value='';}" onblur="if(this.value==''){this.value='Tìm kiếm ...';}" />
+                    <input type="button" class="input floatLeft" style="width: 20px; height: 20px; cursor: pointer" />
+                </div>
+            </div>
+        </div>
+        <div id="mainCtentBdyBtom">
+            <div id="mainCtentBdy">
+                <div class="banner">
+                    <a href="#">
+                        <img src="../../Content/images/banner.jpg" /></a></div>
+                <div class="barMenuTop">
+                    <div class="barMenuTopLeft">
+                        <div class="barMenuTopRight">
+                            <ul>
+                                <li><a href="#"><span>Tin tức</span></a></li>
+                                <li><a href="#"><span>Sản phẩm </span></a></li>
+                                <li><a href="#"><span>Tuyển dụng</span></a></li>
+                                <li><a href="#"><span>Ảnh công trình</span></a></li>
+                                <li><a href="#"><span>Người dùng</span></a></li>
+                                <li><a href="#"><span>Hộp Thư</span></a></li>
+                            </ul>
+                            <div class="boxLanguage">
+                                <a href="#" class="viet">&nbsp;</a> <a href="#" class="Eng">&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mainColunmLeft" class="clear">
+                    <div id="mainMnuLeft">
+                        <div class="mainMnuLeftTOp">
+                            <div class="mainMnuLeftBtom">
+                                <div class="mainMnuContent">
+                                    <div class="barTabMnu">
+                                        <div class="barTabMnuLeft">
+                                            <div class="barTabMnuRight">
+                                                <div class="ctentBarTab">
+                                                    Sản phẩm
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contentMnu">
+                                        <asp:ContentPlaceHolder ID="RightMenu" runat="server"></asp:ContentPlaceHolder>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mainColunmRight">
+                    <div id="mainCtentSpRight">
+                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                <div id="footer">
+                    <div class="floatLeft" style="width: 440px; line-height: 16px; padding-top: 6px;">
+                        <p class="bold">
+                            Allright: Aulacdesign media Co.,LTD
+                        </p>
+                        <p class="bold">
+                            Add:183 Hoa Bằng - Yên Hòa - Cầu Giấy - HN</p>
+                    </div>
+                    <div class="floatRight">
+                        <a href="http://aulacdesign.net">
+                            <img src="../../Content/images/logoalac.jpg" /></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
