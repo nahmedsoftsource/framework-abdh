@@ -4,7 +4,7 @@
     About Us
 </asp:Content>
 
-<asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="aboutContent" ContentPlaceHolderID="UpperMainContent" runat="server">
     <h2>About</h2>
     <p>
         Put content here.

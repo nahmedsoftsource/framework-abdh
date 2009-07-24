@@ -1,0 +1,78 @@
+@charset "utf-8";
+/*/////////////////////////////////////
+=======================================
+========|| Copyright: thanhPr[0] ||====
+-- mail:phut_thatlong_101@yahoo.com ---
+---Phone number: 0974029482 :----------
+========|| Allright : Moore Corp ||==== 
+/////////////////////////////////////*/
+
+.fontsize10{
+	font-size:10px;
+}
+.fontsize11{
+	font-size:11px;
+}
+.fontsize12{
+	font-size:12px;
+}
+.fontsize13{
+	font-size:13px;
+}
+.fontsize14{
+	font-size:14px;
+}
+.fontsize15{
+	font-size:15px;
+}
+.fontsize18{
+	font-size:18px;
+}
+.fontsize19{
+	font-size:19px;
+}
+.fontsize22{
+	font-size:22px;
+}
+.bold{
+	font-weight:bold;
+}
+.fontItalic{
+	font-style:italic;
+}
+.fontsize36{
+	font-size:36px;
+}
+.fontsize48{
+	font-size:48px;
+}
+.fontsize20{
+	font-size:20px;
+}
+.textJustify{
+	text-align:justify;
+}
+.textItanic{
+	font-style:italic;
+}
+.texUnder{
+	text-decoration:underline;
+}
+.textCter{
+	text-align:center;
+}
+.textRight{
+	text-align:right;
+}
+.textLeft{
+	text-align:left;
+}
+.textNomal{
+	font-weight:normal;
+}
+.textTransUp{
+	text-transform:uppercase;
+}
+.textTransNone{
+	text-transform:none;
+}

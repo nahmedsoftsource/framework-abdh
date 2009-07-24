@@ -4,7 +4,7 @@
     Error
 </asp:Content>
 
-<asp:Content ID="errorContent" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="errorContent" ContentPlaceHolderID="UpperMainContent" runat="server">
     <h2>
         Sorry, an error occurred while processing your request.
     </h2>
