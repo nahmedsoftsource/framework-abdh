@@ -55,7 +55,7 @@
       <Column Name="TitleEN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
       <Column Name="SubjectVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="SubjectEN" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="ContentVN" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ContentVN" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ContentEN" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
       <Column Name="Type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -78,7 +78,7 @@
       <Column Name="Description" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="PriceVN" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PriceEN" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Image" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
