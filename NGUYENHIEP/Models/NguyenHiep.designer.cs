@@ -1257,7 +1257,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_ContentVN", DbType="NVarChar(1000)")]
+		[Column(Storage="_ContentVN", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string ContentVN
 		{
 			get
@@ -1520,7 +1520,7 @@ namespace NGUYENHIEP.Models
 		
 		private System.Nullable<double> _PriceEN;
 		
-		private System.Data.Linq.Binary _Image;
+		private string _Image;
 		
 		private string _CreatedBy;
 		
@@ -1554,7 +1554,7 @@ namespace NGUYENHIEP.Models
     partial void OnPriceVNChanged();
     partial void OnPriceENChanging(System.Nullable<double> value);
     partial void OnPriceENChanged();
-    partial void OnImageChanging(System.Data.Linq.Binary value);
+    partial void OnImageChanging(string value);
     partial void OnImageChanged();
     partial void OnCreatedByChanging(string value);
     partial void OnCreatedByChanged();
@@ -1738,8 +1738,8 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_Image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Image
+		[Column(Storage="_Image", DbType="NVarChar(MAX)")]
+		public string Image
 		{
 			get
 			{
