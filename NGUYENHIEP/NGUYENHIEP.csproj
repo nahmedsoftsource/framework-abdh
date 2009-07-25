@@ -241,6 +241,8 @@
     <None Include="Models\NguyenHiep.dbml.layout">
       <DependentUpon>NguyenHiep.dbml</DependentUpon>
     </None>
+    <Content Include="Views\NguyenHiep\EditNews.aspx" />
+    <Content Include="Views\Shared\Admin.Master" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
