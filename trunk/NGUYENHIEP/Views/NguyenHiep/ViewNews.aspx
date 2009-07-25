@@ -20,7 +20,7 @@
 
             </div>
 </div>
-<%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "Sửa", "EditNews", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID)%>
+<%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditNews", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID)%>
 </div>
 </asp:Content>
 
