@@ -48,7 +48,7 @@ namespace NGUYENHIEP.Controllers
                 ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString() }));
                 ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
                 ViewData["NewsType"] = ls;
-                ViewData["ContentVN"] = "<div>" + tblnew.ContentVN + "</div>";
+                ViewData["ContentVN"] = tblnew.ContentVN ;
                 return View(tblnew);
             }
             else
