@@ -26,5 +26,13 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetAllNews(pageSize,page);
         }
+        public void UpdateNews(tblNew tblnew)
+        {
+             _da.UpdateNews(tblnew);
+        }
+        public void InsertNews(tblNew tblnew)
+        {
+            _da.InsertNews(tblnew);
+        }
     }
 }

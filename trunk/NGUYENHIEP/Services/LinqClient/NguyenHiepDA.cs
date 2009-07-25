@@ -21,6 +21,29 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return null;
         }
+        public void UpdateNews(tblNew tblnew)
+        {
+            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0", tblnew.ID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    query.First().TitleVN = tblnew.TitleVN;
+                    query.First().Type = tblnew.Type;
+                    query.First().ContentVN = tblnew.ContentVN;
+                    query.First().Image = tblnew.Image;
+                    _dataContext.SubmitChanges();
+                }
+            }
+        }
+        public void InsertNews(tblNew tblnew)
+        {
+            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
+            {
+                _dataContext.tblNews.InsertOnSubmit(tblnew);
+                _dataContext.SubmitChanges();
+            }
+        }
         public SearchResult<tblNew> GetAllNews(int pageSize, int page)
         {
             SearchResult<tblNew> searchResult = new SearchResult<tblNew>();

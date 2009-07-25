@@ -34,6 +34,7 @@
               counter = 0; %>
         <div class="clear"></div>
         <%} %>
+        
     
     <% } %>
     </div>
@@ -41,7 +42,7 @@
     </div>
     </div>
     </div>
-
+   
 <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
@@ -61,3 +62,6 @@
             }
           )
        %>
+ <span style="float:right">
+ <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", "Thêm tin tức", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + null)%>
+ </span>

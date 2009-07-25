@@ -10,4 +10,9 @@ namespace NguyenHiep.Common
         public static int DefautPagingSize = 4;
         public static int NumberImagesInRow = 4;
   }
+    public class CategoryTypes
+    {
+        public static int News = 1;
+        public static int RecruitmentS = 2;
+    }
 }
