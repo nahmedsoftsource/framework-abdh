@@ -1,24 +1,44 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
-
+<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
+<%--<script type="text/javascript">
+    $(document).ready(function() {
+        
+        $('textarea#content').fck();
+    });
+
+    function InsertContent() {
+        var sample = document.getElementById("ContentVN").value;
+        $.fck.insertHtml('ContentVN', sample);
+    }
+
+    function ShowContent() {
+        alert($.fck.content('fck1', ''));
+    }
+
+    function ClearContent() {
+        $.fck.clearHtml('fck1');
+    }
+</script>--%>
+    <form id="form1" runat="server">
     <%if (ViewData["AddNews"] != null)
           { %>
-            <h2>Thêm tin tức</h2>
+            <h2>Thêm tin t&#7913;c</h2>
         <%}
           else
           { %>
-        <h2>Chỉnh sửa tin tức</h2>
+        <h2>Ch&#7881;nh s&#7917;a tin t&#7913;c</h2>
         <%} %>
     
 
     <%= Html.ValidationSummary("Edit was unsuccessful. Please correct the errors and try again.") %>
 
-    <% using (Html.BeginForm()) {%>
+    <%--<% using (Html.BeginForm()) {%>--%>
 
     <table width="100%">
     <tr>
         <td>
-            <label for="TitleVN">Tiêu đề:</label>
+            <label for="TitleVN">Tiêu &#273;&#7873;:</label>
         </td>
         
         <td>
@@ -28,7 +48,7 @@
     </tr>
     <tr>
         <td>
-            <label for="SubjectVN">Chủ đề:</label>
+            <label for="SubjectVN">Ch&#7911; &#273;&#7873;:</label>
         </td>
         
         <td>
@@ -38,17 +58,21 @@
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">Nội Dung:</label>
+            <label for="ContentVN">N&#7897;i Dung:</label>
         </td>
         
         <td>
-            <%= Html.TextBox("ContentVN", Model.ContentVN)%>
-                <%= Html.ValidationMessage("ContentVN", "*")%>
+            <FCKeditorV2:FCKeditor ID="ContentVN" runat="server" Width="100%" Height="400px">
+            
+              <%=Html.FckTextBox("ContentVN",Model.ContentVN)%>
+
+            </FCKeditorV2:FCKeditor>
+            
         </td>
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">Loại:</label>
+            <label for="ContentVN">Lo&#7841;i:</label>
         </td>
         
         <td>
@@ -58,7 +82,7 @@
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">Hình ảnh:</label>
+            <label for="ContentVN">Hình &#7843;nh:</label>
         </td>
         
         <td>
@@ -70,23 +94,18 @@
         <td colspan="2">
         <%if (ViewData["AddNews"] != null)
           { %>
-            <input type="submit" value="Thêm tin tức" />
+            <input type="submit" value="Thêm tin t&#7913;c" />
         <%}
           else
           { %>
-        <input type="submit" value="Sửa" />
+        <input type="submit" value="S&#7917;a" />
         <%} %>
         </td>
     </tr>
     </table>
       
 
-    <% } %>
-
-   
-
-
-</script>
+    </form>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="RightMenu" runat="server">
