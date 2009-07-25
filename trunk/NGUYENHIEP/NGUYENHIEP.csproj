@@ -230,11 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\images\pspbrwse.jbf" />
-    <None Include="Models\NguyenHiep.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>NguyenHiep.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -330,8 +325,10 @@
     <None Include="fckeditor\_samples\php\sampleposteddata.php" />
     <None Include="fckeditor\_samples\py\sample01.py" />
     <None Include="fckeditor\_samples\py\sampleposteddata.py" />
-    <None Include="Models\NguyenHiep.dbml.layout">
-      <DependentUpon>NguyenHiep.dbml</DependentUpon>
+    <None Include="Models\NguyenHiep.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>NguyenHiep.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="fckeditor\editor\css\behaviors\disablehandles.htc" />
     <Content Include="fckeditor\editor\css\behaviors\showtableborders.htc" />
@@ -806,6 +803,11 @@
     <Content Include="fckeditor\_whatsnew_history.html" />
     <Content Include="Views\NguyenHiep\EditNews.aspx" />
     <Content Include="Views\Shared\Admin.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\NguyenHiep.dbml.layout">
+      <DependentUpon>NguyenHiep.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

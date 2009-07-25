@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
 <%--<script type="text/javascript">
     $(document).ready(function() {
@@ -20,6 +21,7 @@
         $.fck.clearHtml('fck1');
     }
 </script>--%>
+<script src="/Editor/fckeditor.js" type="text/javascript"></script>
     <form id="form1" runat="server">
     <%if (ViewData["AddNews"] != null)
           { %>
@@ -58,21 +60,16 @@
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">N&#7897;i Dung:</label>
+            <label >N&#7897;i Dung:</label>
         </td>
         
         <td>
-            <FCKeditorV2:FCKeditor ID="ContentVN" runat="server" Width="100%" Height="400px">
-            
-              <%=Html.FckTextBox("ContentVN",Model.ContentVN)%>
-
-            </FCKeditorV2:FCKeditor>
-            
+            <%=Html.FckTextBox("ContentVN")%>
         </td>
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">Lo&#7841;i:</label>
+            <label >Lo&#7841;i:</label>
         </td>
         
         <td>
@@ -82,7 +79,7 @@
     </tr>
     <tr>
         <td>
-            <label for="ContentVN">Hình &#7843;nh:</label>
+            <label >Hình &#7843;nh:</label>
         </td>
         
         <td>
