@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using NGUYENHIEP.Models;
 using System.Linq.Dynamic;
-
+using NguyenHiep.Data.Queries;
+using NguyenHiep.Data;
 namespace NGUYENHIEP.Services.LinqClient
 {
     public class NguyenHiepDA
@@ -20,10 +21,20 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return null;
         }
-        public List<tblNew> GetAllNews()
+        public SearchResult<tblNew> GetAllNews(int pageSize, int page)
         {
-            var query = _dataContext.tblNews;
-            return (List<tblNew>)query.ToList();
+            SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
+            var query1 = _dataContext.tblNews;
+            var query = _dataContext.tblNews.Take(pageSize*page).Skip((page - 1) * pageSize);
+            if (query != null && query1 != null)
+            {
+                searchResult.Items = query.ToList();
+                searchResult.Query = query;
+                searchResult.SetMaxResults(pageSize);
+                searchResult.SetPage(page);
+                searchResult.TotalRows = query1.Count();
+            }
+            return searchResult;
         }
     }
 }

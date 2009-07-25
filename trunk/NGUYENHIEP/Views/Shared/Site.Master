@@ -8,7 +8,8 @@
         <%= Html.Encode(ViewData["Title"]) %></title>
 
     <script type="text/javascript" src="../../Scripts/jquery-1.3.2.js"></script>
-
+    <script type="text/javascript" src="../../Scripts/jquery-1.3.2.js"></script>
+    <script type="text/javascript" src="../../Scripts/Core.js"></script>
     <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

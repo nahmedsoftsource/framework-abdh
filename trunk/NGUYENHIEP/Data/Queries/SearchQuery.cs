@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections;
+using System.Linq.Expressions;
 
 namespace NguyenHiep.Data.Queries
 {
-  public class SearchQuery : ISearchQuery
+    public class SearchQuery : IQueryable
   {
     private SearchCriteria _criteria = SearchCriteria.Empty;
     private Dictionary<string, IQueryExpression> _expressions;
@@ -35,7 +37,7 @@ namespace NguyenHiep.Data.Queries
       }
     }
 
-    public ISearchQuery SetCriteria(SearchCriteria criteria)
+    public IQueryable SetCriteria(SearchCriteria criteria)
     {
       if (criteria == null)
       {
@@ -50,12 +52,12 @@ namespace NguyenHiep.Data.Queries
       return _criteria;
     }
 
-    public IQueryExpression Where(string propertyName)
-    {
-      QueryExpression ex = new QueryExpression(this, propertyName);
-      Expressions.Add(propertyName, ex);
-      return ex;
-    }
+    //public IQueryExpression Where(string propertyName)
+    //{
+    //  QueryExpression ex = new QueryExpression(this, propertyName);
+    //  Expressions.Add(propertyName, ex);
+    //  return ex;
+    //}
 
     #endregion
 
@@ -81,13 +83,13 @@ namespace NguyenHiep.Data.Queries
       }
     }
 
-    public ISearchQuery OrderBy(string propertyName)
+    public IQueryable OrderBy(string propertyName)
     {
       OrderClauses.Add(new SortOrder(propertyName, true));
       return this;
     }
 
-    public ISearchQuery OrderByDescending(string propertyName)
+    public IQueryable OrderByDescending(string propertyName)
     {
       OrderClauses.Add(new SortOrder(propertyName, false));
       return this;
@@ -105,7 +107,7 @@ namespace NguyenHiep.Data.Queries
       }
     }
 
-    public ISearchQuery SetPage(int page)
+    public IQueryable SetPage(int page)
     {
       if (page > 0)
       {
@@ -122,7 +124,7 @@ namespace NguyenHiep.Data.Queries
       return this;
     }
 
-    public ISearchQuery SetFirstResult(int firstResult)
+    public IQueryable SetFirstResult(int firstResult)
     {
       if (_firstResult >= 0)
       {
@@ -139,7 +141,7 @@ namespace NguyenHiep.Data.Queries
       return this;
     }
 
-    public ISearchQuery SetMaxResults(int maxResults)
+    public IQueryable SetMaxResults(int maxResults)
     {
       if (_maxResults > 0)
       {
@@ -176,6 +178,15 @@ namespace NguyenHiep.Data.Queries
     }
 
     #endregion
+      #region Implement 
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return null;
+    }
+    public Type ElementType { get; set; }
+    public  Expression Expression { get; set; }
+    public IQueryProvider Provider { get; set; }
 
+      #endregion
   }
 }
