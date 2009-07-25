@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NguyenHiep.Common;
+using NguyenHiep.Data.Queries;
 
 namespace NguyenHiep.Data
 {
   public class SearchResult<T>
   {
+      private int _page = 1;
+      private int _firstResult = 0;
+      private int _maxResults = int.MaxValue;
     private IList<T> _items;
-    private ISearchQuery _query;
+    private IQueryable _query;
 
     /// <summary>
     /// Gets or sets the result items.
@@ -32,17 +36,17 @@ namespace NguyenHiep.Data
     /// Gets or sets the query corresponding to the search result.
     /// </summary>
     /// <value>The query.</value>
-    public ISearchQuery Query
+    public IQueryable Query
     {
       get
       {
-        if (_query == null)
-        {
-          _query = SearchQueryBuilder.CreateQuery();
-        }
+        //if (_query == null)
+        //{
+        //  _query = SearchQueryBuilder.CreateQuery();
+        //}
         return _query;
       }
-      set { _query = value; }
+        set { _query = value; }
     }
 
     /// <summary>
@@ -55,7 +59,7 @@ namespace NguyenHiep.Data
     {
       get
       {
-        int maxResults = Query.GetMaxResults();
+          int maxResults = ((SearchQuery)Query).GetMaxResults();
         if (maxResults > 0)
         {
           return (int)Math.Ceiling(((double)TotalRows) / maxResults);
@@ -81,7 +85,7 @@ namespace NguyenHiep.Data
       TotalRows = totalRows;
     }
 
-    public SearchResult(IList<T> items, int totalRows, ISearchQuery query)
+    public SearchResult(IList<T> items, int totalRows, SearchQuery query)
     {
       _items = items;
       TotalRows = totalRows;
@@ -90,7 +94,84 @@ namespace NguyenHiep.Data
 
     public BasePager<T> ToBasePager()
     {
-      return new BasePager<T>(_query.GetPage(), _query.GetMaxResults(), _items, TotalRows);
+      return new BasePager<T>(GetPage(), GetMaxResults(), _items, TotalRows);
     }
+    #region Paging
+
+    public bool HasPaging
+    {
+        get
+        {
+            return _maxResults != int.MaxValue;
+        }
+    }
+
+    public void SetPage(int page)
+    {
+        if (page > 0)
+        {
+            _page = page;
+            if (_maxResults > 0 && _maxResults < int.MaxValue)
+            {
+                _firstResult = (_page - 1) * _maxResults;
+            }
+        }
+        else
+        {
+            _page = 1;
+        }
+    }
+
+    public void SetFirstResult(int firstResult)
+    {
+        if (_firstResult >= 0)
+        {
+            _firstResult = firstResult;
+            if (_maxResults > 0 && _maxResults < int.MaxValue)
+            {
+                _page = (_firstResult / _maxResults) + 1;
+            }
+        }
+        else
+        {
+            _firstResult = 0;
+        }
+    }
+
+    public void SetMaxResults(int maxResults)
+    {
+        if (_maxResults > 0)
+        {
+            _maxResults = maxResults;
+            if (_firstResult > 0)
+            {
+                _page = (_firstResult / _maxResults) + 1;
+            }
+            else if (_page > 0)
+            {
+                _firstResult = (_page - 1) * _maxResults;
+            }
+        }
+        else
+        {
+            _maxResults = int.MaxValue;
+        }
+    }
+
+    public int GetPage()
+    {
+        return _page;
+    }
+
+    public int GetFirstResult()
+    {
+        return _firstResult;
+    }
+
+    public int GetMaxResults()
+    {
+        return _maxResults;
+    }
+    #endregion
   }
 }

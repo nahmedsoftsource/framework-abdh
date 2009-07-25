@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using NGUYENHIEP.Services.LinqClient;
 using NGUYENHIEP.Models;
+using NguyenHiep.Data;
 
 namespace NGUYENHIEP.Services
 {
@@ -21,9 +22,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetNewsByID(newID);
         }
-        public List<tblNew> GetAllNews()
+        public SearchResult<tblNew> GetAllNews(int pageSize, int page)
         {
-            return _da.GetAllNews();
+            return _da.GetAllNews(pageSize,page);
         }
     }
 }

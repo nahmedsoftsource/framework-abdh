@@ -18,8 +18,8 @@ namespace NguyenHiep.Utility
     {
       get
       {
-        if (_searchQuery == null)
-          _searchQuery = SearchQueryBuilder.CreateQuery();
+        //if (_searchQuery == null)
+        //  _searchQuery = SearchQueryBuilder.CreateQuery();
         return _searchQuery;
       }
       set

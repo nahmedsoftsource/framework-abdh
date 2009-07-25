@@ -1,10 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<NGUYENHIEP.Models.tblNew>>" %>
+﻿<%@ Page Title="" Language="C#"  Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblNew>>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
 
-<div class="mainCtentSpRight">
-
-	
     <div class="barCterTab">
     	<div class="barCterTabLleft">
         	<div class="barCterTabRight">
@@ -22,13 +18,8 @@
                     	<div class="boxCtentSpCtent">
                         <div class="textLeft">
     <%int counter = 0; %>
-    <% foreach (var item in Model) { %>
-        <%--<%if (counter == 0)
-          { %>
-        <tr>
-        <%} %>--%>
+    <% foreach (var item in Model.Items) { %>
         
-        <%--<td class="clear">--%>
             <div class="subSp">
 
             	<div class="clear"><a href="#"><img src="../..<%=item.Image%>" /></a></div>
@@ -38,12 +29,11 @@
                 <div class="clear"></div>
             </div>
         <%counter++; %>
-        <%--</td>--%>
-        <%if (counter == 4)
-          { %>
+        <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
+          {
+              counter = 0; %>
         <div class="clear"></div>
         <%} %>
-        <%if (counter == 4) counter = 0; %>
     
     <% } %>
     </div>
@@ -51,19 +41,23 @@
     </div>
     </div>
     </div>
-    
 
-</div>
-<div class="barCterTab">
-    	<div class="barCterTabLleft">
-        	<div class="barCterTabRight">
-            	<div style="line-height:23px;" class="ctentBarTab">
-                	<%= Html.ActionLink("Create New", "Create") %>
-                </div>
+<%=
+          NguyenHiep.Utility.PagerExtensions.AjaxPager
+          (this.Html,
+            new NguyenHiep.Utility.Pager.PagingOption
+            {
+              CurrentPage = Model.GetPage(),
+              PageSize = Model.GetMaxResults(),
+              TotalRows = Model.TotalRows,
+              //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
+              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize+"&page="+page)
 
-            </div>
-        </div>
-</div>
-
-</asp:Content>
-
+            },
+            new NguyenHiep.Utility.Pager.AjaxPaginationOption
+            {
+                HtmlID = "ListAllNewsID"
+              ,
+            }
+          )
+       %>

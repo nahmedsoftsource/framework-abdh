@@ -19,7 +19,7 @@ namespace NGUYENHIEP
             routes.MapRoute(
                 "Default",                                              // Route name
                 "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "NguyenHiep", action = "ListAllNews", id = "" }  // Parameter defaults
+                new { controller = "NguyenHiep", action = "Index", id = "" }  // Parameter defaults
             );
 
         }

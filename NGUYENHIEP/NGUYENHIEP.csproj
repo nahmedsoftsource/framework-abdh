@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\BasePager.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\DomainBase.cs" />
     <Compile Include="Common\IPager.cs" />
     <Compile Include="Common\Json.cs" />
@@ -71,10 +72,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\NguyenHiepControllerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Data\Configuration\DataClientProviderSection.cs" />
-    <Compile Include="Data\ConnectionContext.cs" />
-    <Compile Include="Data\ConnectionScope.cs" />
-    <Compile Include="Data\DataClientProvider.cs" />
     <Compile Include="Data\IQueryExpression.cs" />
     <Compile Include="Data\ISearchQuery.cs" />
     <Compile Include="Data\ISortOrder.cs" />
@@ -82,10 +79,7 @@
     <Compile Include="Data\Queries\SearchQuery.cs" />
     <Compile Include="Data\Queries\SortOrder.cs" />
     <Compile Include="Data\SearchCriteria.cs" />
-    <Compile Include="Data\SearchQueryBuilder.cs" />
     <Compile Include="Data\SearchResult.cs" />
-    <Compile Include="Data\TransactionContext.cs" />
-    <Compile Include="Data\TransactionScope.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -122,6 +116,7 @@
     <Compile Include="Utility\UIHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\Core.js" />
     <Content Include="Content\fontsize.css" />
     <Content Include="Content\images\AddToCart.png" />
     <Content Include="Content\images\aHver.jpg" />
@@ -249,6 +244,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\Configuration\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
