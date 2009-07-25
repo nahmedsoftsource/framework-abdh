@@ -70,7 +70,7 @@
     <Compile Include="Common\Tool.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\NguyenHiepControllerController.cs" />
+    <Compile Include="Controllers\NguyenHiepController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\IQueryExpression.cs" />
     <Compile Include="Data\ISearchQuery.cs" />
