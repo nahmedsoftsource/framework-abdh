@@ -6,11 +6,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>
         <%= Html.Encode(ViewData["Title"]) %></title>
-
+    <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/jquery-1.3.2.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-1.3.2.js"></script>
     <script type="text/javascript" src="../../Scripts/Core.js"></script>
-    <link href="../../Content/Style.css" rel="stylesheet" type="text/css" />
+    
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function(){
+            $("#TopMenuTab >a").removeClass("selected");
+            var selectMenuID = "li:eq("+$("#SelectedMenuId").val() + ")";
+            $(selectMenuID +">a").addClass("selected");
+        });
+    </script>
 </head>
 <body>
     <div id="mainBdy">
@@ -34,8 +41,8 @@
                 <div class="barMenuTop">
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
-                            <ul>
-                                <li><a class="selected" href="#"><span>Trang chủ</span></a></li>
+                            <ul id="TopMenuTab">
+                                <li><a href="#"><span>Trang chủ</span></a></li>
                                 <li><a href="#"><span>GIới thiệu</span></a></li>
                                 <li><a href="#"><span>Tin tức</span></a></li>
                                 <li><a href="#"><span>Sản phẩm </span></a></li>
