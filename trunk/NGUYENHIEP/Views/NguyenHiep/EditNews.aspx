@@ -26,7 +26,7 @@
         </td>
         
         <td>
-            <%= Html.TextBox("TitleVN", Model.TitleVN) %>
+            <%= Html.TextBox("TitleVN", Model.TitleVN, new { @size="50"})%>
             <%= Html.ValidationMessage("TitleVN", "*") %>
         </td>
     </tr>
@@ -36,7 +36,7 @@
         </td>
         
         <td>
-            <%= Html.TextBox("SubjectVN", Model.SubjectVN) %>
+            <%= Html.TextBox("SubjectVN", Model.SubjectVN, new { @size = "50" })%>
                 <%= Html.ValidationMessage("SubjectVN", "*") %>
         </td>
     </tr>
@@ -67,7 +67,7 @@
         <td>
             <%--<%= Html.TextBox("Image", Model.Image)%>
                 <%= Html.ValidationMessage("Image", "*")%>--%>
-                
+             <input type="file" name="UploadFile" size="50"/>   
         </td>
     </tr>
     <tr>
@@ -83,7 +83,6 @@
         </td>
     </tr>
     </table>
-      <input type=file name="UploadFile" />
     
     </form>
 </asp:Content>
