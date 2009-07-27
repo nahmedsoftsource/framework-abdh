@@ -19,7 +19,7 @@
                         <div class="textLeft">
     <%int counter = 0; %>
     <% foreach (var item in Model.Items) { %>
-        
+        <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
             <div class="subSp">
 
             	<div class="clear"><a href="#"><img src="../..<%=item.Image%>" /></a></div>
