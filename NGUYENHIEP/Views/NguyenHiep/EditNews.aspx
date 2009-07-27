@@ -1,9 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
+
+
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+<%@ Import Namespace="NguyenHiep.Utility" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
 
-<script src="/Editor/fckeditor.js" type="text/javascript"></script>
+    <script src="/Editor/fckeditor.js" type="text/javascript"></script>
     <form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddNews"] != null)
           { %>
@@ -17,7 +20,7 @@
 
     <%= Html.ValidationSummary("Edit was unsuccessful. Please correct the errors and try again.") %>
 
-    <%--<% using (Html.BeginForm()) {%>--%>
+  
 
     <table width="100%">
     <tr>
@@ -53,7 +56,6 @@
         <td>
             <label >Lo&#7841;i:</label>
         </td>
-        
         <td>
             <%=Html.DropDownList("Model.Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
                 <%= Html.ValidationMessage("Type", "*") %>
@@ -63,12 +65,11 @@
         <td>
             <label >Hình &#7843;nh:</label>
         </td>
-        
         <td>
-            <%--<%= Html.TextBox("Image", Model.Image)%>
-                <%= Html.ValidationMessage("Image", "*")%>--%>
-             <input type="file" name="UploadFile" size="50"/>   
-        </td>
+        <p><input type="file" id="UploadFile" name="UploadFile" size="23"/> </p>
+      </td>
+    
+       
     </tr>
     <tr>
         <td colspan="2">
@@ -87,9 +88,4 @@
     </form>
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="RightMenu" runat="server">
-</asp:Content>
-
-<asp:Content ID="Content3" ContentPlaceHolderID="LowerMainContent" runat="server">
-</asp:Content>
 

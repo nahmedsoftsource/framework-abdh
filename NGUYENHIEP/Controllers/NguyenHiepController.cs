@@ -16,7 +16,7 @@ namespace NGUYENHIEP.Controllers
     public class NguyenHiepController : Controller
     {
         NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
-        public ActionResult Index(int? pageSize,int? page)
+        public ActionResult Index(int? pageSize, int? page)
         {
             SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
@@ -28,14 +28,14 @@ namespace NGUYENHIEP.Controllers
                 tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID);
                 return View(tblnews);
             }
-            else if(TempData["NewsID"] != null)
+            else if (TempData["NewsID"] != null)
             {
                 tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"]);
                 return View(tblnews);
             }
             return new EmptyResult();
         }
-        public ActionResult ListAllNews(int? pageSize,int? page)
+        public ActionResult ListAllNews(int? pageSize, int? page)
         {
 
             SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
@@ -43,6 +43,7 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult EditNews(Guid? newsID)
         {
+
             if (newsID != null)
             {
                 tblNew tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID);
@@ -50,7 +51,7 @@ namespace NGUYENHIEP.Controllers
                 ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString() }));
                 ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
                 ViewData["NewsType"] = ls;
-                ViewData["ContentVN"] = tblnew.ContentVN ;
+                ViewData["ContentVN"] = tblnew.ContentVN;
                 ViewData["command"] = "upload";
                 return View(tblnew);
             }
@@ -61,7 +62,7 @@ namespace NGUYENHIEP.Controllers
                 ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
                 ViewData["NewsType"] = ls;
                 ViewData["AddNews"] = true;
-                tblNew tblnew= new tblNew();
+                tblNew tblnew = new tblNew();
                 return View(tblnew);
             }
         }
@@ -69,28 +70,49 @@ namespace NGUYENHIEP.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew)
         {
-            
-            string folder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+            string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+            bool flag = false;
+            if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+            foreach (string inputTagName in Request.Files)
+            {
+                HttpPostedFileBase file = Request.Files[inputTagName];
+                
+                if (newsID != null && ModelState.IsValid)
+                {
+                    tblnew.ID = (Guid)newsID;
+                    string pathImage;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    {
+                        flag = true;
+                        tblnew.Image = pathImage;
+                        _nguyenHiepService.UpdateNews(tblnew);
+                        TempData["NewsID"] = newsID;
+                        return RedirectToAction("ViewNews");
+                    }
+                }
+                else if (newsID == null && ModelState.IsValid)
+                {
+                    flag = true;
+                    tblnew.ID =Guid.NewGuid();
+                    newsID = tblnew.ID;
+                    string pathImage;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    {
+                        tblnew.Image = pathImage;
+                        _nguyenHiepService.InsertNews(tblnew);
+                        return RedirectToAction("Index");
+                    }
 
-            Directory.CreateDirectory(folder);
-            //String path = Path.Combine(folder, insuranceFormItem.Document.ID.ToString("N"));
-            Request.Files["UploadFile"].SaveAs(folder);
-            if (newsID != null && ModelState.IsValid)
-            {
-                tblnew.ID = (Guid)newsID;
-                _nguyenHiepService.UpdateNews(tblnew);
-                TempData["NewsID"] = newsID;
-                return RedirectToAction("ViewNews");
-            }
-            else if (newsID == null && ModelState.IsValid)
-            {
-                tblnew.ID = Guid.NewGuid();
-                _nguyenHiepService.InsertNews(tblnew);
-                return RedirectToAction("Index");
+                }
+
             }
             List<SelectListItem> ls = new List<SelectListItem>();
             ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString() }));
             ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
+            if (!flag)
+            {
+                ModelState.AddModelError("UploadFile", "File Request is not support");
+            }
             ViewData["NewsType"] = ls;
             if (newsID == null)
             {

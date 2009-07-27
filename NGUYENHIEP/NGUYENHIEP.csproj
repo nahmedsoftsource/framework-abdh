@@ -100,6 +100,7 @@
     <Compile Include="Services\NguyenHiepService.cs" />
     <Compile Include="Utility\BaseController.cs" />
     <Compile Include="Utility\DialogCloseOption.cs" />
+    <Compile Include="Utility\File\File.cs" />
     <Compile Include="Utility\GridExtensions.cs" />
     <Compile Include="Utility\InputExtensions.cs" />
     <Compile Include="Utility\JavascriptHelper.cs" />
@@ -802,6 +803,7 @@
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
     <Content Include="Views\NguyenHiep\EditNews.aspx" />
+    <Content Include="Views\NguyenHiep\Index2.aspx" />
     <Content Include="Views\Shared\Admin.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -810,6 +812,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Admin\ImagesInTileNews\" />
     <Folder Include="App_Data\" />
     <Folder Include="Data\Configuration\" />
     <Folder Include="Images\" />
