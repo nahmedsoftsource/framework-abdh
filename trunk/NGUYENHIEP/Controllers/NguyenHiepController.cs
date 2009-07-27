@@ -7,6 +7,8 @@ using NGUYENHIEP.Models;
 using NGUYENHIEP.Services;
 using NguyenHiep.Data;
 using NguyenHiep.Common;
+using System.IO;
+using System.Configuration;
 
 namespace NGUYENHIEP.Controllers
 {
@@ -49,6 +51,7 @@ namespace NGUYENHIEP.Controllers
                 ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
                 ViewData["NewsType"] = ls;
                 ViewData["ContentVN"] = tblnew.ContentVN ;
+                ViewData["command"] = "upload";
                 return View(tblnew);
             }
             else
@@ -66,6 +69,12 @@ namespace NGUYENHIEP.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew)
         {
+            
+            string folder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+
+            Directory.CreateDirectory(folder);
+            //String path = Path.Combine(folder, insuranceFormItem.Document.ID.ToString("N"));
+            Request.Files["UploadFile"].SaveAs(folder);
             if (newsID != null && ModelState.IsValid)
             {
                 tblnew.ID = (Guid)newsID;
