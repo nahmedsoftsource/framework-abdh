@@ -24,55 +24,57 @@
 
     <table width="100%">
     <tr>
-        <td>
+        <td class="l">
             <label for="TitleVN">Tiêu &#273;&#7873;:</label>
         </td>
         
-        <td>
+        <td class="l">
             <%= Html.TextBox("TitleVN", Model.TitleVN, new { @size="50"})%>
             <%= Html.ValidationMessage("TitleVN", "*") %>
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="l">
             <label for="SubjectVN">Ch&#7911; &#273;&#7873;:</label>
         </td>
         
-        <td>
+        <td class="l">
             <%= Html.TextBox("SubjectVN", Model.SubjectVN, new { @size = "50" })%>
                 <%= Html.ValidationMessage("SubjectVN", "*") %>
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="l">
             <label >N&#7897;i Dung:</label>
         </td>
         
-        <td>
-            <%=Html.FckTextBox("ContentVN")%>
+        <td class="l">
+            <div style="border:solid 1px;">
+                <%=Html.FckTextBox("ContentVN")%>
+            </div>
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="l">
             <label >Lo&#7841;i:</label>
         </td>
-        <td>
+        <td class="l">
             <%=Html.DropDownList("Model.Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
                 <%= Html.ValidationMessage("Type", "*") %>
         </td>
     </tr>
     <tr>
-        <td>
+        <td class="l">
             <label >Hình &#7843;nh:</label>
         </td>
-        <td>
+        <td class="l">
         <p><input type="file" id="UploadFile" name="UploadFile" size="23"/> </p>
       </td>
     
        
     </tr>
     <tr>
-        <td colspan="2">
+        <td colspan="2" class="c">
         <%if (ViewData["AddNews"] != null)
           { %>
             <input type="submit" value="Thêm tin t&#7913;c" />

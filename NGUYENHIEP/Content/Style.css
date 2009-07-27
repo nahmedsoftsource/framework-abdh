@@ -36,6 +36,21 @@ p{
 	padding: 0;
 	outline:none;
 }
+.l
+{
+    text-align:left;
+    padding:7px 0px 0px 0px;
+}
+.r
+{
+    text-align:right;
+    padding:5px 0px 0px 0px;
+}
+.c
+{
+    text-align:center;
+    padding:7px 0px 0px 0px;
+}
 .floatLeft{
 	float:left;
 }
