@@ -117,14 +117,10 @@
                             <div class="boxHtroOlineTop">
                                 <div class="boxHtroOlineBtom">
                                     <div class="boxHtroOlineCtent">
-                                        <a href="#">
-                                            <img src="../../Content/images/online_003.gif" /></a>
+                                        <a href="ymsgr:sendIM?tungduongct2006">
+                                            <img src="http://opi.yahoo.com/online?u=bryanpham85&m=g&t=8" /></a>
                                         <p class="bold">
-                                            <a class="color1" href="#">Nguyen_han</a></p>
-                                        <a href="#">
-                                            <img src="../../Content/images/online_002.gif" /></a>
-                                        <p class="bold">
-                                            <a class="color1" href="#">Nguyen_han</a></p>
+                                            <a class="color1" href="ymsgr:sendIM?tungduongct2006"">Nguyen_han</a></p>
                                     </div>
                                 </div>
                             </div>
