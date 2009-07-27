@@ -2,27 +2,9 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
-<%--<script type="text/javascript">
-    $(document).ready(function() {
-        
-        $('textarea#content').fck();
-    });
 
-    function InsertContent() {
-        var sample = document.getElementById("ContentVN").value;
-        $.fck.insertHtml('ContentVN', sample);
-    }
-
-    function ShowContent() {
-        alert($.fck.content('fck1', ''));
-    }
-
-    function ClearContent() {
-        $.fck.clearHtml('fck1');
-    }
-</script>--%>
 <script src="/Editor/fckeditor.js" type="text/javascript"></script>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddNews"] != null)
           { %>
             <h2>Thêm tin t&#7913;c</h2>
@@ -83,8 +65,9 @@
         </td>
         
         <td>
-            <%= Html.TextBox("Image", Model.Image)%>
-                <%= Html.ValidationMessage("Image", "*")%>
+            <%--<%= Html.TextBox("Image", Model.Image)%>
+                <%= Html.ValidationMessage("Image", "*")%>--%>
+                
         </td>
     </tr>
     <tr>
@@ -100,7 +83,7 @@
         </td>
     </tr>
     </table>
-      
+      <input type=file name="UploadFile" />
     
     </form>
 </asp:Content>
