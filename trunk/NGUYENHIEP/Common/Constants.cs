@@ -15,4 +15,14 @@ namespace NguyenHiep.Common
         public static int News = 1;
         public static int RecruitmentS = 2;
     }
+    public class StoreStatuses
+    {
+        public static int Exhausted = 1;
+        public static int NotExhausted = 2;
+    }
+    public class Promoted
+    {
+        public static int Has = 1;
+        public static int NotHas = 2;
+    }
 }

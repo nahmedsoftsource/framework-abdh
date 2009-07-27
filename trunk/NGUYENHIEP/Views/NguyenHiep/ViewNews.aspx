@@ -7,11 +7,11 @@
                 	<div class="boxCtentSpBtom">
                     	<div class="boxCtentSpCtent">
                         	<div class="textLeft">
-                            	<a href="#"><img class="imgGthieu" src="../..<%=Model.Image%>" /></a>
+                            	<a href="#"><img class="imgGthieu" src="../..<%=((Model.Image!=null)?Model.Image:"")%>" /></a>
 
                               <div class="paddingTb4 bold"><a class="color2" href="#"></a>
                                 
-                                <%=Model.ContentVN %>
+                                <%=(Model.ContentVN != null)?Model.ContentVN:""%>
                             </div>
                             <div class="clear"></div>
                         </div>

@@ -802,8 +802,12 @@
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
+    <Content Include="Views\NguyenHiep\EditProduct.aspx" />
+    <Content Include="Views\NguyenHiep\ViewPage1.aspx" />
+    <Content Include="Views\NguyenHiep\ViewProduct.aspx" />
+    <Content Include="Views\NguyenHiep\IndexForProduct.aspx" />
+    <Content Include="Views\NguyenHiep\ListAllProduct.aspx" />
     <Content Include="Views\NguyenHiep\EditNews.aspx" />
-    <Content Include="Views\NguyenHiep\Index2.aspx" />
     <Content Include="Views\Shared\Admin.Master" />
   </ItemGroup>
   <ItemGroup>

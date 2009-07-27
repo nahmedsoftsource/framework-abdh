@@ -48,7 +48,7 @@ namespace NGUYENHIEP.Models
     #endregion
 		
 		public NguyenHiepDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1532,6 +1532,14 @@ namespace NGUYENHIEP.Models
 		
 		private System.Nullable<bool> _Deleted;
 		
+		private System.Nullable<bool> _Promoted;
+		
+		private System.Nullable<bool> _StoreStatus;
+		
+		private string _WarrantyTime;
+		
+		private string _Property;
+		
 		private EntityRef<tblCategory> _tblCategory;
 		
     #region Extensibility Method Definitions
@@ -1566,6 +1574,14 @@ namespace NGUYENHIEP.Models
     partial void OnUpdatedDateChanged();
     partial void OnDeletedChanging(System.Nullable<bool> value);
     partial void OnDeletedChanged();
+    partial void OnPromotedChanging(System.Nullable<bool> value);
+    partial void OnPromotedChanged();
+    partial void OnStoreStatusChanging(System.Nullable<bool> value);
+    partial void OnStoreStatusChanged();
+    partial void OnWarrantyTimeChanging(string value);
+    partial void OnWarrantyTimeChanged();
+    partial void OnPropertyChanging(string value);
+    partial void OnPropertyChanged();
     #endregion
 		
 		public tblProduct()
@@ -1854,6 +1870,86 @@ namespace NGUYENHIEP.Models
 					this._Deleted = value;
 					this.SendPropertyChanged("Deleted");
 					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Promoted", DbType="Bit")]
+		public System.Nullable<bool> Promoted
+		{
+			get
+			{
+				return this._Promoted;
+			}
+			set
+			{
+				if ((this._Promoted != value))
+				{
+					this.OnPromotedChanging(value);
+					this.SendPropertyChanging();
+					this._Promoted = value;
+					this.SendPropertyChanged("Promoted");
+					this.OnPromotedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_StoreStatus", DbType="Bit")]
+		public System.Nullable<bool> StoreStatus
+		{
+			get
+			{
+				return this._StoreStatus;
+			}
+			set
+			{
+				if ((this._StoreStatus != value))
+				{
+					this.OnStoreStatusChanging(value);
+					this.SendPropertyChanging();
+					this._StoreStatus = value;
+					this.SendPropertyChanged("StoreStatus");
+					this.OnStoreStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_WarrantyTime", DbType="NVarChar(50)")]
+		public string WarrantyTime
+		{
+			get
+			{
+				return this._WarrantyTime;
+			}
+			set
+			{
+				if ((this._WarrantyTime != value))
+				{
+					this.OnWarrantyTimeChanging(value);
+					this.SendPropertyChanging();
+					this._WarrantyTime = value;
+					this.SendPropertyChanged("WarrantyTime");
+					this.OnWarrantyTimeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Property", DbType="NVarChar(500)")]
+		public string Property
+		{
+			get
+			{
+				return this._Property;
+			}
+			set
+			{
+				if ((this._Property != value))
+				{
+					this.OnPropertyChanging(value);
+					this.SendPropertyChanging();
+					this._Property = value;
+					this.SendPropertyChanged("Property");
+					this.OnPropertyChanged();
 				}
 			}
 		}

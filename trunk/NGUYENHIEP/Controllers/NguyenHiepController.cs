@@ -21,6 +21,11 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
         }
+        public ActionResult IndexForProduct(int? pageSize, int? page)
+        {
+            SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            return View(listAllNews);
+        }
         public ActionResult ViewNews(Guid? newsID)
         {
             if (newsID != null && !newsID.Equals(Guid.Empty))
@@ -35,10 +40,31 @@ namespace NGUYENHIEP.Controllers
             }
             return new EmptyResult();
         }
+        public ActionResult ViewProduct(Guid? newsID)
+        {
+            if (newsID != null && !newsID.Equals(Guid.Empty))
+            {
+                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
+                return View(tblproduct);
+            }
+            else if (TempData["ProductID"] != null)
+            {
+                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)TempData["ProductID"]);
+                return View(tblproduct);
+            }
+            tblProduct tblpro = new tblProduct();
+            return View(tblpro);
+        }
         public ActionResult ListAllNews(int? pageSize, int? page)
         {
 
             SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            return View(listAllNews);
+        }
+        public ActionResult ListAllProduct(int? pageSize, int? page)
+        {
+
+            SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
         }
         public ActionResult EditNews(Guid? newsID)
@@ -64,6 +90,48 @@ namespace NGUYENHIEP.Controllers
                 ViewData["AddNews"] = true;
                 tblNew tblnew = new tblNew();
                 return View(tblnew);
+            }
+        }
+        public ActionResult EditProduct(Guid? newsID)
+        {
+            List<SelectListItem> categories = new List<SelectListItem>();
+            List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
+            int counter = 0;
+            foreach (tblCategory cat in listCategory)
+            {
+                if (counter == 0)
+                {
+                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                }
+                else
+                {
+                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                }
+                counter++;
+            }
+            List<SelectListItem> storeStatus = new List<SelectListItem>();
+            storeStatus.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
+            storeStatus.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
+            List<SelectListItem> promotion = new List<SelectListItem>();
+            promotion.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
+            promotion.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+            ViewData["StoreStatus"] = storeStatus;
+            ViewData["Promotion"] = promotion;
+            ViewData["Categories"] = categories;
+
+            if (newsID != null)
+            {
+                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
+                
+                
+                return View(tblproduct);
+            }
+            else
+            {
+                
+                ViewData["AddProduct"] = true;
+                tblProduct tblproduct = new tblProduct();
+                return View(tblproduct);
             }
         }
         [ValidateInput(false)]
@@ -119,6 +187,68 @@ namespace NGUYENHIEP.Controllers
                 ViewData["AddNews"] = true;
             }
             return View(tblnew);
+        }
+
+        [ValidateInput(false)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditProduct(Guid? newsID, [Bind(Exclude = "ID")] tblProduct tblproduct)
+        {
+            string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+            bool flag = false;
+            if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+            foreach (string inputTagName in Request.Files)
+            {
+                HttpPostedFileBase file = Request.Files[inputTagName];
+
+                if (newsID != null && ModelState.IsValid)
+                {
+                    tblproduct.ID = (Guid)newsID;
+                    string pathImage;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    {
+                        flag = true;
+                        tblproduct.Image = pathImage;
+                        
+                    }
+                    if (tblproduct.Image == null)
+                    {
+                        tblproduct.Image = Request["Image"];
+                    }
+
+                    _nguyenHiepService.UpdateProduct(tblproduct);
+                    TempData["ProductID"] = newsID;
+                    return RedirectToAction("ViewProduct");
+                }
+                else if (newsID == null && ModelState.IsValid)
+                {
+                    flag = true;
+                    tblproduct.ID = Guid.NewGuid();
+                    newsID = tblproduct.ID;
+                    string pathImage;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    {
+                        tblproduct.Image = pathImage;
+                        
+                    }
+                    _nguyenHiepService.InsertProduct(tblproduct);
+                    return RedirectToAction("IndexForProduct");
+
+                }
+
+            }
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString() }));
+            ls.Add((new SelectListItem { Text = "Tuyển Dụng", Value = CategoryTypes.RecruitmentS.ToString() }));
+            if (!flag)
+            {
+                ModelState.AddModelError("UploadFile", "File Request is not support");
+            }
+            ViewData["NewsType"] = ls;
+            if (newsID == null)
+            {
+                ViewData["AddNews"] = true;
+            }
+            return View(tblproduct);
         }
     }
 }
