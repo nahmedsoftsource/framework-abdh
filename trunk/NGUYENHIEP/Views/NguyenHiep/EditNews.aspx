@@ -54,7 +54,7 @@
                     Lo&#7841;i:</label>
             </td>
             <td class="l">
-                <%=Html.DropDownList("Model.Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
+                <%=Html.DropDownList("Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
                 <%= Html.ValidationMessage("Type", "*") %>
             </td>
         </tr>

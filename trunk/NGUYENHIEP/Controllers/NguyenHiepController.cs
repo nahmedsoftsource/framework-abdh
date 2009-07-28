@@ -245,6 +245,8 @@ namespace NGUYENHIEP.Controllers
                     {
                         tblnew.Image = pathImage;
                         _nguyenHiepService.InsertNews(tblnew);
+                        if (!tblnew.Type.HasValue)
+                            tblnew.Type = (byte)NguyenHiep.Common.CategoryTypes.News;
                         if (tblnew.Type == NguyenHiep.Common.CategoryTypes.News)
                         {
                           return RedirectToAction("IndexForNews");

@@ -25,7 +25,7 @@
                               <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
                 	            <a href="#"><img class="imgGthieu" src="../..<%=(item.Image!=null)?item.Image:""%>" /></a>
                               <div class="paddingTb4 bold"><a class="color1" href="#">
-                              <%=(item.ContentVN!= null)?item.ContentVN.Substring(0, 200):"Chưa có"%>
+                              <%=(item.ContentVN != null && item.ContentVN.Length > 200) ? item.ContentVN.Substring(0, 200) : item.ContentVN%>
                               <div class="textRight fontsize11">
                               <%=Html.ActionLink("Xem tiếp", "ViewNews", new { newsID = item.ID},new {@class="color2"})%>
                               </div>
