@@ -34,6 +34,10 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetAllCategory();
         }
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page)
+        {
+            return _da.GetAllCategory(pageSize, page);
+        }
         public SearchResult<tblProduct> GetAllProduct(int pageSize, int page)
         {
             return _da.GetAllProduct(pageSize, page);
@@ -53,6 +57,14 @@ namespace NGUYENHIEP.Services
         public void InsertProduct(tblProduct tblProduct)
         {
             _da.InsertProduct(tblProduct);
+        }
+        public void UpdateCategory(tblCategory tblnew)
+        {
+            _da.UpdateCategory(tblnew);
+        }
+        public void InsertCategory(tblCategory tblnew)
+        {
+            _da.InsertCategory(tblnew);
         }
     }
 }
