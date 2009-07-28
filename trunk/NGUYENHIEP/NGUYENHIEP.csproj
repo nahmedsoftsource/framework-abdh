@@ -99,6 +99,8 @@
     <Compile Include="Services\LinqClient\NguyenHiepDA.cs" />
     <Compile Include="Services\NguyenHiepService.cs" />
     <Compile Include="Utility\BaseController.cs" />
+    <Compile Include="Utility\Crypto\EncDec.cs" />
+    <Compile Include="Utility\Crypto\KeyGeneration.cs" />
     <Compile Include="Utility\DialogCloseOption.cs" />
     <Compile Include="Utility\File\File.cs" />
     <Compile Include="Utility\GridExtensions.cs" />
