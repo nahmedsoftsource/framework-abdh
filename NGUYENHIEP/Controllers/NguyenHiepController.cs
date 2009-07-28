@@ -86,6 +86,11 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
         }
+        public ActionResult ListCategory(int? pageSize, int? page)
+        {
+            SearchResult<tblCategory> listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            return View(listAllCategory);
+        }
         public ActionResult EditNews(Guid? newsID)
         {
 
@@ -110,6 +115,59 @@ namespace NGUYENHIEP.Controllers
                 tblNew tblnew = new tblNew();
                 return View(tblnew);
             }
+        }
+        public ActionResult EditCategory(Guid? newsID)
+        {
+
+            if (newsID != null)
+            {
+                tblCategory tblCategory = new tblCategory();// = _nguyenHiepService.GetCategoryByID((Guid)newsID);
+
+                ViewData["NameVN"] = tblCategory.CategoryNameVN;
+                ViewData["NameEN"] = tblCategory.CategoryNameVN;
+                ViewData["DescriptionVN"] = tblCategory.DescriptionVN;
+                ViewData["DescriptionEN"] = tblCategory.DescriptionEN;
+                ViewData["command"] = "upload";
+                return View(tblCategory);
+            }
+            else
+            {
+                ViewData["AddNews"] = true;
+                tblCategory tblCategory = new tblCategory();
+                return View(tblCategory);
+            }
+        }
+
+        [ValidateInput(false)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditCategory(Guid? newsID, [Bind(Exclude = "ID")] tblCategory tblnew)
+        {
+            bool flag = false;
+            if (newsID != null && ModelState.IsValid)
+            {
+                _nguyenHiepService.UpdateCategory(tblnew);
+                TempData["CategoryID"] = newsID;
+                //todo: view one category
+                return RedirectToAction("ViewNews");
+            }
+            else if (newsID == null && ModelState.IsValid)
+            {
+                flag = true;
+                tblnew.ID = Guid.NewGuid();
+                newsID = tblnew.ID;
+
+                TempData["CategoryID"] = newsID;
+                _nguyenHiepService.InsertCategory(tblnew);
+                //todo: view one category
+                return RedirectToAction("ViewNews");
+            }
+            
+
+            if (newsID == null)
+            {
+                ViewData["AddNews"] = true;
+            }
+            return View(tblnew);
         }
         public ActionResult EditProduct(Guid? newsID)
         {

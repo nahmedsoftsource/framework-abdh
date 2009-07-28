@@ -14,6 +14,8 @@ namespace NguyenHiep.Common
     {
         public static byte News = 1;
         public static byte Contruction = 2;
+        public static byte HotNew = 3;
+        public static byte PromotionNew = 4; 
     }
     public class StoreStatuses
     {

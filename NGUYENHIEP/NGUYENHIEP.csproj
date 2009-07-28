@@ -804,10 +804,12 @@
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
+    <Content Include="Views\NguyenHiep\EditCategory.aspx" />
     <Content Include="Views\NguyenHiep\Index.aspx" />
     <Content Include="Views\NguyenHiep\IndexForContruction.aspx" />
     <Content Include="Views\NguyenHiep\ListAllContruction.aspx" />
     <Content Include="Views\NguyenHiep\EditProduct.aspx" />
+    <Content Include="Views\NguyenHiep\ListCategory.aspx" />
     <Content Include="Views\NguyenHiep\ViewProduct.aspx" />
     <Content Include="Views\NguyenHiep\IndexForProduct.aspx" />
     <Content Include="Views\NguyenHiep\ListAllProduct.aspx" />
@@ -838,12 +840,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1686</DevelopmentServerPort>
+          <DevelopmentServerPort>3361</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/NGUYENHIEP</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

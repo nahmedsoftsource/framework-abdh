@@ -2,7 +2,6 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
-    <script src="/Editor/fckeditor.js" type="text/javascript"></script>
     <form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddProduct"] != null)
           { %>
