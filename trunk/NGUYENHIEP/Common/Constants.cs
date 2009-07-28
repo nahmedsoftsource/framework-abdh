@@ -12,8 +12,8 @@ namespace NguyenHiep.Common
   }
     public class CategoryTypes
     {
-        public static int News = 1;
-        public static int RecruitmentS = 2;
+        public static byte News = 1;
+        public static byte Contruction = 2;
     }
     public class StoreStatuses
     {

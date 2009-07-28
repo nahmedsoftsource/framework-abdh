@@ -5,7 +5,7 @@
     	<div class="barCterTabLleft">
         	<div class="barCterTabRight">
             	<div style="line-height:23px;" class="ctentBarTab">
-                	Tin tức
+                	Ảnh công trình
                 </div>
 
             </div>
@@ -18,20 +18,23 @@
                     	<div class="boxCtentSpCtent">
                         <div class="textLeft">
     <%int counter = 0; %>
-    <% foreach (var item in Model.Items) 
-       { %>
-    
-                          <div class="boxSubTin1">
-                              <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
-                	            <a href="#"><img class="imgGthieu" src="../..<%=(item.Image!=null)?item.Image:""%>" /></a>
-                              <div class="paddingTb4 bold"><a class="color1" href="#">
-                              <%=(item.ContentVN!= null)?item.ContentVN.Substring(0, 200):"Chưa có"%>
-                              <div class="textRight fontsize11">
-                              <%=Html.ActionLink("Xem tiếp", "ViewNews", new { newsID = item.ID},new {@class="color2"})%>
-                              </div>
-							            <div class="clear"></div>
-    
-   
+    <% foreach (var item in Model.Items) { %>
+        <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
+            <div class="subSp">
+
+            	<div class="clear"><a href="#"><img src="../..<%=((item.Image!=null)?item.Image:"")%>" /></a></div>
+                <div class="paddingTb4 paddingLr18px bold">
+                	<%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
+                </div>
+                <div class="clear"></div>
+            </div>
+        <%counter++; %>
+        <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
+          {
+              counter = 0; %>
+        <div class="clear"></div>
+        <%} %>
+        
     
     <% } %>
     </div>
@@ -49,16 +52,16 @@
               PageSize = Model.GetMaxResults(),
               TotalRows = Model.TotalRows,
               //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize+"&page="+page)
+              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllContruction", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize+"&page="+page)
 
             },
             new NguyenHiep.Utility.Pager.AjaxPaginationOption
             {
-                HtmlID = "ListAllNewsID"
+              HtmlID = "ListAllContructionID"
               ,
             }
           )
        %>
  <span style="float:right">
- <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", "Thêm tin tức", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + null)%>
+ <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddContruction", "Thêm công trình", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + null)%>
  </span>

@@ -16,11 +16,6 @@
           { %>
         <h2>Ch&#7881;nh s&#7917;a tin t&#7913;c</h2>
         <%} %>
-    
-
-    <%= Html.ValidationSummary("Edit was unsuccessful. Please correct the errors and try again.") %>
-
-  
 
     <table width="100%">
     <tr>
@@ -48,10 +43,8 @@
             <label >N&#7897;i Dung:</label>
         </td>
         
-        <td class="l">
-            <div style="border:solid 1px;">
-                <%=Html.FckTextBox("ContentVN")%>
-            </div>
+        <td >
+              <%=Html.FckTextBox("ContentVN")%>
         </td>
     </tr>
     <tr>
