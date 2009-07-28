@@ -11,7 +11,7 @@
      <%--<script type="text/javascript" src="../../Scripts/jquery-1.3.2.min-vsdoc.js"></script>--%>
      <script type="text/javascript" src='<%= ResolveClientUrl("~/Scripts/MicrosoftAjax.js")%>'></script>
      <script type="text/javascript" src='<%= ResolveClientUrl("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
-    <%--<script type="text/javascript" src="../../Scripts/Core.js"></script>--%>
+    <script type="text/javascript" src='<%= ResolveClientUrl("~/Scripts/Core.js")%>'></script>
     <script type="text/javascript" src='<%= ResolveClientUrl("~/Scripts/jquery-1.3.2.js")%>'></script>    
     <%--<script type="text/javascript" src="~/Scripts/ui.core.js"></script>
     <script type="text/javascript" src="~/Scripts/ui.dialog.js"></script>
@@ -20,7 +20,7 @@
     <script type="text/javascript" src='<%= ResolveClientUrl("~/fckeditor/fckeditor.js")%>'></script>
     <%--script type="text/javascript" src="~/Scripts/jquery.form.js"></script>--%>
     
-    <link href='<%= ResolveClientUrl("~/Content/Style.css")%>' rel="stylesheet" type="text/css" />
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
     
 </head>
 

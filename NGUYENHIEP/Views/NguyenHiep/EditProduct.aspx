@@ -34,7 +34,7 @@
         </td>
         
         <td>
-            <%=Html.DropDownList("Model.Promoted", ((List<SelectListItem>)ViewData["Promotion"]).AsEnumerable())%>
+            <%=Html.DropDownList("Promoted", ((List<SelectListItem>)ViewData["Promotion"]).AsEnumerable())%>
                                                 <%= Html.ValidationMessage("Promoted", "*")%>
         </td>
     </tr>
@@ -44,7 +44,7 @@
         </td>
         
         <td>
-        <%=Html.TextBox("Model.WarrantyTime","")%>
+        <%=Html.TextBox("WarrantyTime","")%>
         </td>
         
      </tr>
@@ -54,7 +54,7 @@
         </td>
         
         <td>
-        <%=Html.DropDownList("Model.StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable())%>
+        <%=Html.DropDownList("StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable())%>
         </td>
         
      </tr>
@@ -64,7 +64,7 @@
         </td>
         
         <td>
-        <%=Html.DropDownList("Model.CategoryID", ((List<SelectListItem>)ViewData["Categories"]).AsEnumerable())%>
+        <%=Html.DropDownList("CategoryID", ((List<SelectListItem>)ViewData["Categories"]).AsEnumerable())%>
         </td>
         
      </tr>
@@ -74,7 +74,7 @@
         </td>
         
         <td>
-        <%=Html.TextBox("Model.PriceVN", "", new  {style="width:100%" })%>VNÐ </div>
+        <%=Html.TextBox("PriceVN", "", new  {style="width:100%" })%>VNÐ </div>
         </td>
         
      </tr>
@@ -84,7 +84,7 @@
         </td>
         
         <td>
-         <%=Html.TextArea("Model.Property", "", new { rows=5,cols=20})%>
+         <%=Html.TextArea("Property", "", new { rows=5,cols=20})%>
         </td>
       </tr>
      <tr>
