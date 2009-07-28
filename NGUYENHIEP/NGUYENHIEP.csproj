@@ -205,7 +205,7 @@
     <Content Include="Content\Style.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Views\NguyenHiep\Index.aspx" />
+    <Content Include="Views\NguyenHiep\IndexForNews.aspx" />
     <Content Include="Views\NguyenHiep\ListAllNews.aspx" />
     <Content Include="Views\NguyenHiep\ViewNews.aspx" />
     <Content Include="Web.config" />
@@ -802,8 +802,9 @@
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
+    <Content Include="Views\NguyenHiep\IndexForContruction.aspx" />
+    <Content Include="Views\NguyenHiep\ListAllContruction.aspx" />
     <Content Include="Views\NguyenHiep\EditProduct.aspx" />
-    <Content Include="Views\NguyenHiep\ViewPage1.aspx" />
     <Content Include="Views\NguyenHiep\ViewProduct.aspx" />
     <Content Include="Views\NguyenHiep\IndexForProduct.aspx" />
     <Content Include="Views\NguyenHiep\ListAllProduct.aspx" />

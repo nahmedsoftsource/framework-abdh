@@ -26,9 +26,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetProductByID(newID);
         }
-        public SearchResult<tblNew> GetAllNews(int pageSize, int page)
+        public SearchResult<tblNew> GetAllNews(int pageSize, int page, byte type)
         {
-            return _da.GetAllNews(pageSize,page);
+            return _da.GetAllNews(pageSize,page,type);
         }
         public List<tblCategory> GetAllCategory()
         {

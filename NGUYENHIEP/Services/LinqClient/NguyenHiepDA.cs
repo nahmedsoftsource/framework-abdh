@@ -80,6 +80,8 @@ namespace NGUYENHIEP.Services.LinqClient
         {
             if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
             {
+                tblnew.PostedDate = DateTime.Now;
+                tblnew.CreatedDate = DateTime.Now;
                 _dataContext.tblNews.InsertOnSubmit(tblnew);
                 _dataContext.SubmitChanges();
             }
@@ -88,16 +90,17 @@ namespace NGUYENHIEP.Services.LinqClient
         {
             if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
             {
+                tblproduct.CreatedDate = DateTime.Now;
                 _dataContext.tblProducts.InsertOnSubmit(tblproduct);
                 _dataContext.SubmitChanges();
             }
         }
-        public SearchResult<tblNew> GetAllNews(int pageSize, int page)
+        public SearchResult<tblNew> GetAllNews(int pageSize, int page,byte type)
         {
             SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-            var query1 = _dataContext.tblNews;
-            var query = _dataContext.tblNews.Take(pageSize*page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null)
+            var query1 = _dataContext.tblNews.Where("Type=@0", type);
+            var query = _dataContext.tblNews.Where("Type=@0",type).Take(pageSize*page).Skip((page - 1) * pageSize);
+            if (query != null && query1 != null && query.ToList().Count > 0)
             {
                 searchResult.Items = query.ToList();
                 searchResult.Query = query;
@@ -112,7 +115,7 @@ namespace NGUYENHIEP.Services.LinqClient
             SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
             var query1 = _dataContext.tblProducts;
             var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null)
+            if (query != null && query1 != null && query.ToList().Count > 0)
             {
                 searchResult.Items = query.ToList();
                 searchResult.Query = query;
