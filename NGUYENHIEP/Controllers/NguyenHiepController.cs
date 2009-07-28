@@ -15,7 +15,8 @@ namespace NGUYENHIEP.Controllers
     [HandleError]
     public class NguyenHiepController : Controller
     {
-        
+        #region
+        #endregion
         NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
         public ActionResult Index()
         {
