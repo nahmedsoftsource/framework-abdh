@@ -802,6 +802,7 @@
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
+    <Content Include="Views\NguyenHiep\Index.aspx" />
     <Content Include="Views\NguyenHiep\IndexForContruction.aspx" />
     <Content Include="Views\NguyenHiep\ListAllContruction.aspx" />
     <Content Include="Views\NguyenHiep\EditProduct.aspx" />

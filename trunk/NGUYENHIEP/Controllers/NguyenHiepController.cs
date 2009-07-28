@@ -15,7 +15,12 @@ namespace NGUYENHIEP.Controllers
     [HandleError]
     public class NguyenHiepController : Controller
     {
+        
         NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
+        public ActionResult Index()
+        {
+          return View();
+        }
         public ActionResult IndexForNews(int? pageSize, int? page)
         {
             ViewData["Type"] = NguyenHiep.Common.CategoryTypes.News;
