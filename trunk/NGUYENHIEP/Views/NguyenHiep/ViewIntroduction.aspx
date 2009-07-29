@@ -27,7 +27,6 @@
             </div>
 </div>
 <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditNews", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID + "&Type=" + NguyenHiep.Common.NewsTypes.Introduction.ToString())%>
-<input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="6" />
 </div>
 <%} %>
 

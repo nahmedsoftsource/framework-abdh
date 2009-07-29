@@ -19,7 +19,7 @@
             {
                 if($("#SelectedMenuId") != null)
                 {
-                    $("#TopMenuTab >a").removeClass("selected");
+                    $(".selected").removeClass("selected");
                     var selectMenuID = "li:eq("+$("#SelectedMenuId").val() + ")";
                     $(selectMenuID +">a").addClass("selected");
                 }
@@ -50,7 +50,7 @@
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
                             <ul id="TopMenuTab">
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Trang chủ</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span>Trang chủ</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span>GIới thiệu</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Tin tức</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>Sản phẩm </span></a></li>
