@@ -5,7 +5,7 @@
     <%--<%NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "ListAllNewsID", "", (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=1");%>--%>
     <div class="mainCtentSpRight" id="ListAllNewsID">
     <%Html.RenderPartial("ViewRecruitment",ViewData); %>
-    <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="5" />
+    <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="4" />
     </div>
 </asp:Content>
 
