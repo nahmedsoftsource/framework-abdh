@@ -23,7 +23,7 @@
     
                           <div class="boxSubTin1">
                               <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
-                	            <a href="#"><img class="imgGthieu" src="../..<%=(item.Image!=null)?item.Image:""%>" /></a>
+                	            <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' /></a>
                               <div class="paddingTb4 bold"><a class="color1" href="#">
                               <%=(item.ContentVN != null && item.ContentVN.Length > 200) ? item.ContentVN.Substring(0, 200) : item.ContentVN%>
                               <div class="textRight fontsize11">

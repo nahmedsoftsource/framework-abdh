@@ -6,6 +6,7 @@ using NguyenHiep.Data;
 using System.Web.Mvc;
 using NguyenHiep.Common;
 using NguyenHiep.Utility.Javascripts;
+using NGUYENHIEP.Routing;
 
 namespace NguyenHiep.Utility
 {
