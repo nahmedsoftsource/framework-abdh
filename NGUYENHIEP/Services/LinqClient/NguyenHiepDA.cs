@@ -145,6 +145,60 @@ namespace NGUYENHIEP.Services.LinqClient
             var query = _dataContext.tblNews.Where("Type=@0", type).OrderBy("CreatedDate");
             return ((query!= null && query.ToList().Count>0)?query.ToList().First():(new tblNew()));
         }
+        public tblInformation GetInformation()
+        {
+            SearchResult<tblInformation> searchResult = new SearchResult<tblInformation>();
+            var query = _dataContext.tblInformations.OrderBy("CreatedDate");
+            return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+        }
+        public bool InsertInformation(tblInformation infor)
+        {
+            if (infor != null && !infor.ID.Equals(Guid.Empty))
+            {
+                try
+                {
+                    _dataContext.tblInformations.InsertOnSubmit(infor);
+                    _dataContext.SubmitChanges();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+        public tblInformation GetInformation(Guid id)
+        {
+            
+            var query = _dataContext.tblInformations.Where("ID.ToString()=@0", id.ToString());
+            return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+        }
+        public bool UpdateInformation(tblInformation infor)
+        {
+            if (infor != null && !infor.ID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblInformations.Where("ID.ToString()=@0", infor.ID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    if(!String.IsNullOrEmpty(infor.ContactVN))
+                        query.ToList().First().ContactVN = infor.ContactVN;
+                    if (!String.IsNullOrEmpty(infor.ContactEN))
+                        query.ToList().First().ContactEN = infor.ContactEN;
+                    try
+                    {
+                        _dataContext.SubmitChanges();
+                        return true;
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                }
+                
+            }
+            return false;
+        }
         public SearchResult<tblProduct> GetAllProduct(int pageSize, int page)
         {
             SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();

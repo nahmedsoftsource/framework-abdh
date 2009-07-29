@@ -33,6 +33,11 @@ namespace NGUYENHIEP.Controllers
             tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
             return View(recruitment);
         }
+        public ActionResult IndexForContact()
+        {
+            tblInformation contact = _nguyenHiepService.GetInformation();
+            return View(contact);
+        }
         public ActionResult IndexForIntroduction()
         {
             tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
@@ -361,6 +366,41 @@ namespace NGUYENHIEP.Controllers
                 ViewData["AddNews"] = true;
             }
             return View(tblproduct);
+        }
+        public ActionResult EditContact(Guid? newsID)
+        {
+            tblInformation contact = _nguyenHiepService.GetInformation();
+            return View(contact);
+        }
+        [ValidateInput(false)]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditContact(Guid? newsID, string contactVN)
+        {
+            tblInformation contact = new tblInformation();
+            if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
+            {
+                contact = _nguyenHiepService.GetInformation((Guid)newsID);
+                if (contact != null)
+                {
+                    contact.ContactVN = contactVN;
+                    if (_nguyenHiepService.UpdateInformation(contact))
+                    {
+                        return RedirectToAction("IndexForContact");
+                    }
+                }
+            }
+            else
+            {
+                contact.ID = Guid.NewGuid();
+                contact.ContactVN = contactVN;
+                contact.CreatedDate = DateTime.Now;
+                if (_nguyenHiepService.InsertInformation(contact))
+                {
+                    return RedirectToAction("IndexForContact");
+                }
+            }
+            return View(contact);
+            
         }
         public ActionResult ViewRecruitment()
         {
