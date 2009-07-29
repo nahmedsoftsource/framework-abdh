@@ -1,11 +1,17 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
-<asp:Content ID="registerTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Register
-</asp:Content>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblUser>" %>
 
 <asp:Content ID="registerContent" ContentPlaceHolderID="UpperMainContent" runat="server">
-    <h2>Create a New Account</h2>
+       <div class="barCterTab">
+    	<div class="barCterTabLleft">
+        	<div class="barCterTabRight">
+            	<div style="line-height:23px;" class="ctentBarTab">
+                	Create a New Account
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
     <p>
         Use the form below to create a new account. 
     </p>
@@ -18,26 +24,47 @@
         <div>
             <fieldset>
                 <legend>Account Information</legend>
-                <p>
-                    <label for="username">Username:</label>
-                    <%= Html.TextBox("username") %>
-                    <%= Html.ValidationMessage("username") %>
-                </p>
-                <p>
-                    <label for="email">Email:</label>
-                    <%= Html.TextBox("email") %>
-                    <%= Html.ValidationMessage("email") %>
-                </p>
-                <p>
-                    <label for="password">Password:</label>
-                    <%= Html.Password("password") %>
-                    <%= Html.ValidationMessage("password") %>
-                </p>
-                <p>
-                    <label for="confirmPassword">Confirm password:</label>
-                    <%= Html.Password("confirmPassword") %>
-                    <%= Html.ValidationMessage("confirmPassword") %>
-                </p>
+                      <table width="100%">
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="username">Username:</label>
+                            </td>
+                            
+                            <td>
+                                <%= Html.TextBox("Username") %>
+                                <%= Html.ValidationMessage("Username") %>
+                            </td>
+                        </tr>
+                       <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="email">Email:</label>
+                            </td>                           
+                            <td>
+                                <%= Html.TextBox("Email") %>
+                                <%= Html.ValidationMessage("Email") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="password">Password:</label>
+                            </td>
+                            
+                            <td>
+                                <%= Html.Password("Password") %>
+                                <%= Html.ValidationMessage("Password") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="confirmPassword">Confirm password:</label>
+                            </td>
+                            
+                            <td>                                
+                                <%= Html.Password("confirmPassword") %>
+                                <%= Html.ValidationMessage("confirmPassword") %>
+                            </td>
+                        </tr>
+                     </table>
                 <p>
                     <input type="submit" value="Register" />
                 </p>

@@ -1,14 +1,15 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<asp:Content ID="changePasswordContent" ContentPlaceHolderID="UpperMainContent" runat="server">     
+<div class="barCterTab">
+    	<div class="barCterTabLleft">
+        	<div class="barCterTabRight">
+            	<div style="line-height:23px;" class="ctentBarTab">
+                	    Change Password
+                </div>
 
-<asp:Content ID="changePasswordTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Change Password
-</asp:Content>
-
-<asp:Content ID="changePasswordContent" ContentPlaceHolderID="UpperMainContent" runat="server">
-    <h2>Change Password</h2>
-    <p>
-        Use the form below to change your password. 
-    </p>
+            </div>
+        </div>
+    </div>
     <p>
         New passwords are required to be a minimum of <%=Html.Encode(ViewData["PasswordLength"])%> characters in length.
     </p>
@@ -18,21 +19,37 @@
         <div>
             <fieldset>
                 <legend>Account Information</legend>
-                <p>
-                    <label for="currentPassword">Current password:</label>
-                    <%= Html.Password("currentPassword") %>
-                    <%= Html.ValidationMessage("currentPassword") %>
-                </p>
-                <p>
-                    <label for="newPassword">New password:</label>
-                    <%= Html.Password("newPassword") %>
-                    <%= Html.ValidationMessage("newPassword") %>
-                </p>
-                <p>
-                    <label for="confirmPassword">Confirm new password:</label>
-                    <%= Html.Password("confirmPassword") %>
-                    <%= Html.ValidationMessage("confirmPassword") %>
-                </p>
+                      <table width="100%">
+                       <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="email">Current Password:</label>
+                            </td>                           
+                            <td>
+                                <%= Html.Password("currentPassword") %>
+                                <%= Html.ValidationMessage("currentPassword") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="password">New Password:</label>
+                            </td>
+                            
+                            <td>
+                                <%= Html.Password("newPassword") %>
+                                <%= Html.ValidationMessage("newPassword") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                                <label for="confirmPassword">Confirm password:</label>
+                            </td>
+                            
+                            <td>                                
+                                <%= Html.Password("confirmPassword") %>
+                                <%= Html.ValidationMessage("confirmPassword") %>
+                            </td>
+                        </tr>
+                     </table>                
                 <p>
                     <input type="submit" value="Change Password" />
                 </p>
