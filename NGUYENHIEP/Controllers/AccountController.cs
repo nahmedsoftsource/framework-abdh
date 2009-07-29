@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI;
+using NGUYENHIEP.Services;
+using NGUYENHIEP.Models;
+using NGUYENHIEP.Utility.Crypto;
 
 namespace NGUYENHIEP.Controllers
 {
@@ -14,7 +17,6 @@ namespace NGUYENHIEP.Controllers
     [HandleError]
     public class AccountController : Controller
     {
-
         // This constructor is used by the MVC framework to instantiate the controller using
         // the default forms authentication and membership providers.
 
@@ -44,6 +46,7 @@ namespace NGUYENHIEP.Controllers
             private set;
         }
 
+        NguyenHiepAccountController _accountController = new NguyenHiepAccountController();
         public ActionResult LogOn()
         {
 
@@ -68,7 +71,7 @@ namespace NGUYENHIEP.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("IndexForNews", "NguyenHiep");
             }
         }
 
@@ -77,7 +80,7 @@ namespace NGUYENHIEP.Controllers
 
             FormsAuth.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "NguyenHiep");
         }
 
         public ActionResult Register()
@@ -96,17 +99,14 @@ namespace NGUYENHIEP.Controllers
 
             if (ValidateRegistration(userName, email, password, confirmPassword))
             {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(userName, password, email);
-
-                if (createStatus == MembershipCreateStatus.Success)
+                if (_accountController.CreateUser(userName, password, email))
                 {
                     FormsAuth.SignIn(userName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("IndexForNews", "NguyenHiep");
                 }
                 else
                 {
-                    ModelState.AddModelError("_FORM", ErrorCodeToString(createStatus));
+                    ModelState.AddModelError("_FORM", "Register unsuccessful");
                 }
             }
 
@@ -139,7 +139,7 @@ namespace NGUYENHIEP.Controllers
 
             try
             {
-                if (MembershipService.ChangePassword(User.Identity.Name, currentPassword, newPassword))
+                if (_accountController.ChangePassword(User.Identity.Name, currentPassword, newPassword))
                 {
                     return RedirectToAction("ChangePasswordSuccess");
                 }
@@ -204,7 +204,7 @@ namespace NGUYENHIEP.Controllers
             {
                 ModelState.AddModelError("password", "You must specify a password.");
             }
-            if (!MembershipService.ValidateUser(userName, password))
+            if (!_accountController.ValidateUser(userName, password))
             {
                 ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
             }
@@ -299,6 +299,39 @@ namespace NGUYENHIEP.Controllers
         }
     }
 
+    public class NguyenHiepAccountController
+    {
+        const int MIN_PASSWORD_LENGTH = 6;
+        const string INPUT_TEXT = "HiepNguyen";
+
+        NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
+        public static NguyenHiepAccountController _accountController = new NguyenHiepAccountController();
+
+        public NguyenHiepAccountController()
+        { 
+        }
+        public bool ValidateUser(string userName, string password)
+        {
+            return _nguyenHiepService.Logon(userName, KeyGeneration.EncryptString(INPUT_TEXT, password));
+        }
+        public bool CreateUser(string userName, string password, string email)
+        {
+            tblUser user = new tblUser();
+            user.ID = Guid.NewGuid();
+            user.UserName = userName;
+            user.Email = email;
+            user.Password = KeyGeneration.EncryptString(INPUT_TEXT, password);          
+            return _nguyenHiepService.InsertUser(user);
+        }
+
+        public bool ChangePassword(string userName, string oldPassword, string newPassword)
+        {
+            string oldPassEncrypt = KeyGeneration.EncryptString(INPUT_TEXT,oldPassword);
+            string newPassEncrypt = KeyGeneration.EncryptString(INPUT_TEXT, newPassword);
+            return _nguyenHiepService.ChangePassword(userName, oldPassEncrypt, newPassEncrypt);
+        }
+
+    }
     public interface IMembershipService
     {
         int MinPasswordLength { get; }
@@ -311,7 +344,7 @@ namespace NGUYENHIEP.Controllers
     public class AccountMembershipService : IMembershipService
     {
         private MembershipProvider _provider;
-
+        NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
         public AccountMembershipService()
             : this(null)
         {
@@ -332,7 +365,10 @@ namespace NGUYENHIEP.Controllers
 
         public bool ValidateUser(string userName, string password)
         {
-            return _provider.ValidateUser(userName, password);
+            if (_nguyenHiepService.GetUser(userName, password) == null)
+                return false;
+            else
+                return true;
         }
 
         public MembershipCreateStatus CreateUser(string userName, string password, string email)
