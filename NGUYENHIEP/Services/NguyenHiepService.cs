@@ -58,6 +58,29 @@ namespace NGUYENHIEP.Services
         {
             _da.InsertProduct(tblProduct);
         }
+
+        #region Service tblUser
+        public bool Logon(String userName, String password)
+        {
+            return _da.Logon(userName, password);
+        }
+
+        public tblUser GetUser(String userName,String password)
+        {
+            return _da.GetUser(userName,password);
+        }
+
+        public bool InsertUser(tblUser tbluser)
+        {
+            return _da.InsertUser(tbluser);
+        }
+
+        public bool ChangePassword(string username,string oldpassword, string newpassword)
+        {
+            return _da.ChangePassword(username,oldpassword,newpassword);
+        }
+        #endregion
+
         public void UpdateCategory(tblCategory tblnew)
         {
             _da.UpdateCategory(tblnew);
@@ -66,5 +89,6 @@ namespace NGUYENHIEP.Services
         {
             _da.InsertCategory(tblnew);
         }
+
     }
 }
