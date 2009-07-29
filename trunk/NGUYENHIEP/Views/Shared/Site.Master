@@ -51,10 +51,10 @@
                         <div class="barMenuTopRight">
                             <ul id="TopMenuTab">
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Trang chủ</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>GIới thiệu</span></a></li>
-                                <li><a href="#"><span>Tin tức</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span>GIới thiệu</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Tin tức</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>Sản phẩm </span></a></li>
-                                <li><a href="#"><span>Tuyển dụng</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span>Tuyển dụng</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span>Ảnh công trình</span></a></li>
                                 <li><a href="#"><span>Liên hệ</span></a></li>
                             </ul>
@@ -163,8 +163,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="clear">
-                                            <asp:ContentPlaceHolder ID="RiightNewsEvent" runat="server"></asp:ContentPlaceHolder>
+                                        <div class="clear" id="test">
+                                            <asp:ContentPlaceHolder ID="RiightNewsEvent" runat="server">
+                                            <%--<%=NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "test", "San Pham", ((new UrlHelper(ViewContext.RequestContext)).Action("ListAllCategory") + "?pageSize=" + ((int)NguyenHiep.Common.Constants.DefautPagingSize).ToString() + "&page=1"))%>--%>
+                                            </asp:ContentPlaceHolder>
                                         </div>
                                     </div>
                                 </div>

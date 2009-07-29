@@ -30,6 +30,10 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetAllNews(pageSize,page,type);
         }
+        public tblNew GetSpecialNew(byte type)
+        {
+            return _da.GetSpecialNew(type);
+        }
         public List<tblCategory> GetAllCategory()
         {
             return _da.GetAllCategory();

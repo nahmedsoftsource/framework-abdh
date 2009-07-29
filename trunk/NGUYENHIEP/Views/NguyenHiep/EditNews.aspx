@@ -3,8 +3,11 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
+<script type="text/javascript" language="javascript">
+    var sBasePath = '<%= Url.Content("~/fckeditor/")%>';
+</script>
 
-
+<%Html.ValidationSummary(); %>
     <form id="form1" runat="server" method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddNews"] != null)
       { %>
@@ -66,6 +69,7 @@
             <td class="l">
                 <p>
                     <input type="file" id="UploadFile" name="UploadFile" size="23" />
+                    <%Html.ValidationMessage("UploadFile"); %>
                 </p>
             </td>
         </tr>

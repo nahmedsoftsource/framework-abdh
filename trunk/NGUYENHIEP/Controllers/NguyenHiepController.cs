@@ -24,14 +24,24 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult IndexForNews(int? pageSize, int? page)
         {
-            ViewData["Type"] = NguyenHiep.Common.CategoryTypes.News;
-            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.CategoryTypes.News);
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
+            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.NewsTypes.News);
             return View(listAllNews);
+        }
+        public ActionResult IndexForRecruitment()
+        {
+            tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
+            return View(recruitment);
+        }
+        public ActionResult IndexForIntroduction()
+        {
+            tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
+            return View(introduction);
         }
         public ActionResult IndexForContruction(int? pageSize, int? page)
         {
-          ViewData["Type"] = NguyenHiep.Common.CategoryTypes.Contruction;
-          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.CategoryTypes.Contruction);
+          ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
+          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction);
           return View(listAllNews);
         }
         public ActionResult IndexForProduct(int? pageSize, int? page)
@@ -39,15 +49,23 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
         }
-        public ActionResult ViewNews(Guid? newsID)
+        public ActionResult ViewNews(Guid? newsID,byte? type)
         {
+            if (!type.HasValue)
+            {
+                type = (byte)NguyenHiep.Common.NewsTypes.News;
+            }
             if (newsID != null && !newsID.Equals(Guid.Empty))
             {
                 tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID);
                 return View(tblnews);
             }
-            else if (TempData["NewsID"] != null)
+            else if (TempData["NewsID"] != null )
             {
+                if (TempData["Type"] == null)
+                    type = (byte)NguyenHiep.Common.NewsTypes.News;
+                else
+                    type = (byte)TempData["Type"];
                 tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"]);
                 return View(tblnews);
             }
@@ -71,13 +89,13 @@ namespace NGUYENHIEP.Controllers
         public ActionResult ListAllNews(int? pageSize, int? page)
         {
 
-          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.CategoryTypes.News);
+          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News);
             return View(listAllNews);
         }
         public ActionResult ListAllContruction(int? pageSize, int? page)
         {
 
-          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.CategoryTypes.Contruction);
+          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.NewsTypes.Contruction);
           return View(listAllNews);
         }
         public ActionResult ListAllProduct(int? pageSize, int? page)
@@ -98,8 +116,8 @@ namespace NGUYENHIEP.Controllers
             {
                 tblNew tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID);
                 List<SelectListItem> ls = new List<SelectListItem>();
-                ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString(), Selected = true }));
-                ls.Add((new SelectListItem { Text = "Công trình", Value = CategoryTypes.Contruction.ToString() }));
+                ls.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+                ls.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
                 ViewData["NewsType"] = ls;
                 ViewData["ContentVN"] = tblnew.ContentVN;
                 ViewData["command"] = "upload";
@@ -108,8 +126,8 @@ namespace NGUYENHIEP.Controllers
             else
             {
                 List<SelectListItem> ls = new List<SelectListItem>();
-                ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString(), Selected = true }));
-                ls.Add((new SelectListItem { Text = "Công trình", Value = CategoryTypes.Contruction.ToString() }));
+                ls.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+                ls.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
                 ViewData["NewsType"] = ls;
                 ViewData["AddNews"] = true;
                 tblNew tblnew = new tblNew();
@@ -222,7 +240,7 @@ namespace NGUYENHIEP.Controllers
             {
                 HttpPostedFileBase file = Request.Files[inputTagName];
                 
-                if (newsID != null && ModelState.IsValid)
+                if (file != null && file.ContentLength > 0 && newsID != null && ModelState.IsValid)
                 {
                     tblnew.ID = (Guid)newsID;
                     string pathImage;
@@ -235,7 +253,7 @@ namespace NGUYENHIEP.Controllers
                         return RedirectToAction("ViewNews");
                     }
                 }
-                else if (newsID == null && ModelState.IsValid)
+                else if (file != null && file.ContentLength > 0 && newsID == null && ModelState.IsValid)
                 {
                     flag = true;
                     tblnew.ID =Guid.NewGuid();
@@ -246,28 +264,38 @@ namespace NGUYENHIEP.Controllers
                         tblnew.Image = pathImage;
                         _nguyenHiepService.InsertNews(tblnew);
                         if (!tblnew.Type.HasValue)
-                            tblnew.Type = (byte)NguyenHiep.Common.CategoryTypes.News;
-                        if (tblnew.Type == NguyenHiep.Common.CategoryTypes.News)
+                            tblnew.Type = (byte)NguyenHiep.Common.NewsTypes.News;
+                        if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
                         {
                           return RedirectToAction("IndexForNews");
                         }
-                        else if (tblnew.Type == NguyenHiep.Common.CategoryTypes.Contruction)
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
                         {
                           return RedirectToAction("IndexForContruction");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                        {
+                            return RedirectToAction("ViewHotNew");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
+                        {
+                            return RedirectToAction("ViewIntroduction");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
+                        {
+                            return RedirectToAction("ViewRecruitment");
                         }
                     }
 
                 }
 
             }
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString(),Selected=true}));
-            ls.Add((new SelectListItem { Text = "Công trình", Value = CategoryTypes.Contruction.ToString() }));
+           
             if (!flag)
             {
                 ModelState.AddModelError("UploadFile", "File Request is not support");
             }
-            ViewData["NewsType"] = ls;
+            ViewData["NewsType"] = BuildNewsTypes();
             if (newsID == null)
             {
                 ViewData["AddNews"] = true;
@@ -322,19 +350,44 @@ namespace NGUYENHIEP.Controllers
                 }
 
             }
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add((new SelectListItem { Text = "Tin Tức", Value = CategoryTypes.News.ToString() }));
-            ls.Add((new SelectListItem { Text = "Công trình", Value = CategoryTypes.Contruction.ToString() }));
+           
             if (!flag)
             {
                 ModelState.AddModelError("UploadFile", "File Request is not support");
             }
-            ViewData["NewsType"] = ls;
+            ViewData["NewsType"] = BuildProductTypes();
             if (newsID == null)
             {
                 ViewData["AddNews"] = true;
             }
             return View(tblproduct);
+        }
+        public ActionResult ViewRecruitment()
+        {
+            tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
+            return View(recruitment);
+        }
+        public ActionResult ViewIntroduction()
+        {
+            tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
+            return View(introduction);
+        }
+        protected List<SelectListItem> BuildNewsTypes()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+            ls.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+            ls.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+            ls.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+            ls.Add((new SelectListItem { Text = "Tin tức tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+            return ls;
+        }
+        protected List<SelectListItem> BuildProductTypes()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>();
+            ls.Add((new SelectListItem { Text = "Sản phẩm khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+            ls.Add((new SelectListItem { Text = "Sản phẩm thường", Value = NewsTypes.NormalProduct.ToString() }));
+            return ls;
         }
     }
 }

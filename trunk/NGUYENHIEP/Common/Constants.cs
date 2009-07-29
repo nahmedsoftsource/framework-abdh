@@ -10,12 +10,18 @@ namespace NguyenHiep.Common
         public static int DefautPagingSize = 4;
         public static int NumberImagesInRow = 4;
   }
-    public class CategoryTypes
+    public class NewsTypes
     {
+        public static byte MIN = 1;
         public static byte News = 1;
         public static byte Contruction = 2;
         public static byte HotNew = 3;
-        public static byte PromotionNew = 4; 
+        public static byte PromotionNew = 4;
+        public static byte Recruitment = 5;
+        public static byte Introduction = 6;
+        public static byte NormalProduct = 7;
+        public static byte MAX = 7;
+
     }
     public class StoreStatuses
     {
