@@ -14,6 +14,7 @@ namespace NGUYENHIEP.Services.LinqClient
         NguyenHiepDataContext _dataContext = new NguyenHiepDataContext();
         public tblNew GetNewsByID(Guid newID)
         {
+            
             var query = _dataContext.tblNews.Where("ID.ToString()=@0", newID.ToString());
             if (query.ToList().Count() > 0)
             {
@@ -137,6 +138,12 @@ namespace NGUYENHIEP.Services.LinqClient
                 searchResult.TotalRows = query1.Count();
             }
             return searchResult;
+        }
+        public tblNew GetSpecialNew(byte type)
+        {
+            SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
+            var query = _dataContext.tblNews.Where("Type=@0", type).OrderBy("CreatedDate");
+            return ((query!= null && query.ToList().Count>0)?query.ToList().First():(new tblNew()));
         }
         public SearchResult<tblProduct> GetAllProduct(int pageSize, int page)
         {

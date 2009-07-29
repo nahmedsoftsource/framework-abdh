@@ -22,9 +22,9 @@
         <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
             <div class="subSp">
 
-            	<div class="clear"><a href="#"><img src="../..<%=((item.Image!=null)?item.Image:"")%>" /></a></div>
+            	<div class="clear"><a href="#"><img src='<%= Url.Content("~"+ (!String.IsNullOrEmpty(item.Image)?item.Image:""))%>' /></a></div>
                 <div class="paddingTb4 paddingLr18px bold">
-                	<%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
+                	<%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
                 </div>
                 <div class="clear"></div>
             </div>

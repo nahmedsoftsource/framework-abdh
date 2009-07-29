@@ -810,6 +810,10 @@
     <Content Include="fckeditor\_upgrade.html" />
     <Content Include="fckeditor\_whatsnew.html" />
     <Content Include="fckeditor\_whatsnew_history.html" />
+    <Content Include="Views\NguyenHiep\IndexForIntroduction.aspx" />
+    <Content Include="Views\NguyenHiep\ViewIntroduction.aspx" />
+    <Content Include="Views\NguyenHiep\IndexForRecruitment.aspx" />
+    <Content Include="Views\NguyenHiep\ViewRecruitment.aspx" />
     <Content Include="Views\NguyenHiep\EditCategory.aspx" />
     <Content Include="Views\NguyenHiep\EditNews.aspx" />
     <Content Include="Views\NguyenHiep\EditProduct.aspx" />

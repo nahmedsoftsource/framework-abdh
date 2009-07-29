@@ -23,11 +23,13 @@
     
                           <div class="boxSubTin1">
                               <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = "Không tiêu đề"; %>
+                              <%if(!String.IsNullOrEmpty(item.Image)){ %>
                 	            <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' /></a>
+                	            <%} %>
                               <div class="paddingTb4 bold"><a class="color1" href="#">
-                              <%=(item.ContentVN != null && item.ContentVN.Length > 200) ? item.ContentVN.Substring(0, 200) : item.ContentVN%>
+                              <%=(item.SubjectVN!=null)?item.SubjectVN:"Không có chủ đề"%>
                               <div class="textRight fontsize11">
-                              <%=Html.ActionLink("Xem tiếp", "ViewNews", new { newsID = item.ID},new {@class="color2"})%>
+                              <%=Html.ActionLink("Xem tiếp", "ViewNews", new { newsID = item.ID,type = NguyenHiep.Common.NewsTypes.News},new {@class="color2"})%>
                               </div>
 							            <div class="clear"></div>
     
