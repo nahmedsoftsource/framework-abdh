@@ -34,6 +34,22 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetSpecialNew(type);
         }
+        public tblInformation GetInformation()
+        {
+            return _da.GetInformation();
+        }
+        public bool UpdateInformation(tblInformation infor)
+        {
+            return _da.UpdateInformation(infor);
+        }
+        public bool InsertInformation(tblInformation infor)
+        {
+            return _da.InsertInformation(infor);
+        }
+        public tblInformation GetInformation(Guid id)
+        {
+            return _da.GetInformation(id);
+        }
         public List<tblCategory> GetAllCategory()
         {
             return _da.GetAllCategory();

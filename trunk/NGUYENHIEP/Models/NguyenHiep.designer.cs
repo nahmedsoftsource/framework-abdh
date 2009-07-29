@@ -36,6 +36,9 @@ namespace NGUYENHIEP.Models
     partial void InserttblUser(tblUser instance);
     partial void UpdatetblUser(tblUser instance);
     partial void DeletetblUser(tblUser instance);
+    partial void InserttblEmail(tblEmail instance);
+    partial void UpdatetblEmail(tblEmail instance);
+    partial void DeletetblEmail(tblEmail instance);
     partial void InserttblInformation(tblInformation instance);
     partial void UpdatetblInformation(tblInformation instance);
     partial void DeletetblInformation(tblInformation instance);
@@ -48,7 +51,7 @@ namespace NGUYENHIEP.Models
     #endregion
 		
 		public NguyenHiepDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -90,6 +93,14 @@ namespace NGUYENHIEP.Models
 			get
 			{
 				return this.GetTable<tblUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblEmail> tblEmails
+		{
+			get
+			{
+				return this.GetTable<tblEmail>();
 			}
 		}
 		
@@ -701,6 +712,212 @@ namespace NGUYENHIEP.Models
 					this._Deleted = value;
 					this.SendPropertyChanged("Deleted");
 					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[Table(Name="dbo.tblEmail")]
+	public partial class tblEmail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private System.Nullable<System.DateTime> _SendDate;
+		
+		private string _Sender;
+		
+		private string _Email;
+		
+		private System.Nullable<byte> _SendTo;
+		
+		private string _Title;
+		
+		private string _Content;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnSendDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnSendDateChanged();
+    partial void OnSenderChanging(string value);
+    partial void OnSenderChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnSendToChanging(System.Nullable<byte> value);
+    partial void OnSendToChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnContentChanging(string value);
+    partial void OnContentChanged();
+    #endregion
+		
+		public tblEmail()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SendDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SendDate
+		{
+			get
+			{
+				return this._SendDate;
+			}
+			set
+			{
+				if ((this._SendDate != value))
+				{
+					this.OnSendDateChanging(value);
+					this.SendPropertyChanging();
+					this._SendDate = value;
+					this.SendPropertyChanged("SendDate");
+					this.OnSendDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Sender", DbType="NVarChar(100)")]
+		public string Sender
+		{
+			get
+			{
+				return this._Sender;
+			}
+			set
+			{
+				if ((this._Sender != value))
+				{
+					this.OnSenderChanging(value);
+					this.SendPropertyChanging();
+					this._Sender = value;
+					this.SendPropertyChanged("Sender");
+					this.OnSenderChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="VarChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SendTo", DbType="TinyInt")]
+		public System.Nullable<byte> SendTo
+		{
+			get
+			{
+				return this._SendTo;
+			}
+			set
+			{
+				if ((this._SendTo != value))
+				{
+					this.OnSendToChanging(value);
+					this.SendPropertyChanging();
+					this._SendTo = value;
+					this.SendPropertyChanged("SendTo");
+					this.OnSendToChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Title", DbType="NVarChar(200)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Content", DbType="NVarChar(4000)")]
+		public string Content
+		{
+			get
+			{
+				return this._Content;
+			}
+			set
+			{
+				if ((this._Content != value))
+				{
+					this.OnContentChanging(value);
+					this.SendPropertyChanging();
+					this._Content = value;
+					this.SendPropertyChanged("Content");
+					this.OnContentChanged();
 				}
 			}
 		}

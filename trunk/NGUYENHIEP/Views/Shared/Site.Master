@@ -56,7 +56,7 @@
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>Sản phẩm </span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span>Tuyển dụng</span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span>Ảnh công trình</span></a></li>
-                                <li><a href="#"><span>Liên hệ</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContact/")%>"><span>Liên hệ</span></a></li>
                             </ul>
                             <div class="boxLanguage">
                                 <a href="#" class="viet">&nbsp;</a> <a href="#" class="Eng">&nbsp;</a>

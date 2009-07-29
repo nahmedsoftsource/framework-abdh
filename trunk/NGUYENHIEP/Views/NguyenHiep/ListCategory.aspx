@@ -3,7 +3,6 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="RightMenu" runat="server">
                         	
 
   	<ul>
@@ -13,7 +12,7 @@
             <%} %>
     </ul>
                             
-                      
+        <div class="prevNext">              
 <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
@@ -32,7 +31,7 @@
             }
           )
        %>
+       <div class="prevNext">
  <span style="float:right">
  <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", "Thêm", (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null)%>
  </span>
- </asp:Content>
