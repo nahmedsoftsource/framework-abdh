@@ -6,6 +6,7 @@ using NGUYENHIEP.Models;
 using System.Linq.Dynamic;
 using NguyenHiep.Data.Queries;
 using NguyenHiep.Data;
+using System.Configuration.Provider;
 namespace NGUYENHIEP.Services.LinqClient
 {
     public class NguyenHiepDA
@@ -158,6 +159,62 @@ namespace NGUYENHIEP.Services.LinqClient
            
             return ((query!=null)?query.ToList():(new List<tblCategory>()));
         }
+
+        #region Data Access tblUser
+
+        public bool Logon(String userName, String password)
+        {
+            var query = _dataContext.tblUsers.Where("UserName=@0 and Password=@1", userName, password);
+            HttpContext.Current.Items["UserName"] = null;
+            if (query.ToList().Count() > 0)
+            {
+                tblUser tbluser = query.ToList().First();
+                HttpContext.Current.Items["UserName"] = tbluser.UserName;
+                return true;
+            }
+            return false;
+        }
+
+        public tblUser GetUser(String userName,string password)
+        {
+            var query = _dataContext.tblUsers.Where("UserName=@0 and Password=@1", userName, password);
+            if (query.ToList().Count() > 0)
+            {
+                tblUser tbluser = query.ToList().First();
+                return tbluser;
+            }
+            return null;
+        }
+
+        public bool ChangePassword(string username, string oldpassword, string newpassword)
+        {
+            tblUser tbluser = new tblUser();
+            tbluser = GetUser(username, oldpassword);
+            if (tbluser != null && tbluser.ID != null && !tbluser.ID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblUsers.Where("ID.ToString()=@0", tbluser.ID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    query.First().Password = newpassword;
+                    _dataContext.SubmitChanges();
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public bool InsertUser(tblUser tbluser)
+        {
+            if (tbluser != null && tbluser.ID != null && !tbluser.ID.Equals(Guid.Empty))
+            {
+                _dataContext.tblUsers.InsertOnSubmit(tbluser);
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page)
         {
             SearchResult<tblCategory> searchResult = new SearchResult<tblCategory>();
