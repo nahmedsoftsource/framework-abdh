@@ -5,11 +5,11 @@
     <form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddProduct"] != null)
           { %>
-            <h2>Thêm tin t&#7913;c</h2>
+            <h2><%=Resources.Global.AddProduct %></h2>
         <%}
           else
           { %>
-        <h2>Ch&#7881;nh s&#7917;a tin t&#7913;c</h2>
+        <h2><%=Resources.Global.EditProduct %></h2>
         <%} %>
     
 
@@ -20,7 +20,7 @@
     <table width="100%">
     <tr>
         <td>
-            <label for="ProductNameVN">Tên sản phẩm:</label>
+            <label for="ProductNameVN"><%=Resources.Global.ProductName %></label>
         </td>
         
         <td>
@@ -30,7 +30,7 @@
     </tr>
     <tr>
         <td>
-            <label for="Promoted">Khuyến Mãi:</label>
+            <label for="Promoted"><%=Resources.Global.Promoted %>:</label>
         </td>
         
         <td>
@@ -40,7 +40,7 @@
     </tr>
     <tr>
         <td>
-            <label >Bảo hành:</label>
+            <label ><%=Resources.Global.Warranty %>:</label>
         </td>
         
         <td>
@@ -50,7 +50,7 @@
      </tr>
      <tr>
         <td>
-            <label >Kho:</label>
+            <label ><%=Resources.Global.Store %>:</label>
         </td>
         
         <td>
@@ -60,7 +60,7 @@
      </tr>
      <tr>
         <td>
-            <label >Tên loại sản phẩm:</label>
+            <label ><%=Resources.Global.TypeName %>:</label>
         </td>
         
         <td>
@@ -70,7 +70,7 @@
      </tr>
      <tr>
         <td>
-            <label >Giá:</label>
+            <label ><%=Resources.Global.Price %>:</label>
         </td>
         
         <td>
@@ -80,7 +80,7 @@
      </tr>
       <tr>
         <td>
-            <label >Mô tả ngắn </label>
+            <label ><%=Resources.Global.ShortDescription %>:</label>
         </td>
         
         <td>
@@ -89,7 +89,7 @@
       </tr>
      <tr>
         <td>
-            <label >Thông tin chi tiết</label>
+            <label ><%=Resources.Global.Details %>:</label>
         </td>
         
         <td>
@@ -101,7 +101,7 @@
     <tr>
         <td>
             <%=Html.Hidden("ImageBackup",(Model.Image!=null)?Model.Image:"") %>
-            <label >Hình Ảnh</label>
+            <label ><%=Resources.Global.Image %>:</label>
         </td>
         <td>
         <p><input type="file" id="UploadFile" name="UploadFile" size="23"/> </p>
@@ -113,11 +113,11 @@
         <td colspan="2">
         <%if (ViewData["AddProduct"] != null)
           { %>
-            <input type="submit" value="Thêm tin t&#7913;c" />
+            <input type="submit" value="<%=Resources.Global.AddProduct %>" />
         <%}
           else
           { %>
-        <input type="submit" value="S&#7917;a" />
+        <input type="submit" value="<%=Resources.Global.Edit %>" />
         <%} %>
         </td>
     </tr>

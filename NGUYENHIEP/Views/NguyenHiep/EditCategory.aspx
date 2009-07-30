@@ -10,17 +10,17 @@
     <form id="form2" runat="server"  method='POST' enctype='multipart/form-data' action="#">
     <%if (ViewData["AddNews"] != null)
           { %>
-            <h2>Thêm loại sản phẩm</h2>
+            <h2><%=Resources.Global.AddCategory %></h2>
         <%}
           else
           { %>
-        <h2>Chỉnh sửa loại sản phẩm</h2>
+        <h2><%=Resources.Global.EditCategory %></h2>
         <%} %>
 
     <table width="100%">
     <tr>
         <td class="l">
-            <label for="CategoryNameVN">Tên tiếng Việt:</label>
+            <label for="CategoryNameVN"><%=Resources.Global.VNName %>:</label>
         </td>
         
         <td class="l">
@@ -30,7 +30,7 @@
     </tr>
     <tr>
         <td class="l">
-            <label for="CategoryNameEN">Tên tiếng Anh:</label>
+            <label for="CategoryNameEN"><%=Resources.Global.ENName %>:</label>
         </td>
         
         <td class="l">
@@ -42,7 +42,7 @@
     
     <tr>
         <td class="l">
-            <label for="DescriptionVN">Mô tả tiếng Việt:</label>
+            <label for="DescriptionVN"><%=Resources.Global.VNDescription %>:</label>
         </td>
         
         <td class="l">
@@ -52,7 +52,7 @@
     </tr>
     <tr>
         <td class="l">
-            <label for="CategoryNameEN">Mô tả tiếng Anh:</label>
+            <label for="CategoryNameEN"><%=Resources.Global.ENDescription %>:</label>
         </td>
         
         <td class="l">
@@ -65,11 +65,11 @@
         <td colspan="2" class="c">
         <%if (ViewData["AddNews"] != null)
           { %>
-            <input type="submit" value="Thêm loại sản phẩm" />
+            <input type="submit" value="<%=Resources.Global.AddCategory %>" />
         <%}
           else
           { %>
-        <input type="submit" value="Sửa" />
+        <input type="submit" value="<%=Resources.Global.Edit %>">" />
         <%} %>
         </td>
     </tr>
