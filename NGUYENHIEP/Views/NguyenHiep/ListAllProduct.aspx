@@ -1,49 +1,48 @@
-﻿<%@ Page Title="" Language="C#"  Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblProduct>>" %>
+﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblProduct>>" %>
 
-
-    <div class="barCterTab">
-    	<div class="barCterTabLleft">
-        	<div class="barCterTabRight">
-            	<div style="line-height:23px;" class="ctentBarTab">
-                	Ảnh công trình
-                </div>
-
+<div class="barCterTab">
+    <div class="barCterTabLleft">
+        <div class="barCterTabRight">
+            <div style="line-height: 23px;" class="ctentBarTab">
+                <%=Resources.Global.Products %>
             </div>
         </div>
     </div>
-
-    <div class="boxCtentSp">
-            	<div class="boxCtentSpTop">
-                	<div class="boxCtentSpBtom">
-                    	<div class="boxCtentSpCtent">
-                        <div class="textLeft">
-    <%int counter = 0; %>
-    <% foreach (var item in Model.Items) { %>
-        <%if (String.IsNullOrEmpty(item.ProductNameVN)) item.ProductNameVN = "Không tiêu đề"; %>
-            <div class="subSp">
-
-            	<div class="clear"><a href="#"><img src="../..<%=item.Image%>" /></a></div>
-                <div class="paddingTb4 paddingLr18px bold">
-                	<%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+</div>
+<div class="boxCtentSp">
+    <div class="boxCtentSpTop">
+        <div class="boxCtentSpBtom">
+            <div class="boxCtentSpCtent">
+                <div class="textLeft">
+                    <%int counter = 0; %>
+                    <% foreach (var item in Model.Items)
+                       { %>
+                    <%if (String.IsNullOrEmpty(item.ProductNameVN)) item.ProductNameVN = Resources.Global.NoTitle; %>
+                    <div class="subSp">
+                        <div class="clear">
+                            <a href="#">
+                                <img src="../..<%=item.Image%>" /></a></div>
+                        <div class="paddingTb4 paddingLr18px bold">
+                            <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <%counter++; %>
+                    <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
+                      {
+                          counter = 0; %>
+                    <div class="clear">
+                    </div>
+                    <%} %>
+                    <% } %>
                 </div>
-                <div class="clear"></div>
             </div>
-        <%counter++; %>
-        <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
-          {
-              counter = 0; %>
-        <div class="clear"></div>
-        <%} %>
-        
-    
-    <% } %>
+        </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-   <div class="prevNext">
-<%=
+</div>
+<div class="prevNext">
+    <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
             new NguyenHiep.Utility.Pager.PagingOption
@@ -61,8 +60,8 @@
               ,
             }
           )
-       %>
-       </div>
- <span style="float:right">
- <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", "Thêm tin tức", (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null)%>
- </span>
+    %>
+</div>
+<span style="float: right">
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null)%>
+</span>

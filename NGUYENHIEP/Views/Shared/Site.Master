@@ -50,16 +50,16 @@
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
                             <ul id="TopMenuTab">
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span>Trang chủ</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span>GIới thiệu</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Tin tức</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>Sản phẩm </span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span>Tuyển dụng</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span>Ảnh công trình</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContact/")%>"><span>Liên hệ</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span><%=Resources.Global.Home %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.News%></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span><%=Resources.Global.OurProducts %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span><%=Resources.Global.Recruitment%></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span><%=Resources.Global.ConstructionImages %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContact/")%>"><span><%=Resources.Global.ContactUs %></span></a></li>
                             </ul>
                             <div class="boxLanguage">
-                                <a href="#" class="viet">&nbsp;</a> <a href="#" class="Eng">&nbsp;</a>
+                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                                         <div class="barTabMnuLeft">
                                             <div class="barTabMnuRight">
                                                 <div class="ctentBarTab">
-                                                    Sản phẩm
+                                                    <%=Resources.Global.Products %>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                         <div class="boxTabNewsLeft">
                                             <div class="boxTabNewsRight">
                                                 <div class="ctentBarTab">
-                                                    Tin tức khuyến mãi
+                                                    <%=Resources.Global.PromotionProgram %>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                     <div class="boxKhuyenmai">
                                         <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server"></asp:ContentPlaceHolder>
                                         <div class="paddingTb4 textRight fontsize11">
-                                            <a class="chitiet" href="#">Xem tiếp</a></div>
+                                            <a class="chitiet" href="#"><%=Resources.Global.Next %></a></div>
                                     </div>
                                 </div>
                             </div>
@@ -109,17 +109,19 @@
                     </div>
                     <div class="lienketweb  clear">
                         <div style="padding-top: 10px;" class="bold color2 textLeft">
-                            Liên kết website
+                            <%=Resources.Global.LinkedWebsites %>
                         </div>
                         <div class="paddingTb4">
-                            <select style="width: 208px; height: 20px;">
-                                <option selected="selected">Dantri.com.vn</option>
+                            <select style="width: 208px; height: 20px;" onchange="javascript:window.open(this.value, '_newtab', 'location=yes,resizable=yes,scrollbars=yes,menubar=yes,toolbar=yes');">
+                                <option selected="selected" value="http://www.dantri.com.vn" >Dantri.com.vn</a></option>
+                                <option selected="selected" value="http://vnexpress.net">Vnexpress.net</option>
+                                <option selected="selected" value="http://www.tuoitre.com.vn">Tuoitre.com.vn</option>
                             </select>
                         </div>
                     </div>
                     <div class="HotroOnline  clear">
                         <div style="padding-top: 10px;" class="bold color2 textLeft paddingTb4">
-                            Hổ trợ online
+                            <%=Resources.Global.OnlineSupport %>
                         </div>
                         <div class="boxHtroOline">
                             <div class="boxHtroOlineTop">
@@ -158,7 +160,7 @@
                                             <div class="boxTabNewsLeft">
                                                 <div class="boxTabNewsRight">
                                                     <div class="ctentBarTab">
-                                                        TIn tức - Sự kiện
+                                                        <%=Resources.Global.NewsEvent %>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,10 +189,10 @@
                 <div id="footer">
                     <div class="floatLeft" style="width: 440px; line-height: 16px; padding-top: 6px;">
                         <p class="bold">
-                            Allright: Aulacdesign media Co.,LTD
+                            <%=Resources.Global.CopyRight %>: Aulacdesign media Co.,LTD
                         </p>
                         <p class="bold">
-                            Add:183 Hoa Bằng - Yên Hòa - Cầu Giấy - HN</p>
+                            <%=Resources.Global.Address %></p>
                     </div>
                     <div class="floatRight">
                         <a href="http://aulacdesign.net">

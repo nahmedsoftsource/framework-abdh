@@ -9,11 +9,12 @@ using NguyenHiep.Data;
 using NguyenHiep.Common;
 using System.IO;
 using System.Configuration;
+using NGUYENHIEP.Infrastructure;
 
 namespace NGUYENHIEP.Controllers
 {
     [HandleError]
-    public class NguyenHiepController : Controller
+    public class NguyenHiepController : BaseController
     {
         #region
         #endregion
@@ -428,6 +429,18 @@ namespace NGUYENHIEP.Controllers
             ls.Add((new SelectListItem { Text = "Sản phẩm khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
             ls.Add((new SelectListItem { Text = "Sản phẩm thường", Value = NewsTypes.NormalProduct.ToString() }));
             return ls;
+        }
+
+        public ActionResult SetCulture(string id)
+        {
+
+            HttpCookie userCookie = Request.Cookies["Culture"];
+
+            userCookie.Value = id;
+            userCookie.Expires = DateTime.Now.AddYears(100);
+            Response.SetCookie(userCookie);
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
     }
 }
