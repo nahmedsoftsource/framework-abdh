@@ -63,10 +63,9 @@
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
                             <ul>
-                                
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.News %></span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span><%=Resources.Global.Products %> </span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"<span><%=Resources.Global.Recruitment %></span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span><%=Resources.Global.ConstructionImages %></span></a></li>
                                 <li><a href="#"><span><%=Resources.Global.MessageBox %></span></a></li>
@@ -78,7 +77,8 @@
                     </div>
                 </div>
                 <div id="mainColunmLeft" class="clear">
-                    <div id="mainMnuLeft">
+                    <asp:ContentPlaceHolder ID="RightMenu" runat="server"></asp:ContentPlaceHolder>
+                    <div id="LoginPanel">
                         <div class="mainMnuLeftTOp">
                             <div class="mainMnuLeftBtom">
                                 <div class="mainMnuContent">
@@ -86,18 +86,19 @@
                                         <div class="barTabMnuLeft">
                                             <div class="barTabMnuRight">
                                                 <div class="ctentBarTab">
-                                                    Sản phẩm
+                                                    <%=Resources.Global.LoginInfo %>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="contentMnu">
-                                        <asp:ContentPlaceHolder ID="RightMenu" runat="server"></asp:ContentPlaceHolder>
+                                        <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server"></asp:ContentPlaceHolder>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <div id="mainColunmRight">
                     <div id="mainCtentSpRight">
