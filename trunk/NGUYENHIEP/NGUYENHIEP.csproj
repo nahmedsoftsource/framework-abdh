@@ -111,6 +111,7 @@
     <Compile Include="Utility\Crypto\EncDec.cs" />
     <Compile Include="Utility\Crypto\KeyGeneration.cs" />
     <Compile Include="Utility\DialogCloseOption.cs" />
+    <Compile Include="Services\EmailService.cs" />
     <Compile Include="Utility\File\File.cs" />
     <Compile Include="Utility\GridExtensions.cs" />
     <Compile Include="Utility\Helper.cs" />

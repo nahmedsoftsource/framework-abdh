@@ -319,7 +319,7 @@ namespace NGUYENHIEP.Controllers
             tblUser user = new tblUser();
             user.ID = Guid.NewGuid();
             user.UserName = userName;
-            user.Email = email;
+            //user.Email = email;
             user.Password = KeyGeneration.EncryptString(INPUT_TEXT, password);          
             return _nguyenHiepService.InsertUser(user);
         }
