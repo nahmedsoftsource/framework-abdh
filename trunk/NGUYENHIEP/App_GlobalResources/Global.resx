@@ -159,6 +159,9 @@
   <data name="LinkedWebsites" xml:space="preserve">
     <value>Liên kết website</value>
   </data>
+  <data name="MessageBox" xml:space="preserve">
+    <value>Hộp thư</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>Tin Tức</value>
   </data>
