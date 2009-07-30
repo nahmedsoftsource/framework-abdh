@@ -12,18 +12,18 @@
     <%if (ViewData["AddNews"] != null)
       { %>
     <h2>
-        Thêm tin t&#7913;c</h2>
+        <%=Resources.Global.AddNews %></h2>
     <%}
       else
       { %>
     <h2>
-        Ch&#7881;nh s&#7917;a tin t&#7913;c</h2>
+        <%=Resources.Global.EditNew %></h2>
     <%} %>
     <table width="100%">
         <tr>
             <td class="l">
                 <label for="TitleVN">
-                    Tiêu &#273;&#7873;:</label>
+                    <%=Resources.Global.Title %>:</label>
             </td>
             <td class="l">
                 <%= Html.TextBox("TitleVN", Model.TitleVN, new { @size="50"})%>
@@ -33,7 +33,7 @@
         <tr>
             <td class="l">
                 <label for="SubjectVN">
-                    Ch&#7911; &#273;&#7873;:</label>
+                    <%=Resources.Global.Subject %>:</label>
             </td>
             <td class="l">
                 <%= Html.TextBox("SubjectVN", Model.SubjectVN, new { @size = "50" })%>
@@ -43,7 +43,7 @@
         <tr>
             <td class="l">
                 <label>
-                    N&#7897;i Dung:</label>
+                    <%=Resources.Global.Content %>:</label>
             </td>
             <td>
                 <div style="border:solid 1px">
@@ -54,7 +54,7 @@
         <tr>
             <td class="l">
                 <label>
-                    Lo&#7841;i:</label>
+                   <%=Resources.Global.Type %>:</label>
             </td>
             <td class="l">
                 <%=Html.DropDownList("Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
@@ -64,7 +64,7 @@
         <tr>
             <td class="l">
                 <label>
-                    Hình &#7843;nh:</label>
+                    <%=Resources.Global.Image %>:</label>
             </td>
             <td class="l">
                 <p>
@@ -77,11 +77,11 @@
             <td colspan="2" class="c">
                 <%if (ViewData["AddNews"] != null)
                   { %>
-                <input type="submit" value="Thêm tin t&#7913;c" />
+                <input type="submit" value="<%=Resources.Global.AddNews %>" />
                 <%}
                   else
                   { %>
-                <input type="submit" value="S&#7917;a" />
+                <input type="submit" value="<%=Resources.Global.Update %>" />
                 <%} %>
             </td>
         </tr>

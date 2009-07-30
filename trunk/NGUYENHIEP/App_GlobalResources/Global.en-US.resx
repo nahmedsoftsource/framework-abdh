@@ -141,20 +141,50 @@
   <data name="Address" xml:space="preserve">
     <value>Address: 183 Hoa Bang  - Yen Hoa - Cau Giay - Ha Noi - Vietnam</value>
   </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Category Name</value>
+  </data>
   <data name="ConstructionImages" xml:space="preserve">
     <value>Construction Images</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
   <data name="CopyRight" xml:space="preserve">
     <value>Copy Right</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="EditCategory" xml:space="preserve">
+    <value>Edit category</value>
+  </data>
+  <data name="EditNew" xml:space="preserve">
+    <value>Edit New</value>
+  </data>
+  <data name="EditProduct" xml:space="preserve">
+    <value>Edit Product</value>
+  </data>
+  <data name="ENDescription" xml:space="preserve">
+    <value>English Description</value>
+  </data>
+  <data name="ENName" xml:space="preserve">
+    <value>English Name</value>
+  </data>
+  <data name="EnterContactInfo" xml:space="preserve">
+    <value>Enter Contact Information</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
   </data>
   <data name="LinkedWebsites" xml:space="preserve">
     <value>Linked Websites</value>
@@ -183,13 +213,52 @@
   <data name="OurProducts" xml:space="preserve">
     <value>Our Products</value>
   </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>Product Name</value>
+  </data>
   <data name="Products" xml:space="preserve">
     <value>Products</value>
+  </data>
+  <data name="Promoted" xml:space="preserve">
+    <value>Promoted</value>
   </data>
   <data name="PromotionProgram" xml:space="preserve">
     <value>Promotion Program</value>
   </data>
   <data name="Recruitment" xml:space="preserve">
     <value>Recruitment</value>
+  </data>
+  <data name="ShortDescription" xml:space="preserve">
+    <value>Short Description</value>
+  </data>
+  <data name="Store" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="TypeName" xml:space="preserve">
+    <value>Type Name</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="VNDescription" xml:space="preserve">
+    <value>Vietnamese Description</value>
+  </data>
+  <data name="VNName" xml:space="preserve">
+    <value>Vietnamese Name</value>
+  </data>
+  <data name="Warranty" xml:space="preserve">
+    <value>Wanrranty</value>
   </data>
 </root>

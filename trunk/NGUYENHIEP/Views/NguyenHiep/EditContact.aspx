@@ -13,7 +13,7 @@
         <tr>
             <td class="l">
                 <label>
-                    Nhập thông tin liên hệ:</label>
+                    <%=Resources.Global.EnterContactInfo %>:</label>
             </td>
             </tr>
         <tr>
@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <td colspan="2" class="c">
-                <input type="submit" value="Cập nhật" />
+                <input type="submit" value="<%=Resources.Global.Update %>" />
             </td>
         </tr>
     </table>
