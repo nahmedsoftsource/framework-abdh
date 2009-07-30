@@ -57,7 +57,7 @@
                    <%=Resources.Global.Type %>:</label>
             </td>
             <td class="l">
-                <%=Html.DropDownList("Type",((List<SelectListItem>)ViewData["NewsType"]).AsEnumerable()) %>
+                <%=Html.DropDownList("Type",((List<SelectListItem>)ViewData["Type"]).AsEnumerable()) %>
                 <%= Html.ValidationMessage("Type", "*") %>
             </td>
         </tr>
@@ -73,6 +73,19 @@
                 </p>
             </td>
         </tr>
+        <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
+        { %>
+      <tr>
+        <td>
+            Hình hiện tại:
+        </td>
+        <td >
+         <span style="float:left">
+    	<a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+Model.Image)%>' /></a>
+    	</span>
+        </td>
+      </tr>
+      <%} %>
         <tr>
             <td colspan="2" class="c">
                 <%if (ViewData["AddNews"] != null)

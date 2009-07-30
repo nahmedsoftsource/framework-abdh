@@ -21,7 +21,7 @@
                     <div class="subSp">
                         <div class="clear">
                             <a href="#">
-                                <img src="../..<%=item.Image%>" /></a></div>
+                                <img src='<%= Url.Content("~"+item.Image)%>' /></a></div>
                         <div class="paddingTb4 paddingLr18px bold">
                             <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
                         </div>
@@ -51,7 +51,7 @@
               PageSize = Model.GetMaxResults(),
               TotalRows = Model.TotalRows,
               //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllProduct", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize+"&page="+page)
+              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllProduct", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))
 
             },
             new NguyenHiep.Utility.Pager.AjaxPaginationOption
@@ -63,5 +63,5 @@
     %>
 </div>
 <span style="float: right">
-    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null)%>
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
 </span>

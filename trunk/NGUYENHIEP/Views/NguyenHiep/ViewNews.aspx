@@ -24,6 +24,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditNews", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID)%>
     </div>
