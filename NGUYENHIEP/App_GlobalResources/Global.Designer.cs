@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phòng kế toán.
+        /// </summary>
+        internal static string AccountingDept {
+            get {
+                return ResourceManager.GetString("AccountingDept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm.
         /// </summary>
         internal static string Add {
@@ -129,6 +138,15 @@ namespace Resources {
         internal static string Address {
             get {
                 return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hủy bỏ.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -223,6 +241,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Địa chỉ email.
+        /// </summary>
+        internal static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mô tả tiếng Anh.
         /// </summary>
         internal static string ENDescription {
@@ -291,6 +318,24 @@ namespace Resources {
         internal static string LoginInfo {
             get {
                 return ResourceManager.GetString("LoginInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ban giám đôc.
+        /// </summary>
+        internal static string ManagementBoard {
+            get {
+                return ResourceManager.GetString("ManagementBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phòng marketing.
+        /// </summary>
+        internal static string MarketingDept {
+            get {
+                return ResourceManager.GetString("MarketingDept", resourceCulture);
             }
         }
         
@@ -421,6 +466,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phòng kinh doanh.
+        /// </summary>
+        internal static string SaleDept {
+            get {
+                return ResourceManager.GetString("SaleDept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gửi.
+        /// </summary>
+        internal static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mô tả ngắn.
         /// </summary>
         internal static string ShortDescription {
@@ -448,11 +511,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phòng kỹ thuật.
+        /// </summary>
+        internal static string TechnicalDept {
+            get {
+                return ResourceManager.GetString("TechnicalDept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tiêu đề.
         /// </summary>
         internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gửi đến.
+        /// </summary>
+        internal static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         
@@ -507,6 +588,15 @@ namespace Resources {
         internal static string Warranty {
             get {
                 return ResourceManager.GetString("Warranty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên của bạn.
+        /// </summary>
+        internal static string YourName {
+            get {
+                return ResourceManager.GetString("YourName", resourceCulture);
             }
         }
     }
