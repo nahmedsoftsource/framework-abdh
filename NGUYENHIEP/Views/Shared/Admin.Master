@@ -23,7 +23,19 @@
     <script type="text/javascript" src="~/Scripts/ui.resizable.js"></script>--%>
     <script type="text/javascript" src='<%= Url.Content("~/fckeditor/fckeditor.js")%>'></script>
     <%--script type="text/javascript" src="~/Scripts/jquery.form.js"></script>--%>
-    
+    <script type="text/javascript" language="javascript">
+        $(document).ready
+        (function()
+            {
+                if($("#SelectedMenuId") != null)
+                {
+                    $(".selected").removeClass("selected");
+                    var selectMenuID = "li:eq("+$("#SelectedMenuId").val() + ")";
+                    $(selectMenuID +">a").addClass("selected");
+                }
+            }
+        );
+    </script>
     
     
 </head>
@@ -52,15 +64,15 @@
                         <div class="barMenuTopRight">
                             <ul>
                                 
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>Tin tức</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>Sản phẩm </span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>GIới thiệu</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"<span>Tuyển dụng</span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span>Ảnh công trình</span></a></li>
-                                <li><a href="#"><span>Hộp Thư</span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.News %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span><%=Resources.Global.Products %> </span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"<span><%=Resources.Global.Recruitment %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span><%=Resources.Global.ConstructionImages %></span></a></li>
+                                <li><a href="#"><span><%=Resources.Global.MessageBox %></span></a></li>
                             </ul>
                             <div class="boxLanguage">
-                                <a href="#" class="viet">&nbsp;</a> <a href="#" class="Eng">&nbsp;</a>
+                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
                             </div>
                         </div>
                     </div>
@@ -100,10 +112,10 @@
                 <div id="footer">
                     <div class="floatLeft" style="width: 440px; line-height: 16px; padding-top: 6px;">
                         <p class="bold">
-                            Allright: Aulacdesign media Co.,LTD
+                            <%=Resources.Global.CopyRight %>: Aulacdesign media Co.,LTD
                         </p>
                         <p class="bold">
-                            Add:183 Hoa Bằng - Yên Hòa - Cầu Giấy - HN</p>
+                            <%=Resources.Global.Address %></p>
                     </div>
                     <div class="floatRight">
                         <a href="http://aulacdesign.net">

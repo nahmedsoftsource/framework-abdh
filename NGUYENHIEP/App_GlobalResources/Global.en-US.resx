@@ -159,6 +159,9 @@
   <data name="LinkedWebsites" xml:space="preserve">
     <value>Linked Websites</value>
   </data>
+  <data name="MessageBox" xml:space="preserve">
+    <value>Message Box</value>
+  </data>
   <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
