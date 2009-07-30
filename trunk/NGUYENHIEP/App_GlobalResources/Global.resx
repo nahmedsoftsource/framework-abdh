@@ -261,4 +261,10 @@
   <data name="Warranty" xml:space="preserve">
     <value>Bảo hành</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="LoginInfo" xml:space="preserve">
+    <value>Thông tin đăng nhập</value>
+  </data>
 </root>

@@ -65,26 +65,7 @@
                     </div>
                 </div>
                 <div id="mainColunmLeft" class="clear">
-                    <div id="mainMnuLeft">
-                        <div class="mainMnuLeftTOp">
-                            <div class="mainMnuLeftBtom">
-                                <div class="mainMnuContent">
-                                    <div class="barTabMnu">
-                                        <div class="barTabMnuLeft">
-                                            <div class="barTabMnuRight">
-                                                <div class="ctentBarTab">
-                                                    <%=Resources.Global.Products %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="contentMnu">
-                                        <asp:ContentPlaceHolder ID="RightMenu" runat="server"></asp:ContentPlaceHolder>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server"></asp:ContentPlaceHolder>
                     <div class="boxNews" style="float: none;">
                         <div class="boxNewsTop">
                             <div class="boxNewsBtom">

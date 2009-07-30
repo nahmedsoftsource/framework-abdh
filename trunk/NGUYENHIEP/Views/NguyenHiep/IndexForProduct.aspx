@@ -8,8 +8,8 @@
     <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="3" />
     </div>
 </asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="RightMenu" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
+        <%Html.RenderPartial("ListCategory",ViewData); %>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">

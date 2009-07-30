@@ -8,7 +8,7 @@
     <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="6" />
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="RightMenu" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
