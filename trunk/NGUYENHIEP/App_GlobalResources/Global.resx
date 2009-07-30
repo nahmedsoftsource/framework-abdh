@@ -261,10 +261,40 @@
   <data name="Warranty" xml:space="preserve">
     <value>Bảo hành</value>
   </data>
+  <data name="AccountingDept" xml:space="preserve">
+    <value>Phòng kế toán</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy bỏ</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Địa chỉ email</value>
+  </data>
   <data name="Login" xml:space="preserve">
     <value>Đăng nhập</value>
   </data>
   <data name="LoginInfo" xml:space="preserve">
     <value>Thông tin đăng nhập</value>
+  </data>
+  <data name="ManagementBoard" xml:space="preserve">
+    <value>Ban giám đôc</value>
+  </data>
+  <data name="MarketingDept" xml:space="preserve">
+    <value>Phòng marketing</value>
+  </data>
+  <data name="SaleDept" xml:space="preserve">
+    <value>Phòng kinh doanh</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="TechnicalDept" xml:space="preserve">
+    <value>Phòng kỹ thuật</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Gửi đến</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Tên của bạn</value>
   </data>
 </root>
