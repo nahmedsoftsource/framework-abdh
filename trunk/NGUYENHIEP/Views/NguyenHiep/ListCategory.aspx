@@ -33,5 +33,5 @@
        %>
        <div class="prevNext">
  <span style="float:right">
- <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", "Thêm", (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null)%>
+ <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", Resources.Global.AddCategory, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null)%>
  </span>

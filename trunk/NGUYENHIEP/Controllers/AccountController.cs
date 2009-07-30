@@ -10,12 +10,13 @@ using System.Web.UI;
 using NGUYENHIEP.Services;
 using NGUYENHIEP.Models;
 using NGUYENHIEP.Utility.Crypto;
+using NGUYENHIEP.Infrastructure;
 
 namespace NGUYENHIEP.Controllers
 {
 
     [HandleError]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         // This constructor is used by the MVC framework to instantiate the controller using
         // the default forms authentication and membership providers.
@@ -274,6 +275,19 @@ namespace NGUYENHIEP.Controllers
             }
         }
         #endregion
+
+
+        public ActionResult SetCulture(string id)
+        {
+
+            HttpCookie userCookie = Request.Cookies["Culture"];
+
+            userCookie.Value = id;
+            userCookie.Expires = DateTime.Now.AddYears(100);
+            Response.SetCookie(userCookie);
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
     }
 
     // The FormsAuthentication type is sealed and contains static members, so it is difficult to
