@@ -21,7 +21,7 @@
                             <div class="paddingTb4">
 				                <div class="floatLeft" style="width:150px;">
 
-                                    <a href="#"><img class="imgGthieu" src="../..<%=((Model.Image != null)?Model.Image:"")%>" /></a>
+                                    <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((Model.Image != null)?Model.Image:""))%>' /></a>
                                 </div>
 		                        <div class="floatLeft" style="width:530px;">
 				                    <div class="bold fontsize13"><a href="#" class="color2">Butyl Carbitol (BC)</a></div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </div>
-<%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID)%>
+<%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID+ ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))%>
 </div>
 <%} %>
 </asp:Content>

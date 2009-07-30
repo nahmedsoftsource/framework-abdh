@@ -51,7 +51,7 @@
               PageSize = Model.GetMaxResults(),
               TotalRows = Model.TotalRows,
               //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize+"&page="+page)
+              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
 
             },
             new NguyenHiep.Utility.Pager.AjaxPaginationOption
@@ -63,5 +63,5 @@
     %>
 </div>
 <span style="float: right">
-    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", Resources.Global.AddNews, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews") + "?newsID=" + null)%>
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", Resources.Global.AddNews, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews") + "?newsID=" + Guid.Empty.ToString() + "&Type="+NguyenHiep.Common.NewsTypes.News.ToString())%>
 </span>
