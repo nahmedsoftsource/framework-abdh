@@ -4,13 +4,13 @@
     	<div class="barCterTabLleft">
         	<div class="barCterTabRight">
             	<div style="line-height:23px;" class="ctentBarTab">
-                	    Change Password
+                	    <%=Resources.Global.ChangePassword %>
                 </div>
 
             </div>
         </div>
     </div>
     <p>
-        Your password has been changed successfully.
+        <%=Resources.Global.ChangePasswordSuccess %>
     </p>
 </asp:Content>

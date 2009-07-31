@@ -5,7 +5,7 @@
     	<div class="barCterTabLleft">
         	<div class="barCterTabRight">
             	<div style="line-height:23px;" class="ctentBarTab">
-                	Create a New Account
+                	<%=Resources.Global.CreateAccount %>
                 </div>
 
             </div>
@@ -13,26 +13,32 @@
     </div>
     
     <p>
-        Use the form below to create a new account. 
+        <%=Resources.Global.WarningPasswordLength %>
     </p>
-    <p>
-        Passwords are required to be a minimum of <%=Html.Encode(ViewData["PasswordLength"])%> characters in length.
-    </p>
-    <%= Html.ValidationSummary("Account creation was unsuccessful. Please correct the errors and try again.") %>
-
+    
     <% using (Html.BeginForm()) { %>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
+                <legend><%=Resources.Global.AccountInfor %></legend>
                       <table width="100%">
                         <tr>
                             <td width:"20%" style="width: 131px">
-                                <label for="username">Username:</label>
+                                <label for="username"><%=Resources.Global.UserName %>:</label>
                             </td>
                             
                             <td>
                                 <%= Html.TextBox("Username") %>
                                 <%= Html.ValidationMessage("Username") %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="l">
+                                <label>
+                                   <%=Resources.Global.Department %>:</label>
+                            </td>
+                            <td class="l">
+                                <%=Html.DropDownList("Department", ((List<SelectListItem>)ViewData["Department"]).AsEnumerable())%>
+                                <%= Html.ValidationMessage("Department", "*")%>
                             </td>
                         </tr>
                        <tr>
@@ -46,7 +52,7 @@
                         </tr>
                         <tr>
                             <td width:"20%" style="width: 131px">
-                                <label for="password">Password:</label>
+                                <label for="password"><%=Resources.Global.Password %>:</label>
                             </td>
                             
                             <td>
@@ -56,7 +62,7 @@
                         </tr>
                         <tr>
                             <td width:"20%" style="width: 131px">
-                                <label for="confirmPassword">Confirm password:</label>
+                                <label for="confirmPassword"><%=Resources.Global.ConfirmPassword %>:</label>
                             </td>
                             
                             <td>                                
@@ -64,10 +70,15 @@
                                 <%= Html.ValidationMessage("confirmPassword") %>
                             </td>
                         </tr>
+                        <tr>
+                            <td width:"20%" style="width: 131px">
+                            </td>
+                            
+                            <td>                                
+                            <input type="submit" value="<%=Resources.Global.Create %>" />
+                            </td>
+                        </tr>
                      </table>
-                <p>
-                    <input type="submit" value="Register" />
-                </p>
             </fieldset>
         </div>
     <% } %>
