@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trong kho còn hàng.
+        /// </summary>
+        internal static string AvailableInStore {
+            get {
+                return ResourceManager.GetString("AvailableInStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hủy bỏ.
         /// </summary>
         internal static string Cancel {
@@ -250,6 +259,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trong kho hết hàng.
+        /// </summary>
+        internal static string EmptyInStore {
+            get {
+                return ResourceManager.GetString("EmptyInStore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mô tả tiếng Anh.
         /// </summary>
         internal static string ENDescription {
@@ -291,6 +309,15 @@ namespace Resources {
         internal static string Image {
             get {
                 return ResourceManager.GetString("Image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Có khuyến mãi.
+        /// </summary>
+        internal static string IsPromoted {
+            get {
+                return ResourceManager.GetString("IsPromoted", resourceCulture);
             }
         }
         
@@ -385,11 +412,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chưa cập nhật.
+        /// </summary>
+        internal static string NotAvailable {
+            get {
+                return ResourceManager.GetString("NotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Không có tiêu đề.
         /// </summary>
         internal static string NoTitle {
             get {
                 return ResourceManager.GetString("NoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không khuyến mãi.
+        /// </summary>
+        internal static string NotPromoted {
+            get {
+                return ResourceManager.GetString("NotPromoted", resourceCulture);
             }
         }
         
@@ -421,6 +466,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chi tiết sản phẩm.
+        /// </summary>
+        internal static string ProductDetails {
+            get {
+                return ResourceManager.GetString("ProductDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tên sản phẩm.
         /// </summary>
         internal static string ProductName {
@@ -435,6 +489,15 @@ namespace Resources {
         internal static string Products {
             get {
                 return ResourceManager.GetString("Products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên loại sản phẩm.
+        /// </summary>
+        internal static string ProductType {
+            get {
+                return ResourceManager.GetString("ProductType", resourceCulture);
             }
         }
         

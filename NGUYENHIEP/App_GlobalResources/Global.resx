@@ -297,4 +297,25 @@
   <data name="YourName" xml:space="preserve">
     <value>Tên của bạn</value>
   </data>
+  <data name="AvailableInStore" xml:space="preserve">
+    <value>Trong kho còn hàng</value>
+  </data>
+  <data name="EmptyInStore" xml:space="preserve">
+    <value>Trong kho hết hàng</value>
+  </data>
+  <data name="IsPromoted" xml:space="preserve">
+    <value>Có khuyến mãi</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>Chưa cập nhật</value>
+  </data>
+  <data name="NotPromoted" xml:space="preserve">
+    <value>Không khuyến mãi</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Chi tiết sản phẩm</value>
+  </data>
+  <data name="ProductType" xml:space="preserve">
+    <value>Tên loại sản phẩm</value>
+  </data>
 </root>
