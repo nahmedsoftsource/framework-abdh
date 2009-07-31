@@ -21,13 +21,13 @@ namespace NGUYENHIEP.Controllers
         NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
         public ActionResult Index()
         {
-          return View();
+            return View();
         }
         public ActionResult IndexForNews(int? pageSize, int? page)
         {
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
 
-            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.NewsTypes.News);
+            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
             return View(listAllNews);
         }
         public ActionResult IndexForRecruitment()
@@ -49,9 +49,17 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult IndexForContruction(int? pageSize, int? page)
         {
-          ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
-          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction);
-          return View(listAllNews);
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
+            }
+            return View(listAllNews);
         }
         public ActionResult IndexForProduct(int? pageSize, int? page)
         {
@@ -59,7 +67,7 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllNews);
         }
-        public ActionResult ViewNews(Guid? newsID,byte? type)
+        public ActionResult ViewNews(Guid? newsID, byte? type)
         {
             ViewData["Type"] = type;
             if (!type.HasValue)
@@ -71,7 +79,7 @@ namespace NGUYENHIEP.Controllers
                 tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID);
                 return View(tblnews);
             }
-            else if (TempData["NewsID"] != null )
+            else if (TempData["NewsID"] != null)
             {
                 if (TempData["Type"] == null)
                     type = (byte)NguyenHiep.Common.NewsTypes.News;
@@ -82,7 +90,7 @@ namespace NGUYENHIEP.Controllers
             }
             return new EmptyResult();
         }
-        public ActionResult ViewProduct(Guid? newsID,byte? type)
+        public ActionResult ViewProduct(Guid? newsID, byte? type)
         {
             ViewData["Type"] = type;
             if (newsID != null && !newsID.Equals(Guid.Empty))
@@ -100,15 +108,31 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult ListAllNews(int? pageSize, int? page)
         {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
-            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
+            }
             return View(listAllNews);
         }
         public ActionResult ListAllContruction(int? pageSize, int? page)
         {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
-          SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),NguyenHiep.Common.NewsTypes.Contruction);
-          return View(listAllNews);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
+            }
+            return View(listAllNews);
         }
         public ActionResult ListAllProduct(int? pageSize, int? page)
         {
@@ -121,7 +145,7 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblCategory> listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
             return View(listAllCategory);
         }
-        public ActionResult EditNews(Guid? newsID,byte? type)
+        public ActionResult EditNews(Guid? newsID, byte? type)
         {
             List<SelectListItem> lsEN = new List<SelectListItem>();
             List<SelectListItem> lsVN = new List<SelectListItem>();
@@ -131,12 +155,12 @@ namespace NGUYENHIEP.Controllers
                 tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID);
             }
             #region Edit
-            if (newsID.HasValue && !newsID.Equals(Guid.Empty)&& tblnew != null)
+            if (newsID.HasValue && !newsID.Equals(Guid.Empty) && tblnew != null)
             {
                 if (tblnew.Type.HasValue && tblnew.Type.Value == NewsTypes.News)
                 {
                     lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(),Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = false }));
                     lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = false }));
                     lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = false }));
                     lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = false }));
@@ -151,7 +175,8 @@ namespace NGUYENHIEP.Controllers
                     lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = false }));
                     lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = false }));
 
-                }else if (tblnew.Type.HasValue && tblnew.Type.Value == NewsTypes.Contruction)
+                }
+                else if (tblnew.Type.HasValue && tblnew.Type.Value == NewsTypes.Contruction)
                 {
                     lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
                     lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = false }));
@@ -260,25 +285,25 @@ namespace NGUYENHIEP.Controllers
                     lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = false }));
                     lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = false }));
                     lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = false }));
-                    
+
                 }
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
                     ViewData["Type"] = lsEN;
                     ViewData["ContentVN"] = tblnew.ContentEN;
                 }
-                else 
+                else
                 {
                     ViewData["Type"] = lsVN;
                     ViewData["ContentVN"] = tblnew.ContentVN;
                 }
-                
-                
-                
+
+
+
                 ViewData["command"] = "upload";
                 return View(tblnew);
             }
-            #endregion 
+            #endregion
             #region Add
             if (type.HasValue && type.Value == NewsTypes.News)
             {
@@ -298,120 +323,121 @@ namespace NGUYENHIEP.Controllers
                 lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
                 lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
 
-            }else
-            if (type.HasValue && type.Value == NewsTypes.Contruction)
-            {
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
-
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-
             }
-            else if (type.HasValue && type.Value == NewsTypes.HotNew)
-            {
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+            else
+                if (type.HasValue && type.Value == NewsTypes.Contruction)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-            }
-            else if (type.HasValue && type.Value == NewsTypes.Introduction)
-            {
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
 
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-            }
-            else if (type.HasValue && type.Value == NewsTypes.NormalProduct)
-            {
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                }
+                else if (type.HasValue && type.Value == NewsTypes.HotNew)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-            }
-            else if (type.HasValue && type.Value == NewsTypes.PromotionNew)
-            {
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                }
+                else if (type.HasValue && type.Value == NewsTypes.Introduction)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-            }
-            else if (type.HasValue && type.Value == NewsTypes.Recruitment)
-            {
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                }
+                else if (type.HasValue && type.Value == NewsTypes.NormalProduct)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                }
+                else if (type.HasValue && type.Value == NewsTypes.PromotionNew)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                }
+                else if (type.HasValue && type.Value == NewsTypes.Recruitment)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
 
 
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                
-                
-                
-            }
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+
+
+
+                }
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["Type"] = lsEN;
@@ -449,7 +475,7 @@ namespace NGUYENHIEP.Controllers
 
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditCategory(Guid? newsID, [Bind(Exclude = "ID")] tblCategory tblnew,byte? type)
+        public ActionResult EditCategory(Guid? newsID, [Bind(Exclude = "ID")] tblCategory tblnew, byte? type)
         {
             bool flag = false;
             if (newsID != null && ModelState.IsValid)
@@ -470,19 +496,19 @@ namespace NGUYENHIEP.Controllers
                 //todo: view one category
                 return RedirectToAction("ViewNews");
             }
-            
+
 
             if (newsID == null)
             {
                 ViewData["AddNews"] = true;
             }
-           
+
             return View(tblnew);
         }
-        public ActionResult EditProduct(Guid? newsID,byte? type)
+        public ActionResult EditProduct(Guid? newsID, byte? type)
         {
             ViewData["Type"] = type;
-            
+
             List<SelectListItem> categories = new List<SelectListItem>();
             List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
             int counter = 0;
@@ -516,7 +542,7 @@ namespace NGUYENHIEP.Controllers
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["StoreStatus"] = storeStatusEN;
-                
+
                 ViewData["Promotion"] = promotionEN;
             }
             else
@@ -524,20 +550,20 @@ namespace NGUYENHIEP.Controllers
                 ViewData["Promotion"] = promotionVN;
                 ViewData["StoreStatus"] = storeStatusVN;
             }
-            
-            
+
+
             ViewData["Categories"] = categories;
 
             if (newsID != null)
             {
                 tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
-                
-                
+
+
                 return View(tblproduct);
             }
             else
             {
-                
+
                 ViewData["AddProduct"] = true;
                 tblProduct tblproduct = new tblProduct();
                 return View(tblproduct);
@@ -545,7 +571,7 @@ namespace NGUYENHIEP.Controllers
         }
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew,byte? type)
+        public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew, byte? type)
         {
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             bool flag = false;
@@ -554,7 +580,58 @@ namespace NGUYENHIEP.Controllers
             foreach (string inputTagName in Request.Files)
             {
                 HttpPostedFileBase file = Request.Files[inputTagName];
-                
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    if (String.IsNullOrEmpty(tblnew.SubjectEN))
+                    {
+                        ModelState.AddModelError("SubjectEN", "Subject field is required");
+                    }
+                    else if (tblnew.SubjectEN.Length >= 500)
+                    {
+                        ModelState.AddModelError("SubjectEN", "Input no more than 500 characters");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.TitleEN))
+                    {
+                        ModelState.AddModelError("TitleEN", "Title field is required");
+                    }
+                    else if (tblnew.TitleEN.Length >= 200)
+                    {
+                        ModelState.AddModelError("TitleEN", "Input no more than 200 characters");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.ContentEN))
+                    {
+                        ModelState.AddModelError("ContentEN", "Content field is required");
+                    }
+                    
+
+                }
+                else
+                {
+                    if (String.IsNullOrEmpty(tblnew.SubjectVN))
+                    {
+                        ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
+                    }
+                    else if (tblnew.SubjectVN.Length >= 250)
+                    {
+                        ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.TitleVN))
+                    {
+                        ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
+                    }
+                    else if (tblnew.TitleVN.Length >= 100)
+                    {
+                        ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 200 ký tự");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.ContentVN))
+                    {
+                        ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
+                    }
+                    else if (tblnew.ContentVN.Length >= 8000)
+                    {
+                        ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 8000 ký tự");
+                    }
+                }
                 if (file != null && file.ContentLength > 0 && newsID != null && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
                 {
                     tblnew.ID = (Guid)newsID;
@@ -567,6 +644,7 @@ namespace NGUYENHIEP.Controllers
                         insert = false;
                         TempData["NewsID"] = newsID;
                         TempData["Type"] = tblnew.Type;
+                        ModelState.Clear();
                         if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
                         {
                             return RedirectToAction("ViewNews");
@@ -592,26 +670,27 @@ namespace NGUYENHIEP.Controllers
                 else if (file != null && file.ContentLength > 0 && (!newsID.HasValue || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
                 {
                     flag = true;
-                    tblnew.ID =Guid.NewGuid();
+                    tblnew.ID = Guid.NewGuid();
                     newsID = tblnew.ID;
                     string pathImage;
                     if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
                     {
                         tblnew.Image = pathImage;
                         _nguyenHiepService.InsertNews(tblnew);
+                        ModelState.Clear();
                         insert = true;
                         TempData["Type"] = tblnew.Type;
                         if (!type.HasValue)
                             type = (byte)NguyenHiep.Common.NewsTypes.News;
                         if (type == NguyenHiep.Common.NewsTypes.News)
                         {
-                          return RedirectToAction("IndexForNews");
+                            return RedirectToAction("IndexForNews");
                         }
                         else if (type == NguyenHiep.Common.NewsTypes.Contruction)
                         {
-                          return RedirectToAction("IndexForContruction");
+                            return RedirectToAction("IndexForContruction");
                         }
-                        else if (type  == NguyenHiep.Common.NewsTypes.HotNew)
+                        else if (type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
                             return RedirectToAction("ViewHotNew");
                         }
@@ -628,69 +707,76 @@ namespace NGUYENHIEP.Controllers
                 }
 
             }
-           
+
             if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image))
             {
-                ModelState.AddModelError("UploadFile", "File Request is not support");
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                }
+                else
+                {
+                    ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                }
             }
             else if (!flag && tblnew != null && !String.IsNullOrEmpty(tblnew.Image))
             {
-              if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty))
-              {
-                tblnew.ID = Guid.NewGuid();
-                newsID = tblnew.ID;
-                _nguyenHiepService.InsertNews(tblnew);
-                TempData["Type"] = tblnew.Type;
-                if (!type.HasValue)
-                  type = (byte)NguyenHiep.Common.NewsTypes.News;
-                if (type == NguyenHiep.Common.NewsTypes.News)
+                if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty))
                 {
-                  return RedirectToAction("IndexForNews");
+                    tblnew.ID = Guid.NewGuid();
+                    newsID = tblnew.ID;
+                    _nguyenHiepService.InsertNews(tblnew);
+                    TempData["Type"] = tblnew.Type;
+                    if (!type.HasValue)
+                        type = (byte)NguyenHiep.Common.NewsTypes.News;
+                    if (type == NguyenHiep.Common.NewsTypes.News)
+                    {
+                        return RedirectToAction("IndexForNews");
+                    }
+                    else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                    {
+                        return RedirectToAction("IndexForContruction");
+                    }
+                    else if (type == NguyenHiep.Common.NewsTypes.HotNew)
+                    {
+                        return RedirectToAction("ViewHotNew");
+                    }
+                    else if (type == NguyenHiep.Common.NewsTypes.Introduction)
+                    {
+                        return RedirectToAction("IndexForIntroduction");
+                    }
+                    else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
+                    {
+                        return RedirectToAction("IndexForRecruitment");
+                    }
                 }
-                else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
                 {
-                  return RedirectToAction("IndexForContruction");
+                    tblnew.ID = (Guid)newsID;
+                    _nguyenHiepService.UpdateNews(tblnew);
+                    TempData["NewsID"] = newsID;
+                    TempData["Type"] = tblnew.Type;
+                    if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
+                    {
+                        return RedirectToAction("ViewNews");
+                    }
+                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
+                    {
+                        return RedirectToAction("ViewNews");
+                    }
+                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                    {
+                        return RedirectToAction("ViewHotNew");
+                    }
+                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
+                    {
+                        return RedirectToAction("IndexForIntroduction");
+                    }
+                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
+                    {
+                        return RedirectToAction("IndexForRecruitment");
+                    }
                 }
-                else if (type == NguyenHiep.Common.NewsTypes.HotNew)
-                {
-                  return RedirectToAction("ViewHotNew");
-                }
-                else if (type == NguyenHiep.Common.NewsTypes.Introduction)
-                {
-                  return RedirectToAction("IndexForIntroduction");
-                }
-                else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
-                {
-                  return RedirectToAction("IndexForRecruitment");
-                }
-              }
-              else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
-              {
-                tblnew.ID = (Guid)newsID;
-                _nguyenHiepService.UpdateNews(tblnew);
-                TempData["NewsID"] = newsID;
-                TempData["Type"] = tblnew.Type;
-                if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
-                {
-                  return RedirectToAction("ViewNews");
-                }
-                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
-                {
-                  return RedirectToAction("ViewNews");
-                }
-                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
-                {
-                  return RedirectToAction("ViewHotNew");
-                }
-                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
-                {
-                  return RedirectToAction("IndexForIntroduction");
-                }
-                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
-                {
-                  return RedirectToAction("IndexForRecruitment");
-                }
-              }
             }
             List<SelectListItem> lsEN = new List<SelectListItem>();
             List<SelectListItem> lsVN = new List<SelectListItem>();
@@ -841,41 +927,22 @@ namespace NGUYENHIEP.Controllers
 
 
                 ViewData["command"] = "upload";
-            }else
-            #endregion
-            #region Add
-            if (type.HasValue && type.Value == NewsTypes.News)
-            {
-                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
-                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
-
-                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString(), Selected = true }));
-                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-
             }
             else
-                if (type.HasValue && type.Value == NewsTypes.Contruction)
+            #endregion
+                #region Add
+                if (type.HasValue && type.Value == NewsTypes.News)
                 {
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
                     lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
                     lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
                     lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
                     lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
                     lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString(), Selected = true }));
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
                     lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
                     lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
                     lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
@@ -883,100 +950,120 @@ namespace NGUYENHIEP.Controllers
                     lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
 
                 }
-                else if (type.HasValue && type.Value == NewsTypes.HotNew)
-                {
-                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                else
+                    if (type.HasValue && type.Value == NewsTypes.Contruction)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-                }
-                else if (type.HasValue && type.Value == NewsTypes.Introduction)
-                {
-                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
 
-                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-                }
-                else if (type.HasValue && type.Value == NewsTypes.NormalProduct)
-                {
-                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                    }
+                    else if (type.HasValue && type.Value == NewsTypes.HotNew)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-                }
-                else if (type.HasValue && type.Value == NewsTypes.PromotionNew)
-                {
-                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                    }
+                    else if (type.HasValue && type.Value == NewsTypes.Introduction)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
 
-                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
-                }
-                else if (type.HasValue && type.Value == NewsTypes.Recruitment)
-                {
-                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
-                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                    }
+                    else if (type.HasValue && type.Value == NewsTypes.NormalProduct)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                    }
+                    else if (type.HasValue && type.Value == NewsTypes.PromotionNew)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+                    }
+                    else if (type.HasValue && type.Value == NewsTypes.Recruitment)
+                    {
+                        lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
+                        lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
 
 
-                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
-                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
-                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
+                        lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                        lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
 
 
 
-                }
+                    }
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["Type"] = lsEN;
@@ -987,7 +1074,7 @@ namespace NGUYENHIEP.Controllers
             }
             ViewData["AddNews"] = true;
             tblnew = new tblNew();
-            #endregion
+                #endregion
             if (newsID == null)
             {
                 ViewData["AddNews"] = true;
@@ -1014,7 +1101,7 @@ namespace NGUYENHIEP.Controllers
                     {
                         flag = true;
                         tblproduct.Image = pathImage;
-                        
+
                     }
                     if (tblproduct.Image == null)
                     {
@@ -1034,7 +1121,7 @@ namespace NGUYENHIEP.Controllers
                     if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
                     {
                         tblproduct.Image = pathImage;
-                        
+
                     }
                     _nguyenHiepService.InsertProduct(tblproduct);
                     return RedirectToAction("IndexForProduct");
@@ -1042,7 +1129,7 @@ namespace NGUYENHIEP.Controllers
                 }
 
             }
-           
+
             if (!flag)
             {
                 ModelState.AddModelError("UploadFile", "File Request is not support");
@@ -1130,7 +1217,7 @@ namespace NGUYENHIEP.Controllers
                 }
             }
             return View(contact);
-            
+
         }
         public ActionResult ViewRecruitment(byte? type)
         {

@@ -18,7 +18,15 @@
                     <% foreach (var item in Model.Items)
                        { %>
                     <div class="boxSubTin1">
+                    <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
+                                <%}
+                                  else
+                                  { %>
                         <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
+                                <%} %>
+                        
                         <%if (!String.IsNullOrEmpty(item.Image))
                           { %>
                         <a href="#">
@@ -26,7 +34,15 @@
                         <%} %>
                         <div class="paddingTb4 bold">
                             <a class="color1" href="#">
+                            <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%=(item.SubjectEN!=null)?item.SubjectEN:Resources.Global.NoSubject%>
+                                <%}
+                                  else
+                                  { %>
                                 <%=(item.SubjectVN!=null)?item.SubjectVN:Resources.Global.NoSubject%>
+                                <%} %>
+                                
                             </a>
                         </div>
                         <div class="textRight fontsize11">

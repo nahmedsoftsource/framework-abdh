@@ -124,18 +124,34 @@ namespace NGUYENHIEP.Services.LinqClient
                 _dataContext.SubmitChanges();
             }
         }
-        public SearchResult<tblNew> GetAllNews(int pageSize, int page,byte type)
+        public SearchResult<tblNew> GetAllNews(int pageSize, int page,byte type,bool isEN)
         {
             SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-            var query1 = _dataContext.tblNews.Where("Type=@0", type);
-            var query = _dataContext.tblNews.Where("Type=@0",type).Take(pageSize*page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null && query.ToList().Count > 0)
+            if (!isEN)
             {
-                searchResult.Items = query.ToList();
-                searchResult.Query = query;
-                searchResult.SetMaxResults(pageSize);
-                searchResult.SetPage(page);
-                searchResult.TotalRows = query1.Count();
+                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=@1", type,null);
+                var query = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=@1", type, null).Take(pageSize * page).Skip((page - 1) * pageSize);
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
+            }
+            else
+            {
+                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=@1", type,null);
+                var query = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=@1", type, null).Take(pageSize * page).Skip((page - 1) * pageSize);
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
             }
             return searchResult;
         }

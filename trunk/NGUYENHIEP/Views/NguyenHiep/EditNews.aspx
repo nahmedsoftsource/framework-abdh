@@ -26,8 +26,17 @@
                     <%=Resources.Global.Title %>:</label>
             </td>
             <td class="l">
-                <%= Html.TextBox("TitleVN", Model.TitleVN, new { @size="50"})%>
-                <%= Html.ValidationMessage("TitleVN", "*") %>
+            <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%= Html.TextArea("TitleEN", Model.TitleVN, new { rows = 5, style = "width:100%" })%>
+                <%= Html.ValidationMessage("TitleEN")%>
+                                <%}
+                                  else
+                                  { %>
+                <%= Html.TextArea("TitleVN", Model.TitleVN, new { rows = 5, style = "width:100%" })%>
+                <%= Html.ValidationMessage("TitleVN") %>
+                                <%} %>
+                
             </td>
         </tr>
         <tr>
@@ -36,8 +45,18 @@
                     <%=Resources.Global.Subject %>:</label>
             </td>
             <td class="l">
-                <%= Html.TextBox("SubjectVN", Model.SubjectVN, new { @size = "50" })%>
-                <%= Html.ValidationMessage("SubjectVN", "*") %>
+            <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%= Html.TextArea("SubjectEN", Model.SubjectEN, new { rows = 10, style = "width:100%" })%>
+                                <%= Html.ValidationMessage("SubjectEN") %>
+                                <%}
+                                  else
+                                  { %>
+                        <%= Html.TextArea("SubjectVN", Model.SubjectVN, new { rows=10,style="width:100%" })%>
+                        <%= Html.ValidationMessage("SubjectVN") %>
+                                <%} %>
+                
+                
             </td>
         </tr>
         <tr>
@@ -47,7 +66,17 @@
             </td>
             <td>
                 <div style="border:solid 1px">
-                    <%=Html.FckTextBox("ContentVN")%>
+                <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%=Html.FckTextBox("ContentEN")%>
+                                <%= Html.ValidationMessage("ContentEN")%>
+                                <%}
+                                  else
+                                  { %>
+                                <%=Html.FckTextBox("ContentVN")%>
+                                <%= Html.ValidationMessage("ContentVN")%>
+                                <%} %>
+                    
                 </div>
             </td>
         </tr>
@@ -58,21 +87,26 @@
             </td>
             <td class="l">
                 <%=Html.DropDownList("Type",((List<SelectListItem>)ViewData["Type"]).AsEnumerable()) %>
-                <%= Html.ValidationMessage("Type", "*") %>
+                <%= Html.ValidationMessage("Type") %>
             </td>
         </tr>
         <tr>
             <td class="l">
                 <label> <%=Resources.Global.Image %>:</label>
-                <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
+                
             </td>
             <td class="l">
                 <p>
                     <input type="file" id="UploadFile" name="UploadFile" size="23" />
-                    <%Html.ValidationMessage("UploadFile"); %>
+                    
                 </p>
+                <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
+                <br />
+                <%=Html.ValidationMessage("Image")%>
+                <br />
             </td>
         </tr>
+        
         <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
         { %>
       <tr>

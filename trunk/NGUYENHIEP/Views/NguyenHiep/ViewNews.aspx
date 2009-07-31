@@ -9,6 +9,7 @@
                 <div class="boxCtentSpBtom">
                     <div class="boxCtentSpCtent">
                         <div class="textLeft">
+                        
                             <%if (!String.IsNullOrEmpty(Model.Image))
                               { %>
                             <span style="float: left"><a href="#">
@@ -16,7 +17,14 @@
                             <%} %>
                             <div class="paddingTb4 bold">
                                 <a class="color2" href="#"></a>
+                                <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%=((Model.ContentEN != null) ? Model.ContentEN : "")%>
+                                <%}
+                                  else
+                                  { %>
                                 <%=((Model.ContentVN != null) ? Model.ContentVN : "")%>
+                                <%} %>
                             </div>
                             <div class="clear">
                             </div>
