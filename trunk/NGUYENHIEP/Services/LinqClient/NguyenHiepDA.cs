@@ -11,7 +11,7 @@ namespace NGUYENHIEP.Services.LinqClient
 {
     public class NguyenHiepDA
     {
-        NguyenHiepDataContext _dataContext = new NguyenHiepDataContext();
+        NguyenHiepDataContext _dataContext = new NguyenHiepDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=NguyenHiep;User ID=sa;Password=vubao29");
         public tblNew GetNewsByID(Guid newID)
         {
             
@@ -258,14 +258,37 @@ namespace NGUYENHIEP.Services.LinqClient
         public bool Logon(String userName, String password)
         {
             var query = _dataContext.tblUsers.Where("UserName=@0 and Password=@1", userName, password);
-            HttpContext.Current.Items["UserName"] = null;
+            HttpContext.Current.Session["UserName"] = null;
             if (query.ToList().Count() > 0)
             {
                 tblUser tbluser = query.ToList().First();
-                HttpContext.Current.Items["UserName"] = tbluser.UserName;
+                HttpContext.Current.Session["UserName"] = tbluser.UserName;
                 return true;
             }
             return false;
+        }
+
+        public bool DuplicateUsername(String username)
+        {
+            var query = _dataContext.tblUsers.Where("UserName=@0", username);
+            if (query.ToList().Count() > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool DuplicateEmail(String email)
+        {
+            var query = _dataContext.tblUsers.Where("Email=@0", email);
+            if (query.ToList().Count() > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public void Logoff()
+        {
+            HttpContext.Current.Session["UserName"] = null;
         }
 
         public tblUser GetUser(String userName,string password)
