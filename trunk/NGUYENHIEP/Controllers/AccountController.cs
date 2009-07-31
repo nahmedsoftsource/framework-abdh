@@ -11,6 +11,7 @@ using NGUYENHIEP.Services;
 using NGUYENHIEP.Models;
 using NGUYENHIEP.Utility.Crypto;
 using NGUYENHIEP.Infrastructure;
+using NguyenHiep.Common;
 
 namespace NGUYENHIEP.Controllers
 {
@@ -50,7 +51,6 @@ namespace NGUYENHIEP.Controllers
         NguyenHiepAccountController _accountController = new NguyenHiepAccountController();
         public ActionResult LogOn()
         {
-
             return View();
         }
 
@@ -80,27 +80,68 @@ namespace NGUYENHIEP.Controllers
         {
 
             FormsAuth.SignOut();
-
-            return RedirectToAction("Index", "NguyenHiep");
+            _accountController.Logoff();
+            return RedirectToAction("IndexForNews", "NguyenHiep");
         }
 
+        private List<SelectListItem> LoadDataForDropDownList()
+        {
+            List<SelectListItem> lsEN = new List<SelectListItem>();
+            List<SelectListItem> lsVN = new List<SelectListItem>();
+            
+            lsVN.Add((new SelectListItem { Text = "Ban giám đốc", Value = Department.Managers.ToString(), Selected = true }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kỹ thuật", Value = Department.Techonology.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng marketing", Value = Department.Marketing.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kinh doanh", Value = Department.Sales.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kế toán", Value = Department.Accounts.ToString(), Selected = false }));
+
+            lsEN.Add((new SelectListItem { Text = "Managers Department", Value = Department.Managers.ToString(), Selected = true }));
+            lsEN.Add((new SelectListItem { Text = "Technology Department", Value = Department.Techonology.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Marketing Department", Value = Department.Marketing.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Sales Department", Value = Department.Sales.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Accounts Department", Value = Department.Accounts.ToString(), Selected = false }));
+
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                return lsEN;
+            else
+                return lsVN;
+
+        }
         public ActionResult Register()
         {
+            if (User.Identity.Name != "")
+            {
+                List<SelectListItem> lsEN = new List<SelectListItem>();
+                List<SelectListItem> lsVN = new List<SelectListItem>();
 
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+                lsVN.Add((new SelectListItem { Text = "Ban giám đốc", Value = Department.Managers.ToString(), Selected = true }));
+                lsVN.Add((new SelectListItem { Text = "Phòng kỹ thuật", Value = Department.Techonology.ToString(), Selected = false }));
+                lsVN.Add((new SelectListItem { Text = "Phòng marketing", Value = Department.Marketing.ToString(), Selected = false }));
+                lsVN.Add((new SelectListItem { Text = "Phòng kinh doanh", Value = Department.Sales.ToString(), Selected = false }));
+                lsVN.Add((new SelectListItem { Text = "Phòng kế toán", Value = Department.Accounts.ToString(), Selected = false }));
 
-            return View();
+                lsEN.Add((new SelectListItem { Text = "Managers Department", Value = Department.Managers.ToString(), Selected = true }));
+                lsEN.Add((new SelectListItem { Text = "Technology Department", Value = Department.Techonology.ToString(), Selected = false }));
+                lsEN.Add((new SelectListItem { Text = "Marketing Department", Value = Department.Marketing.ToString(), Selected = false }));
+                lsEN.Add((new SelectListItem { Text = "Sales Department", Value = Department.Sales.ToString(), Selected = false }));
+                lsEN.Add((new SelectListItem { Text = "Accounts Department", Value = Department.Accounts.ToString(), Selected = false }));
+                ViewData["Department"] = LoadDataForDropDownList();
+                ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+
+                return View();
+            }
+            return RedirectToAction("Logon", "Account");
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Register(string userName, string email, string password, string confirmPassword)
+        public ActionResult Register(string userName, string email, string password, string confirmPassword,byte department)
         {
-
+            ViewData["Department"] = LoadDataForDropDownList();   
             ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
 
             if (ValidateRegistration(userName, email, password, confirmPassword))
             {
-                if (_accountController.CreateUser(userName, password, email))
+                if (_accountController.CreateUser(userName, password, email,department))
                 {
                     FormsAuth.SignIn(userName, false /* createPersistentCookie */);
                     return RedirectToAction("IndexForNews", "NguyenHiep");
@@ -118,10 +159,12 @@ namespace NGUYENHIEP.Controllers
         [Authorize]
         public ActionResult ChangePassword()
         {
-
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-
-            return View();
+            if (User.Identity.Name != "")
+            {
+                ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
+                return View();        
+            }
+            return RedirectToAction("Logon", "Account");
         }
 
         [Authorize]
@@ -177,19 +220,16 @@ namespace NGUYENHIEP.Controllers
         {
             if (String.IsNullOrEmpty(currentPassword))
             {
-                ModelState.AddModelError("currentPassword", "You must specify a current password.");
+                ModelState.AddModelError("currentPassword", Resources.Global.ValidatePassword);
             }
             if (newPassword == null || newPassword.Length < MembershipService.MinPasswordLength)
             {
-                ModelState.AddModelError("newPassword",
-                    String.Format(CultureInfo.CurrentCulture,
-                         "You must specify a new password of {0} or more characters.",
-                         MembershipService.MinPasswordLength));
+                ModelState.AddModelError("newPassword",Resources.Global.WarningPasswordLength);
             }
 
             if (!String.Equals(newPassword, confirmPassword, StringComparison.Ordinal))
             {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
+                ModelState.AddModelError("confirmPassword", Resources.Global.ValidatePasswordConfirmPassword);
             }
 
             return ModelState.IsValid;
@@ -199,15 +239,16 @@ namespace NGUYENHIEP.Controllers
         {
             if (String.IsNullOrEmpty(userName))
             {
-                ModelState.AddModelError("username", "You must specify a username.");
+                ModelState.AddModelError("username", Resources.Global.ValidateUserName);
             }
             if (String.IsNullOrEmpty(password))
             {
-                ModelState.AddModelError("password", "You must specify a password.");
+                ModelState.AddModelError("password",Resources.Global.ValidatePassword);
             }
+
             if (!_accountController.ValidateUser(userName, password))
             {
-                ModelState.AddModelError("_FORM", "The username or password provided is incorrect.");
+                ModelState.AddModelError("_FORM", Resources.Global.WarningLogonUnssucessful);
             }
 
             return ModelState.IsValid;
@@ -217,62 +258,29 @@ namespace NGUYENHIEP.Controllers
         {
             if (String.IsNullOrEmpty(userName))
             {
-                ModelState.AddModelError("username", "You must specify a username.");
+                ModelState.AddModelError("username", Resources.Global.ValidateUserName);
             }
             if (String.IsNullOrEmpty(email))
             {
-                ModelState.AddModelError("email", "You must specify an email address.");
+                ModelState.AddModelError("email",Resources.Global.ValidateEmail);
             }
             if (password == null || password.Length < MembershipService.MinPasswordLength)
             {
-                ModelState.AddModelError("password",
-                    String.Format(CultureInfo.CurrentCulture,
-                         "You must specify a password of {0} or more characters.",
-                         MembershipService.MinPasswordLength));
+                ModelState.AddModelError("password",Resources.Global.WarningPasswordLength);
             }
             if (!String.Equals(password, confirmPassword, StringComparison.Ordinal))
             {
-                ModelState.AddModelError("_FORM", "The new password and confirmation password do not match.");
+                ModelState.AddModelError("_FORM", Resources.Global.ValidatePasswordConfirmPassword);
+            }
+            if (_accountController.DuplicateUsername(userName))
+            {
+                ModelState.AddModelError("username", Resources.Global.ValidateDuplicateUserName);
+            }
+            if (_accountController.DuplicateEmail(email))
+            {
+                ModelState.AddModelError("email", Resources.Global.ValidateDuplicateEmail);
             }
             return ModelState.IsValid;
-        }
-
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // See http://msdn.microsoft.com/en-us/library/system.web.security.membershipcreatestatus.aspx for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "Username already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A username for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
         }
         #endregion
 
@@ -324,15 +332,32 @@ namespace NGUYENHIEP.Controllers
         public NguyenHiepAccountController()
         { 
         }
+
+        public bool DuplicateUsername(string username)
+        {
+            return _nguyenHiepService.DuplicateUsername(username);
+        }
+
+        public bool DuplicateEmail(string email)
+        {
+            return _nguyenHiepService.DuplicateEmail(email);
+        }
+        
         public bool ValidateUser(string userName, string password)
         {
             return _nguyenHiepService.Logon(userName, KeyGeneration.EncryptString(INPUT_TEXT, password));
         }
-        public bool CreateUser(string userName, string password, string email)
+        public void Logoff()
+        {
+            _nguyenHiepService.Logoff();
+        }
+        public bool CreateUser(string userName, string password, string email,byte department)
         {
             tblUser user = new tblUser();
             user.ID = Guid.NewGuid();
             user.UserName = userName;
+            user.Email = email;
+            user.Department = department;
             //user.Email = email;
             user.Password = KeyGeneration.EncryptString(INPUT_TEXT, password);          
             return _nguyenHiepService.InsertUser(user);
