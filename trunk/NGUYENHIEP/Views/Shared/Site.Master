@@ -64,8 +64,66 @@
                         </div>
                     </div>
                 </div>
+                
                 <div id="mainColunmLeft" class="clear">
-                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="LeftMenu" runat="server"></asp:ContentPlaceHolder>
+                   <%
+                       if (HttpContext.Current.Session["UserName"] != null)
+                           LoginPanelLeft.Visible = true;
+                       else
+                           LoginPanelLeft.Visible = false;
+                    %>
+
+                   <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server"> 
+                  <div id="LoginPanel">
+                        <div class="mainMnuLeftTOp">
+                            <div class="mainMnuLeftBtom">
+                                <div class="mainMnuContent">
+                                    <div class="barTabMnu">
+                                        <div class="barTabMnuLeft">
+                                            <div class="barTabMnuRight">
+                                                <div class="ctentBarTab">
+                                                    <%=Resources.Global.LoginInfo %>        
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="contentMnu">
+                                        <div>
+                                                <table>
+                                                            <tr>
+                                                            <td>
+                                                                <%=Resources.Global.LogonBy %>:
+                                                            </td>
+                                                            <td>
+                                                                <%=HttpContext.Current.Session["UserName"]%>
+                                                            </td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td colspan=2>
+                                                                <a href="<%= Url.Content("~/Account/Register/")%>"><%=Resources.Global.CreateAccount %></a>
+                                                            </td>
+                                                            </tr>
+                                                             <tr>
+                                                            <td colspan=2>
+                                                                    <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>   
+                                                            </td>
+                                                            </tr>
+                                                            <tr>
+                                                            <td colspan=2>
+                                                                    <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>   
+                                                            </td>
+                                                            </tr>
+                                                 </table>                           
+                                                 
+                                         </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </asp:ContentPlaceHolder>
                     <div class="boxNews" style="float: none;">
                         <div class="boxNewsTop">
                             <div class="boxNewsBtom">
