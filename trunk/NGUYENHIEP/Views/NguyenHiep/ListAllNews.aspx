@@ -16,8 +16,14 @@
                 <div class="textLeft">
                     <%int counter = 0; %>
                     <% foreach (var item in Model.Items)
-                       { %>
-                    <div class="boxSubTin1">
+                       {
+                           counter++;
+                           if (counter % 2 != 0)
+                               Response.Write("<div class='boxSubTin1'>");%>
+                                
+                           <%else
+                            Response.Write("<div class='boxSubTin1' style='background: transparent none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;'></div>");%>
+                                
                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                           { %>
                         <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
