@@ -51,7 +51,7 @@ namespace NGUYENHIEP.Models
     #endregion
 		
 		public NguyenHiepDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString2"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1394,7 +1394,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_TitleVN", DbType="NVarChar(200)")]
+		[Column(Storage="_TitleVN", DbType="NVarChar(500)")]
 		public string TitleVN
 		{
 			get
@@ -1414,7 +1414,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_TitleEN", DbType="NVarChar(200)")]
+		[Column(Storage="_TitleEN", DbType="NVarChar(500)")]
 		public string TitleEN
 		{
 			get
@@ -1434,7 +1434,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_SubjectVN", DbType="NVarChar(500)")]
+		[Column(Storage="_SubjectVN", DbType="VarChar(1000)")]
 		public string SubjectVN
 		{
 			get
@@ -1454,7 +1454,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_SubjectEN", DbType="VarChar(500)")]
+		[Column(Storage="_SubjectEN", DbType="VarChar(1000)")]
 		public string SubjectEN
 		{
 			get
@@ -1494,7 +1494,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_ContentEN", DbType="VarChar(1000)")]
+		[Column(Storage="_ContentEN", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string ContentEN
 		{
 			get
@@ -1674,7 +1674,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_Image", DbType="NVarChar(MAX)")]
+		[Column(Storage="_Image", DbType="NVarChar(200)")]
 		public string Image
 		{
 			get
@@ -1911,7 +1911,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_Description", DbType="NVarChar(500)")]
+		[Column(Storage="_Description", DbType="NText", UpdateCheck=UpdateCheck.Never)]
 		public string Description
 		{
 			get

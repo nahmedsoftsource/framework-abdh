@@ -129,8 +129,8 @@ namespace NGUYENHIEP.Services.LinqClient
             SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
             if (!isEN)
             {
-                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=@1", type,null);
-                var query = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=@1", type, null).Take(pageSize * page).Skip((page - 1) * pageSize);
+                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=null", type);
+                var query = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=null", type).Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();
@@ -142,8 +142,8 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             else
             {
-                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=@1", type,null);
-                var query = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=@1", type, null).Take(pageSize * page).Skip((page - 1) * pageSize);
+                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=null", type);
+                var query = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=null", type).Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();
@@ -215,18 +215,34 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return false;
         }
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page)
+        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
         {
             SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
-            var query1 = _dataContext.tblProducts;
-            var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null && query.ToList().Count > 0)
+            if (isEN)
             {
-                searchResult.Items = query.ToList();
-                searchResult.Query = query;
-                searchResult.SetMaxResults(pageSize);
-                searchResult.SetPage(page);
-                searchResult.TotalRows = query1.Count();
+                var query1 = _dataContext.tblProducts.Where("ProductNameEN!=null");
+                var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("ProductNameEN!=null");
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
+            }
+            else
+            {
+                var query1 = _dataContext.tblProducts.Where("ProductNameVN!=null");
+                var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("ProductNameVN!=null");
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
             }
             return searchResult;
         }
