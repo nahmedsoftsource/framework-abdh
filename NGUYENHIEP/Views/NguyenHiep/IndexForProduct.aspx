@@ -9,7 +9,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
-        <%Html.RenderPartial("ListCategory",ViewData); %>
+        <%--<%Html.RenderPartial("ListCategory",ViewData); %>--%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">

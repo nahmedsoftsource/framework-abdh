@@ -17,7 +17,7 @@
         <%} %>
     
 
-    <%= Html.ValidationSummary("Edit was unsuccessful. Please correct the errors and try again.") %>
+    <%= Html.ValidationSummary() %>
 
   
 
