@@ -549,6 +549,7 @@ namespace NGUYENHIEP.Controllers
         {
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             bool flag = false;
+            bool insert = false;
             if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
             foreach (string inputTagName in Request.Files)
             {
@@ -563,6 +564,7 @@ namespace NGUYENHIEP.Controllers
                         flag = true;
                         tblnew.Image = pathImage;
                         _nguyenHiepService.UpdateNews(tblnew);
+                        insert = false;
                         TempData["NewsID"] = newsID;
                         TempData["Type"] = tblnew.Type;
                         if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
@@ -597,6 +599,7 @@ namespace NGUYENHIEP.Controllers
                     {
                         tblnew.Image = pathImage;
                         _nguyenHiepService.InsertNews(tblnew);
+                        insert = true;
                         TempData["Type"] = tblnew.Type;
                         if (!type.HasValue)
                             type = (byte)NguyenHiep.Common.NewsTypes.News;
@@ -626,9 +629,68 @@ namespace NGUYENHIEP.Controllers
 
             }
            
-            if (!flag)
+            if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image))
             {
                 ModelState.AddModelError("UploadFile", "File Request is not support");
+            }
+            else if (!flag && tblnew != null && !String.IsNullOrEmpty(tblnew.Image))
+            {
+              if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty))
+              {
+                tblnew.ID = Guid.NewGuid();
+                newsID = tblnew.ID;
+                _nguyenHiepService.InsertNews(tblnew);
+                TempData["Type"] = tblnew.Type;
+                if (!type.HasValue)
+                  type = (byte)NguyenHiep.Common.NewsTypes.News;
+                if (type == NguyenHiep.Common.NewsTypes.News)
+                {
+                  return RedirectToAction("IndexForNews");
+                }
+                else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                {
+                  return RedirectToAction("IndexForContruction");
+                }
+                else if (type == NguyenHiep.Common.NewsTypes.HotNew)
+                {
+                  return RedirectToAction("ViewHotNew");
+                }
+                else if (type == NguyenHiep.Common.NewsTypes.Introduction)
+                {
+                  return RedirectToAction("IndexForIntroduction");
+                }
+                else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
+                {
+                  return RedirectToAction("IndexForRecruitment");
+                }
+              }
+              else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
+              {
+                tblnew.ID = (Guid)newsID;
+                _nguyenHiepService.UpdateNews(tblnew);
+                TempData["NewsID"] = newsID;
+                TempData["Type"] = tblnew.Type;
+                if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
+                {
+                  return RedirectToAction("ViewNews");
+                }
+                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
+                {
+                  return RedirectToAction("ViewNews");
+                }
+                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                {
+                  return RedirectToAction("ViewHotNew");
+                }
+                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
+                {
+                  return RedirectToAction("IndexForIntroduction");
+                }
+                else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
+                {
+                  return RedirectToAction("IndexForRecruitment");
+                }
+              }
             }
             List<SelectListItem> lsEN = new List<SelectListItem>();
             List<SelectListItem> lsVN = new List<SelectListItem>();
@@ -779,8 +841,7 @@ namespace NGUYENHIEP.Controllers
 
 
                 ViewData["command"] = "upload";
-                return View(tblnew);
-            }
+            }else
             #endregion
             #region Add
             if (type.HasValue && type.Value == NewsTypes.News)
@@ -926,7 +987,6 @@ namespace NGUYENHIEP.Controllers
             }
             ViewData["AddNews"] = true;
             tblnew = new tblNew();
-            return View(tblnew);
             #endregion
             if (newsID == null)
             {
