@@ -63,8 +63,8 @@
         </tr>
         <tr>
             <td class="l">
-                <label>
-                    <%=Resources.Global.Image %>:</label>
+                <label> <%=Resources.Global.Image %>:</label>
+                <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
             </td>
             <td class="l">
                 <p>
