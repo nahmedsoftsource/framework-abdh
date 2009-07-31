@@ -85,6 +85,20 @@ namespace NGUYENHIEP.Services
             return _da.Logon(userName, password);
         }
 
+        public bool DuplicateUsername(string username)
+        {
+            return _da.DuplicateUsername(username);
+        }
+        
+        public bool DuplicateEmail(string email)
+        {
+            return _da.DuplicateEmail(email);
+        }
+        public void Logoff()
+        {
+           _da.Logoff();
+        }
+
         public tblUser GetUser(String userName,String password)
         {
             return _da.GetUser(userName,password);
