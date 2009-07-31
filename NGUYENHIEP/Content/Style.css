@@ -478,6 +478,25 @@ a.chitiet:hover{
 	text-decoration:underline;
 	background:#BFBFBF
 }
+.noidung {
+    FONT-SIZE: 11pt; FONT-FAMILY: "Arial"
+}
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
 .textLine
 {
     margin:3px 0px 3px 0px;

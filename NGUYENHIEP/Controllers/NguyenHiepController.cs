@@ -25,9 +25,16 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult IndexForNews(int? pageSize, int? page)
         {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
-
-            SearchResult<tblNew> listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
+            }
             return View(listAllNews);
         }
         public ActionResult IndexForRecruitment()
@@ -162,6 +169,14 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult EditNews(Guid? newsID, byte? type)
         {
+            if (type.HasValue)
+            {
+                ViewData["CurrentType"] = type;
+            }
+            else
+            {
+                ViewData["CurrentType"] = NguyenHiep.Common.NewsTypes.News;
+            }
             List<SelectListItem> lsEN = new List<SelectListItem>();
             List<SelectListItem> lsVN = new List<SelectListItem>();
             tblNew tblnew = null;
@@ -572,7 +587,10 @@ namespace NGUYENHIEP.Controllers
             if (newsID != null)
             {
                 tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
-
+                if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
+                {
+                    ViewData["Description"] = tblproduct.Description;
+                }
 
                 return View(tblproduct);
             }
@@ -588,6 +606,17 @@ namespace NGUYENHIEP.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew, byte? type)
         {
+            
+            byte tmpType = 0;
+            if (tblnew.Type.HasValue)
+            {
+                tmpType = (byte)tblnew.Type;
+            }
+            else if (type.HasValue)
+            {
+                tmpType = (byte)type;
+            }
+            ViewData["CurrentType"] = tmpType;
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             bool flag = false;
             bool insert = false;
@@ -597,21 +626,24 @@ namespace NGUYENHIEP.Controllers
                 HttpPostedFileBase file = Request.Files[inputTagName];
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
-                    if (String.IsNullOrEmpty(tblnew.SubjectEN))
+                    if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment)
                     {
-                        ModelState.AddModelError("SubjectEN", "Subject field is required");
-                    }
-                    else if (tblnew.SubjectEN.Length >= 500)
-                    {
-                        ModelState.AddModelError("SubjectEN", "Input no more than 500 characters");
-                    }
-                    if (String.IsNullOrEmpty(tblnew.TitleEN))
-                    {
-                        ModelState.AddModelError("TitleEN", "Title field is required");
-                    }
-                    else if (tblnew.TitleEN.Length >= 250)
-                    {
-                        ModelState.AddModelError("TitleEN", "Input no more than 250 characters");
+                        if (String.IsNullOrEmpty(tblnew.SubjectEN))
+                        {
+                            ModelState.AddModelError("SubjectEN", "Subject field is required");
+                        }
+                        else if (tblnew.SubjectEN.Length >= 500)
+                        {
+                            ModelState.AddModelError("SubjectEN", "Input no more than 500 characters");
+                        }
+                        if (String.IsNullOrEmpty(tblnew.TitleEN))
+                        {
+                            ModelState.AddModelError("TitleEN", "Title field is required");
+                        }
+                        else if (tblnew.TitleEN.Length >= 250)
+                        {
+                            ModelState.AddModelError("TitleEN", "Input no more than 250 characters");
+                        }
                     }
                     if (String.IsNullOrEmpty(tblnew.ContentEN))
                     {
@@ -626,21 +658,24 @@ namespace NGUYENHIEP.Controllers
                 }
                 else
                 {
-                    if (String.IsNullOrEmpty(tblnew.SubjectVN))
+                    if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment)
                     {
-                        ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
-                    }
-                    else if (tblnew.SubjectVN.Length >= 500)
-                    {
-                        ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
-                    }
-                    if (String.IsNullOrEmpty(tblnew.TitleVN))
-                    {
-                        ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
-                    }
-                    else if (tblnew.TitleVN.Length >= 250)
-                    {
-                        ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 250 ký tự");
+                        if (String.IsNullOrEmpty(tblnew.SubjectVN))
+                        {
+                            ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
+                        }
+                        else if (tblnew.SubjectVN.Length >= 500)
+                        {
+                            ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
+                        }
+                        if (String.IsNullOrEmpty(tblnew.TitleVN))
+                        {
+                            ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
+                        }
+                        else if (tblnew.TitleVN.Length >= 250)
+                        {
+                            ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 250 ký tự");
+                        }
                     }
                     if (String.IsNullOrEmpty(tblnew.ContentVN))
                     {
@@ -740,7 +775,7 @@ namespace NGUYENHIEP.Controllers
             }
             else if (!flag && tblnew != null && !String.IsNullOrEmpty(tblnew.Image))
             {
-                if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty))
+                if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
                 {
                     tblnew.ID = Guid.NewGuid();
                     newsID = tblnew.ID;
@@ -769,7 +804,7 @@ namespace NGUYENHIEP.Controllers
                         return RedirectToAction("IndexForRecruitment");
                     }
                 }
-                else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
+                else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
                 {
                     tblnew.ID = (Guid)newsID;
                     _nguyenHiepService.UpdateNews(tblnew);
@@ -944,7 +979,7 @@ namespace NGUYENHIEP.Controllers
                 }
 
 
-
+                
                 ViewData["command"] = "upload";
             }
             else
@@ -1092,7 +1127,7 @@ namespace NGUYENHIEP.Controllers
                 ViewData["Type"] = lsVN;
             }
             ViewData["AddNews"] = true;
-            tblnew = new tblNew();
+            //tblnew = new tblNew();
                 #endregion
             if (newsID == null)
             {

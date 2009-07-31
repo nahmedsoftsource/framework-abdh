@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="NguyenHiep" Class="NguyenHiepDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DUONG-D9EB8AEE5\SQLEXPRESS;Initial Catalog=NguyenHiep;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NguyenHiepConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DUONG-D9EB8AEE5\SQLEXPRESS;Initial Catalog=NguyenHiep;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NguyenHiepConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tblCategory" Member="tblCategories">
     <Type Name="tblCategory">
       <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -64,7 +64,7 @@
       <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TitleVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="TitleEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="SubjectVN" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="SubjectVN" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
       <Column Name="SubjectEN" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
       <Column Name="ContentVN" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="ContentEN" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
