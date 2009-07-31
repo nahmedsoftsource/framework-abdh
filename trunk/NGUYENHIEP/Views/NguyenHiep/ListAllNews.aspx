@@ -16,7 +16,7 @@
                 <div class="textLeft">
                     <%int counter = 0; %>
                     <% foreach (var item in Model.Items)
-                       {
+                       { 
                            counter++;
                            if (counter % 2 != 0)
                                Response.Write("<div class='boxSubTin1'>");%>
@@ -24,32 +24,41 @@
                            <%else
                             Response.Write("<div class='boxSubTin1' style='background: transparent none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;'>");%>
                                 
-                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-                          { %>
-                        <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
-                        <%}
-                          else
-                          { %>
-                        <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
-                        <%} %>
+                        
+                        
                         <%if (!String.IsNullOrEmpty(item.Image))
                           { %>
-                        <div class="clear">
                             <a href="#">
-                                <img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' /></a></div>
+                                <img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' />
+                                </a>
+                        
                         <%} %>
-                        <div class="paddingTb4 bold">
-                            <a class="color1" href="#">
+                        <div class="paddingTb4 bold"> 
+                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                          { %>
+                            <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle;  %>
+                            <%=item.TitleEN %>
+                        <%}else
+                          { %>
+                        <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
+                        <%=item.TitleVN %>
+                                <%} %>
+                        
+                        </div>
+                        <p>
+                            <%--<a class="color1" href="#">--%>
                                 <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                                   { %>
                                 <%=(item.SubjectEN!=null)?item.SubjectEN:Resources.Global.NoSubject%>
+                                <%=item.TitleEN %>
                                 <%}
                                   else
                                   { %>
                                 <%=(item.SubjectVN!=null)?item.SubjectVN:Resources.Global.NoSubject%>
+                                <%=item.TitleVN %>
                                 <%} %>
-                            </a>
-                        </div>
+                            <%--</a>--%>
+                            </p>
                         <div class="textRight fontsize11">
                             <%=Html.ActionLink(Resources.Global.Next, "ViewNews", new { newsID = item.ID,type = NguyenHiep.Common.NewsTypes.News},new {@class="color2"})%>
                         </div>
@@ -57,7 +66,7 @@
                         </div>
                     </div>
                     <% } %>
-                </div>
+                    </div>
             </div>
         </div>
     </div>

@@ -21,8 +21,14 @@
                     	<div class="boxCtentSpCtent">
                         	<div class="textLeft">
                               <div class="paddingTb4 bold"><a class="color2" href="#"></a>
-                                
-                                <%=((Model.ContentVN != null) ? Model.ContentVN : "")%>
+                                <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%=((Model.ContentEN != null) ? Model.ContentEN : "")%>
+                                <%}
+                                  else
+                                  { %>
+                                  <%=((Model.ContentVN != null) ? Model.ContentVN : "")%>
+                                <%} %>
                             </div>
                             <div class="clear"></div>
                         </div>

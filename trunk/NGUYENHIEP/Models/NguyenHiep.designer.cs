@@ -51,7 +51,7 @@ namespace NGUYENHIEP.Models
     #endregion
 		
 		public NguyenHiepDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString2"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["NguyenHiepConnectionString3"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1434,7 +1434,7 @@ namespace NGUYENHIEP.Models
 			}
 		}
 		
-		[Column(Storage="_SubjectVN", DbType="VarChar(1000)")]
+		[Column(Storage="_SubjectVN", DbType="NVarChar(1000)")]
 		public string SubjectVN
 		{
 			get

@@ -44,7 +44,7 @@ namespace NGUYENHIEP.Services.LinqClient
                     query.First().TitleEN = tblnew.TitleEN;
                     query.First().Type = tblnew.Type;
                     query.First().ContentVN = tblnew.ContentVN;
-                    query.First().ContentVN = tblnew.ContentVN;
+                    query.First().ContentEN = tblnew.ContentEN;
                     query.First().Image = tblnew.Image;
                     query.First().PostedBy = tblnew.PostedBy;
                     query.First().SubjectEN = tblnew.SubjectEN;

@@ -30,12 +30,12 @@
         <td>
         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
           { %>
-            <%= Html.TextBox("ProductNameEN", (Model != null && Model.ProductNameEN != null) ? Model.ProductNameEN : "", new { style = "width:80%" })%>
+            <%= Html.TextBox("ProductNameEN", (Model != null && Model.ProductNameEN != null) ? Model.ProductNameEN : "", new { style = "width:100%" })%>
             <%= Html.ValidationMessage("ProductNameEN")%>
             <%}
           else
           { %>
-          <%= Html.TextBox("ProductNameVN", (Model != null && Model.ProductNameVN != null) ? Model.ProductNameVN : "", new { style = "width:80%" })%>
+          <%= Html.TextBox("ProductNameVN", (Model != null && Model.ProductNameVN != null) ? Model.ProductNameVN : "", new { style = "width:100%" })%>
             <%= Html.ValidationMessage("ProductNameVN")%>
             <%} %>
         </td>
@@ -47,7 +47,7 @@
         </td>
         
         <td>
-        <%=Html.TextBox("WarrantyTime", ((Model != null && Model.WarrantyTime != null) ? Model.WarrantyTime : ""), new { style = "width:80%" })%>
+        <%=Html.TextBox("WarrantyTime", ((Model != null && Model.WarrantyTime != null) ? Model.WarrantyTime : ""), new { style = "width:100%" })%>
         <%= Html.ValidationMessage("WarrantyTime")%>
         </td>
         
@@ -58,7 +58,7 @@
         </td>
         
         <td>
-        <%=Html.DropDownList("StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable(), new { style = "width:80%" })%>
+        <%=Html.DropDownList("StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable(), new { style = "width:100%" })%>
         <%= Html.ValidationMessage("StoreStatus")%>
         </td>
         
@@ -69,7 +69,7 @@
         </td>
         
         <td>
-        <%=Html.DropDownList("CategoryID", ((List<SelectListItem>)ViewData["Categories"]).AsEnumerable(), new { style = "width:80%" })%>
+        <%=Html.DropDownList("CategoryID", ((List<SelectListItem>)ViewData["Categories"]).AsEnumerable(), new { style = "width:100%" })%>
         <%= Html.ValidationMessage("CategoryID")%>
         </td>
         
@@ -82,12 +82,12 @@
         <td>
         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
           { %>
-        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "", new { style = "width:80%" })%>VNÐ 
+        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "", new { style = "width:100%" })%>USD 
         <%= Html.ValidationMessage("PriceEN","Value is invalid")%>
         <%}
           else
           { %>
-          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "", new { style = "width:80%" })%>VNÐ 
+          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "", new { style = "width:100%" })%>VNÐ 
         <%= Html.ValidationMessage("PriceVN", "Giá trị nhập không hợp lệ")%>
         <%} %>
         </td>
@@ -99,7 +99,7 @@
         </td>
         
         <td>
-         <%=Html.TextArea("Property", "", new { rows=5, style="width:80%" })%>
+         <%=Html.TextArea("Property",(Model!=null && !String.IsNullOrEmpty(Model.Property))?Model.Property:"", new { rows=5, style="width:100%" })%>
          <%= Html.ValidationMessage("Property")%>
         </td>
       </tr>
@@ -120,11 +120,9 @@
             <label ><%=Resources.Global.Image %>:</label>
         </td>
         <td>
-        <p><input type="file" id="UploadFile" name="UploadFile" size="23"/> </p>
+        <p><input type="file" id="UploadFile" name="UploadFile" style="width:100%"/> </p>
        <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
-                <br />
                 <%=Html.ValidationMessage("Image")%>
-                <br />
       </td>
       <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
         { %>
