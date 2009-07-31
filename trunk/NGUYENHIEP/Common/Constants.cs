@@ -33,4 +33,42 @@ namespace NguyenHiep.Common
         public static int Has = 1;
         public static int NotHas = 2;
     }
+
+    public class Department
+    {
+        public static int Managers = 1;
+        public static int Techonology = 2;
+        public static int Marketing = 3;
+        public static int Sales = 4;
+        public static int Accounts = 5;
+    }
+
+    // Summary:
+    //     Describes the result of a System.Web.Security.Membership.CreateUser(System.String,System.String)
+    //     operation.
+    public class CreateUserStatus
+    {
+        // Summary:
+        //     The user was successfully created.
+        public static byte Success = 0;
+        // Summary:
+        //     The user name was not found in the database.
+        public static byte InvalidUserName = 1;
+        //
+        // Summary:
+        //     The password is not formatted correctly.
+        public static byte InvalidPassword = 2;
+    
+        // Summary:
+        //     The e-mail address is not formatted correctly.
+        public static byte InvalidEmail = 3;
+        //
+        // Summary:
+        //     The user name already exists in the database for the application.
+        public static byte DuplicateUserName =4;
+        //
+        // Summary:
+        //     The e-mail address already exists in the database for the application.
+        public static byte  DuplicateEmail = 5;
+    }
 }
