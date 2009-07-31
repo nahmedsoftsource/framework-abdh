@@ -3,6 +3,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
     <%if (Model != null)
       { %>
+      <div class="barCterTab">
+    <div class="barCterTabLleft">
+        <div class="barCterTabRight">
+            <div style="line-height: 23px;" class="ctentBarTab">
+                <%=Resources.Global.News%>
+            </div>
+        </div>
+    </div>
+</div>
     <div id="mainCtentSpRight">
         <div class="boxCtentSp">
             <div class="boxCtentSpTop">
