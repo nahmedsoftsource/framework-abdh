@@ -63,8 +63,16 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult IndexForProduct(int? pageSize, int? page)
         {
+            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.NormalProduct;
-            SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+            }
             return View(listAllNews);
         }
         public ActionResult ViewNews(Guid? newsID, byte? type)
@@ -136,8 +144,15 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult ListAllProduct(int? pageSize, int? page)
         {
-
-            SearchResult<tblProduct> listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+            }
             return View(listAllNews);
         }
         public ActionResult ListCategory(int? pageSize, int? page)
@@ -594,13 +609,17 @@ namespace NGUYENHIEP.Controllers
                     {
                         ModelState.AddModelError("TitleEN", "Title field is required");
                     }
-                    else if (tblnew.TitleEN.Length >= 200)
+                    else if (tblnew.TitleEN.Length >= 250)
                     {
-                        ModelState.AddModelError("TitleEN", "Input no more than 200 characters");
+                        ModelState.AddModelError("TitleEN", "Input no more than 250 characters");
                     }
                     if (String.IsNullOrEmpty(tblnew.ContentEN))
                     {
                         ModelState.AddModelError("ContentEN", "Content field is required");
+                    }
+                    else if (tblnew.ContentEN.Length >= 4000)
+                    {
+                        ModelState.AddModelError("ContentEN", "Input no more than 4000 characters");
                     }
                     
 
@@ -611,7 +630,7 @@ namespace NGUYENHIEP.Controllers
                     {
                         ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
                     }
-                    else if (tblnew.SubjectVN.Length >= 250)
+                    else if (tblnew.SubjectVN.Length >= 500)
                     {
                         ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
                     }
@@ -619,17 +638,17 @@ namespace NGUYENHIEP.Controllers
                     {
                         ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
                     }
-                    else if (tblnew.TitleVN.Length >= 100)
+                    else if (tblnew.TitleVN.Length >= 250)
                     {
-                        ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 200 ký tự");
+                        ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 250 ký tự");
                     }
                     if (String.IsNullOrEmpty(tblnew.ContentVN))
                     {
                         ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
                     }
-                    else if (tblnew.ContentVN.Length >= 8000)
+                    else if (tblnew.ContentVN.Length >= 4000)
                     {
-                        ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 8000 ký tự");
+                        ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 4000 ký tự");
                     }
                 }
                 if (file != null && file.ContentLength > 0 && newsID != null && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
@@ -1086,9 +1105,86 @@ namespace NGUYENHIEP.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditProduct(Guid? newsID, [Bind(Exclude = "ID,StoreStatus")] tblProduct tblproduct)
         {
+            if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
+            {
+                ViewData["Description"] = tblproduct.Description;
+            }
+            int counter = 0;
+            List<SelectListItem> categories = new List<SelectListItem>();
+            List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
+            List<SelectListItem> storeStatusVN = new List<SelectListItem>();
+            List<SelectListItem> storeStatusEN = new List<SelectListItem>();
+            List<SelectListItem> promotionVN = new List<SelectListItem>();
+            List<SelectListItem> promotionEN = new List<SelectListItem>();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                
+                if (String.IsNullOrEmpty(tblproduct.ProductNameEN))
+                {
+                    ModelState.AddModelError("ProductNameEN", "Product name field is required");
+                }
+                else if (tblproduct.ProductNameEN.Length >= 100)
+                {
+                    ModelState.AddModelError("ProductNameEN", "Input no more than 100 characters");
+                }
+                if (String.IsNullOrEmpty(tblproduct.WarrantyTime) && tblproduct.WarrantyTime.Length >= 25)
+                {
+                    ModelState.AddModelError("WarrantyTime", "Input no more than 25 characters");
+                }
+                if (String.IsNullOrEmpty(tblproduct.Property))
+                {
+                    ModelState.AddModelError("Property", "Property field is required");
+                }
+                else if (tblproduct.Property.Length > 250)
+                {
+                    ModelState.AddModelError("Property", "Input no more than 250 characters");
+                }
+                if (String.IsNullOrEmpty(tblproduct.Description))
+                {
+                    ModelState.AddModelError("Description", "Description field is required");
+                }
+                else if (tblproduct.Description.Length > 4000)
+                {
+                    ModelState.AddModelError("Description", "Input no more than 4000 characters");
+                }
+
+
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(tblproduct.ProductNameVN))
+                {
+                    ModelState.AddModelError("ProductNameVN", "Cần nhập tên sản phẩm");
+                }
+                else if (tblproduct.ProductNameVN.Length >= 100)
+                {
+                    ModelState.AddModelError("ProductNameVN", "Không nhập quá 100 ký tự");
+                }
+                if (String.IsNullOrEmpty(tblproduct.WarrantyTime) && tblproduct.WarrantyTime.Length >= 25)
+                {
+                    ModelState.AddModelError("WarrantyTime", "Không nhập quá 25 ký tự");
+                }
+                if (String.IsNullOrEmpty(tblproduct.Property))
+                {
+                    ModelState.AddModelError("Property", "Cần mô tả ngắn gọn");
+                }
+                else if (tblproduct.Property.Length > 250)
+                {
+                    ModelState.AddModelError("Property", "Không nhập quá 250 ký tự");
+                }
+                if (String.IsNullOrEmpty(tblproduct.Description))
+                {
+                    ModelState.AddModelError("Description", "Cần nhập chi tiết ");
+                }
+                else if (tblproduct.Description.Length > 4000)
+                {
+                    ModelState.AddModelError("Description", "Không nhập quá 4000 ký tự");
+                }
+            }
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             bool flag = false;
             if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+
             foreach (string inputTagName in Request.Files)
             {
                 HttpPostedFileBase file = Request.Files[inputTagName];
@@ -1103,14 +1199,69 @@ namespace NGUYENHIEP.Controllers
                         tblproduct.Image = pathImage;
 
                     }
-                    if (tblproduct.Image == null)
+                    if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
                     {
-                        tblproduct.Image = Request["Image"];
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                        }
                     }
+                    if (ModelState.IsValid)
+                    {
+                        _nguyenHiepService.UpdateProduct(tblproduct);
+                        TempData["ProductID"] = newsID;
+                        return RedirectToAction("ViewProduct");
+                    }
+                    else
+                    {
+                        counter = 0;
+                        foreach (tblCategory cat in listCategory)
+                        {
+                            if (counter == 0)
+                            {
+                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                            }
+                            else
+                            {
+                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                            }
+                            counter++;
+                        }
+                        storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
+                        storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
+                        storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
+                        storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
 
-                    _nguyenHiepService.UpdateProduct(tblproduct);
-                    TempData["ProductID"] = newsID;
-                    return RedirectToAction("ViewProduct");
+
+                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
+                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+
+                        promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
+                        promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            ViewData["StoreStatus"] = storeStatusEN;
+
+                            ViewData["Promotion"] = promotionEN;
+                        }
+                        else
+                        {
+                            ViewData["Promotion"] = promotionVN;
+                            ViewData["StoreStatus"] = storeStatusVN;
+                        }
+
+
+                        ViewData["Categories"] = categories;
+                        if (newsID == null)
+                        {
+                            ViewData["AddNews"] = true;
+                        }
+                        return View(tblproduct);
+                    }
                 }
                 else if ((newsID == null || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
                 {
@@ -1123,20 +1274,78 @@ namespace NGUYENHIEP.Controllers
                         tblproduct.Image = pathImage;
 
                     }
-                    _nguyenHiepService.InsertProduct(tblproduct);
-                    return RedirectToAction("IndexForProduct");
+                    if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
+                    {
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                        }
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        _nguyenHiepService.InsertProduct(tblproduct);
+                        return RedirectToAction("IndexForProduct");
+                    }
+                    else 
+                    {
+                        
+                        counter = 0;
+                        foreach (tblCategory cat in listCategory)
+                        {
+                            if (counter == 0)
+                            {
+                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                            }
+                            else
+                            {
+                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                            }
+                            counter++;
+                        }
+                        storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
+                        storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
+                        storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
+                        storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
+
+
+                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
+                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+
+                        promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
+                        promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            ViewData["StoreStatus"] = storeStatusEN;
+
+                            ViewData["Promotion"] = promotionEN;
+                        }
+                        else
+                        {
+                            ViewData["Promotion"] = promotionVN;
+                            ViewData["StoreStatus"] = storeStatusVN;
+                        }
+
+
+                        ViewData["Categories"] = categories;
+                        if (newsID == null)
+                        {
+                            ViewData["AddNews"] = true;
+                        }
+                        return View(tblproduct);
+                    }
+                    
 
                 }
 
             }
-
-            if (!flag)
-            {
-                ModelState.AddModelError("UploadFile", "File Request is not support");
-            }
-            List<SelectListItem> categories = new List<SelectListItem>();
-            List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
-            int counter = 0;
+            
+            
+            
+            counter = 0;
             foreach (tblCategory cat in listCategory)
             {
                 if (counter == 0)
@@ -1149,19 +1358,19 @@ namespace NGUYENHIEP.Controllers
                 }
                 counter++;
             }
-            List<SelectListItem> storeStatusVN = new List<SelectListItem>();
+            
             storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
             storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
-            List<SelectListItem> storeStatusEN = new List<SelectListItem>();
+            
             storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
             storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
 
 
-            List<SelectListItem> promotionVN = new List<SelectListItem>();
+            
             promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
             promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
 
-            List<SelectListItem> promotionEN = new List<SelectListItem>();
+            
             promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
             promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")

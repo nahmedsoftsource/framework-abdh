@@ -17,7 +17,7 @@
         <%} %>
     
 
-    <%= Html.ValidationSummary() %>
+    <%--<%= Html.ValidationSummary() %>--%>
 
   
 
@@ -28,8 +28,16 @@
         </td>
         
         <td>
-            <%= Html.TextBox("ProductNameVN",(Model != null && Model.ProductNameVN != null)?Model.ProductNameVN:"", new { style = "width:80%" })%>
-            <%= Html.ValidationMessage("ProductNameVN", "Value is invalid")%>
+        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+          { %>
+            <%= Html.TextBox("ProductNameEN", (Model != null && Model.ProductNameEN != null) ? Model.ProductNameEN : "", new { style = "width:80%" })%>
+            <%= Html.ValidationMessage("ProductNameEN")%>
+            <%}
+          else
+          { %>
+          <%= Html.TextBox("ProductNameVN", (Model != null && Model.ProductNameVN != null) ? Model.ProductNameVN : "", new { style = "width:80%" })%>
+            <%= Html.ValidationMessage("ProductNameVN")%>
+            <%} %>
         </td>
     </tr>
     
@@ -40,7 +48,7 @@
         
         <td>
         <%=Html.TextBox("WarrantyTime", ((Model != null && Model.WarrantyTime != null) ? Model.WarrantyTime : ""), new { style = "width:80%" })%>
-        
+        <%= Html.ValidationMessage("WarrantyTime")%>
         </td>
         
      </tr>
@@ -51,6 +59,7 @@
         
         <td>
         <%=Html.DropDownList("StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable(), new { style = "width:80%" })%>
+        <%= Html.ValidationMessage("StoreStatus")%>
         </td>
         
      </tr>
@@ -61,6 +70,7 @@
         
         <td>
         <%=Html.DropDownList("CategoryID", ((List<SelectListItem>)ViewData["Categories"]).AsEnumerable(), new { style = "width:80%" })%>
+        <%= Html.ValidationMessage("CategoryID")%>
         </td>
         
      </tr>
@@ -70,8 +80,16 @@
         </td>
         
         <td>
-        <%=Html.TextBox("PriceVN", "", new  {style="width:80%" })%>VNÐ 
-        <%= Html.ValidationMessage("PriceVN", "Value is invalid")%>
+        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+          { %>
+        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "", new { style = "width:80%" })%>VNÐ 
+        <%= Html.ValidationMessage("PriceEN","Value is invalid")%>
+        <%}
+          else
+          { %>
+          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "", new { style = "width:80%" })%>VNÐ 
+        <%= Html.ValidationMessage("PriceVN", "Giá trị nhập không hợp lệ")%>
+        <%} %>
         </td>
         
      </tr>
@@ -82,6 +100,7 @@
         
         <td>
          <%=Html.TextArea("Property", "", new { rows=5, style="width:80%" })%>
+         <%= Html.ValidationMessage("Property")%>
         </td>
       </tr>
      <tr>
@@ -91,18 +110,21 @@
         
         <td>
         <%=Html.FckTextBox("Description")%>
+        <%= Html.ValidationMessage("Description")%>
         </td>
         
      </tr>
     
     <tr>
         <td>
-            <%=Html.Hidden("ImageBackup",(Model != null && Model.Image!=null)?Model.Image:"") %>
             <label ><%=Resources.Global.Image %>:</label>
         </td>
         <td>
         <p><input type="file" id="UploadFile" name="UploadFile" size="23"/> </p>
-       
+       <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
+                <br />
+                <%=Html.ValidationMessage("Image")%>
+                <br />
       </td>
       <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
         { %>

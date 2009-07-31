@@ -58,9 +58,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetAllCategory(pageSize, page);
         }
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page)
+        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
         {
-            return _da.GetAllProduct(pageSize, page);
+            return _da.GetAllProduct(pageSize, page,isEN);
         }
         public void UpdateNews(tblNew tblnew)
         {
