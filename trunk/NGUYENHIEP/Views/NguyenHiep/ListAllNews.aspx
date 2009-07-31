@@ -18,23 +18,23 @@
                     <% foreach (var item in Model.Items)
                        { %>
                     <div class="boxSubTin1">
-                    <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-                                  { %>
-                                <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
-                                <%}
-                                  else
-                                  { %>
+                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                          { %>
+                        <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
+                        <%}
+                          else
+                          { %>
                         <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
-                                <%} %>
-                        
+                        <%} %>
                         <%if (!String.IsNullOrEmpty(item.Image))
                           { %>
-                        <a href="#">
-                            <img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' /></a>
+                        <div class="clear">
+                            <a href="#">
+                                <img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' /></a></div>
                         <%} %>
                         <div class="paddingTb4 bold">
                             <a class="color1" href="#">
-                            <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                                   { %>
                                 <%=(item.SubjectEN!=null)?item.SubjectEN:Resources.Global.NoSubject%>
                                 <%}
@@ -42,7 +42,6 @@
                                   { %>
                                 <%=(item.SubjectVN!=null)?item.SubjectVN:Resources.Global.NoSubject%>
                                 <%} %>
-                                
                             </a>
                         </div>
                         <div class="textRight fontsize11">
@@ -50,8 +49,8 @@
                         </div>
                         <div class="clear">
                         </div>
-                        <% } %>
                     </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -59,23 +58,23 @@
 </div>
 <div class="prevNext">
     <%=
-          NguyenHiep.Utility.PagerExtensions.AjaxPager
-          (this.Html,
-            new NguyenHiep.Utility.Pager.PagingOption
-            {
-              CurrentPage = Model.GetPage(),
-              PageSize = Model.GetMaxResults(),
-              TotalRows = Model.TotalRows,
-              //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
+        NguyenHiep.Utility.PagerExtensions.AjaxPager
+              (this.Html,
+                new NguyenHiep.Utility.Pager.PagingOption
+                {
+                  CurrentPage = Model.GetPage(),
+                  PageSize = Model.GetMaxResults(),
+                  TotalRows = Model.TotalRows,
+                  //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
+                  UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
 
-            },
-            new NguyenHiep.Utility.Pager.AjaxPaginationOption
-            {
-                HtmlID = "ListAllNewsID"
-              ,
-            }
-          )
+                },
+                new NguyenHiep.Utility.Pager.AjaxPaginationOption
+                {
+                    HtmlID = "ListAllNewsID"
+                  ,
+                }
+            )
     %>
 </div>
 <span style="float: right">
