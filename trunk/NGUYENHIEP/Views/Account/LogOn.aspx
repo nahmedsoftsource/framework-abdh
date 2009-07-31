@@ -4,26 +4,27 @@
     	<div class="barCterTabLleft">
         	<div class="barCterTabRight">
             	<div style="line-height:23px;" class="ctentBarTab">
-                	Thông tin &#273;&#259;ng nh&#7853;p
+                	<%=Resources.Global.Logon %>
                 </div>
 
             </div>
         </div>
     </div>
     
-    <p>
+<%-- <p>
         Nh&#7853;p username và password &#273;&#7875; &#273;&#259;ng nh&#7853;p vào h&#7879; th&#7889;ng. <%= Html.ActionLink("DangKi", "Register") %> N&#7871;u b&#7841;n ch&#432;a có tài kh&#7887;an.
-    </p>
-    <%= Html.ValidationSummary("") %>
+    </p> 
+--%>    
+<%= Html.ValidationSummary("") %>
 
     <% using (Html.BeginForm()) { %>
         <div>
             <fieldset>
-                <legend>Thông tin &#273;&#259;ng nh&#7853;p</legend>
+                <legend><%=Resources.Global.AccountInfor %></legend>
                     <table width="100%">
                         <tr>
-                            <td width:"20%" style="width: 131px">
-                                <label for="username">Username:</label>
+                            <td width:"20%" style="width: 165px">
+                                <label for="username"><%=Resources.Global.UserName %></label>
                             </td>
                             
                             <td>
@@ -32,17 +33,28 @@
                             </td>
                         </tr>
                        <tr>
-                            <td width:"20%" style="width: 131px">
-                                <label for="password">Password :</label>
+                            <td width:"20%" style="width: 165px">
+                                <label for="password"><%=Resources.Global.Password %></label>
                             </td>                           
                             <td>
                                 <%= Html.Password("password") %>
                                 <%= Html.ValidationMessage("password") %>
                             </td>
                         </tr>
+
+                       <tr>
+                            <td width:"20%" style="width: 165px">
+                                <%= Html.CheckBox("rememberMe") %> <label class="inline" for="rememberMe"><%=Resources.Global.RememberPassword %>?</label>
+                            </td>                           
+                            <td>
+                                 <input type="submit" value="<%=Resources.Global.Logon %>" />
+                            </td>
+                        </tr>
+                        
+                                                
                         </table>
-                    <%= Html.CheckBox("rememberMe") %> <label class="inline" for="rememberMe">Nh&#7899; tôi?</label>
-                    <input type="submit" value="Log On" />
+                    
+                    
             </fieldset>
         </div>
     <% } %>
