@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using NGUYENHIEP.Models;
@@ -1830,6 +1832,28 @@ namespace NGUYENHIEP.Controllers
                 //Step 2: Send Email
                 tblUser user = new tblUser();
                 user = _nguyenHiepService.GetUserByDepartment(byte.Parse(Request["department"].ToString()));
+                /*Hung implement sending mail by SMTP via google*/
+                #region Send mail
+                //set up SMTP client
+                SmtpClient smpt = new SmtpClient("smtp.gmail.com", 587);
+                string mailFromAccount = "duchungpham12d2@gmail.com";
+                string mailFromPass = "nho12d2";
+                NetworkCredential cred = new NetworkCredential(mailFromAccount, mailFromPass);
+                smpt.Credentials = cred; 
+                smpt.EnableSsl = true;
+                smpt.UseDefaultCredentials = false;
+                smpt.Timeout = 20000;
+                smpt.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                //Build up email message
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("duchungpham12d2@gmail.com", "Nguyen Hiep site Admin");
+                mail.To.Add("bryanpham85@hotmail.com");
+                mail.Subject = email.Title;
+                mail.Body = String.Format("Sent from: {0}\n Date: {1}\n From email address: {2}\n Person in charge: {3}\n\n Content detail:\n {4}",
+                                            email.Sender, email.SendDate, email.Email, email.SendTo, email.Content);
+                smpt.Send(mail);
+                #endregion Send mail
                 ViewData["Message"] = "Send successful!";
             }
             else
