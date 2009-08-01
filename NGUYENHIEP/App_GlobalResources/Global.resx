@@ -312,11 +312,17 @@
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Xác nhận mật khẩu</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Tạo</value>
+  </data>
   <data name="CreateAccount" xml:space="preserve">
     <value>Tạo mới tài khỏan</value>
   </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Mật khẩu hiện tại</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Phòng</value>
   </data>
   <data name="EmptyInStore" xml:space="preserve">
     <value>Trong kho hết hàng</value>
