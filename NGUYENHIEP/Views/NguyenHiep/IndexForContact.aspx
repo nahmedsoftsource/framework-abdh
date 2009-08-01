@@ -22,6 +22,7 @@
                                 document.getElementById('ListCategoryID').innerHTML = msg
                                 if (document.layers) {
                                     alert(document.getElementById('ListCategoryID').innerHTML);
+                                    document.getElementById('ListCategoryID').className="mainMnuLeft";
                                     document.getElementById('ListCategoryID').open();
                                     document.getElementById('ListCategoryID').write(msg);
                                     document.getElementById('ListCategoryID').close();

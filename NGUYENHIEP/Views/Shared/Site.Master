@@ -4,15 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title><%=Html.Encode(ViewData["Title"]) %></title>
+    <title>
+        <%=Html.Encode(ViewData["Title"]) %></title>
     <%--<link href='<%=Url.Content( "~/Content/Style.css" %>'  rel="stylesheet" type="text/css" />--%>
-    <link href="~/Content/Style.css"   rel="stylesheet" type="text/css" />
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
+
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>
-<%--    <script type="text/javascript" src="../../Scripts/jquery-1.3.2.min-vsdoc.js"></script>
+
+    <%--    <script type="text/javascript" src="../../Scripts/jquery-1.3.2.min-vsdoc.js"></script>
      <script type="text/javascript" src="../../Scripts/MicrosoftAjax.js"></script>
      <script type="text/javascript" src="../../Scripts/MicrosoftMvcAjax.js"></script>--%>
+
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
+
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
+
     <script type="text/javascript" language="javascript">
         $(document).ready
         (function()
@@ -26,6 +32,7 @@
             }
         );
     </script>
+
 </head>
 <body>
     <div id="mainBdy">
@@ -50,96 +57,97 @@
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
                             <ul id="TopMenuTab">
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span><%=Resources.Global.Home %></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.News%></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span><%=Resources.Global.OurProducts %></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span><%=Resources.Global.Recruitment%></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span><%=Resources.Global.ConstructionImages %></span></a></li>
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContact/")%>"><span><%=Resources.Global.ContactUs %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span>
+                                    <%=Resources.Global.Home %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span>
+                                    <%=Resources.Global.AboutUs %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span>
+                                    <%=Resources.Global.News%></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span>
+                                    <%=Resources.Global.OurProducts %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForRecruitment/")%>"><span>
+                                    <%=Resources.Global.Recruitment%></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span>
+                                    <%=Resources.Global.ConstructionImages %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContact/")%>"><span>
+                                    <%=Resources.Global.ContactUs %></span></a></li>
                             </ul>
                             <div class="boxLanguage">
-                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
+                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a>
+                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
                 <div id="mainColunmLeft" class="clear">
-                <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
-                
-                </asp:ContentPlaceHolder>
-                   <%
-                       if (HttpContext.Current.Session["UserName"] != null)
-                           LoginPanelLeft.Visible = true;
-                       else
-                           LoginPanelLeft.Visible = false;
+                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <%
+                        if (HttpContext.Current.Session["UserName"] != null)
+                            LoginPanelLeft.Visible = true;
+                        else
+                            LoginPanelLeft.Visible = false;
                     %>
-                    
-                    
-                    
-                   <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server"> 
-                  <div id="LoginPanel">
-                        <div class="mainMnuLeftTOp">
-                            <div class="mainMnuLeftBtom">
-                                <div class="mainMnuContent">
-                                    <div class="barTabMnu">
-                                        <div class="barTabMnuLeft">
-                                            <div class="barTabMnuRight">
-                                                <div class="ctentBarTab">
-                                                    <%=Resources.Global.LoginInfo %>        
+                    <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server">
+                        <div id="LoginPanel">
+                            <div id="mainMnuLeft">
+                                <div class="mainMnuLeftTOp">
+                                    <div class="mainMnuLeftBtom">
+                                        <div class="mainMnuContent">
+                                            <div class="barTabMnu">
+                                                <div class="barTabMnuLeft">
+                                                    <div class="barTabMnuRight">
+                                                        <div class="ctentBarTab">
+                                                            <%=Resources.Global.LoginInfo %>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="contentMnu">
-                                        <div>
-                                                <table>
-                                                            <tr>
+                                            <div class="contentMnu">
+                                                <div>
+                                                    <table>
+                                                        <tr>
                                                             <td>
                                                                 <%=Resources.Global.LogonBy %>:
                                                             </td>
                                                             <td>
                                                                 <%=HttpContext.Current.Session["UserName"]%>
                                                             </td>
-                                                            </tr>
-                                                            <tr>
-                                                            <td colspan=2>
-                                                                <a href="<%= Url.Content("~/Account/Register/")%>"><%=Resources.Global.CreateAccount %></a>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <a href="<%= Url.Content("~/Account/Register/")%>">
+                                                                    <%=Resources.Global.CreateAccount %></a>
                                                             </td>
-                                                            </tr>
-                                                             <tr>
-                                                            <td colspan=2>
-                                                                    <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>   
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>
                                                             </td>
-                                                            </tr>
-                                                            <tr>
-                                                            <td colspan=2>
-                                                                    <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>   
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>
                                                             </td>
-                                                            </tr>
-                                                 </table>                           
-                                                 
-                                         </div>
-                                       
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                  </asp:ContentPlaceHolder>
-                    
+                    </asp:ContentPlaceHolder>
                     <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server">
                     </asp:ContentPlaceHolder>
-                    
                     <div class="lienketweb  clear">
                         <div style="padding-top: 10px;" class="bold color2 textLeft">
                             <%=Resources.Global.LinkedWebsites %>
                         </div>
                         <div class="paddingTb4">
                             <select style="width: 208px; height: 20px;" onchange="javascript:window.open(this.value, '_newtab', 'location=yes,resizable=yes,scrollbars=yes,menubar=yes,toolbar=yes');">
-                                <option selected="selected" value="http://www.dantri.com.vn" >Dantri.com.vn</a></option>
+                                <option selected="selected" value="http://www.dantri.com.vn">Dantri.com.vn</a></option>
                                 <option selected="selected" value="http://vnexpress.net">Vnexpress.net</option>
                                 <option selected="selected" value="http://www.tuoitre.com.vn">Tuoitre.com.vn</option>
                             </select>
@@ -164,7 +172,7 @@
                     </div>
                     <div class="boxQcLeft">
                         <a href="#">
-                            <img  src='<%= Url.Content("~/Content/images/index1_116.jpg")%>'  /></a>
+                            <img src='<%= Url.Content("~/Content/images/index1_116.jpg")%>' /></a>
                     </div>
                 </div>
                 <div id="mainColunmRight">
@@ -193,7 +201,7 @@
                                         </div>
                                         <div class="clear" id="test">
                                             <asp:ContentPlaceHolder ID="RiightNewsEvent" runat="server">
-                                            <%--<%=NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "test", "San Pham", ((new UrlHelper(ViewContext.RequestContext)).Action("ListAllCategory") + "?pageSize=" + ((int)NguyenHiep.Common.Constants.DefautPagingSize).ToString() + "&page=1"))%>--%>
+                                                <%--<%=NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "test", "San Pham", ((new UrlHelper(ViewContext.RequestContext)).Action("ListAllCategory") + "?pageSize=" + ((int)NguyenHiep.Common.Constants.DefautPagingSize).ToString() + "&page=1"))%>--%>
                                             </asp:ContentPlaceHolder>
                                         </div>
                                     </div>
@@ -205,9 +213,9 @@
                     </div>
                     <div id="mainCtentSpRight">
                         <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
-                                        </asp:ContentPlaceHolder>
+                        </asp:ContentPlaceHolder>
                         <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
-                    </asp:ContentPlaceHolder>
+                        </asp:ContentPlaceHolder>
                     </div>
                 </div>
                 <div class="clear">
