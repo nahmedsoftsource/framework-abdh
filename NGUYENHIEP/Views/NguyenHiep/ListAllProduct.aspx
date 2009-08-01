@@ -23,7 +23,14 @@
                             <a href="#">
                                 <img src='<%= Url.Content("~"+item.Image)%>' /></a></div>
                         <div class="paddingTb4 paddingLr18px bold">
-                            <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                          { %>
+                            <%=Html.ActionLink(item.ProductNameEN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                            <%}
+                          else
+                          { %>
+                          <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                            <%} %>
                         </div>
                         <div class="clear">
                         </div>

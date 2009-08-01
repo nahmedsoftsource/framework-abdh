@@ -17,13 +17,20 @@
                     <%int counter = 0; %>
                     <% foreach (var item in Model.Items)
                        { %>
-                    <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
+                      
+                    <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle; %>
+                    
                     <div class="subSp">
                         <div class="clear">
                             <a href="#">
                                 <img src='<%= Url.Content("~"+ (!String.IsNullOrEmpty(item.Image)?item.Image:""))%>' /></a></div>
                         <div class="paddingTb4 paddingLr18px bold">
+                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                          { %>
+                            <%=Html.ActionLink(item.TitleEN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
+                            <%}else{ %>
                             <%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
+                            <%} %>
                         </div>
                         <div class="clear">
                         </div>

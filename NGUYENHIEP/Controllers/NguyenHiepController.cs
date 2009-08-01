@@ -45,11 +45,20 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult IndexForContact()
         {
-            tblInformation contact = _nguyenHiepService.GetInformation();
+            tblInformation contact = new tblInformation();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                contact = _nguyenHiepService.GetInformation(true);
+            }
+            else
+            {
+                contact = _nguyenHiepService.GetInformation(false);
+            }
             return View(contact);
         }
         public ActionResult IndexForIntroduction()
         {
+            
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Introduction;
             tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
             return View(introduction);
@@ -320,7 +329,7 @@ namespace NGUYENHIEP.Controllers
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
                     ViewData["Type"] = lsEN;
-                    ViewData["ContentVN"] = tblnew.ContentEN;
+                    ViewData["ContentEN"] = tblnew.ContentEN;
                 }
                 else
                 {
@@ -626,25 +635,24 @@ namespace NGUYENHIEP.Controllers
                 HttpPostedFileBase file = Request.Files[inputTagName];
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
-                    if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment)
+                    
+                    if (String.IsNullOrEmpty(tblnew.SubjectEN))
                     {
-                        if (String.IsNullOrEmpty(tblnew.SubjectEN))
-                        {
-                            ModelState.AddModelError("SubjectEN", "Subject field is required");
-                        }
-                        else if (tblnew.SubjectEN.Length >= 500)
-                        {
-                            ModelState.AddModelError("SubjectEN", "Input no more than 500 characters");
-                        }
-                        if (String.IsNullOrEmpty(tblnew.TitleEN))
-                        {
-                            ModelState.AddModelError("TitleEN", "Title field is required");
-                        }
-                        else if (tblnew.TitleEN.Length >= 250)
-                        {
-                            ModelState.AddModelError("TitleEN", "Input no more than 250 characters");
-                        }
+                        ModelState.AddModelError("SubjectEN", "Subject field is required");
                     }
+                    else if (tblnew.SubjectEN.Length >= 500)
+                    {
+                        ModelState.AddModelError("SubjectEN", "Input no more than 500 characters");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.TitleEN))
+                    {
+                        ModelState.AddModelError("TitleEN", "Title field is required");
+                    }
+                    else if (tblnew.TitleEN.Length >= 250)
+                    {
+                        ModelState.AddModelError("TitleEN", "Input no more than 250 characters");
+                    }
+                    
                     if (String.IsNullOrEmpty(tblnew.ContentEN))
                     {
                         ModelState.AddModelError("ContentEN", "Content field is required");
@@ -658,25 +666,24 @@ namespace NGUYENHIEP.Controllers
                 }
                 else
                 {
-                    if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment)
+                    
+                    if (String.IsNullOrEmpty(tblnew.SubjectVN))
                     {
-                        if (String.IsNullOrEmpty(tblnew.SubjectVN))
-                        {
-                            ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
-                        }
-                        else if (tblnew.SubjectVN.Length >= 500)
-                        {
-                            ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
-                        }
-                        if (String.IsNullOrEmpty(tblnew.TitleVN))
-                        {
-                            ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
-                        }
-                        else if (tblnew.TitleVN.Length >= 250)
-                        {
-                            ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 250 ký tự");
-                        }
+                        ModelState.AddModelError("SubjectVN", "Cần nhập chủ đề");
                     }
+                    else if (tblnew.SubjectVN.Length >= 500)
+                    {
+                        ModelState.AddModelError("SubjectVN", "Chủ đề nhập không quá 500 ký tự");
+                    }
+                    if (String.IsNullOrEmpty(tblnew.TitleVN))
+                    {
+                        ModelState.AddModelError("TitleVN", "Cần nhập tiêu đề");
+                    }
+                    else if (tblnew.TitleVN.Length >= 250)
+                    {
+                        ModelState.AddModelError("TitleVN", "Tiêu đề nhập không quá 250 ký tự");
+                    }
+                    
                     if (String.IsNullOrEmpty(tblnew.ContentVN))
                     {
                         ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
@@ -761,75 +768,130 @@ namespace NGUYENHIEP.Controllers
                 }
 
             }
-
-            if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image))
+            if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment && tmpType != NguyenHiep.Common.NewsTypes.Introduction)
             {
-                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image))
                 {
-                    ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                    if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                    {
+                        ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                    }
+                    
                 }
-                else
+                else if (!flag && tblnew != null && !String.IsNullOrEmpty(tblnew.Image))
                 {
-                    ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                    if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+                    {
+                        tblnew.ID = Guid.NewGuid();
+                        newsID = tblnew.ID;
+                        _nguyenHiepService.InsertNews(tblnew);
+                        TempData["Type"] = tblnew.Type;
+                        if (!type.HasValue)
+                            type = (byte)NguyenHiep.Common.NewsTypes.News;
+                        if (type == NguyenHiep.Common.NewsTypes.News)
+                        {
+                            return RedirectToAction("IndexForNews");
+                        }
+                        else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                        {
+                            return RedirectToAction("IndexForContruction");
+                        }
+                        else if (type == NguyenHiep.Common.NewsTypes.HotNew)
+                        {
+                            return RedirectToAction("ViewHotNew");
+                        }
+                        else if (type == NguyenHiep.Common.NewsTypes.Introduction)
+                        {
+                            return RedirectToAction("IndexForIntroduction");
+                        }
+                        else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
+                        {
+                            return RedirectToAction("IndexForRecruitment");
+                        }
+                    }
+                    else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+                    {
+                        tblnew.ID = (Guid)newsID;
+                        _nguyenHiepService.UpdateNews(tblnew);
+                        TempData["NewsID"] = newsID;
+                        TempData["Type"] = tblnew.Type;
+                        if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
+                        {
+                            return RedirectToAction("ViewNews");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
+                        {
+                            return RedirectToAction("ViewNews");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                        {
+                            return RedirectToAction("ViewHotNew");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
+                        {
+                            return RedirectToAction("IndexForIntroduction");
+                        }
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
+                        {
+                            return RedirectToAction("IndexForRecruitment");
+                        }
+                    }
                 }
             }
-            else if (!flag && tblnew != null && !String.IsNullOrEmpty(tblnew.Image))
+            else
             {
-                if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+                if (tmpType == NguyenHiep.Common.NewsTypes.Recruitment || tmpType == NguyenHiep.Common.NewsTypes.Introduction)
+                {
+                    if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                    {
+                        if (String.IsNullOrEmpty(tblnew.ContentEN))
+                        {
+                            ModelState.AddModelError("ContentEN", "Content field is required");
+                        }
+                        else if (tblnew.ContentEN.Length >= 4000)
+                        {
+                            ModelState.AddModelError("ContentEN", "Input no more than 4000 characters");
+                        }
+
+                        
+                    }
+                    else
+                    {
+                        if (String.IsNullOrEmpty(tblnew.ContentVN))
+                        {
+                            ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
+                        }
+                        else if (tblnew.ContentVN.Length >= 4000)
+                        {
+                            ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 4000 ký tự");
+                        }
+                    }
+                    
+                }
+                if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+                {
+                    tblnew.ID = (Guid)newsID;
+                        _nguyenHiepService.UpdateNews(tblnew);
+                        if (tmpType == NguyenHiep.Common.NewsTypes.Recruitment)
+                        {
+                            return RedirectToAction("IndexForRecruitment");
+                        }
+                        else if (tmpType == NguyenHiep.Common.NewsTypes.Introduction)
+                        {
+                            return RedirectToAction("IndexForIntroduction");
+                        }
+                } if (!newsID.HasValue || newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
                 {
                     tblnew.ID = Guid.NewGuid();
                     newsID = tblnew.ID;
+                    tblnew.CreatedDate = DateTime.Now;
                     _nguyenHiepService.InsertNews(tblnew);
-                    TempData["Type"] = tblnew.Type;
-                    if (!type.HasValue)
-                        type = (byte)NguyenHiep.Common.NewsTypes.News;
-                    if (type == NguyenHiep.Common.NewsTypes.News)
-                    {
-                        return RedirectToAction("IndexForNews");
-                    }
-                    else if (type == NguyenHiep.Common.NewsTypes.Contruction)
-                    {
-                        return RedirectToAction("IndexForContruction");
-                    }
-                    else if (type == NguyenHiep.Common.NewsTypes.HotNew)
-                    {
-                        return RedirectToAction("ViewHotNew");
-                    }
-                    else if (type == NguyenHiep.Common.NewsTypes.Introduction)
-                    {
-                        return RedirectToAction("IndexForIntroduction");
-                    }
-                    else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
-                    {
-                        return RedirectToAction("IndexForRecruitment");
-                    }
-                }
-                else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
-                {
-                    tblnew.ID = (Guid)newsID;
-                    _nguyenHiepService.UpdateNews(tblnew);
-                    TempData["NewsID"] = newsID;
-                    TempData["Type"] = tblnew.Type;
-                    if (tblnew.Type == NguyenHiep.Common.NewsTypes.News)
-                    {
-                        return RedirectToAction("ViewNews");
-                    }
-                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Contruction)
-                    {
-                        return RedirectToAction("ViewNews");
-                    }
-                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
-                    {
-                        return RedirectToAction("ViewHotNew");
-                    }
-                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
-                    {
-                        return RedirectToAction("IndexForIntroduction");
-                    }
-                    else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
-                    {
-                        return RedirectToAction("IndexForRecruitment");
-                    }
+                    return RedirectToAction("IndexForRecruitment");
+
                 }
             }
             List<SelectListItem> lsEN = new List<SelectListItem>();
@@ -1430,37 +1492,97 @@ namespace NGUYENHIEP.Controllers
         }
         public ActionResult EditContact(Guid? newsID)
         {
-            tblInformation contact = _nguyenHiepService.GetInformation();
+            tblInformation contact = new tblInformation();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                contact = _nguyenHiepService.GetInformation(true);
+                if (contact != null)
+                {
+                    ViewData["ContactEN"] = contact.ContactEN;
+                }
+                
+            }
+            else
+            {
+                contact = _nguyenHiepService.GetInformation(false);
+                if (contact != null)
+                {
+                    ViewData["ContactVN"] = contact.ContactVN;
+                }
+            }
             return View(contact);
         }
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditContact(Guid? newsID, string contactVN)
+        public ActionResult EditContact(Guid? newsID, [Bind(Exclude = "ID")] tblInformation tblinfor)
         {
-            tblInformation contact = new tblInformation();
-            if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                contact = _nguyenHiepService.GetInformation((Guid)newsID);
-                if (contact != null)
+                if (tblinfor == null || string.IsNullOrEmpty(tblinfor.ContactEN))
                 {
-                    contact.ContactVN = contactVN;
-                    if (_nguyenHiepService.UpdateInformation(contact))
+                    ModelState.AddModelError("ContactEN", "Contact field is required");
+                }
+                else if (tblinfor != null && tblinfor.ContactEN.Length >= 250)
+                {
+                    ModelState.AddModelError("ContactEN", "Input no more than 250 characters");
+                }
+            }
+            else
+            {
+                if (tblinfor == null || string.IsNullOrEmpty(tblinfor.ContactEN))
+                {
+                    ModelState.AddModelError("ContactVN", "Cần nhập thông tin");
+                }
+                else if (tblinfor != null && tblinfor.ContactEN.Length >= 250)
+                {
+                    ModelState.AddModelError("ContactEN", "Nhập không quá 250 ký tự");
+                }
+            }
+
+            if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+            {
+                
+                if (tblinfor != null && ModelState.IsValid)
+                {
+                    tblinfor.ID = (Guid)newsID;
+                    tblinfor.ContactVN = tblinfor.ContactVN;
+                    tblinfor.ContactEN = tblinfor.ContactEN;
+                    if (_nguyenHiepService.UpdateInformation(tblinfor))
                     {
                         return RedirectToAction("IndexForContact");
                     }
                 }
             }
-            else
+            else if((!newsID.HasValue || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid) 
             {
-                contact.ID = Guid.NewGuid();
-                contact.ContactVN = contactVN;
-                contact.CreatedDate = DateTime.Now;
-                if (_nguyenHiepService.InsertInformation(contact))
+                if (tblinfor != null)
                 {
-                    return RedirectToAction("IndexForContact");
+                    tblinfor.ID = Guid.NewGuid();
+                    tblinfor.CreatedDate = DateTime.Now;
+                    if (_nguyenHiepService.InsertInformation(tblinfor))
+                    {
+                        return RedirectToAction("IndexForContact");
+                    }
                 }
             }
-            return View(contact);
+            
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+
+                if (tblinfor != null)
+                {
+                    ViewData["ContactEN"] = tblinfor.ContactEN;
+                }
+
+            }
+            else
+            {
+                if (tblinfor != null)
+                {
+                    ViewData["ContactVN"] = tblinfor.ContactVN;
+                }
+            }
+            return View(tblinfor);
 
         }
         public ActionResult ViewRecruitment(byte? type)
