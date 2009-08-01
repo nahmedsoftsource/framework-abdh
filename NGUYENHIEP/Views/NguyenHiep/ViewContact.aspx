@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblInformation>" %>
+
 <form method="post" id="twat">
+
 <div id="mainCtentSpRight">
     <div class="barCterTab">
         <div class="barCterTabLleft">
@@ -93,7 +95,7 @@
                             </td>
                             <td class="paddingTb4">
                             <span style="float:center">
-                                <input id="send" name="Send" type="button" value="<%=Resources.Global.Send %>" />
+                                <input id="Send" name="Send" type="button" value="<%=Resources.Global.Send %>" />
                                 </span>                               
                             </td>
                         </tr>
@@ -120,25 +122,32 @@
         </div>
     </div>
 </div>
-<script language="javascript" >
-$("#send").click(function () { 
-    $(document).ready(function() 
-    {
-        $.ajax({
-            url: '<%=Url.Content("~/NguyenHiep/Send") %>',
-            global: false,
-            data:{sender : document.getElementById("sender").value,
-                  email : document.getElementById("email").value,
-                  department : document.getElementById("department").value,
-                  title : document.getElementById("title").value,
-                  content : document.getElementById("content").value},
-            type: "POST",
-            dataType: "html",
-            success: function(msg) {
+<%NguyenHiep.Utility.UIHelper.JavascriptFile(Url.Content("~/Scripts/jquery-1.3.2.js")); %>
+<%NguyenHiep.Utility.UIHelper.JavascriptFile(Url.Content("~/Scripts/Core.js")); %>
+<%--<script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
 
-            }
-            })})
-      
+    <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>--%>
+<script language="javascript" type="text/javascript">
+    $("#Send").click(function() {
+
+        $(document).ready(function() {
+            $.ajax({
+                url: '<%=Url.Content("~/NguyenHiep/Send") %>',
+                global: false,
+                data: { sender: document.getElementById("Sender").value,
+                email: document.getElementById("Email").value,
+                department: document.getElementById("Department").value,
+                title: document.getElementById("Title").value,
+                content: document.getElementById("Content").value
+                },
+                type: "POST",
+                dataType: "html",
+                success: function(msg) {
+
+                }
+            })
+        })
+
     }
     );
 
