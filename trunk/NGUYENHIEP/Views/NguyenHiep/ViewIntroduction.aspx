@@ -41,7 +41,9 @@
 
             </div>
 </div>
+<span style="float:right">
 <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditNews", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID + "&Type=" + NguyenHiep.Common.NewsTypes.Introduction.ToString())%>
+</span>
 </div>
 <%} %>
 

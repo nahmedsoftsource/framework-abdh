@@ -171,9 +171,40 @@ namespace NGUYENHIEP.Controllers
             }
             return View(listAllNews);
         }
+        public ActionResult IndexForProductByCategory(int? pageSize, int? page, Guid? categoryID)
+        {
+            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
+            if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+            {
+                ViewData["CategoryID"] = categoryID;
+                listAllNews = _nguyenHiepService.GetAllProductByCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), (Guid)categoryID);
+            }
+
+            return View(listAllNews);
+        }
+        public ActionResult ListAllProductByCategory(int? pageSize, int? page,Guid? categoryID)
+        {
+            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
+            if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+            {
+                ViewData["CategoryID"] = categoryID;
+                listAllNews = _nguyenHiepService.GetAllProductByCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), (Guid)categoryID);
+            }
+            
+            return View(listAllNews);
+        }
         public ActionResult ListCategory(int? pageSize, int? page)
         {
-            SearchResult<tblCategory> listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1));
+            SearchResult<tblCategory> listAllCategory = new SearchResult<tblCategory>();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+            }
+            else 
+            {
+                listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+            }
+
             return View(listAllCategory);
         }
         public ActionResult EditNews(Guid? newsID, byte? type)
@@ -517,12 +548,42 @@ namespace NGUYENHIEP.Controllers
         public ActionResult EditCategory(Guid? newsID, [Bind(Exclude = "ID")] tblCategory tblnew, byte? type)
         {
             bool flag = false;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                if (tblnew != null && String.IsNullOrEmpty(tblnew.CategoryNameEN))
+                {
+                    ModelState.AddModelError("CategoryNameEN", "Category name is required");
+                }
+                else if (tblnew != null && tblnew.CategoryNameEN.Length >= 100)
+                {
+                    ModelState.AddModelError("CategoryNameEN", "Input no more than 100 characters");
+                }
+                if (tblnew != null && !String.IsNullOrEmpty(tblnew.DescriptionEN) && tblnew.DescriptionEN.Length >= 250)
+                {
+                    ModelState.AddModelError("CategoryNameEN", "Input no more than 250 characters");
+                }
+            }
+            else
+            {
+                if (tblnew != null && String.IsNullOrEmpty(tblnew.CategoryNameVN))
+                {
+                    ModelState.AddModelError("CategoryNameVN", "Cần nhập tên loại sản phẩm");
+                }
+                else if (tblnew != null && tblnew.CategoryNameVN.Length >= 100)
+                {
+                    ModelState.AddModelError("CategoryNameVN", "Không nhập quá 100 ký tự");
+                }
+                if (tblnew != null && !String.IsNullOrEmpty(tblnew.DescriptionVN) && tblnew.DescriptionVN.Length >= 250)
+                {
+                    ModelState.AddModelError("DescriptionVN", "Không nhập quá 250 ký tự");
+                }
+            }
             if (newsID != null && ModelState.IsValid)
             {
                 _nguyenHiepService.UpdateCategory(tblnew);
                 TempData["CategoryID"] = newsID;
                 //todo: view one category
-                return RedirectToAction("ViewNews");
+                return RedirectToAction("IndexForNews");
             }
             else if (newsID == null && ModelState.IsValid)
             {
@@ -533,7 +594,7 @@ namespace NGUYENHIEP.Controllers
                 TempData["CategoryID"] = newsID;
                 _nguyenHiepService.InsertCategory(tblnew);
                 //todo: view one category
-                return RedirectToAction("ViewNews");
+                return RedirectToAction("IndexForNews");
             }
 
 
@@ -549,19 +610,27 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = type;
 
             List<SelectListItem> categories = new List<SelectListItem>();
-            List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
+            List<tblCategory> listCategory = new List<tblCategory>();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listCategory = _nguyenHiepService.GetAllCategory(true);
+            }
+            else
+            {
+                listCategory = _nguyenHiepService.GetAllCategory(false);
+            }
             int counter = 0;
             foreach (tblCategory cat in listCategory)
             {
-                if (counter == 0)
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
-                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                    categories.Add(new SelectListItem { Text = cat.CategoryNameEN, Value = cat.ID.ToString() });
                 }
                 else
                 {
-                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                    categories.Add(new SelectListItem { Text = cat.CategoryNameVN, Value = cat.ID.ToString() });
                 }
-                counter++;
+                
             }
             List<SelectListItem> storeStatusVN = new List<SelectListItem>();
             storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
@@ -1206,9 +1275,18 @@ namespace NGUYENHIEP.Controllers
             {
                 ViewData["Description"] = tblproduct.Description;
             }
-            int counter = 0;
+            
             List<SelectListItem> categories = new List<SelectListItem>();
-            List<tblCategory> listCategory = _nguyenHiepService.GetAllCategory();
+            List<tblCategory> listCategory = new List<tblCategory>();
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listCategory = _nguyenHiepService.GetAllCategory(true);
+            }
+            else
+            {
+                listCategory = _nguyenHiepService.GetAllCategory(false);
+            }
+            
             List<SelectListItem> storeStatusVN = new List<SelectListItem>();
             List<SelectListItem> storeStatusEN = new List<SelectListItem>();
             List<SelectListItem> promotionVN = new List<SelectListItem>();
@@ -1315,18 +1393,17 @@ namespace NGUYENHIEP.Controllers
                     }
                     else
                     {
-                        counter = 0;
                         foreach (tblCategory cat in listCategory)
                         {
-                            if (counter == 0)
+                            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                             {
-                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                                categories.Add(new SelectListItem { Text = cat.CategoryNameEN, Value = cat.ID.ToString() });
                             }
                             else
                             {
-                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                                categories.Add(new SelectListItem { Text = cat.CategoryNameVN, Value = cat.ID.ToString() });
                             }
-                            counter++;
+                            
                         }
                         storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
                         storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
@@ -1390,18 +1467,16 @@ namespace NGUYENHIEP.Controllers
                     else 
                     {
                         
-                        counter = 0;
                         foreach (tblCategory cat in listCategory)
                         {
-                            if (counter == 0)
+                            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                             {
-                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                                categories.Add(new SelectListItem { Text = cat.CategoryNameEN, Value = cat.ID.ToString() });
                             }
                             else
                             {
-                                categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                                categories.Add(new SelectListItem { Text = cat.CategoryNameVN, Value = cat.ID.ToString() });
                             }
-                            counter++;
                         }
                         storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
                         storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
@@ -1442,18 +1517,16 @@ namespace NGUYENHIEP.Controllers
             
             
             
-            counter = 0;
             foreach (tblCategory cat in listCategory)
             {
-                if (counter == 0)
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
-                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN });
+                    categories.Add(new SelectListItem { Text = cat.CategoryNameEN, Value = cat.ID.ToString() });
                 }
                 else
                 {
-                    categories.Add(new SelectListItem { Text = cat.ID.ToString(), Value = cat.CategoryNameEN, Selected = true });
+                    categories.Add(new SelectListItem { Text = cat.CategoryNameVN, Value = cat.ID.ToString() });
                 }
-                counter++;
             }
             
             storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));

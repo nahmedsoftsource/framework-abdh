@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
     <%--<%NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "ListAllNewsID", "", (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=1");%>--%>
     <div class="mainCtentSpRight" id="ListAllProductID">
-        <%Html.RenderPartial("ListAllProduct", ViewData); %>
+        <%Html.RenderPartial("ListAllProductByCategory", ViewData); %>
         <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="3" />
     </div>
 </asp:Content>

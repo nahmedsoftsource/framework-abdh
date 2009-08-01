@@ -72,7 +72,7 @@ namespace NGUYENHIEP.Services.LinqClient
                     query.First().UpdatedBy = tblproduct.UpdatedBy;
                     query.First().UpdatedDate = DateTime.Now;
                     query.First().CreatedBy = tblproduct.CreatedBy;
-                    query.First().CategoryID = tblproduct.CategoryID;
+                    //query.First().CategoryID = tblproduct.CategoryID;
                     query.First().Description = tblproduct.Description;
                     query.First().Image = tblproduct.Image;
                     _dataContext.SubmitChanges();
@@ -264,11 +264,37 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return searchResult;
         }
-        public List<tblCategory> GetAllCategory()
+        public SearchResult<tblProduct> GetAllProductByCategory(int pageSize, int page, Guid? categoryID)
         {
-            var query = _dataContext.tblCategories;
+            SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
+
+            var query1 = _dataContext.tblProducts.Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString());
+            var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString());
+            if (query != null && query1 != null && query.ToList().Count > 0)
+            {
+                searchResult.Items = query.ToList();
+                searchResult.Query = query;
+                searchResult.SetMaxResults(pageSize);
+                searchResult.SetPage(page);
+                searchResult.TotalRows = query1.Count();
+            }
+        
+            return searchResult;
+        }
+        public List<tblCategory> GetAllCategory(bool isEN)
+        {
+            if (isEN)
+            {
+                var query = _dataContext.tblCategories.Where("CategoryNameEN!=null");
+                return ((query!=null)?query.ToList():(new List<tblCategory>()));
+            }
+            else
+            {
+                var query = _dataContext.tblCategories.Where("CategoryNameVN!=null");
+                return ((query!=null)?query.ToList():(new List<tblCategory>()));
+            }
            
-            return ((query!=null)?query.ToList():(new List<tblCategory>()));
+            
         }
 
         #region Data Access tblUser
@@ -349,18 +375,34 @@ namespace NGUYENHIEP.Services.LinqClient
         }
         #endregion
 
-        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page)
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page,bool isEN)
         {
             SearchResult<tblCategory> searchResult = new SearchResult<tblCategory>();
-            var query1 = _dataContext.tblCategories;
-            var query = _dataContext.tblCategories.Take(pageSize * page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null && query.ToList().Count > 0)
+            if (isEN)
             {
-                searchResult.Items = query.ToList();
-                searchResult.Query = query;
-                searchResult.SetMaxResults(pageSize);
-                searchResult.SetPage(page);
-                searchResult.TotalRows = query1.Count();
+                var query1 = _dataContext.tblCategories.Where("CategoryNameEN!=null");
+                var query = _dataContext.tblCategories.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryNameEN!=null");
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
+            }
+            else 
+            {
+                var query1 = _dataContext.tblCategories.Where("CategoryNameVN!=null");
+                var query = _dataContext.tblCategories.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryNameVN!=null");
+                if (query != null && query1 != null && query.ToList().Count > 0)
+                {
+                    searchResult.Items = query.ToList();
+                    searchResult.Query = query;
+                    searchResult.SetMaxResults(pageSize);
+                    searchResult.SetPage(page);
+                    searchResult.TotalRows = query1.Count();
+                }
             }
             return searchResult;
         }
