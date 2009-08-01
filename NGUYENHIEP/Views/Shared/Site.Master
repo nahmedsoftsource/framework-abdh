@@ -12,7 +12,7 @@
      <script type="text/javascript" src="../../Scripts/MicrosoftAjax.js"></script>
      <script type="text/javascript" src="../../Scripts/MicrosoftMvcAjax.js"></script>--%>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
-    
+    <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
     <script type="text/javascript" language="javascript">
         $(document).ready
         (function()
@@ -66,14 +66,18 @@
                 </div>
                 
                 <div id="mainColunmLeft" class="clear">
-                <asp:ContentPlaceHolder ID="LeftMenu" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
+                
+                </asp:ContentPlaceHolder>
                    <%
                        if (HttpContext.Current.Session["UserName"] != null)
                            LoginPanelLeft.Visible = true;
                        else
                            LoginPanelLeft.Visible = false;
                     %>
-
+                    
+                    
+                    
                    <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server"> 
                   <div id="LoginPanel">
                         <div class="mainMnuLeftTOp">
@@ -123,29 +127,12 @@
                             </div>
                         </div>
                     </div>
+                    
                   </asp:ContentPlaceHolder>
-                    <div class="boxNews" style="float: none;">
-                        <div class="boxNewsTop">
-                            <div class="boxNewsBtom">
-                                <div class="boxNewsCtent">
-                                    <div class="boxTabNews">
-                                        <div class="boxTabNewsLeft">
-                                            <div class="boxTabNewsRight">
-                                                <div class="ctentBarTab">
-                                                    <%=Resources.Global.PromotionProgram %>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="boxKhuyenmai">
-                                        <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server"></asp:ContentPlaceHolder>
-                                        <div class="paddingTb4 textRight fontsize11">
-                                            <a class="chitiet" href="#"><%=Resources.Global.Next %></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server">
+                    </asp:ContentPlaceHolder>
+                    
                     <div class="lienketweb  clear">
                         <div style="padding-top: 10px;" class="bold color2 textLeft">
                             <%=Resources.Global.LinkedWebsites %>

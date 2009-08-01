@@ -53,8 +53,9 @@
             }
           )
        %>
+       <br />
         <span style="float:right">
- <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", Resources.Global.AddCategory, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null) + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : "")%>
+ <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", Resources.Global.AddCategory, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + Guid.Empty.ToString() + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
  </span>
  <br />
   </div>
