@@ -740,9 +740,13 @@ namespace NGUYENHIEP.Controllers
             }
             ViewData["CurrentType"] = tmpType;
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+            string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
+            string pathFolderThumbSmallest = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNewsSmallest"]);
             bool flag = false;
             bool insert = false;
             if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+            if (!Directory.Exists(pathFolderThumb)) Directory.CreateDirectory(pathFolderThumb);
+            if (!Directory.Exists(pathFolderThumbSmallest)) Directory.CreateDirectory(pathFolderThumbSmallest);
             foreach (string inputTagName in Request.Files)
             {
                 HttpPostedFileBase file = Request.Files[inputTagName];
@@ -810,10 +814,19 @@ namespace NGUYENHIEP.Controllers
                 {
                     tblnew.ID = (Guid)newsID;
                     string pathImage;
-                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    string pathImageThumb;
+                    string pathImageThumbSmallest;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)newsID, pathFolder, Request.PhysicalApplicationPath))
                     {
                         flag = true;
-                        tblnew.Image = pathImage;
+                        if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                        {
+                            tblnew.Image = pathFolderThumbSmallest;
+                        }
+                        else
+                        {
+                            tblnew.Image = pathImageThumb;
+                        }
                         _nguyenHiepService.UpdateNews(tblnew);
                         insert = false;
                         TempData["NewsID"] = newsID;
@@ -847,9 +860,18 @@ namespace NGUYENHIEP.Controllers
                     tblnew.ID = Guid.NewGuid();
                     newsID = tblnew.ID;
                     string pathImage;
-                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    string pathImageThumb;
+                    string pathImageThumbSmallest;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)newsID, pathFolder, Request.PhysicalApplicationPath))
                     {
-                        tblnew.Image = pathImage;
+                        if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
+                        {
+                            tblnew.Image = pathImageThumbSmallest;
+                        }
+                        else
+                        {
+                            tblnew.Image = pathImageThumb;
+                        }
                         _nguyenHiepService.InsertNews(tblnew);
                         ModelState.Clear();
                         insert = true;
@@ -1424,10 +1446,12 @@ namespace NGUYENHIEP.Controllers
                 {
                     tblproduct.ID = (Guid)newsID;
                     string pathImage;
-                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    string pathImageThumb;
+                    string pathImageThumbSmallest;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)newsID, pathFolder, Request.PhysicalApplicationPath))
                     {
                         flag = true;
-                        tblproduct.Image = pathImage;
+                        tblproduct.Image = pathImageThumb;
 
                     }
                     if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
@@ -1499,9 +1523,11 @@ namespace NGUYENHIEP.Controllers
                     tblproduct.ID = Guid.NewGuid();
                     newsID = tblproduct.ID;
                     string pathImage;
-                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, (Guid)newsID, pathFolder))
+                    string pathImageThumb;
+                    string pathImageThumbSmallest;
+                    if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)newsID, pathFolder, Request.PhysicalApplicationPath ))
                     {
-                        tblproduct.Image = pathImage;
+                        tblproduct.Image = pathImageThumb;
 
                     }
                     if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
@@ -1658,13 +1684,13 @@ namespace NGUYENHIEP.Controllers
             }
             else
             {
-                if (tblinfor == null || string.IsNullOrEmpty(tblinfor.ContactEN))
+                if (tblinfor == null || string.IsNullOrEmpty(tblinfor.ContactVN))
                 {
                     ModelState.AddModelError("ContactVN", "Cần nhập thông tin");
                 }
-                else if (tblinfor != null && tblinfor.ContactEN.Length >= 250)
+                else if (tblinfor != null && tblinfor.ContactVN.Length >= 250)
                 {
-                    ModelState.AddModelError("ContactEN", "Nhập không quá 250 ký tự");
+                    ModelState.AddModelError("ContactVN", "Nhập không quá 250 ký tự");
                 }
             }
 

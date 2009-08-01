@@ -18,15 +18,15 @@
                         url: '<%=Url.Content("~/NguyenHiep/ListCategory") %>',
                         global: false,
                         type: "POST",
+                        async: false,
                         dataType: "html",
                         success: function(msg) {
-                            document.getElementById('ListCategoryID').innerHTML = msg
+                            document.getElementById('ListCategoryID').innerHTML = msg;
                             if (document.layers) {
-                                alert(document.getElementById('ListCategoryID').innerHTML);
                                 document.getElementById('ListCategoryID').open();
                                 document.getElementById('ListCategoryID').write(msg);
                                 document.getElementById('ListCategoryID').close();
-                                document.getElementById('ListCategoryID').innerHTML = msg
+                                document.getElementById('ListCategoryID').innerHTML = msg;
                             }
                             else {
                                 document.all['ListCategoryID'].innerHTML = msg;
@@ -46,19 +46,20 @@
 
     var content = "";
     $(document).ready(function() {
+
         content = $.ajax({
             url: '<%=Url.Content("~/NguyenHiep/ListPromotionNews") %>',
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
-            document.getElementById('ListNewsPromotionID').innerHTML = msg
+                document.getElementById('ListNewsPromotionID').innerHTML = msg;
                 if (document.layers) {
-                    alert(document.getElementById('ListNewsPromotionID').innerHTML);
                     document.getElementById('ListNewsPromotionID').open();
                     document.getElementById('ListNewsPromotionID').write(msg);
                     document.getElementById('ListNewsPromotionID').close();
-                    document.getElementById('ListNewsPromotionID').innerHTML = msg
+                    document.getElementById('ListNewsPromotionID').innerHTML = msg;
                 }
                 else {
                     document.all['ListNewsPromotionID'].innerHTML = msg;
@@ -79,20 +80,20 @@
 
     var content3 = "";
     $(document).ready(function() {
-
+        
         content3 = $.ajax({
-        url: '<%=Url.Content("~/NguyenHiep/ListHotNews") %>',
+            url: '<%=Url.Content("~/NguyenHiep/ListHotNews") %>',
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
-            document.getElementById('ListHotNewsID').innerHTML = msg
+                document.getElementById('ListHotNewsID').innerHTML = msg;
                 if (document.layers) {
-                    alert(document.getElementById('ListHotNewsID').innerHTML);
                     document.getElementById('ListHotNewsID').open();
                     document.getElementById('ListHotNewsID').write(msg);
                     document.getElementById('ListHotNewsID').close();
-                    document.getElementById('ListHotNewsID').innerHTML = msg
+                    document.getElementById('ListHotNewsID').innerHTML = msg;
                 }
                 else {
                     document.all['ListHotNewsID'].innerHTML = msg;

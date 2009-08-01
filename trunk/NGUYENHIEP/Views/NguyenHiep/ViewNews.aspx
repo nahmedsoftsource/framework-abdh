@@ -18,11 +18,10 @@
                 <div class="boxCtentSpBtom">
                     <div class="boxCtentSpCtent">
                         <div class="textLeft">
-                        
                             <%if (!String.IsNullOrEmpty(Model.Image))
                               { %>
                             <span style="float: left"><a href="#">
-                                <img class="imgGthieu" src='<%= Url.Content("~"+Model.Image)%>' /></a> </span>
+                                <img class="imgGthieu" src='<%= Url.Content("~"+Model.Image.Replace("ThumbImagesNewsSmallest", "ThumbImagesNews"))%>' /></a> </span>
                             <%} %>
                             <div class="paddingTb4 bold"><%--<a class="color2" href="#">--%>
                             <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
@@ -78,6 +77,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
                 document.getElementById('ListCategoryID').innerHTML = msg;
                 if (document.layers) {
@@ -94,7 +94,6 @@
             }
 
         });
-        //                    $("#ListCategoryID").load('<%=Url.Content("~/NguyenHiep/ListCategory") %>');
     })
                     </script>
                     <div id="ListCategoryID">
@@ -110,6 +109,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
                 document.getElementById('ListNewsPromotionID').innerHTML = msg
                 if (document.layers) {
@@ -141,6 +141,7 @@
         url: '<%=Url.Content("~/NguyenHiep/ListHotNews") %>',
             global: false,
             type: "POST",
+            async: false,
             dataType: "html",
             success: function(msg) {
             document.getElementById('ListHotNewsID').innerHTML = msg

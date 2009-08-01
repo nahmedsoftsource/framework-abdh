@@ -18,16 +18,16 @@
                         </div>
                         <div class="boxKhuyenmai" >
                     <ul>
-                        <% foreach (var item in Model.Items)
+                        <% foreach (NGUYENHIEP.Models.tblNew item in Model.Items)
                            {%>
                         <li>
                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                           { %>
-                            <%=Html.ActionLink((item.TitleEN != null) ? item.TitleEN : "No Name", "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
+                            <%=Html.ActionLink((item!=null && item.TitleEN != null) ? item.TitleEN : "No Name", "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
                             <%}
                           else
                           { %>
-                          <%=Html.ActionLink((item.TitleVN != null) ? item.TitleEN : "Không có tên", "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
+                          <%=Html.ActionLink((item != null && item.TitleVN != null) ? item.TitleVN : "Không có tên", "ViewNews", new { newsID = item.ID }, new { @class = "color2" })%>
                             <%} %>
                         </li>
                         <%} %>

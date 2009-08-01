@@ -186,28 +186,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="boxNews">
-                            <div class="boxNewsTop">
-                                <div class="boxNewsBtom">
-                                    <div class="boxNewsCtent">
-                                        <div class="boxTabNews">
-                                            <div class="boxTabNewsLeft">
-                                                <div class="boxTabNewsRight">
-                                                    <div class="ctentBarTab">
-                                                        <%=Resources.Global.NewsEvent %>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clear" id="test">
+                        
                                             <asp:ContentPlaceHolder ID="RiightNewsEvent" runat="server">
-                                                <%--<%=NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "test", "San Pham", ((new UrlHelper(ViewContext.RequestContext)).Action("ListAllCategory") + "?pageSize=" + ((int)NguyenHiep.Common.Constants.DefautPagingSize).ToString() + "&page=1"))%>--%>
                                             </asp:ContentPlaceHolder>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                        
                         <div class="clear">
                         </div>
                     </div>
