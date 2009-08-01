@@ -34,9 +34,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetSpecialNew(type);
         }
-        public tblInformation GetInformation()
+        public tblInformation GetInformation(bool isEN)
         {
-            return _da.GetInformation();
+            return _da.GetInformation(isEN);
         }
         public bool UpdateInformation(tblInformation infor)
         {
@@ -46,9 +46,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.InsertInformation(infor);
         }
-        public tblInformation GetInformation(Guid id)
+        public tblInformation GetInformation(Guid id,bool isEN)
         {
-            return _da.GetInformation(id);
+            return _da.GetInformation(id,isEN);
         }
         public List<tblCategory> GetAllCategory()
         {

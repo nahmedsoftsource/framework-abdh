@@ -17,8 +17,16 @@
             </td>
             </tr>
         <tr>
-            <td>
+            <td><%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                  { %>
+                    <%=Html.FckTextBox("ContactEN")%>
+                    <%=Html.ValidationMessage("ContactEN") %>
+                    <%}
+                  else
+                  { %>
                     <%=Html.FckTextBox("ContactVN")%>
+                    <%=Html.ValidationMessage("ContactVN")%>
+                    <%} %>
                 <%--<%=Html.TextArea("contactVN", (((Model != null && String.IsNullOrEmpty(Model.ContactEN)) ? Model.ContactEN : "")), new { rows = 15, style = "width:100%" })%>--%>
             </td>
         </tr>

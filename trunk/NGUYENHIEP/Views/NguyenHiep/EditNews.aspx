@@ -20,7 +20,7 @@
         <%=Resources.Global.EditNew %></h2>
     <%} %>
     <table width="100%">
-    <%if (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment))
+    <%if ((ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment)) && (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Introduction)))
       { %>
         <tr>
             <td class="l">
@@ -83,7 +83,7 @@
                 </div>
             </td>
         </tr>
-       <%if (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment))
+       <%if ((ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment)) && (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Introduction)))
          { %>
         <tr>
             <td class="l">

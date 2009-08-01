@@ -17,7 +17,14 @@
                     <div style="padding: 10px 0 30px 0;">
                         <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
                             class="clear">
-                            <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactVN)) ? Model.ContactVN : "Thông tin chưa cập nhật")%>
+                            <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                              { %>
+                            <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactEN)) ? Model.ContactEN : "Thông tin chưa cập nhật")%>
+                            <%}
+                              else
+                              { %>
+                              <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactVN)) ? Model.ContactVN : "Information is not available")%>
+                            <%} %>
                         </div>
                         <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
                             class="clear">

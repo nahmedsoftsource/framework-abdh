@@ -18,15 +18,21 @@
                 	<div class="boxCtentSpBtom">
                     	<div class="boxCtentSpCtent">
                         	<div class="textLeft">
-                        	<%if (!String.IsNullOrEmpty(Model.Image))
+                        	<%--<%if (!String.IsNullOrEmpty(Model.Image))
                            { %>
                            <span style="float:left">
                             	<a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+Model.Image)%>' /></a>
                             	</span>
-                            <%} %>
+                            <%} %>--%>
                               <div class="paddingTb4 bold"><a class="color2" href="#"></a>
-                                
-                                <%=((Model.ContentVN != null) ? Model.ContentVN : "")%>
+                                <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                  { %>
+                                <%=((Model.ContentEN != null) ? Model.ContentEN : "")%>
+                                <%}
+                                  else
+                                  { %>
+                                  <%=((Model.ContentVN != null) ? Model.ContentVN : "")%>
+                                <%} %>
                             </div>
                             <div class="clear"></div>
                         </div>

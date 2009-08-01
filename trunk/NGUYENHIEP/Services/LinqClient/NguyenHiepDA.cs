@@ -161,11 +161,19 @@ namespace NGUYENHIEP.Services.LinqClient
             var query = _dataContext.tblNews.Where("Type=@0", type).OrderBy("CreatedDate");
             return ((query!= null && query.ToList().Count>0)?query.ToList().First():(new tblNew()));
         }
-        public tblInformation GetInformation()
+        public tblInformation GetInformation(bool isEN)
         {
-            SearchResult<tblInformation> searchResult = new SearchResult<tblInformation>();
-            var query = _dataContext.tblInformations.OrderBy("CreatedDate");
-            return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+            if (isEN)
+            {
+                var query = _dataContext.tblInformations.Where("ContactEN!=null").OrderBy("CreatedDate");
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+            }
+            else
+            {
+                var query = _dataContext.tblInformations.Where("ContactVN!=null").OrderBy("CreatedDate");
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+            }
+            
         }
         public bool InsertInformation(tblInformation infor)
         {
@@ -184,11 +192,20 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return false;
         }
-        public tblInformation GetInformation(Guid id)
+        public tblInformation GetInformation(Guid id,bool isEN)
         {
+            if (isEN)
+            {
+                var query = _dataContext.tblInformations.Where("ID.ToString()=@0 and ContactEN!=null", id.ToString());
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+            }
+            else
+            {
+                var query = _dataContext.tblInformations.Where("ID.ToString()=@0 and ContactVN!=null", id.ToString());
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+            }
             
-            var query = _dataContext.tblInformations.Where("ID.ToString()=@0", id.ToString());
-            return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
+
         }
         public bool UpdateInformation(tblInformation infor)
         {
