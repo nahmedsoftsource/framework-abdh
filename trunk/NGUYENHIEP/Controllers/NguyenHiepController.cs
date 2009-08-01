@@ -620,14 +620,14 @@ namespace NGUYENHIEP.Controllers
                     ModelState.AddModelError("DescriptionVN", "Không nhập quá 250 ký tự");
                 }
             }
-            if (newsID != null && ModelState.IsValid)
+            if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
             {
                 _nguyenHiepService.UpdateCategory(tblnew);
                 TempData["CategoryID"] = newsID;
                 //todo: view one category
                 return RedirectToAction("IndexForNews");
             }
-            else if (newsID == null && ModelState.IsValid)
+            else if ((!newsID.HasValue || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
             {
                 flag = true;
                 tblnew.ID = Guid.NewGuid();

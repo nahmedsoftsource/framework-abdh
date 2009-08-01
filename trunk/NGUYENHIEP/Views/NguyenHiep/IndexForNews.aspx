@@ -16,6 +16,7 @@
             url: '<%=Url.Content("~/NguyenHiep/ListCategory") %>',
             global: false,
             type: "POST",
+            async: false,
             dataType: "html",
             success: function(msg) {
                 document.getElementById('ListCategoryID').innerHTML = msg;
@@ -50,6 +51,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
                 document.getElementById('ListNewsPromotionID').innerHTML = msg
                 if (document.layers) {
@@ -82,6 +84,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
             document.getElementById('ListHotNewsID').innerHTML = msg
                 if (document.layers) {
