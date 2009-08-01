@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thông tin tài khoản.
+        /// </summary>
+        internal static string AccountInfor {
+            get {
+                return ResourceManager.GetString("AccountInfor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phòng kế toán.
         /// </summary>
         internal static string AccountingDept {
@@ -169,6 +178,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đỗi mật khẩu.
+        /// </summary>
+        internal static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thay đổi mật khẩu thành công..
+        /// </summary>
+        internal static string ChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xác nhận mật khẩu.
+        /// </summary>
+        internal static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ảnh Công Trình.
         /// </summary>
         internal static string ConstructionImages {
@@ -201,6 +237,24 @@ namespace Resources {
         internal static string CopyRight {
             get {
                 return ResourceManager.GetString("CopyRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tạo mới tài khỏan.
+        /// </summary>
+        internal static string CreateAccount {
+            get {
+                return ResourceManager.GetString("CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu hiện tại.
+        /// </summary>
+        internal static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
         
@@ -313,6 +367,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email không hợp lệ..
+        /// </summary>
+        internal static string InvalidEmail {
+            get {
+                return ResourceManager.GetString("InvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Có khuyến mãi.
         /// </summary>
         internal static string IsPromoted {
@@ -340,11 +403,56 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Đăng nhập.
+        /// </summary>
+        internal static string Login1 {
+            get {
+                return ResourceManager.GetString("Login1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thông tin đăng nhập.
         /// </summary>
         internal static string LoginInfo {
             get {
                 return ResourceManager.GetString("LoginInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thông tin đăng nhập.
+        /// </summary>
+        internal static string LoginInfo1 {
+            get {
+                return ResourceManager.GetString("LoginInfo1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đăng Nhập.
+        /// </summary>
+        internal static string Logon {
+            get {
+                return ResourceManager.GetString("Logon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đăng nhập bởi:.
+        /// </summary>
+        internal static string LogonBy {
+            get {
+                return ResourceManager.GetString("LogonBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thoát.
+        /// </summary>
+        internal static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
         
@@ -372,6 +480,15 @@ namespace Resources {
         internal static string MessageBox {
             get {
                 return ResourceManager.GetString("MessageBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu mới.
+        /// </summary>
+        internal static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
             }
         }
         
@@ -457,6 +574,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Giá.
         /// </summary>
         internal static string Price {
@@ -525,6 +651,15 @@ namespace Resources {
         internal static string Recruitment {
             get {
                 return ResourceManager.GetString("Recruitment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ghi nhớ mật khẩu.
+        /// </summary>
+        internal static string RememberPassword {
+            get {
+                return ResourceManager.GetString("RememberPassword", resourceCulture);
             }
         }
         
@@ -628,6 +763,78 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tên người dùng.
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tạo tài khoản không thành công..
+        /// </summary>
+        internal static string ValidateCreateAccount {
+            get {
+                return ResourceManager.GetString("ValidateCreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email này đã tồn tại trong hệ thông. Xin nhập email khác..
+        /// </summary>
+        internal static string ValidateDuplicateEmail {
+            get {
+                return ResourceManager.GetString("ValidateDuplicateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên người dùng đã tồn tại trong hệ thống. Xin nhập tên người dùng khác..
+        /// </summary>
+        internal static string ValidateDuplicateUserName {
+            get {
+                return ResourceManager.GetString("ValidateDuplicateUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bạn phải nhập email..
+        /// </summary>
+        internal static string ValidateEmail {
+            get {
+                return ResourceManager.GetString("ValidateEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bạn phải nhập mật khẩu..
+        /// </summary>
+        internal static string ValidatePassword {
+            get {
+                return ResourceManager.GetString("ValidatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu mới và xác nhận mật khẩu không đồng nhất..
+        /// </summary>
+        internal static string ValidatePasswordConfirmPassword {
+            get {
+                return ResourceManager.GetString("ValidatePasswordConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bạn phải nhập tên người dùng..
+        /// </summary>
+        internal static string ValidateUserName {
+            get {
+                return ResourceManager.GetString("ValidateUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mô tả tiếng Việt.
         /// </summary>
         internal static string VNDescription {
@@ -642,6 +849,24 @@ namespace Resources {
         internal static string VNName {
             get {
                 return ResourceManager.GetString("VNName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên người dùng hoặc mật khẩu không chính xác..
+        /// </summary>
+        internal static string WarningLogonUnssucessful {
+            get {
+                return ResourceManager.GetString("WarningLogonUnssucessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mật khẩu phải có ít nhất 6 kí tự.
+        /// </summary>
+        internal static string WarningPasswordLength {
+            get {
+                return ResourceManager.GetString("WarningPasswordLength", resourceCulture);
             }
         }
         
