@@ -14,23 +14,24 @@
                     </div>
                 </div>
                 <div class="clear" >
-                <%if(Model != null && Model.Items != null){ %>
+                <%if (Model != null && Model.Items != null)
+                  { %>
                     <%int counter = 0; %>
-                    <% foreach (var item in Model.Items)
-                       { 
+                    <% foreach (NGUYENHIEP.Models.tblNew item in Model.Items)
+                       {
                            counter++;
                            if (counter % 2 != 0)
                                Response.Write("<div class='boxSubTin1'>");%>
                                 
                            <%else
-                            Response.Write("<div class='boxSubTin1' style='background: transparent none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;'>");%>
+                        Response.Write("<div class='boxSubTin1' style='background: transparent none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;'>");%>
                                 
                         
                         
                         <%if (!String.IsNullOrEmpty(item.Image))
                           { %>
                             <a href="#">
-                                <img class="imgGthieu" src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' />
+                                <img class="imgSubNews"  src='<%= Url.Content("~"+((item.Image!=null)?item.Image:""))%>' />
                                 </a>
                         
                         <%} %>
@@ -38,16 +39,18 @@
                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                           { %>
                             <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle;  %>
-                            <%=Html.ActionLink(item.TitleEN , "ViewNews", new { newsID = item.ID,type = NguyenHiep.Common.NewsTypes.HotNew},new {@class="color1"})%>
-                        <%}else
+                            <%=Html.ActionLink(item.TitleEN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.HotNew }, new { @class = "color1" })%>
+                        <%}
+                          else
                           { %>
                         <%if (String.IsNullOrEmpty(item.TitleVN)) item.TitleVN = Resources.Global.NoTitle; %>
-                        <%=Html.ActionLink(item.TitleEN , "ViewNews", new { newsID = item.ID,type = NguyenHiep.Common.NewsTypes.HotNew},new {@class="color1"})%>
+                        <%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.HotNew }, new { @class = "color1" })%>
                                 <%} %>
                         
                         </div>
                         </div>
                         <%} %>
+                     <%} %>
                     
                 </div>
             </div>

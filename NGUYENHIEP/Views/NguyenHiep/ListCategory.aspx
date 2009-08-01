@@ -45,7 +45,7 @@
               CurrentPage = Model.GetPage(),
               PageSize = Model.GetMaxResults(),
               TotalRows = Model.TotalRows,
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListCategory", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))
+              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListCategory", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))
 
             },
             new NguyenHiep.Utility.Pager.AjaxPaginationOption

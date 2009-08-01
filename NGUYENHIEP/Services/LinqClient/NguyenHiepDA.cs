@@ -239,7 +239,7 @@ namespace NGUYENHIEP.Services.LinqClient
             if (isEN)
             {
                 var query1 = _dataContext.tblProducts.Where("ProductNameEN!=null");
-                var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("ProductNameEN!=null");
+                var query = _dataContext.tblProducts.Where("ProductNameEN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();
@@ -252,7 +252,7 @@ namespace NGUYENHIEP.Services.LinqClient
             else
             {
                 var query1 = _dataContext.tblProducts.Where("ProductNameVN!=null");
-                var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("ProductNameVN!=null");
+                var query = _dataContext.tblProducts.Where("ProductNameVN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();
@@ -269,7 +269,7 @@ namespace NGUYENHIEP.Services.LinqClient
             SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
 
             var query1 = _dataContext.tblProducts.Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString());
-            var query = _dataContext.tblProducts.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString());
+            var query = _dataContext.tblProducts.Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString()).Take(pageSize * page).Skip((page - 1) * pageSize);
             if (query != null && query1 != null && query.ToList().Count > 0)
             {
                 searchResult.Items = query.ToList();
@@ -405,7 +405,7 @@ namespace NGUYENHIEP.Services.LinqClient
             if (isEN)
             {
                 var query1 = _dataContext.tblCategories.Where("CategoryNameEN!=null");
-                var query = _dataContext.tblCategories.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryNameEN!=null");
+                var query = _dataContext.tblCategories.Where("CategoryNameEN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();
@@ -418,7 +418,7 @@ namespace NGUYENHIEP.Services.LinqClient
             else 
             {
                 var query1 = _dataContext.tblCategories.Where("CategoryNameVN!=null");
-                var query = _dataContext.tblCategories.Take(pageSize * page).Skip((page - 1) * pageSize).Where("CategoryNameVN!=null");
+                var query = _dataContext.tblCategories.Where("CategoryNameVN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
                     searchResult.Items = query.ToList();

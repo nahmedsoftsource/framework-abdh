@@ -21,7 +21,7 @@
                             <div class="paddingTb4">
 				                <div class="floatLeft" style="width:150px;">
 
-                                    <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((Model.Image != null)?Model.Image:""))%>' /></a>
+                                    <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((Model.Image != null)?Model.Image.Replace("ThumbImagesNewsSmallest", "ThumbImagesNews"):""))%>' /></a>
                                 </div>
 		                        <div class="floatLeft" style="width:530px;">
 				                    <div class="bold fontsize13 textLine"><a href="#" class="color2">Butyl Carbitol (BC)</a></div>
@@ -60,6 +60,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
                 document.getElementById('ListCategoryID').innerHTML = msg;
                 if (document.layers) {
@@ -76,7 +77,6 @@
             }
 
         });
-        //                    $("#ListCategoryID").load('<%=Url.Content("~/NguyenHiep/ListCategory") %>');
     })
                     </script>
                     <div id="ListCategoryID">
@@ -92,6 +92,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
             document.getElementById('ListNewsPromotionID').innerHTML = msg
                 if (document.layers) {
@@ -124,6 +125,7 @@
             global: false,
             type: "POST",
             dataType: "html",
+            async: false,
             success: function(msg) {
             document.getElementById('ListHotNewsID').innerHTML = msg
                 if (document.layers) {
