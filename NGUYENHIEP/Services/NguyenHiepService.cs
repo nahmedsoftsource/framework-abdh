@@ -108,6 +108,11 @@ namespace NGUYENHIEP.Services
             return _da.GetUser(userName,password);
         }
 
+        public tblUser GetUserByDepartment(byte department)
+        {
+            return _da.GetUserByDepartment(department);
+        }
+
         public bool InsertUser(tblUser tbluser)
         {
             return _da.InsertUser(tbluser);
@@ -116,6 +121,15 @@ namespace NGUYENHIEP.Services
         public bool ChangePassword(string username,string oldpassword, string newpassword)
         {
             return _da.ChangePassword(username,oldpassword,newpassword);
+        }
+        #endregion
+
+        #region Service tblEmail
+        public bool InsertEmail(tblEmail email)
+        {
+            if(email.Sender!="" && email.Email!="" && email.Title!="" && email.Content!="")
+                return _da.InsertEmail(email);
+            return false;
         }
         #endregion
 

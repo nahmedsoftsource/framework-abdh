@@ -71,9 +71,11 @@ namespace NGUYENHIEP.Controllers
             tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
             return View(recruitment);
         }
+
         public ActionResult IndexForContact()
         {
             tblInformation contact = new tblInformation();
+            ViewData["Department"] = LoadDataForDropDownList();
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 contact = _nguyenHiepService.GetInformation(true);
@@ -1753,5 +1755,56 @@ namespace NGUYENHIEP.Controllers
 
             return Redirect(Request.UrlReferrer.ToString());
         }
+        #region Send Email
+        private List<SelectListItem> LoadDataForDropDownList()
+        {
+            List<SelectListItem> lsEN = new List<SelectListItem>();
+            List<SelectListItem> lsVN = new List<SelectListItem>();
+
+            lsVN.Add((new SelectListItem { Text = "Ban giám đốc", Value = Department.Managers.ToString(), Selected = true }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kỹ thuật", Value = Department.Techonology.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng marketing", Value = Department.Marketing.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kinh doanh", Value = Department.Sales.ToString(), Selected = false }));
+            lsVN.Add((new SelectListItem { Text = "Phòng kế toán", Value = Department.Accounts.ToString(), Selected = false }));
+
+            lsEN.Add((new SelectListItem { Text = "Managers Department", Value = Department.Managers.ToString(), Selected = true }));
+            lsEN.Add((new SelectListItem { Text = "Technology Department", Value = Department.Techonology.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Marketing Department", Value = Department.Marketing.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Sales Department", Value = Department.Sales.ToString(), Selected = false }));
+            lsEN.Add((new SelectListItem { Text = "Accounts Department", Value = Department.Accounts.ToString(), Selected = false }));
+
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                return lsEN;
+            else
+                return lsVN;
+
+        }
+    [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Send()
+        {
+           //Step 1: Insert to tblEmail
+            tblEmail email = new tblEmail();
+            email.ID = Guid.NewGuid();
+            email.Sender = Request["sender"].ToString();
+            email.SendDate = DateTime.Now;
+            email.Email = Request["email"].ToString();
+            email.SendTo = byte.Parse(Request["department"].ToString());
+            email.Title = Request["title"].ToString();
+            email.Content = Request["content"].ToString();
+            if (_nguyenHiepService.InsertEmail(email))
+            {
+                //Step 2: Send Email
+                tblUser user = new tblUser();
+                user = _nguyenHiepService.GetUserByDepartment(byte.Parse(Request["department"].ToString()));
+                ViewData["Message"] = "Send successful!";
+            }
+            else
+            {
+                ViewData["Message"] = "Send Unsuccessful!";
+            }
+            ViewData["Department"] = LoadDataForDropDownList();
+            return RedirectToAction("IndexForContact");
+        }
+        #endregion
     }
 }
