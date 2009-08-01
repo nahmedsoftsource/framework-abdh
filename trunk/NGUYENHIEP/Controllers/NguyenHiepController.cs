@@ -172,6 +172,20 @@ namespace NGUYENHIEP.Controllers
             }
             return View(listAllNews);
         }
+        public ActionResult ListHotNews(int? pageSize, int? page)
+        {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.HotNew;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, false);
+            }
+            return View(listAllNews);
+        }
         public ActionResult ListAllContruction(int? pageSize, int? page)
         {
             SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
@@ -813,7 +827,7 @@ namespace NGUYENHIEP.Controllers
                         }
                         else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
-                            return RedirectToAction("ViewHotNew");
+                            return RedirectToAction("ViewNews");
                         }
                         else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
                         {
@@ -850,7 +864,7 @@ namespace NGUYENHIEP.Controllers
                         }
                         else if (type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
-                            return RedirectToAction("ViewHotNew");
+                            return RedirectToAction("IndexForNews");
                         }
                         else if (type == NguyenHiep.Common.NewsTypes.Introduction)
                         {
@@ -903,7 +917,7 @@ namespace NGUYENHIEP.Controllers
                         }
                         else if (type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
-                            return RedirectToAction("ViewHotNew");
+                            return RedirectToAction("IndexForNews");
                         }
                         else if (type == NguyenHiep.Common.NewsTypes.Introduction)
                         {
@@ -934,7 +948,7 @@ namespace NGUYENHIEP.Controllers
                         }
                         else if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
-                            return RedirectToAction("ViewHotNew");
+                            return RedirectToAction("ViewNews");
                         }
                         else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Introduction)
                         {

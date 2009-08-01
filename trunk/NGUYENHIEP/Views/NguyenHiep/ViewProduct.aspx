@@ -114,6 +114,36 @@
                     </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="RiightNewsEvent" runat="server">
+<script language="javascript" type="text/javascript">
+
+    var content3 = "";
+    $(document).ready(function() {
+
+        content3 = $.ajax({
+        url: '<%=Url.Content("~/NguyenHiep/ListHotNews") %>',
+            global: false,
+            type: "POST",
+            dataType: "html",
+            success: function(msg) {
+            document.getElementById('ListHotNewsID').innerHTML = msg
+                if (document.layers) {
+                    alert(document.getElementById('ListHotNewsID').innerHTML);
+                    document.getElementById('ListHotNewsID').open();
+                    document.getElementById('ListHotNewsID').write(msg);
+                    document.getElementById('ListHotNewsID').close();
+                    document.getElementById('ListHotNewsID').innerHTML = msg
+                }
+                else {
+                    document.all['ListHotNewsID'].innerHTML = msg;
+                }
+
+            }
+
+        }).responseText;
+    })
+                    </script>
+                    <div id="ListHotNewsID">
+                    </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">
 </asp:Content>
