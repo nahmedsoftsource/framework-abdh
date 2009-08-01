@@ -23,6 +23,34 @@ namespace NGUYENHIEP.Controllers
         {
             return View();
         }
+        public ActionResult IndexForPromotionNews(int? pageSize, int? page)
+        {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.PromotionNew;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
+            }
+            return View(listAllNews);
+        }
+        public ActionResult ListPromotionNews(int? pageSize, int? page)
+        {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.PromotionNew;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
+            }
+            return View(listAllNews);
+        }
         public ActionResult IndexForNews(int? pageSize, int? page)
         {
             SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
@@ -832,6 +860,10 @@ namespace NGUYENHIEP.Controllers
                         {
                             return RedirectToAction("IndexForRecruitment");
                         }
+                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        {
+                            return RedirectToAction("IndexForNews");
+                        }
                     }
 
                 }
@@ -881,6 +913,10 @@ namespace NGUYENHIEP.Controllers
                         {
                             return RedirectToAction("IndexForRecruitment");
                         }
+                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        {
+                            return RedirectToAction("IndexForNews");
+                        }
                     }
                     else if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
                     {
@@ -907,6 +943,10 @@ namespace NGUYENHIEP.Controllers
                         else if (tblnew.Type == NguyenHiep.Common.NewsTypes.Recruitment)
                         {
                             return RedirectToAction("IndexForRecruitment");
+                        }
+                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        {
+                            return RedirectToAction("ViewNews");
                         }
                     }
                 }

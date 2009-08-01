@@ -2,39 +2,38 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
     <%--<%NguyenHiep.Utility.UIHelper.RenderRemotePartial(Html, "ListAllNewsID", "", (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=1");%>--%>
-    <div class="mainCtentSpRight" id="ListAllNewsID">
-        <%Html.RenderPartial("ListAllNews", ViewData); %>
-        <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="2" />
+    <div class="mainCtentSpRight" id="ListAllProductID">
+        <%Html.RenderPartial("ListAllPromotionNews", ViewData); %>
+        <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="3" />
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
-<script language="javascript" type="text/javascript">
-    var a= "";
-    $(document).ready(function() {
-        $.ajaxSetup();
-        $.ajax({
-            url: '<%=Url.Content("~/NguyenHiep/ListCategory") %>',
-            global: false,
-            type: "POST",
-            dataType: "html",
-            success: function(msg) {
-                document.getElementById('ListCategoryID').innerHTML = msg;
-                if (document.layers) {
-                    alert(document.getElementById('ListCategoryID').innerHTML);
-                    document.getElementById('ListCategoryID').open();
-                    document.getElementById('ListCategoryID').write(msg);
-                    document.getElementById('ListCategoryID').close();
-                    document.getElementById('ListCategoryID').innerHTML = msg
-                }
-                else {
-                    document.all['ListCategoryID'].innerHTML = msg;
-                }
+   <script language="javascript" type="text/javascript">
 
-            }
+       var content = "";
+       $(document).ready(function() {
+           content = $.ajax({
+               url: '<%=Url.Content("~/NguyenHiep/ListCategory") %>',
+               global: false,
+               type: "POST",
+               dataType: "html",
+               success: function(msg) {
+                   document.getElementById('ListCategoryID').innerHTML = msg
+                   if (document.layers) {
+                       alert(document.getElementById('ListCategoryID').innerHTML);
+                       document.getElementById('ListCategoryID').open();
+                       document.getElementById('ListCategoryID').write(msg);
+                       document.getElementById('ListCategoryID').close();
+                       document.getElementById('ListCategoryID').innerHTML = msg
+                   }
+                   else {
+                       document.all['ListCategoryID'].innerHTML = msg;
+                   }
 
-        });
-        //                    $("#ListCategoryID").load('<%=Url.Content("~/NguyenHiep/ListCategory") %>');
-    })
+               }
+
+           }).responseText;
+       })
                     </script>
                     <div id="ListCategoryID">
                     </div>
@@ -42,16 +41,15 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
 <script language="javascript" type="text/javascript">
 
-    var content2 = "";
+    var content = "";
     $(document).ready(function() {
-
-    content2 = $.ajax({
+        content = $.ajax({
             url: '<%=Url.Content("~/NguyenHiep/ListPromotionNews") %>',
             global: false,
             type: "POST",
             dataType: "html",
             success: function(msg) {
-                document.getElementById('ListNewsPromotionID').innerHTML = msg
+            document.getElementById('ListNewsPromotionID').innerHTML = msg
                 if (document.layers) {
                     alert(document.getElementById('ListNewsPromotionID').innerHTML);
                     document.getElementById('ListNewsPromotionID').open();
