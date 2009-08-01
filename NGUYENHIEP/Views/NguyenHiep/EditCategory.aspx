@@ -67,7 +67,7 @@
           else
           { %>
           <span style="float:right">
-        <input type="submit" value="<%=Resources.Global.Edit %>">" />
+        <input type="submit" value="<%=Resources.Global.Edit %>" />
         </span>
         <%} %>
         </span>
