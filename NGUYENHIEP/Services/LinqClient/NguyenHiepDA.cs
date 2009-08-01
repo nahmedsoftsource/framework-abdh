@@ -11,7 +11,8 @@ namespace NGUYENHIEP.Services.LinqClient
 {
     public class NguyenHiepDA
     {
-        NguyenHiepDataContext _dataContext = new NguyenHiepDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=NguyenHiep;User ID=sa;Password=vubao29");
+        //NguyenHiepDataContext _dataContext = new NguyenHiepDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=NguyenHiep;User ID=sa;Password=vubao29");
+        NguyenHiepDataContext _dataContext = new NguyenHiepDataContext();
         public tblNew GetNewsByID(Guid newID)
         {
             
