@@ -99,11 +99,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForContructionImages, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForContructionImages, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
             }
             return View(listAllNews);
         }
@@ -113,11 +113,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.NormalProduct;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+                listAllNews = _nguyenHiepService.GetAllProduct(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1),true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+                listAllNews = _nguyenHiepService.GetAllProduct(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), false);
             }
             return View(listAllNews);
         }
@@ -166,11 +166,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
             }
             return View(listAllNews);
         }
@@ -180,11 +180,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.HotNew;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForHotNew, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForHotNew, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.HotNew, false);
             }
             return View(listAllNews);
         }
@@ -194,11 +194,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForContructionImages, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForContructionImages, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, false);
             }
             return View(listAllNews);
         }
@@ -207,11 +207,11 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+                listAllNews = _nguyenHiepService.GetAllProduct(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1),true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllProduct((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+                listAllNews = _nguyenHiepService.GetAllProduct(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1),false);
             }
             return View(listAllNews);
         }
@@ -221,7 +221,7 @@ namespace NGUYENHIEP.Controllers
             if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
             {
                 ViewData["CategoryID"] = categoryID;
-                listAllNews = _nguyenHiepService.GetAllProductByCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), (Guid)categoryID);
+                listAllNews = _nguyenHiepService.GetAllProductByCategory(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), (Guid)categoryID);
             }
 
             return View(listAllNews);
@@ -232,7 +232,7 @@ namespace NGUYENHIEP.Controllers
             if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
             {
                 ViewData["CategoryID"] = categoryID;
-                listAllNews = _nguyenHiepService.GetAllProductByCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), (Guid)categoryID);
+                listAllNews = _nguyenHiepService.GetAllProductByCategory(NguyenHiep.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), (Guid)categoryID);
             }
             
             return View(listAllNews);
@@ -242,11 +242,11 @@ namespace NGUYENHIEP.Controllers
             SearchResult<tblCategory> listAllCategory = new SearchResult<tblCategory>();
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),true);
+                listAllCategory = _nguyenHiepService.GetAllCategory(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1),true);
             }
             else 
             {
-                listAllCategory = _nguyenHiepService.GetAllCategory((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1),false);
+                listAllCategory = _nguyenHiepService.GetAllCategory(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1),false);
             }
 
             return View(listAllCategory);
@@ -1037,7 +1037,14 @@ namespace NGUYENHIEP.Controllers
                     newsID = tblnew.ID;
                     tblnew.CreatedDate = DateTime.Now;
                     _nguyenHiepService.InsertNews(tblnew);
-                    return RedirectToAction("IndexForRecruitment");
+                    if (tmpType == NguyenHiep.Common.NewsTypes.Recruitment)
+                    {
+                        return RedirectToAction("IndexForRecruitment");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.Introduction)
+                    {
+                        return RedirectToAction("IndexForIntroduction");
+                    }
 
                 }
             }
@@ -1752,23 +1759,8 @@ namespace NGUYENHIEP.Controllers
             tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
             return View(introduction);
         }
-        protected List<SelectListItem> BuildNewsTypes()
-        {
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
-            ls.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
-            ls.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
-            ls.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
-            ls.Add((new SelectListItem { Text = "Tin tức tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
-            return ls;
-        }
-        protected List<SelectListItem> BuildProductTypes()
-        {
-            List<SelectListItem> ls = new List<SelectListItem>();
-            ls.Add((new SelectListItem { Text = "Sản phẩm khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
-            ls.Add((new SelectListItem { Text = "Sản phẩm thường", Value = NewsTypes.NormalProduct.ToString() }));
-            return ls;
-        }
+       
+       
 
         public ActionResult SetCulture(string id)
         {
@@ -1811,12 +1803,28 @@ namespace NGUYENHIEP.Controllers
            //Step 1: Insert to tblEmail
             tblEmail email = new tblEmail();
             email.ID = Guid.NewGuid();
-            email.Sender = Request["sender"].ToString();
+            if (Request["sender"] != null)
+            {
+                email.Sender = Request["sender"].ToString();
+            }
+            if (Request["email"] != null)
+            {
+                email.Email = Request["email"].ToString();
+            }
             email.SendDate = DateTime.Now;
-            email.Email = Request["email"].ToString();
-            email.SendTo = byte.Parse(Request["department"].ToString());
-            email.Title = Request["title"].ToString();
-            email.Content = Request["content"].ToString();
+            if (Request["department"] != null)
+            {
+                email.SendTo = byte.Parse(Request["department"].ToString());
+            }
+            if (Request["title"] != null)
+            {
+                email.Title = Request["title"].ToString();
+            }
+            if (Request["content"] != null)
+            {
+                email.Content = Request["content"].ToString();
+            }
+            
             if (_nguyenHiepService.InsertEmail(email))
             {
                 //Step 2: Send Email
