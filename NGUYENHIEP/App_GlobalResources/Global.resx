@@ -297,14 +297,53 @@
   <data name="YourName" xml:space="preserve">
     <value>Tên của bạn</value>
   </data>
+  <data name="AccountInfor" xml:space="preserve">
+    <value>Thông tin tài khoản</value>
+  </data>
   <data name="AvailableInStore" xml:space="preserve">
     <value>Trong kho còn hàng</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Đỗi mật khẩu</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>Thay đổi mật khẩu thành công.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Xác nhận mật khẩu</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Tạo mới tài khỏan</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mật khẩu hiện tại</value>
   </data>
   <data name="EmptyInStore" xml:space="preserve">
     <value>Trong kho hết hàng</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>Email không hợp lệ.</value>
+  </data>
   <data name="IsPromoted" xml:space="preserve">
     <value>Có khuyến mãi</value>
+  </data>
+  <data name="Login1" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="LoginInfo1" xml:space="preserve">
+    <value>Thông tin đăng nhập</value>
+  </data>
+  <data name="Logon" xml:space="preserve">
+    <value>Đăng Nhập</value>
+  </data>
+  <data name="LogonBy" xml:space="preserve">
+    <value>Đăng nhập bởi:</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Thoát</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
     <value>Chưa cập nhật</value>
@@ -312,10 +351,46 @@
   <data name="NotPromoted" xml:space="preserve">
     <value>Không khuyến mãi</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+  </data>
   <data name="ProductDetails" xml:space="preserve">
     <value>Chi tiết sản phẩm</value>
   </data>
   <data name="ProductType" xml:space="preserve">
     <value>Tên loại sản phẩm</value>
+  </data>
+  <data name="RememberPassword" xml:space="preserve">
+    <value>Ghi nhớ mật khẩu</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Tên người dùng</value>
+  </data>
+  <data name="ValidateCreateAccount" xml:space="preserve">
+    <value>Tạo tài khoản không thành công.</value>
+  </data>
+  <data name="ValidateDuplicateEmail" xml:space="preserve">
+    <value>Email này đã tồn tại trong hệ thông. Xin nhập email khác.</value>
+  </data>
+  <data name="ValidateDuplicateUserName" xml:space="preserve">
+    <value>Tên người dùng đã tồn tại trong hệ thống. Xin nhập tên người dùng khác.</value>
+  </data>
+  <data name="ValidateEmail" xml:space="preserve">
+    <value>Bạn phải nhập email.</value>
+  </data>
+  <data name="ValidatePassword" xml:space="preserve">
+    <value>Bạn phải nhập mật khẩu.</value>
+  </data>
+  <data name="ValidatePasswordConfirmPassword" xml:space="preserve">
+    <value>Mật khẩu mới và xác nhận mật khẩu không đồng nhất.</value>
+  </data>
+  <data name="ValidateUserName" xml:space="preserve">
+    <value>Bạn phải nhập tên người dùng.</value>
+  </data>
+  <data name="WarningLogonUnssucessful" xml:space="preserve">
+    <value>Tên người dùng hoặc mật khẩu không chính xác.</value>
+  </data>
+  <data name="WarningPasswordLength" xml:space="preserve">
+    <value>Mật khẩu phải có ít nhất 6 kí tự</value>
   </data>
 </root>

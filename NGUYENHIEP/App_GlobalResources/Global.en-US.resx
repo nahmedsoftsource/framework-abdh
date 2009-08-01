@@ -297,14 +297,53 @@
   <data name="YourName" xml:space="preserve">
     <value>Your Name</value>
   </data>
+  <data name="AccountInfor" xml:space="preserve">
+    <value>Account Information</value>
+  </data>
   <data name="AvailableInStore" xml:space="preserve">
     <value>Available</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ChangePasswordSuccess" xml:space="preserve">
+    <value>Your password has been changed successfully.</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create a New Account</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current Password</value>
   </data>
   <data name="EmptyInStore" xml:space="preserve">
     <value>Empty</value>
   </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>The e-mail address provided is invalid. Please check the value and try again.</value>
+  </data>
   <data name="IsPromoted" xml:space="preserve">
     <value>Promoted</value>
+  </data>
+  <data name="Login1" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginInfo1" xml:space="preserve">
+    <value>Login Information</value>
+  </data>
+  <data name="Logon" xml:space="preserve">
+    <value>Logon</value>
+  </data>
+  <data name="LogonBy" xml:space="preserve">
+    <value>Login by:</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New Password</value>
   </data>
   <data name="NotAvailable" xml:space="preserve">
     <value>N/A</value>
@@ -312,10 +351,43 @@
   <data name="NotPromoted" xml:space="preserve">
     <value>Non promoted</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
   <data name="ProductDetails" xml:space="preserve">
     <value>Product Details</value>
   </data>
   <data name="ProductType" xml:space="preserve">
     <value>Product Type</value>
+  </data>
+  <data name="RememberPassword" xml:space="preserve">
+    <value>Remember password</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="ValidateCreateAccount" xml:space="preserve">
+    <value>Account creation was unsuccessful. Please correct the errors and try again.</value>
+  </data>
+  <data name="ValidateDuplicateEmail" xml:space="preserve">
+    <value>A username for that e-mail address already exists. Please enter a different e-mail address.</value>
+  </data>
+  <data name="ValidateDuplicateUserName" xml:space="preserve">
+    <value>Username already exists. Please enter a different username.</value>
+  </data>
+  <data name="ValidateEmail" xml:space="preserve">
+    <value>You must specify a email.</value>
+  </data>
+  <data name="ValidatePassword" xml:space="preserve">
+    <value>You must specify a password.</value>
+  </data>
+  <data name="ValidatePasswordConfirmPassword" xml:space="preserve">
+    <value>The new password and confirmation password do not match</value>
+  </data>
+  <data name="WarningLogonUnssucessful" xml:space="preserve">
+    <value>The username or password provided is incorrect.</value>
+  </data>
+  <data name="WarningPasswordLength" xml:space="preserve">
+    <value>Passwords are required to be a minimum of 6 characters in length.</value>
   </data>
 </root>
