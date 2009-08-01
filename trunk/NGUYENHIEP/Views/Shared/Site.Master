@@ -57,7 +57,7 @@
                     <div class="barMenuTopLeft">
                         <div class="barMenuTopRight">
                             <ul id="TopMenuTab">
-                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>" class="selected"><span>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/Index/")%>" class="selected"><span>
                                     <%=Resources.Global.Home %></span></a></li>
                                 <li><a href="<%= Url.Content("~/NguyenHiep/IndexForIntroduction/")%>"><span>
                                     <%=Resources.Global.AboutUs %></span></a></li>
