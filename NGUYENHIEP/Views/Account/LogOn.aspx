@@ -7,51 +7,51 @@
                 <div style="line-height: 23px;" class="ctentBarTab">
                     <%=Resources.Global.Logon %>
                 </div>
-                <div class="boxKhuyenmai">
-                    <%= Html.ValidationSummary("") %>
-                    <% using (Html.BeginForm())
-                       { %>
-                    <div>
-                        <fieldset>
-                            <legend>
-                                <%=Resources.Global.AccountInfor %></legend>
-                            <table width="100%">
-                                <tr>
-                                    <td style="width: 165px">
-                                        <label for="username">
-                                            <%=Resources.Global.UserName %></label>
-                                    </td>
-                                    <td>
-                                        <%= Html.TextBox("username") %>
-                                        <%= Html.ValidationMessage("username") %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 165px">
-                                        <label for="password">
-                                            <%=Resources.Global.Password %></label>
-                                    </td>
-                                    <td>
-                                        <%= Html.Password("password") %>
-                                        <%= Html.ValidationMessage("password") %>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 165px">
-                                        <%= Html.CheckBox("rememberMe") %>
-                                        <label class="inline" for="rememberMe">
-                                            <%=Resources.Global.RememberPassword %>?</label>
-                                    </td>
-                                    <td>
-                                        <input type="submit" value="<%=Resources.Global.Logon %>" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    </div>
-                    <% } %>
-                </div>
             </div>
+        </div>
+    </div>
+    <div class="boxKhuyenmai">
+        <%= Html.ValidationSummary("") %>
+        <% using (Html.BeginForm())
+           { %>
+        <div>
+            <fieldset>
+                <legend>
+                    <%=Resources.Global.AccountInfor %></legend>
+                <table width="100%">
+                    <tr>
+                        <td style="width: 165px">
+                            <label for="username">
+                                <%=Resources.Global.UserName %></label>
+                        </td>
+                        <td>
+                            <%= Html.TextBox("username") %>
+                            <%= Html.ValidationMessage("username") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 165px">
+                            <label for="password">
+                                <%=Resources.Global.Password %></label>
+                        </td>
+                        <td>
+                            <%= Html.Password("password") %>
+                            <%= Html.ValidationMessage("password") %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 165px">
+                            <%= Html.CheckBox("rememberMe") %>
+                            <label class="inline" for="rememberMe">
+                                <%=Resources.Global.RememberPassword %>?</label>
+                        </td>
+                        <td>
+                            <input type="submit" value="<%=Resources.Global.Logon %>" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <% } %>
         </div>
     </div>
     <%-- <p>
