@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblInformation>" %>
-
+<form method="post" id="twat">
 <div id="mainCtentSpRight">
     <div class="barCterTab">
         <div class="barCterTabLleft">
@@ -28,20 +28,25 @@
                         </div>
                         <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
                             class="clear">
+                            <%if (HttpContext.Current.Session["username"] != null)
+                              { %>
                             <span style="float: right">
-                                <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null?Model.ID:Guid.Empty)))%>
+                                <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null ? Model.ID : Guid.Empty)))%>
                             </span>
+                            <%} %>
                         </div>
                         <div class="clear">
                         </div>
                     </div>
+                    
                     <table style="line-height: 25px;" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td width="36%" valign="top" class="bold">
                                 <%=Resources.Global.YourName %>:
                             </td>
                             <td width="64%" valign="top">
-                                <input name="name" size="30" class="inputbox" value="" type="text">
+                                <%=Html.TextBox("Sender") %>
+                                <%=Html.ValidationMessage("Sender","*") %>
                             </td>
                         </tr>
                         <tr>
@@ -49,7 +54,8 @@
                                 <%=Resources.Global.EmailAddress %>:
                             </td>
                             <td valign="top">
-                                <input name="name" size="30" class="inputbox" value="" type="text">
+                                <%=Html.TextBox("Email") %>
+                                <%=Html.ValidationMessage("Email","*") %>
                             </td>
                         </tr>
                         <tr>
@@ -57,13 +63,9 @@
                                 <%=Resources.Global.To %>:
                             </td>
                             <td valign="top">
-                                <select name="con_id" class="inputbox">
-                                    <option value="duchungpham12d2@gmail.com"><%=Resources.Global.ManagementBoard %></option>
-                                    <option value="duchungpham12d2@gmail.com"><%=Resources.Global.TechnicalDept %></option>
-                                    <option value="duchungpham12d2@gmail.com"><%=Resources.Global.MarketingDept%></option>
-                                    <option value="duchungpham12d2@gmail.com"><%=Resources.Global.SaleDept %></option>
-                                    <option value="duchungpham12d2@gmail.com"><%=Resources.Global.AccountingDept %></option>
-                                </select>
+                                <%=Html.DropDownList("Department", ((List<SelectListItem>)ViewData["Department"]).AsEnumerable())%>
+                                <%= Html.ValidationMessage("Department", "*")%>
+
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +73,8 @@
                                 <%=Resources.Global.Title %>:
                             </td>
                             <td valign="top">
-                                <input name="name" size="30" class="inputbox" value="" type="text">
+                                <%=Html.TextBox("Title") %>
+                                <%=Html.ValidationMessage("Title", "*")%>
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +82,9 @@
                                 <%=Resources.Global.Content %>:
                             </td>
                             <td valign="top">
-                                <textarea cols="35" rows="10" name="text" id="contact_text" class="inputbox"></textarea>
+                                <%=Html.TextArea("Content", new { @width="500px",@height="200px"})%>
+                                <%=Html.ValidationMessage("Content", "*")%>
+                                
                             </td>
                         </tr>
                         <tr>
@@ -87,10 +92,14 @@
                                 &nbsp;
                             </td>
                             <td class="paddingTb4">
-                            <span style="float:right">
-                                <input type="button" value="<%=Resources.Global.Send %>" />
-                                </span>
-                                <input type="reset" value="<%=Resources.Global.Send %>" />
+                            <span style="float:center">
+                                <input id="send" name="Send" type="button" value="<%=Resources.Global.Send %>" />
+                                </span>                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" colspan=2>
+                                <asp:label runat="server" ID="lblMsg" style="color: #FF0000"></asp:label>   
                             </td>
                         </tr>
                         <tr>
@@ -102,6 +111,8 @@
                             </td>
                         </tr>
                     </table>
+
+                    
                     <div class="clear">
                     </div>
                 </div>
@@ -109,3 +120,27 @@
         </div>
     </div>
 </div>
+<script language="javascript" >
+$("#send").click(function () { 
+    $(document).ready(function() 
+    {
+        $.ajax({
+            url: '<%=Url.Content("~/NguyenHiep/Send") %>',
+            global: false,
+            data:{sender : document.getElementById("sender").value,
+                  email : document.getElementById("email").value,
+                  department : document.getElementById("department").value,
+                  title : document.getElementById("title").value,
+                  content : document.getElementById("content").value},
+            type: "POST",
+            dataType: "html",
+            success: function(msg) {
+
+            }
+            })})
+      
+    }
+    );
+
+</script>
+                    </form>

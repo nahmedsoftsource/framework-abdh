@@ -346,6 +346,17 @@ namespace NGUYENHIEP.Services.LinqClient
             return null;
         }
 
+        public tblUser GetUserByDepartment(byte department)
+        {
+            var query = _dataContext.tblUsers.Where("Department=@0", department);
+            if (query.ToList().Count() > 0)
+            {
+                tblUser tbluser = query.ToList().First();
+                return tbluser;
+            }
+            return null;
+        }
+
         public bool ChangePassword(string username, string oldpassword, string newpassword)
         {
             tblUser tbluser = new tblUser();
@@ -368,6 +379,19 @@ namespace NGUYENHIEP.Services.LinqClient
             if (tbluser != null && tbluser.ID != null && !tbluser.ID.Equals(Guid.Empty))
             {
                 _dataContext.tblUsers.InsertOnSubmit(tbluser);
+                _dataContext.SubmitChanges();
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region Data Access tblEmail
+        public bool InsertEmail(tblEmail email)
+        {
+            if (email != null && email.ID != null && !email.ID.Equals(Guid.Empty))
+            {
+                _dataContext.tblEmails.InsertOnSubmit(email);
                 _dataContext.SubmitChanges();
                 return true;
             }
