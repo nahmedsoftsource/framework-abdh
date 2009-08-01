@@ -14,20 +14,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="contentMnu">
+                <div class="contentMnu" >
                     <ul>
                         <% foreach (var item in Model.Items)
                            {%>
                         <li>
-                            <%=Html.ActionLink(item.CategoryNameVN, "ViewNews", new { categoryID = item.ID }, new { @class = "color2" })%></li>
+                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                          { %>
+                            <%=Html.ActionLink((item.CategoryNameEN!=null)?item.CategoryNameEN:"No Name", "IndexForProductByCategory", new { categoryID = item.ID }, new { @class = "color2" })%>
+                            <%}
+                          else
+                          { %>
+                          <%=Html.ActionLink((item.CategoryNameVN != null) ? item.CategoryNameVN : "Không có tên", "IndexForProductByCategory", new { categoryID = item.ID }, new { @class = "color2" })%>
+                            <%} %>
+                        </li>
                         <%} %>
                     </ul>
                 </div>
-            </div>
-        </div>
+                            
     </div>
 
-<div class="prevNext">
+ <div class="prevNext">
     <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
@@ -46,14 +53,11 @@
             }
           )
        %>
-       <div class="prevNext">
- <span style="float:right">
+        <span style="float:right">
  <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", Resources.Global.AddCategory, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null) + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : "")%>
  </span>
-    %>
-</div>
-<div class="prevNext">
-    <span style="float: right">
-        <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddCategory", Resources.Global.AddCategory, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory", "NguyenHiep") + "?newsID=" + null)%>
-    </span>
-</div>
+ <br />
+  </div>
+                
+
+    

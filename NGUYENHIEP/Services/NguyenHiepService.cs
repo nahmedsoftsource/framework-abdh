@@ -50,17 +50,21 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetInformation(id,isEN);
         }
-        public List<tblCategory> GetAllCategory()
+        public List<tblCategory> GetAllCategory(bool isEN)
         {
-            return _da.GetAllCategory();
+            return _da.GetAllCategory(isEN);
         }
-        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page)
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page,bool isEN)
         {
-            return _da.GetAllCategory(pageSize, page);
+            return _da.GetAllCategory(pageSize, page,isEN);
         }
         public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
         {
             return _da.GetAllProduct(pageSize, page,isEN);
+        }
+        public SearchResult<tblProduct> GetAllProductByCategory(int pageSize, int page, Guid? categoryID)
+        {
+            return _da.GetAllProductByCategory(pageSize, page, categoryID);
         }
         public void UpdateNews(tblNew tblnew)
         {

@@ -87,7 +87,9 @@
                                 &nbsp;
                             </td>
                             <td class="paddingTb4">
+                            <span style="float:right">
                                 <input type="button" value="<%=Resources.Global.Send %>" />
+                                </span>
                                 <input type="reset" value="<%=Resources.Global.Send %>" />
                             </td>
                         </tr>

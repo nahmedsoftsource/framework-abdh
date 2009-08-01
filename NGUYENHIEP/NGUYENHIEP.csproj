@@ -859,6 +859,9 @@
       <LastGenOutput>Global.en-US.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
+    <Content Include="Views\NguyenHiep\IndexForProductByCategory.aspx" />
+    <Content Include="Views\NguyenHiep\ListAllProductByCategory.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\NguyenHiep.dbml.layout">

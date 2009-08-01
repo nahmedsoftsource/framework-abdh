@@ -50,5 +50,44 @@
 </div>
 <%} %>
 </asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
+<script language="javascript" type="text/javascript">
+    var a= "";
+    $(document).ready(function() {
+        $.ajaxSetup();
+        $.ajax({
+            url: '<%=Url.Content("~/NguyenHiep/ListCategory") %>',
+            global: false,
+            type: "POST",
+            dataType: "html",
+            success: function(msg) {
+                document.getElementById('ListCategoryID').innerHTML = msg;
+                if (document.layers) {
+                    alert(document.getElementById('ListCategoryID').innerHTML);
+                    document.getElementById('ListCategoryID').open();
+                    document.getElementById('ListCategoryID').write(msg);
+                    document.getElementById('ListCategoryID').close();
+                    document.getElementById('ListCategoryID').innerHTML = msg
+                }
+                else {
+                    document.all['ListCategoryID'].innerHTML = msg;
+                }
+
+            }
+
+        });
+        //                    $("#ListCategoryID").load('<%=Url.Content("~/NguyenHiep/ListCategory") %>');
+    })
+                    </script>
+                    <div id="ListCategoryID">
+                    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
+</asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="RiightNewsEvent" runat="server">
+</asp:Content>
+<asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">
+</asp:Content>
+
 
 
