@@ -20,7 +20,7 @@
     <table width="100%">
     <tr>
         <td class="l" style="width:30%">
-            <label for="CategoryNameVN"><%=Resources.Global.VNName %>:</label>
+            <label for="CategoryNameVN"><%=Resources.Global.Name %>:</label>
         </td>
         
         <td class="l">
@@ -41,7 +41,7 @@
     
     <tr>
         <td class="l"  style="width:30%">
-            <label for="DescriptionVN"><%=Resources.Global.VNDescription %>:</label>
+            <label for="DescriptionVN"><%=Resources.Global.Description %>:</label>
         </td>
         
         <td class="l">

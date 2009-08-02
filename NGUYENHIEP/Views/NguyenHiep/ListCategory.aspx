@@ -28,6 +28,10 @@
                               { %>
                             <%=Html.ActionLink((item.CategoryNameVN != null) ? item.CategoryNameVN : "Không có tên", "IndexForProductByCategory", new { categoryID = item.ID }, new { @class = "color2" })%>
                             <%} %>
+                            <%if (HttpContext.Current.Session["UserName"]!=null && HttpContext.Current.Response.Cookies["Culture"] != null)
+                              { %>
+                            <%=Html.ActionLink(Resources.Global.Edit, "EditCategory", new { categoryID = item.ID }, new { @class = "color2" })%>
+                            <%}%>
                         </li>
                         <%} %>
                     </ul>

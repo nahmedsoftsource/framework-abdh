@@ -159,6 +159,16 @@
       <%} %>
         <tr>
             <td colspan="2" class="c">
+            <%if (Model != null && Model.ID != null && !Model.ID.Equals(Guid.Empty))
+              {%>
+              <%
+                  byte type = ((Model.Type.HasValue)?(Model.Type.Value):NguyenHiep.Common.NewsTypes.News);
+                  %>
+                
+            <span style="float: left">
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "Delete", Resources.Global.Delete, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews") + "?newsID=" + Model.ID + "&Type=" + type+ "&Delete=true")%>
+</span>
+<%} %>
             <span style="float:right">
                 <%if (ViewData["AddNews"] != null)
                   { %>

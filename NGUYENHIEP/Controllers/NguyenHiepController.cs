@@ -129,7 +129,7 @@ namespace NGUYENHIEP.Controllers
         public ActionResult IndexForContruction(int? pageSize, int? page)
         {
             SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
-            ViewData["Type"] = NguyenHiep.Common.NewsTypes.Contruction;
+            ViewData["TypeNews"] = NguyenHiep.Common.NewsTypes.Contruction;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForContructionImages, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.Contruction, true);
@@ -154,12 +154,12 @@ namespace NGUYENHIEP.Controllers
             }
             return View(listAllNews);
         }
-        public ActionResult ViewNews(Guid? newsID, byte? type)
+        public ActionResult ViewNews(Guid? newsID,byte? typeNews)
         {
-            ViewData["Type"] = type;
-            if (!type.HasValue)
+            ViewData["TypeNews"] = typeNews;
+            if (!typeNews.HasValue)
             {
-                type = (byte)NguyenHiep.Common.NewsTypes.News;
+                typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
             }
             if (newsID != null && !newsID.Equals(Guid.Empty))
             {
@@ -177,9 +177,9 @@ namespace NGUYENHIEP.Controllers
             else if (TempData["NewsID"] != null)
             {
                 if (TempData["Type"] == null)
-                    type = (byte)NguyenHiep.Common.NewsTypes.News;
+                    typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
                 else
-                    type = (byte)TempData["Type"];
+                    typeNews = (byte)TempData["Type"];
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
                     tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"],true);
@@ -332,6 +332,49 @@ namespace NGUYENHIEP.Controllers
             {
                 ViewData["CurrentType"] = NguyenHiep.Common.NewsTypes.News;
             }
+            byte tmpType = NguyenHiep.Common.NewsTypes.News;
+            if (type.HasValue)
+            {
+                tmpType = (byte)type;
+            }
+            #region delete
+            if (Request["Delete"] != null)
+            {
+                if (newsID.HasValue && !newsID.Equals(Guid.Empty))
+                {
+                    _nguyenHiepService.DeleteNews((Guid)newsID);
+
+                    if (tmpType == NguyenHiep.Common.NewsTypes.News)
+                    {
+                        return RedirectToAction("IndexForNews");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.Contruction)
+                    {
+                        return RedirectToAction("IndexForContruction");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.HotNew)
+                    {
+                        return RedirectToAction("IndexForNews");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.Introduction)
+                    {
+                        return RedirectToAction("IndexForIntroduction");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.Recruitment)
+                    {
+                        return RedirectToAction("IndexForRecruitment");
+                    }
+                    else if (tmpType == NguyenHiep.Common.NewsTypes.PromotionNew)
+                    {
+                        return RedirectToAction("IndexForNews");
+                    }
+                    else
+                    {
+                        return RedirectToAction("IndexForNews");
+                    }
+                }
+            }
+            #endregion
             List<SelectListItem> lsEN = new List<SelectListItem>();
             List<SelectListItem> lsVN = new List<SelectListItem>();
             tblNew tblnew = null;
@@ -752,7 +795,32 @@ namespace NGUYENHIEP.Controllers
         public ActionResult EditProduct(Guid? newsID, byte? type)
         {
             ViewData["Type"] = type;
+            byte tmpType = NguyenHiep.Common.NewsTypes.NormalProduct;
+            if (type.HasValue)
+            {
+                tmpType = (byte)type;
+            }
+            #region delete
+            if (Request["Delete"] != null)
+            {
+                if (newsID.HasValue && !newsID.Equals(Guid.Empty))
+                {
+                    _nguyenHiepService.DeleteProduct((Guid)newsID);
 
+                    if (tmpType == NguyenHiep.Common.NewsTypes.NormalProduct)
+                    {
+                        return RedirectToAction("IndexForProduct");
+                    }else if (tmpType == NguyenHiep.Common.NewsTypes.PromotionNew)
+                    {
+                        return RedirectToAction("IndexForPromotionNews");
+                    }
+                    else
+                    {
+                        return RedirectToAction("IndexForProduct");
+                    }
+                }
+            }
+            #endregion
             List<SelectListItem> categories = new List<SelectListItem>();
             List<tblCategory> listCategory = new List<tblCategory>();
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
@@ -834,19 +902,30 @@ namespace NGUYENHIEP.Controllers
         }
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew, byte? type)
+        public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew, byte? typeNews)
         {
-            
+            if (tblnew != null)
+            {
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    ViewData["ContentEN"] = tblnew.ContentEN;
+                }
+                else
+                {
+                    ViewData["ContentVN"] = tblnew.ContentVN;
+                }
+            }
             byte tmpType = NguyenHiep.Common.NewsTypes.News;
             if (tblnew.Type.HasValue)
             {
                 tmpType = (byte)tblnew.Type;
             }
-            else if (type.HasValue)
+            else if (typeNews.HasValue)
             {
-                tmpType = (byte)type;
+                tmpType = (byte)typeNews;
             }
             
+           
             ViewData["CurrentType"] = tmpType;
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
@@ -985,29 +1064,29 @@ namespace NGUYENHIEP.Controllers
                         ModelState.Clear();
                         insert = true;
                         TempData["Type"] = tblnew.Type;
-                        if (!type.HasValue)
-                            type = (byte)NguyenHiep.Common.NewsTypes.News;
-                        if (type == NguyenHiep.Common.NewsTypes.News)
+                        if (!typeNews.HasValue)
+                            typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
+                        if (typeNews == NguyenHiep.Common.NewsTypes.News)
                         {
                             return RedirectToAction("IndexForNews");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Contruction)
                         {
                             return RedirectToAction("IndexForContruction");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.HotNew)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.HotNew)
                         {
                             return RedirectToAction("IndexForNews");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Introduction)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Introduction)
                         {
                             return RedirectToAction("IndexForIntroduction");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Recruitment)
                         {
                             return RedirectToAction("IndexForRecruitment");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.PromotionNew)
                         {
                             return RedirectToAction("IndexForNews");
                         }
@@ -1038,29 +1117,29 @@ namespace NGUYENHIEP.Controllers
                         newsID = tblnew.ID;
                         _nguyenHiepService.InsertNews(tblnew);
                         TempData["Type"] = tblnew.Type;
-                        if (!type.HasValue)
-                            type = (byte)NguyenHiep.Common.NewsTypes.News;
-                        if (type == NguyenHiep.Common.NewsTypes.News)
+                        if (!typeNews.HasValue)
+                            typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
+                        if (typeNews == NguyenHiep.Common.NewsTypes.News)
                         {
                             return RedirectToAction("IndexForNews");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Contruction)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Contruction)
                         {
                             return RedirectToAction("IndexForContruction");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.HotNew)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.HotNew)
                         {
                             return RedirectToAction("IndexForNews");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Introduction)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Introduction)
                         {
                             return RedirectToAction("IndexForIntroduction");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.Recruitment)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.Recruitment)
                         {
                             return RedirectToAction("IndexForRecruitment");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        else if (typeNews == NguyenHiep.Common.NewsTypes.PromotionNew)
                         {
                             return RedirectToAction("IndexForNews");
                         }
@@ -1091,7 +1170,7 @@ namespace NGUYENHIEP.Controllers
                         {
                             return RedirectToAction("IndexForRecruitment");
                         }
-                        else if (type == NguyenHiep.Common.NewsTypes.PromotionNew)
+                        else if (tblnew.Type == NguyenHiep.Common.NewsTypes.PromotionNew)
                         {
                             return RedirectToAction("ViewNews");
                         }
@@ -1310,7 +1389,7 @@ namespace NGUYENHIEP.Controllers
             else
             #endregion
                 #region Add
-                if (type.HasValue && type.Value == NewsTypes.News)
+                if (typeNews.HasValue && typeNews.Value == NewsTypes.News)
                 {
                     lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
                     lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1330,7 +1409,7 @@ namespace NGUYENHIEP.Controllers
 
                 }
                 else
-                    if (type.HasValue && type.Value == NewsTypes.Contruction)
+                    if (typeNews.HasValue && typeNews.Value == NewsTypes.Contruction)
                     {
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString() }));
@@ -1349,7 +1428,7 @@ namespace NGUYENHIEP.Controllers
                         lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
 
                     }
-                    else if (type.HasValue && type.Value == NewsTypes.HotNew)
+                    else if (typeNews.HasValue && typeNews.Value == NewsTypes.HotNew)
                     {
                         lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1367,7 +1446,7 @@ namespace NGUYENHIEP.Controllers
                         lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
                         lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
                     }
-                    else if (type.HasValue && type.Value == NewsTypes.Introduction)
+                    else if (typeNews.HasValue && typeNews.Value == NewsTypes.Introduction)
                     {
                         lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1385,7 +1464,7 @@ namespace NGUYENHIEP.Controllers
                         lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
                         lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
                     }
-                    else if (type.HasValue && type.Value == NewsTypes.NormalProduct)
+                    else if (typeNews.HasValue && typeNews.Value == NewsTypes.NormalProduct)
                     {
                         lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1403,7 +1482,7 @@ namespace NGUYENHIEP.Controllers
                         lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
                         lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
                     }
-                    else if (type.HasValue && type.Value == NewsTypes.PromotionNew)
+                    else if (typeNews.HasValue && typeNews.Value == NewsTypes.PromotionNew)
                     {
                         lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1421,7 +1500,7 @@ namespace NGUYENHIEP.Controllers
                         lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
                         lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
                     }
-                    else if (type.HasValue && type.Value == NewsTypes.Recruitment)
+                    else if (typeNews.HasValue && typeNews.Value == NewsTypes.Recruitment)
                     {
                         lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = true }));
                         lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
@@ -1981,8 +2060,8 @@ namespace NGUYENHIEP.Controllers
             if (_nguyenHiepService.InsertEmail(email))
             {
                 //Step 2: Send Email
-                tblUser user = new tblUser();
-                user = _nguyenHiepService.GetUserByDepartment(byte.Parse(Request["department"].ToString()));
+                List<tblUser> allUser = new List<tblUser>();
+                allUser = _nguyenHiepService.GetUserByDepartment(byte.Parse(Request["department"].ToString()));
                 /*Hung implement sending mail by SMTP via google*/
                 #region Send mail
                 //set up SMTP client
@@ -1997,8 +2076,11 @@ namespace NGUYENHIEP.Controllers
 
                 //Build up email message
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("duchungpham12d2@gmail.com", "Nguyen Hiep site Admin");
-                mail.To.Add(user.Email);
+                mail.From = new MailAddress("admin.nguyen.hiep@gmail.com", "Nguyen Hiep site Admin");
+                foreach (tblUser user in allUser)
+                {
+                    mail.To.Add(user.Email);
+                }
                 mail.Subject = email.Title;
                 mail.Body = String.Format("<b>Customer Name:</b> {0} <br/><b>Date:</b> {1}<br/> <b>From email address:</b> {2}<br/> <b>Person in charge:</b> {3}<br/><br/> <b>Content detail:<b><br/><hr> {4}",
                                      email.Sender, email.SendDate, email.Email, Request["departmentname"].ToString(), email.Content);
