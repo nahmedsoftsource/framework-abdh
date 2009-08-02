@@ -80,14 +80,6 @@
                     </div>
                 </div>
                 <div id="mainColunmLeft" class="clear">
-                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
-                    </asp:ContentPlaceHolder>
-                    <%
-                        if (HttpContext.Current.Session["UserName"] != null)
-                            LoginPanelLeft.Visible = true;
-                        else
-                            LoginPanelLeft.Visible = false;
-                    %>
                     <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server">
                         <div id="LoginPanel">
                             <div id="mainMnuLeft">
@@ -139,6 +131,15 @@
                             </div>
                         </div>
                     </asp:ContentPlaceHolder>
+
+                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <%
+                        if (HttpContext.Current.Session["UserName"] != null)
+                            LoginPanelLeft.Visible = true;
+                        else
+                            LoginPanelLeft.Visible = false;
+                    %>
                     <asp:ContentPlaceHolder ID="PromotionAnnoucement" runat="server">
                     </asp:ContentPlaceHolder>
                     <div class="lienketweb  clear">

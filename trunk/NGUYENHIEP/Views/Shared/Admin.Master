@@ -77,8 +77,6 @@
                     </div>
                 </div>
                 <div id="mainColunmLeft" class="clear">
-                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
-                    </asp:ContentPlaceHolder>
                     <%
                         if (HttpContext.Current.Session["UserName"] != null)
                             LoginPanelLeft.Visible = true;
@@ -136,6 +134,9 @@
                             </div>
                         </div>
                     </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
+                    </asp:ContentPlaceHolder>
+                    
                 </div>
                 <div id="mainColunmRight">
                     <div id="mainCtentSpRight">
