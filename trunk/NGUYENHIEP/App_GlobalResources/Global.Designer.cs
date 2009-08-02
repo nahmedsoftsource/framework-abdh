@@ -124,11 +124,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm tin tức/sự kiện.
+        /// </summary>
+        internal static string AddNewsEvent {
+            get {
+                return ResourceManager.GetString("AddNewsEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thêm sản phẩm.
         /// </summary>
         internal static string AddProduct {
             get {
                 return ResourceManager.GetString("AddProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thêm tin khuyến mãi.
+        /// </summary>
+        internal static string AddPromotion {
+            get {
+                return ResourceManager.GetString("AddPromotion", resourceCulture);
             }
         }
         
@@ -241,7 +259,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tạo.
+        ///   Looks up a localized string similar to Tạo mới.
         /// </summary>
         internal static string Create {
             get {
@@ -313,11 +331,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sửa tin tức/sự kiện.
+        /// </summary>
+        internal static string EditNewsEvent {
+            get {
+                return ResourceManager.GetString("EditNewsEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chỉnh sửa sản phẩm.
         /// </summary>
         internal static string EditProduct {
             get {
                 return ResourceManager.GetString("EditProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sửa tin khuyến mãi.
+        /// </summary>
+        internal static string EditPromotion {
+            get {
+                return ResourceManager.GetString("EditPromotion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hình hiện tại.
+        /// </summary>
+        internal static string EmageCurrent {
+            get {
+                return ResourceManager.GetString("EmageCurrent", resourceCulture);
             }
         }
         
