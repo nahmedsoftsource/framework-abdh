@@ -2000,7 +2000,7 @@ namespace NGUYENHIEP.Controllers
                 mail.From = new MailAddress("duchungpham12d2@gmail.com", "Nguyen Hiep site Admin");
                 mail.To.Add(user.Email);
                 mail.Subject = email.Title;
-                mail.Body = String.Format("<h4>Customer Name:</h4><b> {0}</b> <br/><h4>Date:</h4> <b>{1}</b><br/> <h4>From email address:</h4> <b>{2}</b><br/> <h4>Person in charge:</h4> {3}<br/><br/> <h4>Content detail:</h4><br/> {4}",
+                mail.Body = String.Format("<b>Customer Name:</b> {0} <br/><b>Date:</b> {1}<br/> <b>From email address:</b> {2}<br/> <b>Person in charge:</b> {3}<br/><br/> <b>Content detail:<b><br/> {4}",
                                      email.Sender, email.SendDate, email.Email, Request["departmentname"].ToString(), email.Content);
                 mail.IsBodyHtml = true;
                 mail.BodyEncoding = Encoding.UTF8;
