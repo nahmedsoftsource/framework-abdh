@@ -839,9 +839,9 @@ namespace NGUYENHIEP.Controllers
                     {
                         ModelState.AddModelError("ContentEN", "Content field is required");
                     }
-                    else if (tblnew.ContentEN.Length >= 4000)
+                    else if (tblnew.ContentEN.Length >= 16000)
                     {
-                        ModelState.AddModelError("ContentEN", "Input no more than 4000 characters");
+                        ModelState.AddModelError("ContentEN", "Input no more than 16000 characters");
                     }
                     
 
@@ -870,9 +870,9 @@ namespace NGUYENHIEP.Controllers
                     {
                         ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
                     }
-                    else if (tblnew.ContentVN.Length >= 4000)
+                    else if (tblnew.ContentVN.Length >= 16000)
                     {
-                        ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 4000 ký tự");
+                        ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 16000 ký tự");
                     }
                 }
                 if (file != null && file.ContentLength > 0 && newsID != null && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
@@ -1064,9 +1064,9 @@ namespace NGUYENHIEP.Controllers
                         {
                             ModelState.AddModelError("ContentEN", "Content field is required");
                         }
-                        else if (tblnew.ContentEN.Length >= 4000)
+                        else if (tblnew.ContentEN.Length >= 16000)
                         {
-                            ModelState.AddModelError("ContentEN", "Input no more than 4000 characters");
+                            ModelState.AddModelError("ContentEN", "Input no more than 16000 characters");
                         }
 
                         
@@ -1077,9 +1077,9 @@ namespace NGUYENHIEP.Controllers
                         {
                             ModelState.AddModelError("ContentVN", "Cần nhập nội dung");
                         }
-                        else if (tblnew.ContentVN.Length >= 4000)
+                        else if (tblnew.ContentVN.Length >= 16000)
                         {
-                            ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 4000 ký tự");
+                            ModelState.AddModelError("ContentVN", "Tiêu đề nhập không quá 16000 ký tự");
                         }
                     }
                     
@@ -1468,9 +1468,9 @@ namespace NGUYENHIEP.Controllers
                 {
                     ModelState.AddModelError("Description", "Description field is required");
                 }
-                else if (tblproduct.Description.Length > 4000)
+                else if (tblproduct.Description.Length > 16000)
                 {
-                    ModelState.AddModelError("Description", "Input no more than 4000 characters");
+                    ModelState.AddModelError("Description", "Input no more than 16000 characters");
                 }
 
 
@@ -1501,14 +1501,18 @@ namespace NGUYENHIEP.Controllers
                 {
                     ModelState.AddModelError("Description", "Cần nhập chi tiết ");
                 }
-                else if (tblproduct.Description.Length > 4000)
+                else if (tblproduct.Description.Length > 16000)
                 {
-                    ModelState.AddModelError("Description", "Không nhập quá 4000 ký tự");
+                    ModelState.AddModelError("Description", "Không nhập quá 16000 ký tự");
                 }
             }
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
+            string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
+            string pathFolderThumbSmallest = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNewsSmallest"]);
             bool flag = false;
             if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
+            if (!Directory.Exists(pathFolderThumb)) Directory.CreateDirectory(pathFolderThumb);
+            if (!Directory.Exists(pathFolderThumbSmallest)) Directory.CreateDirectory(pathFolderThumbSmallest);
 
             foreach (string inputTagName in Request.Files)
             {
