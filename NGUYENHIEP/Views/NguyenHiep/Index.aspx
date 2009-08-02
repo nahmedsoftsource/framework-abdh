@@ -21,7 +21,7 @@
                             async: false,
                             dataType: "html",
                             success: function(msg) {
-                                document.getElementById('ListCategoryID').innerHTML = msg;
+                                
                                 if (document.layers) {
                                     document.getElementById('ListCategoryID').open();
                                     document.getElementById('ListCategoryID').write(msg);
@@ -29,7 +29,7 @@
                                     document.getElementById('ListCategoryID').innerHTML = msg;
                                 }
                                 else {
-                                    document.all['ListCategoryID'].innerHTML = msg;
+                                    document.getElementById('ListCategoryID').innerHTML = msg;
                                 }
 
                             }
@@ -53,7 +53,7 @@
             dataType: "html",
             async: false,
             success: function(msg) {
-                document.getElementById('ListNewsPromotionID').innerHTML = msg;
+                
                 if (document.layers) {
                     document.getElementById('ListNewsPromotionID').open();
                     document.getElementById('ListNewsPromotionID').write(msg);
@@ -61,7 +61,7 @@
                     document.getElementById('ListNewsPromotionID').innerHTML = msg;
                 }
                 else {
-                    document.all['ListNewsPromotionID'].innerHTML = msg;
+                    document.getElementById('ListNewsPromotionID').innerHTML = msg;
                 }
 
             }
@@ -86,7 +86,7 @@
             dataType: "html",
             async: false,
             success: function(msg) {
-                document.getElementById('ListHotNewsID').innerHTML = msg;
+                
                 if (document.layers) {
                     document.getElementById('ListHotNewsID').open();
                     document.getElementById('ListHotNewsID').write(msg);
@@ -94,7 +94,7 @@
                     document.getElementById('ListHotNewsID').innerHTML = msg;
                 }
                 else {
-                    document.all['ListHotNewsID'].innerHTML = msg;
+                    document.getElementById('ListHotNewsID').innerHTML = msg;
                 }
 
             }
