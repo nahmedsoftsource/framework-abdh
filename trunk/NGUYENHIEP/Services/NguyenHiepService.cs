@@ -157,5 +157,9 @@ namespace NGUYENHIEP.Services
         {
             _da.DeleteProduct(productID);
         }
+        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
+        {
+            return _da.GetCategoryByID(categoryID, isEN);
+        }
     }
 }

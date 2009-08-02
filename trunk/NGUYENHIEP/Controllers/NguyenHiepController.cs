@@ -708,12 +708,27 @@ namespace NGUYENHIEP.Controllers
             return View(tblnew);
             #endregion
         }
-        public ActionResult EditCategory(Guid? newsID)
+        public ActionResult EditCategory(Guid? categoryID)
         {
-
-            if (newsID != null)
+            if (Request["Delete"] != null)
             {
-                tblCategory tblCategory = new tblCategory();// = _nguyenHiepService.GetCategoryByID((Guid)newsID);
+                if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+                {
+                    _nguyenHiepService.DeleteCategory((Guid)categoryID);
+                    return RedirectToAction("IndexForProduct");
+                }
+            }
+            if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+            {
+                tblCategory tblCategory = new tblCategory();
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblCategory = _nguyenHiepService.GetCategoryByID((Guid)categoryID, true);
+                }
+                else
+                {
+                    tblCategory = _nguyenHiepService.GetCategoryByID((Guid)categoryID, false);
+                }
 
                 ViewData["NameVN"] = tblCategory.CategoryNameVN;
                 ViewData["NameEN"] = tblCategory.CategoryNameVN;
@@ -732,65 +747,64 @@ namespace NGUYENHIEP.Controllers
 
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditCategory(Guid? newsID, [Bind(Exclude = "ID")] tblCategory tblnew, byte? type)
+        public ActionResult EditCategory(Guid? categoryID, [Bind(Exclude = "ID")] tblCategory tblcategory, byte? type)
         {
-            bool flag = false;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                if (tblnew != null && String.IsNullOrEmpty(tblnew.CategoryNameEN))
+                if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryNameEN))
                 {
                     ModelState.AddModelError("CategoryNameEN", "Category name is required");
                 }
-                else if (tblnew != null && tblnew.CategoryNameEN.Length >= 100)
+                else if (tblcategory != null && tblcategory.CategoryNameEN.Length >= 100)
                 {
                     ModelState.AddModelError("CategoryNameEN", "Input no more than 100 characters");
                 }
-                if (tblnew != null && !String.IsNullOrEmpty(tblnew.DescriptionEN) && tblnew.DescriptionEN.Length >= 250)
+                if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.DescriptionEN) && tblcategory.DescriptionEN.Length >= 250)
                 {
                     ModelState.AddModelError("CategoryNameEN", "Input no more than 250 characters");
                 }
             }
             else
             {
-                if (tblnew != null && String.IsNullOrEmpty(tblnew.CategoryNameVN))
+                if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryNameVN))
                 {
                     ModelState.AddModelError("CategoryNameVN", "Cần nhập tên loại sản phẩm");
                 }
-                else if (tblnew != null && tblnew.CategoryNameVN.Length >= 100)
+                else if (tblcategory != null && tblcategory.CategoryNameVN.Length >= 100)
                 {
                     ModelState.AddModelError("CategoryNameVN", "Không nhập quá 100 ký tự");
                 }
-                if (tblnew != null && !String.IsNullOrEmpty(tblnew.DescriptionVN) && tblnew.DescriptionVN.Length >= 250)
+                if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.DescriptionVN) && tblcategory.DescriptionVN.Length >= 250)
                 {
                     ModelState.AddModelError("DescriptionVN", "Không nhập quá 250 ký tự");
                 }
             }
-            if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty) && ModelState.IsValid)
+            if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty) && ModelState.IsValid)
             {
-                _nguyenHiepService.UpdateCategory(tblnew);
-                TempData["CategoryID"] = newsID;
+                tblcategory.ID = (Guid)categoryID;
+                _nguyenHiepService.UpdateCategory(tblcategory);
+                TempData["CategoryID"] = categoryID;
                 //todo: view one category
                 return RedirectToAction("IndexForProductByCategory");
             }
-            else if ((!newsID.HasValue || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
-            {
-                flag = true;
-                tblnew.ID = Guid.NewGuid();
-                newsID = tblnew.ID;
+            else if ((!categoryID.HasValue || categoryID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
+            {         
+                tblcategory.ID = Guid.NewGuid();
+                categoryID = tblcategory.ID;
 
-                TempData["CategoryID"] = newsID;
-                _nguyenHiepService.InsertCategory(tblnew);
+                TempData["CategoryID"] = categoryID;
+                _nguyenHiepService.InsertCategory(tblcategory);
                 //todo: view one category
                 return RedirectToAction("IndexForProductByCategory");
             }
 
 
-            if (newsID == null)
+            if (categoryID == null)
             {
                 ViewData["AddNews"] = true;
             }
 
-            return View(tblnew);
+            return View(tblcategory);
         }
         public ActionResult EditProduct(Guid? newsID, byte? type)
         {
