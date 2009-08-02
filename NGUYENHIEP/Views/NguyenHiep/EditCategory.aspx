@@ -59,6 +59,13 @@
         
     <tr>
         <td colspan="2" class="c"  style="width:30%">
+        <%if (Model != null && Model.ID != null && !Model.ID.Equals(Guid.Empty))
+              {%>
+                
+            <span style="float: left">
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "Delete", Resources.Global.Delete, (new UrlHelper(ViewContext.RequestContext)).Action("EditCategory") + "?categoryID=" + Model.ID +"&Delete=true")%>
+</span>
+<%} %>
         <span style="float:right">
         <%if (ViewData["AddNews"] != null)
           { %>

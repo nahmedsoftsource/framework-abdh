@@ -29,7 +29,14 @@
 				                    <div class="textLine"><span class="bold"><%=Resources.Global.Warranty %>:</span><%=((Model.WarrantyTime != null) ? Model.WarrantyTime : "")%></div>
 
 			                        <div class="textLine"><span class="bold"><%=Resources.Global.Store %>:</span><%=((Model.StoreStatus.HasValue && Model.StoreStatus.Value) ? Resources.Global.AvailableInStore : Resources.Global.EmptyInStore)%></div>
-                                    <div class="textLine"><span class="bold"><%=Resources.Global.ProductType %>:</span> <a href="#" class="color1"><%=((Model.tblCategory != null) ? Model.tblCategory.CategoryNameVN : Resources.Global.NotAvailable)%></a> </div>
+			                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                              { %>
+                                    <div class="textLine"><span class="bold"><%=Resources.Global.ProductType%>:</span> <a href="#" class="color1"><%=((Model.tblCategory != null) ? Model.tblCategory.CategoryNameEN : Resources.Global.NotAvailable)%></a> </div>
+                                    <%}
+                              else
+                              { %>
+                              <div class="textLine"><span class="bold"><%=Resources.Global.ProductType%>:</span> <a href="#" class="color1"><%=((Model.tblCategory != null) ? Model.tblCategory.CategoryNameVN : Resources.Global.NotAvailable)%></a> </div>
+                                    <%} %>
 			                        <div class="bold textLine"><span class="bold color1"><%=Resources.Global.Price %>: </span><%=(((Model.PriceVN.HasValue) ? Model.PriceVN.ToString() : " ") + "VND")%></div>
 				                    <div><%=(Model.Property != null) ? Model.Property : ""%></div>
 

@@ -139,17 +139,17 @@ namespace NGUYENHIEP.Services.LinqClient
                 }
             }
         }
-        public void UpdateCategory(tblCategory tblnew)
+        public void UpdateCategory(tblCategory tblcategory)
         {
-            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
+            if (tblcategory != null && tblcategory.ID != null && !tblcategory.ID.Equals(Guid.Empty))
             {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0", tblnew.ID.ToString());
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0", tblcategory.ID.ToString());
                 if (query != null && query.ToList().Count > 0)
                 {
-                    query.First().CategoryNameVN = tblnew.CategoryNameVN;
-                    query.First().CategoryNameEN = tblnew.CategoryNameEN;
-                    query.First().DescriptionVN = tblnew.DescriptionVN;
-                    query.First().DescriptionEN = tblnew.DescriptionEN;
+                    query.First().CategoryNameVN = tblcategory.CategoryNameVN;
+                    query.First().CategoryNameEN = tblcategory.CategoryNameEN;
+                    query.First().DescriptionVN = tblcategory.DescriptionVN;
+                    query.First().DescriptionEN = tblcategory.DescriptionEN;
                     query.First().UpdatedDate = DateTime.Now;
                     _dataContext.SubmitChanges();
                 }
@@ -387,6 +387,27 @@ namespace NGUYENHIEP.Services.LinqClient
             }
         
             return searchResult;
+        }
+        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
+        {
+            if (isEN)
+            {
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameEN!=null", categoryID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    return query.ToList().First();
+                }
+                return new tblCategory();
+            }
+            else
+            {
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameVN!=null", categoryID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    return query.ToList().First();
+                }
+                return new tblCategory();
+            }
         }
         public List<tblCategory> GetAllCategory(bool isEN)
         {
