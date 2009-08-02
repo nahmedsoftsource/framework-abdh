@@ -108,10 +108,10 @@
                                                     <table>
                                                         <tr>
                                                             <td>
-                                                                <%=Resources.Global.LogonBy %>:
+                                                                <%=Resources.Global.LogonBy %> <%=HttpContext.Current.Session["UserName"]%>
                                                             </td>
                                                             <td>
-                                                                <%=HttpContext.Current.Session["UserName"]%>
+                                                              | <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -122,12 +122,12 @@
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2">
-                                                                <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>
+                                                                <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td colspan="2">
-                                                                <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>
+                                                                
                                                             </td>
                                                         </tr>
                                                     </table>
