@@ -9,6 +9,12 @@ namespace NguyenHiep.Common
   {
         public static int DefautPagingSize = 4;
         public static int NumberImagesInRow = 4;
+        public static int DefautPagingSizeForCategory = 9;
+        public static int DefautPagingSizeForHotNew = 4;
+        public static int DefautPagingSizeForContructionImages = 8;
+        public static int DefautPagingSizeForNews = 6;
+        public static int DefautPagingSizeForProduct = 12;
+
   }
     public class NewsTypes
     {

@@ -13,24 +13,48 @@ namespace NGUYENHIEP.Services.LinqClient
     {
         //NguyenHiepDataContext _dataContext = new NguyenHiepDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=NguyenHiep;User ID=sa;Password=vubao29");
         NguyenHiepDataContext _dataContext = new NguyenHiepDataContext();
-        public tblNew GetNewsByID(Guid newID)
+        public tblNew GetNewsByID(Guid newID,bool isEN)
         {
-            
-            var query = _dataContext.tblNews.Where("ID.ToString()=@0", newID.ToString());
-            if (query.ToList().Count() > 0)
+            if (isEN)
             {
-                tblNew tblnew = query.ToList().First();
-                return tblnew;
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and TitleEN != null", newID.ToString());
+                if (query.ToList().Count() > 0)
+                {
+                    tblNew tblnew = query.ToList().First();
+                    return tblnew;
+                }
             }
+            else
+            {
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and TitleVN != null", newID.ToString());
+                if (query.ToList().Count() > 0)
+                {
+                    tblNew tblnew = query.ToList().First();
+                    return tblnew;
+                }
+            }
+
             return null;
         }
-        public tblProduct GetProductByID(Guid newID)
+        public tblProduct GetProductByID(Guid newID,bool isEN)
         {
-            var query = _dataContext.tblProducts.Where("ID.ToString()=@0", newID.ToString());
-            if (query.ToList().Count() > 0)
+            if (isEN)
             {
-                tblProduct tblnew = query.ToList().First();
-                return tblnew;
+                var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductNameEN != null", newID.ToString());
+                if (query.ToList().Count() > 0)
+                {
+                    tblProduct tblnew = query.ToList().First();
+                    return tblnew;
+                }
+            }
+            else
+            {
+                var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductNameVN != null", newID.ToString());
+                if (query.ToList().Count() > 0)
+                {
+                    tblProduct tblnew = query.ToList().First();
+                    return tblnew;
+                }
             }
             return null;
         }

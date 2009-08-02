@@ -18,13 +18,13 @@ namespace NGUYENHIEP.Services
                 return new NguyenHiepService();
             }
         }
-        public tblNew GetNewsByID(Guid newID)
+        public tblNew GetNewsByID(Guid newID,bool isEN)
         {
-            return _da.GetNewsByID(newID);
+            return _da.GetNewsByID(newID,isEN);
         }
-        public tblProduct GetProductByID(Guid newID)
+        public tblProduct GetProductByID(Guid newID,bool isEN)
         {
-            return _da.GetProductByID(newID);
+            return _da.GetProductByID(newID,isEN);
         }
         public SearchResult<tblNew> GetAllNews(int pageSize, int page, byte type, bool isEN)
         {
