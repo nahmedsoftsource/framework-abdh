@@ -1988,27 +1988,28 @@ namespace NGUYENHIEP.Controllers
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com", 587);
                 string mailFromAccount = "duchungpham12d2@gmail.com";
                 string mailFromPass = "1234ABDH";
+                smpt.UseDefaultCredentials = false;
                 NetworkCredential cred = new NetworkCredential(mailFromAccount, mailFromPass);
                 smpt.Credentials = cred; 
                 smpt.EnableSsl = true;
-                smpt.UseDefaultCredentials = false;
                 smpt.Timeout = 20000;
-                smpt.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 //Build up email message
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("duchungpham12d2@gmail.com", "Nguyen Hiep site Admin");
-                mail.To.Add("bryanpham85@hotmail.com");
+                mail.To.Add(user.Email);
                 mail.Subject = email.Title;
-                mail.Body = String.Format("Sent from: {0}\n Date: {1}\n From email address: {2}\n Person in charge: {3}\n\n Content detail:\n {4}",
-                email.Sender, email.SendDate, email.Email, email.SendTo, email.Content);
+                mail.Body = String.Format("<h4>Customer Name:</h4><b> {0}</b> <br/><h4>Date:</h4> <b>{1}</b><br/> <h4>From email address:</h4> <b>{2}</b><br/> <h4>Person in charge:</h4> {3}<br/><br/> <h4>Content detail:</h4><br/> {4}",
+                                     email.Sender, email.SendDate, email.Email, Request["departmentname"].ToString(), email.Content);
+                mail.IsBodyHtml = true;
+                mail.BodyEncoding = Encoding.UTF8;
                 #endregion Send mail
                 try
                 {
                     smpt.Send(mail);
                     TempData["Message"] = "Send successful!";
                 }
-                catch
+                catch(SmtpException ex)
                 {
                     TempData["Message"] = "Send Unsuccessful!";
                 }
