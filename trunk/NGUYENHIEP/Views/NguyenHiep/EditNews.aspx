@@ -12,30 +12,41 @@
     <%if (ViewData["AddNews"] != null)
       { %>
     <h2>
-          <%if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News)
+          <%if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News))
           {%>
                 <%=Resources.Global.AddNews%>
-          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew)
+          <%}
+            else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew))
             { %>
                 <%=Resources.Global.AddNewsEvent%>
-          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew) 
+          <%}
+            else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew))
             { %>
                 <%=Resources.Global.AddPromotion%>
-          <%} %>      
+          <%}
+            else
+            { %>      
+            <%=Resources.Global.AddNews%>
+          <% }%>
           </h2>
     <%}
       else
       { %>
     <h2>
-          <%if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News)
+          <%if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News))
           {%>
                 <%=Resources.Global.EditNew%>
-          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew)
+          <%}else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew))
             { %>
                 <%=Resources.Global.EditNewsEvent%>
-          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew) 
+          <%}
+            else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew))
             { %>
                 <%=Resources.Global.EditPromotion%>
+          <%}
+            else
+            { %>
+             <%=Resources.Global.EditNew%>
           <%} %>
     </h2>
     <%} %>

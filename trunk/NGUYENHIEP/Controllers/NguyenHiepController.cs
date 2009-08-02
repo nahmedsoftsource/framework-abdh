@@ -80,8 +80,16 @@ namespace NGUYENHIEP.Controllers
         public ActionResult IndexForRecruitment()
         {
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Recruitment;
-            tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
-            return View(recruitment);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment,true);
+                return View(recruitment);
+            }
+            else
+            {
+                tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment, false);
+                return View(recruitment);
+            }
         }
 
         public ActionResult IndexForContact()
@@ -106,8 +114,16 @@ namespace NGUYENHIEP.Controllers
         {
             
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.Introduction;
-            tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
-            return View(introduction);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction,true);
+                return View(introduction);
+            }
+            else
+            {
+                tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction,false);
+                return View(introduction);
+            }
         }
         public ActionResult IndexForContruction(int? pageSize, int? page)
         {
@@ -268,6 +284,10 @@ namespace NGUYENHIEP.Controllers
         public ActionResult IndexForProductByCategory(int? pageSize, int? page, Guid? categoryID)
         {
             SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
+            if (TempData["CategoryID"] != null)
+            {
+                categoryID = (Guid)TempData["CategoryID"];
+            }
             if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
             {
                 ViewData["CategoryID"] = categoryID;
@@ -457,6 +477,28 @@ namespace NGUYENHIEP.Controllers
                     lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = false }));
                     lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = false }));
 
+                }
+                if (lsVN.Count<=0)
+                {
+                    lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+                    lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString(), Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString(), Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString(), Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString(), Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString(), Selected = false }));
+                    lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString(), Selected = false }));
+
+                    lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString(), Selected = true }));
+                }
+                if (lsEN.Count <= 0)
+                {
+
+                    lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString(), Selected = false }));
+                    lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString(), Selected = false }));
+                    lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString(), Selected = false }));
+                    lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString(), Selected = false }));
+                    lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString(), Selected = false }));
+                    lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString(), Selected = false }));
                 }
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
@@ -684,7 +726,7 @@ namespace NGUYENHIEP.Controllers
                 _nguyenHiepService.UpdateCategory(tblnew);
                 TempData["CategoryID"] = newsID;
                 //todo: view one category
-                return RedirectToAction("IndexForNews");
+                return RedirectToAction("IndexForProductByCategory");
             }
             else if ((!newsID.HasValue || newsID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
             {
@@ -695,7 +737,7 @@ namespace NGUYENHIEP.Controllers
                 TempData["CategoryID"] = newsID;
                 _nguyenHiepService.InsertCategory(tblnew);
                 //todo: view one category
-                return RedirectToAction("IndexForNews");
+                return RedirectToAction("IndexForProductByCategory");
             }
 
 
@@ -794,7 +836,7 @@ namespace NGUYENHIEP.Controllers
         public ActionResult EditNews(Guid? newsID, [Bind(Exclude = "ID")] tblNew tblnew, byte? type)
         {
             
-            byte tmpType = 0;
+            byte tmpType = NguyenHiep.Common.NewsTypes.News;
             if (tblnew.Type.HasValue)
             {
                 tmpType = (byte)tblnew.Type;
@@ -803,6 +845,7 @@ namespace NGUYENHIEP.Controllers
             {
                 tmpType = (byte)type;
             }
+            
             ViewData["CurrentType"] = tmpType;
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
@@ -974,7 +1017,7 @@ namespace NGUYENHIEP.Controllers
             }
             if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment && tmpType != NguyenHiep.Common.NewsTypes.Introduction)
             {
-                if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image))
+                if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image) && tmpType != NguyenHiep.Common.NewsTypes.PromotionNew)
                 {
                     if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                     {
@@ -1399,6 +1442,29 @@ namespace NGUYENHIEP.Controllers
 
 
                     }
+            if (lsEN.Count <= 0)
+            {
+                
+
+                lsEN.Add((new SelectListItem { Text = "News", Value = NewsTypes.News.ToString(), Selected = true }));
+                lsEN.Add((new SelectListItem { Text = " Construction Images", Value = NewsTypes.Contruction.ToString() }));
+                lsEN.Add((new SelectListItem { Text = "Hot New", Value = NewsTypes.HotNew.ToString() }));
+                lsEN.Add((new SelectListItem { Text = "About Us", Value = NewsTypes.Introduction.ToString() }));
+                lsEN.Add((new SelectListItem { Text = "Products", Value = NewsTypes.NormalProduct.ToString() }));
+                lsEN.Add((new SelectListItem { Text = "Promotion Program", Value = NewsTypes.PromotionNew.ToString() }));
+                lsEN.Add((new SelectListItem { Text = "Recruitment", Value = NewsTypes.Recruitment.ToString() }));
+
+            }
+            if (lsVN.Count <= 0)
+            {
+                lsVN.Add((new SelectListItem { Text = "Tin Tức", Value = NewsTypes.News.ToString(), Selected = true }));
+                lsVN.Add((new SelectListItem { Text = "Công trình", Value = NewsTypes.Contruction.ToString() }));
+                lsVN.Add((new SelectListItem { Text = "Tin nóng", Value = NewsTypes.HotNew.ToString() }));
+                lsVN.Add((new SelectListItem { Text = "Giới thiệu", Value = NewsTypes.Introduction.ToString() }));
+                lsVN.Add((new SelectListItem { Text = "Sản phẩm", Value = NewsTypes.NormalProduct.ToString() }));
+                lsVN.Add((new SelectListItem { Text = "Tin tức khuyến mãi", Value = NewsTypes.PromotionNew.ToString() }));
+                lsVN.Add((new SelectListItem { Text = "Tuyển dụng", Value = NewsTypes.Recruitment.ToString() }));
+            }
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["Type"] = lsEN;
@@ -1414,6 +1480,7 @@ namespace NGUYENHIEP.Controllers
             {
                 ViewData["AddNews"] = true;
             }
+            
             return View(tblnew);
         }
 
@@ -1819,14 +1886,30 @@ namespace NGUYENHIEP.Controllers
         public ActionResult ViewRecruitment(byte? type)
         {
             ViewData["Type"] = type;
-            tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment);
-            return View(recruitment);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment,true);
+                return View(recruitment);
+            }
+            else
+            {
+                tblNew recruitment = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Recruitment,false);
+                return View(recruitment);
+            }
         }
         public ActionResult ViewIntroduction(byte? type)
         {
             ViewData["Type"] = type;
-            tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction);
-            return View(introduction);
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction,true);
+                return View(introduction);
+            }
+            else
+            {
+                tblNew introduction = _nguyenHiepService.GetSpecialNew(NguyenHiep.Common.NewsTypes.Introduction,false);
+                return View(introduction);
+            }
         }
        
        
