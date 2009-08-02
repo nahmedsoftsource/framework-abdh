@@ -1987,8 +1987,8 @@ namespace NGUYENHIEP.Controllers
                 #region Send mail
                 //set up SMTP client
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com", 587);
-                string mailFromAccount = "duchungpham12d2@gmail.com";
-                string mailFromPass = "1234ABDH";
+                string mailFromAccount = "admin.nguyen.hiep@gmail.com";
+                string mailFromPass = "nguyenhiep123";
                 smpt.UseDefaultCredentials = false;
                 NetworkCredential cred = new NetworkCredential(mailFromAccount, mailFromPass);
                 smpt.Credentials = cred; 
@@ -2000,7 +2000,7 @@ namespace NGUYENHIEP.Controllers
                 mail.From = new MailAddress("duchungpham12d2@gmail.com", "Nguyen Hiep site Admin");
                 mail.To.Add(user.Email);
                 mail.Subject = email.Title;
-                mail.Body = String.Format("<b>Customer Name:</b> {0} <br/><b>Date:</b> {1}<br/> <b>From email address:</b> {2}<br/> <b>Person in charge:</b> {3}<br/><br/> <b>Content detail:<b><br/> {4}",
+                mail.Body = String.Format("<b>Customer Name:</b> {0} <br/><b>Date:</b> {1}<br/> <b>From email address:</b> {2}<br/> <b>Person in charge:</b> {3}<br/><br/> <b>Content detail:<b><br/><hr> {4}",
                                      email.Sender, email.SendDate, email.Email, Request["departmentname"].ToString(), email.Content);
                 mail.IsBodyHtml = true;
                 mail.BodyEncoding = Encoding.UTF8;
