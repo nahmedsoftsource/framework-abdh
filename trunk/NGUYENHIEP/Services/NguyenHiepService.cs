@@ -141,6 +141,21 @@ namespace NGUYENHIEP.Services
         {
             _da.InsertCategory(tblnew);
         }
-
+        public void DeleteInformation(Guid informationID)
+        {
+             _da.DeleteInformation(informationID);
+        }
+        public void DeleteCategory(Guid categoryID)
+        {
+            _da.DeleteCategory(categoryID);
+        }
+        public void DeleteNews(Guid newsID)
+        {
+            _da.DeleteNews(newsID);
+        }
+        public void DeleteProduct(Guid productID)
+        {
+            _da.DeleteProduct(productID);
+        }
     }
 }

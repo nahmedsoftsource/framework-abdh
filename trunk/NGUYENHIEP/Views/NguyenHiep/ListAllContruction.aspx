@@ -27,9 +27,9 @@
                         <div class="paddingTb4 paddingLr18px bold">
                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                           { %>
-                            <%=Html.ActionLink(item.TitleEN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
+                            <%=Html.ActionLink(item.TitleEN, "ViewNews", new { newsID = item.ID, TypeNews = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
                             <%}else{ %>
-                            <%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
+                            <%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, TypeNews = NguyenHiep.Common.NewsTypes.Contruction }, new { @class = "color2" })%>
                             <%} %>
                         </div>
                         <div class="clear">

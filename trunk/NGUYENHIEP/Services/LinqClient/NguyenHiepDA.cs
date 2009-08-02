@@ -80,6 +80,24 @@ namespace NGUYENHIEP.Services.LinqClient
                 }
             }
         }
+        public void DeleteNews(Guid newsID)
+        {
+            if (newsID != null && !newsID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0", newsID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    try
+                    {
+                        _dataContext.tblNews.DeleteOnSubmit(query.ToList().First());
+                        _dataContext.SubmitChanges();
+                    }
+                    catch
+                    { 
+                    }
+                }
+            }
+        }
         public void UpdateProduct(tblProduct tblproduct)
         {
             if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
@@ -103,6 +121,24 @@ namespace NGUYENHIEP.Services.LinqClient
                 }
             }
         }
+        public void DeleteProduct(Guid productID)
+        {
+            if (productID != null && !productID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblProducts.Where("ID.ToString()=@0", productID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    try
+                    {
+                        _dataContext.tblProducts.DeleteOnSubmit(query.ToList().First());
+                        _dataContext.SubmitChanges();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
         public void UpdateCategory(tblCategory tblnew)
         {
             if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
@@ -119,6 +155,25 @@ namespace NGUYENHIEP.Services.LinqClient
                 }
             }
         }
+        public void DeleteCategory(Guid categoryID)
+        {
+            if (categoryID != null && !categoryID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0", categoryID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    try
+                    {
+                        _dataContext.tblCategories.DeleteOnSubmit(query.ToList().First());
+                        _dataContext.SubmitChanges();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
+
         public void InsertNews(tblNew tblnew)
         {
             if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
@@ -241,6 +296,25 @@ namespace NGUYENHIEP.Services.LinqClient
             
 
         }
+        public void DeleteInformation(Guid informationID)
+        {
+            if (informationID != null && !informationID.Equals(Guid.Empty))
+            {
+                var query = _dataContext.tblInformations.Where("ID.ToString()=@0", informationID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    try
+                    {
+                        _dataContext.tblInformations.DeleteOnSubmit(query.ToList().First());
+                        _dataContext.SubmitChanges();
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+        }
+
         public bool UpdateInformation(tblInformation infor)
         {
             if (infor != null && !infor.ID.Equals(Guid.Empty))
