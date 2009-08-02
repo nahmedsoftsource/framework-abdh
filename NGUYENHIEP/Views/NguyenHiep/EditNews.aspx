@@ -12,18 +12,38 @@
     <%if (ViewData["AddNews"] != null)
       { %>
     <h2>
-        <%=Resources.Global.AddNews %></h2>
+          <%if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News)
+          {%>
+                <%=Resources.Global.AddNews%>
+          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew)
+            { %>
+                <%=Resources.Global.AddNewsEvent%>
+          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew) 
+            { %>
+                <%=Resources.Global.AddPromotion%>
+          <%} %>      
+          </h2>
     <%}
       else
       { %>
     <h2>
-        <%=Resources.Global.EditNew %></h2>
+          <%if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.News)
+          {%>
+                <%=Resources.Global.EditNew%>
+          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.HotNew)
+            { %>
+                <%=Resources.Global.EditNewsEvent%>
+          <%}else if ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.PromotionNew) 
+            { %>
+                <%=Resources.Global.EditPromotion%>
+          <%} %>
+    </h2>
     <%} %>
     <table width="100%">
     <%if ((ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment)) && (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Introduction)))
       { %>
         <tr>
-            <td class="l">
+            <td class="l" style="width: 90px">
                 <label for="TitleVN">
                     <%=Resources.Global.Title%>:</label>
             </td>
@@ -42,7 +62,7 @@
             </td>
         </tr>
         <tr>
-            <td class="l">
+            <td class="l" style="width: 90px">
                 <label for="SubjectVN">
                     <%=Resources.Global.Subject%>:</label>
             </td>
@@ -63,7 +83,7 @@
         </tr>
          <%} %>
         <tr>
-            <td class="l">
+            <td class="l" style="width: 90px">
                 <label>
                     <%=Resources.Global.Content%>:</label>
             </td>
@@ -86,7 +106,7 @@
        <%if ((ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment)) && (ViewData["CurrentType"] != null && !((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Introduction)))
          { %>
         <tr>
-            <td class="l">
+            <td class="l" style="width: 90px">
                 <label>
                    <%=Resources.Global.Type%>:</label>
             </td>
@@ -96,7 +116,7 @@
             </td>
         </tr>
         <tr>
-            <td class="l">
+            <td class="l" style="width: 90px">
                 <label> <%=Resources.Global.Image%>:</label>
                 
             </td>
@@ -115,8 +135,8 @@
         <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
         { %>
       <tr>
-        <td>
-            Hình hiện tại:
+        <td style="width: 90px">
+            <%=Resources.Global.EmageCurrent %>
         </td>
         <td >
          <span style="float:left">
