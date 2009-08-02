@@ -53,9 +53,12 @@
                     </div>
                 </div>
             </div>
+            <%if (HttpContext.Current.Session["username"] != null)
+              { %>
        <span style="float:right">
-        <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID+ ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))%>
+        <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))%>
         </span>
+        <%} %>
 </div>
 <%} %>
 </asp:Content>
