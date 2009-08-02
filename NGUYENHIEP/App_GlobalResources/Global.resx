@@ -313,7 +313,7 @@
     <value>Xác nhận mật khẩu</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Tạo</value>
+    <value>Tạo mới</value>
   </data>
   <data name="CreateAccount" xml:space="preserve">
     <value>Tạo mới tài khỏan</value>
@@ -398,5 +398,20 @@
   </data>
   <data name="WarningPasswordLength" xml:space="preserve">
     <value>Mật khẩu phải có ít nhất 6 kí tự</value>
+  </data>
+  <data name="AddNewsEvent" xml:space="preserve">
+    <value>Thêm tin tức/sự kiện</value>
+  </data>
+  <data name="AddPromotion" xml:space="preserve">
+    <value>Thêm tin khuyến mãi</value>
+  </data>
+  <data name="EditNewsEvent" xml:space="preserve">
+    <value>Sửa tin tức/sự kiện</value>
+  </data>
+  <data name="EditPromotion" xml:space="preserve">
+    <value>Sửa tin khuyến mãi</value>
+  </data>
+  <data name="EmageCurrent" xml:space="preserve">
+    <value>Hình hiện tại</value>
   </data>
 </root>
