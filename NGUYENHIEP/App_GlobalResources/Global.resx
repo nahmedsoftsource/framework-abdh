@@ -414,4 +414,13 @@
   <data name="EmageCurrent" xml:space="preserve">
     <value>Hình hiện tại</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Mô tả</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Tên</value>
+  </data>
 </root>
