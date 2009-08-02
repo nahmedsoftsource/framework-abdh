@@ -92,11 +92,11 @@ namespace NGUYENHIEP.Services.LinqClient
                     query.First().ProductNameEN = tblproduct.ProductNameEN;
                     query.First().ProductNameVN = tblproduct.ProductNameVN;
                     query.First().ProductNo = tblproduct.ProductNo;
-                    query.First().tblCategory= tblproduct.tblCategory;
+                    //query.First().tblCategory= tblproduct.tblCategory;
                     query.First().UpdatedBy = tblproduct.UpdatedBy;
                     query.First().UpdatedDate = DateTime.Now;
                     query.First().CreatedBy = tblproduct.CreatedBy;
-                    //query.First().CategoryID = tblproduct.CategoryID;
+                    query.First().CategoryID = tblproduct.CategoryID;
                     query.First().Description = tblproduct.Description;
                     query.First().Image = tblproduct.Image;
                     _dataContext.SubmitChanges();
@@ -144,6 +144,7 @@ namespace NGUYENHIEP.Services.LinqClient
         {
             if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
             {
+                
                 tblproduct.CreatedDate = DateTime.Now;
                 _dataContext.tblProducts.InsertOnSubmit(tblproduct);
                 _dataContext.SubmitChanges();
