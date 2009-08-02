@@ -379,13 +379,12 @@ namespace NGUYENHIEP.Services.LinqClient
             return null;
         }
 
-        public tblUser GetUserByDepartment(byte department)
+        public List<tblUser> GetUserByDepartment(byte department)
         {
             var query = _dataContext.tblUsers.Where("Department=@0", department);
             if (query.ToList().Count() > 0)
             {
-                tblUser tbluser = query.ToList().First();
-                return tbluser;
+                return ((query != null) ? query.ToList() : (new List<tblUser>()));
             }
             return null;
         }

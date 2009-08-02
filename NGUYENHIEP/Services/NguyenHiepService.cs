@@ -108,7 +108,7 @@ namespace NGUYENHIEP.Services
             return _da.GetUser(userName,password);
         }
 
-        public tblUser GetUserByDepartment(byte department)
+        public List<tblUser> GetUserByDepartment(byte department)
         {
             return _da.GetUserByDepartment(department);
         }
