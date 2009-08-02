@@ -69,6 +69,9 @@
           )
     %>
 </div>
-<span style="float: right">
+<%if (HttpContext.Current.Session["username"] != null)
+  { %>
+  <span style="float: right">
     <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : "")+"&CategoryID="+((ViewData["CategoryID"]!=null)?((Guid)ViewData["CategoryID"]).ToString():Guid.Empty.ToString()))%>
 </span>
+  <%} %>

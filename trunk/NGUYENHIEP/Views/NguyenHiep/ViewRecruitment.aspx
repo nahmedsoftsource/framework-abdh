@@ -37,9 +37,13 @@
 
             </div>
 </div>
+
+<%if (HttpContext.Current.Session["username"] != null)
+  { %>
 <span style="float:right">
 <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditNews", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Model.ID+"&Type="+NguyenHiep.Common.NewsTypes.Recruitment.ToString())%>
 </span>
+  <%} %>
 </div>
 <%} %>
 
