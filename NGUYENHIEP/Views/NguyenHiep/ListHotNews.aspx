@@ -35,7 +35,7 @@
                                 </a>
                         
                         <%} %>
-                        <div class="a"> 
+                        
                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                           { %>
                             <%if (String.IsNullOrEmpty(item.TitleEN)) item.TitleEN = Resources.Global.NoTitle;  %>
@@ -47,7 +47,6 @@
                         <%=Html.ActionLink(item.TitleVN, "ViewNews", new { newsID = item.ID, type = NguyenHiep.Common.NewsTypes.HotNew }, new { @class = "color1" })%>
                                 <%} %>
                         
-                        </div>
                         </div>
                         <%} %>
                      <%} %>
