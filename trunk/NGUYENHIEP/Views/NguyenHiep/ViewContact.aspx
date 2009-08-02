@@ -21,11 +21,11 @@
                             class="clear">
                             <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                               { %>
-                            <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactEN)) ? Model.ContactEN : "Thông tin chưa cập nhật")%>
+                            <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactEN)) ? Model.ContactEN : "Information is not available")%>
                             <%}
                               else
                               { %>
-                              <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactVN)) ? Model.ContactVN : "Information is not available")%>
+                              <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactVN)) ? Model.ContactVN : "Thông tin chưa cập nhật")%>
                             <%} %>
                         </div>
                         <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
@@ -33,7 +33,7 @@
                             <%if (HttpContext.Current.Session["username"] != null)
                               { %>
                             <span style="float: right">
-                                <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", "Sửa", (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null ? Model.ID : Guid.Empty)))%>
+                                <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null ? Model.ID : Guid.Empty)))%>
                             </span>
                             <%} %>
                         </div>

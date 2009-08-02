@@ -23,7 +23,17 @@ namespace NGUYENHIEP.Controllers
         NguyenHiepService _nguyenHiepService = NguyenHiepService.Instance;
         public ActionResult Index()
         {
-            return View();
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
+            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            {
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews,1, NguyenHiep.Common.NewsTypes.News, true);
+            }
+            else
+            {
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews, 1, NguyenHiep.Common.NewsTypes.News, false);
+            }
+            return View(listAllNews);
         }
         public ActionResult IndexForPromotionNews(int? pageSize, int? page)
         {
@@ -31,11 +41,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.PromotionNew;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
             }
             return View(listAllNews);
         }
@@ -45,11 +55,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.PromotionNew;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.PromotionNew, false);
             }
             return View(listAllNews);
         }
@@ -59,11 +69,11 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = NguyenHiep.Common.NewsTypes.News;
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, true);
             }
             else
             {
-                listAllNews = _nguyenHiepService.GetAllNews((pageSize.HasValue ? (int)pageSize : NguyenHiep.Common.Constants.DefautPagingSize), (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
+                listAllNews = _nguyenHiepService.GetAllNews(NguyenHiep.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), NguyenHiep.Common.NewsTypes.News, false);
             }
             return View(listAllNews);
         }
