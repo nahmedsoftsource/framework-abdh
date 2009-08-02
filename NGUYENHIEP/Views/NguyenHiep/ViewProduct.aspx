@@ -46,7 +46,9 @@
                     </div>
                 </div>
             </div>
-<%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID+ ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))%>
+       <span style="float:right">
+        <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditProduct", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + Model.ID+ ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))%>
+        </span>
 </div>
 <%} %>
 </asp:Content>
