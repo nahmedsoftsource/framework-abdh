@@ -15,40 +15,44 @@
             <div class="boxCtentSpCtent">
                 <div class="textLeft">
                     <%int counter = 0; %>
+                    <%int counter2=0; %>
                     <% foreach (var item in Model.Items)
                        { %>
-                    <%if (String.IsNullOrEmpty(item.ProductNameVN)) item.ProductNameVN = Resources.Global.NoTitle; %>
-                    <div class="subSp">
-                        <div class="clear">
-                            <a href="#">
-                                <img src='<%= Url.Content("~"+item.Image)%>' /></a></div>
-                        <div class="paddingTb4 paddingLr18px bold">
-                        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-                          { %>
-                            <%=Html.ActionLink(item.ProductNameEN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
-                            <%}
-                          else
-                          { %>
-                          <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
-                            <%} %>
+                        <%if (String.IsNullOrEmpty(item.ProductNameVN)) item.ProductNameVN = Resources.Global.NoTitle; %>
+                        <div class="subSp">
+                                <div class="clear">
+                                    <a href="#">
+                                        <img src='<%= Url.Content("~"+item.Image)%>' /></a>
+                                </div>
+                                <div class="paddingTb4 paddingLr18px bold">
+                                    <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                     { %>
+                                    <%=Html.ActionLink(item.ProductNameEN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                                    <%}
+                                    else
+                                    { %>
+                                    <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                                    <%} %>
+                                </div>
+                                <div class="clear">
+                                </div>
                         </div>
-                        <div class="clear">
-                        </div>
-                    </div>
-                    <%counter++; %>
-                    <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
-                      {
-                          counter = 0; %>
-                    <div class="clear">
-                    </div>
-                    <%} %>
+                        <%counter++; %>
+                        <%counter2++; %>
+                        <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter2 >= Model.Items.Count)
+                          {
+                            counter = 0; %>
+                            <div class="clear"></div>
+                        <%}%>
                     <% } %>
                 </div>
+               
             </div>
         </div>
     </div>
 </div>
-<div class="prevNext">
+
+ <div class="prevNext">
     <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
@@ -69,9 +73,8 @@
           )
     %>
 </div>
-<%if (HttpContext.Current.Session["username"] != null)
-  { %>
-<span style="float: right">
-    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
-</span>
-  <%} %>
+ <div>
+                <span style="float: right">
+                    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "NguyenHiep") + "?newsID=" + null + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
+                </span>
+                </div>

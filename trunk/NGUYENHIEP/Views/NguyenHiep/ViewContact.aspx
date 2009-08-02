@@ -44,6 +44,11 @@
                     <table style="line-height: 25px;" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td width="36%" valign="top" class="bold">
+                                <%if (ViewData["Message"] != null)
+                                  {%>
+                                  <%=ViewData["Message"]%>
+                                  <%
+                                  } %>
                                 <%=Resources.Global.YourName %>:
                             </td>
                             <td width="64%" valign="top">

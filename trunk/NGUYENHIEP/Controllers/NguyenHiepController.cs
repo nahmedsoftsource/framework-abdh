@@ -78,6 +78,10 @@ namespace NGUYENHIEP.Controllers
         {
             tblInformation contact = new tblInformation();
             ViewData["Department"] = LoadDataForDropDownList();
+            if(TempData["Message"] != null)
+            {
+                ViewData["Message"] = TempData["Message"];
+            }
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 contact = _nguyenHiepService.GetInformation(true);
@@ -132,8 +136,16 @@ namespace NGUYENHIEP.Controllers
             }
             if (newsID != null && !newsID.Equals(Guid.Empty))
             {
-                tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID);
-                return View(tblnews);
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID,true);
+                    return View(tblnews);
+                }
+                else
+                {
+                    tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)newsID,false);
+                    return View(tblnews);
+                }
             }
             else if (TempData["NewsID"] != null)
             {
@@ -141,8 +153,17 @@ namespace NGUYENHIEP.Controllers
                     type = (byte)NguyenHiep.Common.NewsTypes.News;
                 else
                     type = (byte)TempData["Type"];
-                tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"]);
-                return View(tblnews);
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"],true);
+                    return View(tblnews);
+                }
+                else 
+                {
+                    tblNew tblnews = _nguyenHiepService.GetNewsByID((Guid)TempData["NewsID"],false);
+                    return View(tblnews);
+
+                }
             }
             return new EmptyResult();
         }
@@ -151,13 +172,30 @@ namespace NGUYENHIEP.Controllers
             ViewData["Type"] = type;
             if (newsID != null && !newsID.Equals(Guid.Empty))
             {
-                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
-                return View(tblproduct);
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID,true);
+                    return View(tblproduct);
+                }
+                else
+                {
+                    tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID,false);
+                    return View(tblproduct);
+                }
+                
             }
             else if (TempData["ProductID"] != null)
             {
-                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)TempData["ProductID"]);
-                return View(tblproduct);
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)TempData["ProductID"],true);
+                    return View(tblproduct);
+                }
+                else
+                {
+                    tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)TempData["ProductID"],false);
+                    return View(tblproduct);
+                }
             }
             tblProduct tblpro = new tblProduct();
             return View(tblpro);
@@ -268,7 +306,14 @@ namespace NGUYENHIEP.Controllers
             tblNew tblnew = null;
             if (newsID.HasValue && !newsID.Value.Equals(Guid.Empty))
             {
-                tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID);
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID,true);
+                }
+                else
+                {
+                    tblnew = _nguyenHiepService.GetNewsByID((Guid)newsID,false);
+                }
             }
             #region Edit
             if (newsID.HasValue && !newsID.Equals(Guid.Empty) && tblnew != null)
@@ -710,7 +755,15 @@ namespace NGUYENHIEP.Controllers
 
             if (newsID != null)
             {
-                tblProduct tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID);
+                tblProduct tblproduct = new tblProduct();
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID,true);
+                }
+                else
+                {
+                    tblproduct = _nguyenHiepService.GetProductByID((Guid)newsID,false);
+                }
                 if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
                 {
                     ViewData["Description"] = tblproduct.Description;
@@ -1837,7 +1890,7 @@ namespace NGUYENHIEP.Controllers
                 //set up SMTP client
                 SmtpClient smpt = new SmtpClient("smtp.gmail.com", 587);
                 string mailFromAccount = "duchungpham12d2@gmail.com";
-                string mailFromPass = "nho12d2";
+                string mailFromPass = "1234ABDH";
                 NetworkCredential cred = new NetworkCredential(mailFromAccount, mailFromPass);
                 smpt.Credentials = cred; 
                 smpt.EnableSsl = true;
@@ -1851,16 +1904,25 @@ namespace NGUYENHIEP.Controllers
                 mail.To.Add("bryanpham85@hotmail.com");
                 mail.Subject = email.Title;
                 mail.Body = String.Format("Sent from: {0}\n Date: {1}\n From email address: {2}\n Person in charge: {3}\n\n Content detail:\n {4}",
-                                            email.Sender, email.SendDate, email.Email, email.SendTo, email.Content);
-                smpt.Send(mail);
+                email.Sender, email.SendDate, email.Email, email.SendTo, email.Content);
                 #endregion Send mail
-                ViewData["Message"] = "Send successful!";
+                try
+                {
+                    smpt.Send(mail);
+                    TempData["Message"] = "Send successful!";
+                }
+                catch
+                {
+                    TempData["Message"] = "Send Unsuccessful!";
+                }
+                
+                
             }
             else
             {
-                ViewData["Message"] = "Send Unsuccessful!";
+                
             }
-            ViewData["Department"] = LoadDataForDropDownList();
+            TempData["Department"] = LoadDataForDropDownList();
             return RedirectToAction("IndexForContact");
         }
         #endregion
