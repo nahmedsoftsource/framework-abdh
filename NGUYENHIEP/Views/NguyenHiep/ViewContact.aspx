@@ -34,6 +34,7 @@
                               { %>
                             <span style="float: right">
                                 <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null ? Model.ID : Guid.Empty)))%>
+                                
                             </span>
                             <%} %>
                         </div>
@@ -44,11 +45,7 @@
                     <table style="line-height: 25px;" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
                             <td width="36%" valign="top" class="bold">
-                                <%if (ViewData["Message"] != null)
-                                  {%>
-                                  <%=ViewData["Message"]%>
-                                  <%
-                                  } %>
+                                <%if(ViewData["Message"]!= null)Response.Write(ViewData["Message"].ToString()); %>
                                 <%=Resources.Global.YourName %>:
                             </td>
                             <td width="64%" valign="top">

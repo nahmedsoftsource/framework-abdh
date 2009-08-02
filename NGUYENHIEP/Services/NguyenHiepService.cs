@@ -30,9 +30,9 @@ namespace NGUYENHIEP.Services
         {
             return _da.GetAllNews(pageSize,page,type,isEN);
         }
-        public tblNew GetSpecialNew(byte type)
+        public tblNew GetSpecialNew(byte type,bool isEN)
         {
-            return _da.GetSpecialNew(type);
+            return _da.GetSpecialNew(type, isEN);
         }
         public tblInformation GetInformation(bool isEN)
         {

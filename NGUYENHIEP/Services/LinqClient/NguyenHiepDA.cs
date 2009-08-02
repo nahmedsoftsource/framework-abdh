@@ -17,7 +17,7 @@ namespace NGUYENHIEP.Services.LinqClient
         {
             if (isEN)
             {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and TitleEN != null", newID.ToString());
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and ContentEN != null", newID.ToString());
                 if (query.ToList().Count() > 0)
                 {
                     tblNew tblnew = query.ToList().First();
@@ -26,7 +26,7 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             else
             {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and TitleVN != null", newID.ToString());
+                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and ContentVN != null", newID.ToString());
                 if (query.ToList().Count() > 0)
                 {
                     tblNew tblnew = query.ToList().First();
@@ -181,11 +181,19 @@ namespace NGUYENHIEP.Services.LinqClient
             }
             return searchResult;
         }
-        public tblNew GetSpecialNew(byte type)
+        public tblNew GetSpecialNew(byte type,bool isEN)
         {
-            SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-            var query = _dataContext.tblNews.Where("Type=@0", type).OrderBy("CreatedDate");
-            return ((query!= null && query.ToList().Count>0)?query.ToList().First():(new tblNew()));
+            if (isEN)
+            {
+                var query = _dataContext.tblNews.Where("Type=@0 and ContentEN!= null", type).OrderBy("CreatedDate");
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblNew()));
+            }
+            else
+            {
+                var query = _dataContext.tblNews.Where("Type=@0 and ContentVN!= null", type).OrderBy("CreatedDate");
+                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblNew()));
+
+            }
         }
         public tblInformation GetInformation(bool isEN)
         {
