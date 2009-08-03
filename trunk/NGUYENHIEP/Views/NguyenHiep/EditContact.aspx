@@ -33,7 +33,14 @@
         <tr>
             <td colspan="2" class="c">
             <span style="float:right">
+            <%if (Model != null && (Model.ID == null || Model.ID.Equals(Guid.Empty)))
+              { %>
+              <input type="submit" class="abutton" value="<%=Resources.Global.Add %>" />
+            <%}
+              else
+              {%>
                 <input type="submit" class="abutton" value="<%=Resources.Global.Update %>" />
+                <%} %>
                 </span>
             </td>
         </tr>
@@ -134,7 +141,8 @@
         }).responseText;
     })
                     </script>
-                    <div id="ListHotNewsID">                    </div>
+                    <div id="ListHotNewsID" class="boxNews">
+                    </div>
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">

@@ -1109,9 +1109,9 @@ namespace NGUYENHIEP.Controllers
                 }
 
             }
-            if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment && tmpType != NguyenHiep.Common.NewsTypes.Introduction)
+            if (tmpType != NguyenHiep.Common.NewsTypes.Recruitment && tmpType != NguyenHiep.Common.NewsTypes.Introduction )
             {
-                if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image) && tmpType != NguyenHiep.Common.NewsTypes.PromotionNew)
+                if (!flag && tblnew != null && String.IsNullOrEmpty(tblnew.Image) )
                 {
                     if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                     {

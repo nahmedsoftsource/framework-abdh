@@ -163,7 +163,7 @@
     <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "Delete", Resources.Global.Delete, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct") + "?newsID=" + Model.ID + "&Type=" + type+ "&Delete=true")%>
 </span>
 <%} %>
-        <%if (ViewData["AddProduct"] != null)
+        <%if (Model != null && (Model.ID == null || Model.ID.Equals(Guid.Empty)))
           { %>
           <span style="float:right">
             <input type="submit" class="abutton" value="<%=Resources.Global.AddProduct %>" />
@@ -172,7 +172,7 @@
           else
           { %>
           <span style="float:right">
-        <input type="submit" class="abutton" value="<%=Resources.Global.Edit %>" />
+        <input type="submit" class="abutton" value="<%=Resources.Global.Update %>" />
         </span>
         <%} %>
         </td>
@@ -274,7 +274,7 @@
         }).responseText;
     })
                     </script>
-                    <div id="ListHotNewsID">
+                    <div id="ListHotNewsID" class="boxNews">
                     </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">

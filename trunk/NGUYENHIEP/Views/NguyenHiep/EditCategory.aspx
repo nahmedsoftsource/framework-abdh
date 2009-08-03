@@ -67,14 +67,14 @@
 </span>
 <%} %>
         <span style="float:right">
-        <%if (ViewData["AddNews"] != null)
+        <%if (Model != null && (Model.ID == null || Model.ID.Equals(Guid.Empty)) )
           { %>
             <input type="submit" class="abutton" value="<%=Resources.Global.AddCategory %>" />
         <%}
           else
           { %>
           <span style="float:right">
-        <input type="submit" class="abutton" value="<%=Resources.Global.Edit %>" />
+        <input type="submit" class="abutton" value="<%=Resources.Global.Update %>" />
         </span>
         <%} %>
         </span>
@@ -178,7 +178,8 @@
         }).responseText;
     })
                     </script>
-                    <div id="ListHotNewsID">                    </div>
+                   <div id="ListHotNewsID" class="boxNews">
+                    </div>
 </asp:Content>
 
 <asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">

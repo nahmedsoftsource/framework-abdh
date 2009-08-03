@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblNew>>" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
-<div class="boxNews">
+
     <div class="boxNewsTop">
         <div class="boxNewsBtom">
             <div class="boxNewsCtent">
@@ -55,7 +55,7 @@
             </div>
         </div>
     </div>
-</div>
+
 <%if(Model != null && Model.Items != null){ %>
 <div class="prevNext">
     <%=
@@ -82,7 +82,7 @@
 <%if (HttpContext.Current.Session["username"] != null)
   { %>
     <span style="float: right">
-    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddHotNews", Resources.Global.AddNews, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews") + "?newsID=" + Guid.Empty.ToString() + "&Type="+NguyenHiep.Common.NewsTypes.HotNew.ToString())%>
+    <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddHotNews", Resources.Global.AddNewsEvent, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews") + "?newsID=" + Guid.Empty.ToString() + "&Type="+NguyenHiep.Common.NewsTypes.HotNew.ToString())%>
 </span>
   <%} %>
   

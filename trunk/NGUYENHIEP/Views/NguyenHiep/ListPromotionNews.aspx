@@ -66,7 +66,7 @@
  <%if (HttpContext.Current.Session["username"] != null)
   { %>
       <span style="float:right">
- <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", Resources.Global.EditNew, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Guid.Empty.ToString() + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
+ <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "AddNews", Resources.Global.AddPromotion, (new UrlHelper(ViewContext.RequestContext)).Action("EditNews", "NguyenHiep") + "?newsID=" + Guid.Empty.ToString() + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
  </span>
   <%} %>       
  <br />
