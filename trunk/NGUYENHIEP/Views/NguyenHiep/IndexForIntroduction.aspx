@@ -36,6 +36,8 @@
         }).responseText;
     })
                     </script>
+                    <div id="ListCategoryID">
+                    </div>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
