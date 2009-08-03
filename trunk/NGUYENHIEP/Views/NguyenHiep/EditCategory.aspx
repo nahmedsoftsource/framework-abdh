@@ -69,12 +69,12 @@
         <span style="float:right">
         <%if (ViewData["AddNews"] != null)
           { %>
-            <input type="submit" value="<%=Resources.Global.AddCategory %>" />
+            <input type="submit" class="abutton" value="<%=Resources.Global.AddCategory %>" />
         <%}
           else
           { %>
           <span style="float:right">
-        <input type="submit" value="<%=Resources.Global.Edit %>" />
+        <input type="submit" class="abutton" value="<%=Resources.Global.Edit %>" />
         </span>
         <%} %>
         </span>

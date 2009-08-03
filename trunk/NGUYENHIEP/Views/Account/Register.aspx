@@ -75,7 +75,7 @@
                             </td>
                             
                             <td>                                
-                            <input type="submit" value="<%=Resources.Global.Create %>" />
+                            <input type="submit" class="abutton" value="<%=Resources.Global.Create %>" />
                             </td>
                         </tr>
                      </table>

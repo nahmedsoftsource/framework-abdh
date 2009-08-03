@@ -166,13 +166,13 @@
         <%if (ViewData["AddProduct"] != null)
           { %>
           <span style="float:right">
-            <input type="submit" value="<%=Resources.Global.AddProduct %>" />
+            <input type="submit" class="abutton" value="<%=Resources.Global.AddProduct %>" />
             </span>
         <%}
           else
           { %>
           <span style="float:right">
-        <input type="submit" value="<%=Resources.Global.Edit %>" />
+        <input type="submit" class="abutton" value="<%=Resources.Global.Edit %>" />
         </span>
         <%} %>
         </td>
