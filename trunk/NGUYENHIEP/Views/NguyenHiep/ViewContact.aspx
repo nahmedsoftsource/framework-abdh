@@ -140,7 +140,7 @@
                 email: document.getElementById("Email").value,
                 department: document.getElementById("Department").value,
                 title: document.getElementById("Title").value,
-                departmentname: document.getElementById("Department").text,
+                departmentname: document.getElementById("Department").options[document.getElementById("Department").selectedIndex].text,
                 content: document.getElementById("Content").value
                 },
                 type: "POST",
