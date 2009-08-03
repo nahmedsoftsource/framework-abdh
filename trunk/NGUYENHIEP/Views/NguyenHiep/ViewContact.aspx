@@ -44,7 +44,7 @@
                     
                     <table style="line-height: 25px;" cellpadding="0" cellspacing="0" width="100%">
                         <tr>
-                            <td width="36%" valign="top" class="bold">
+                            <td width="20%" valign="top" class="bold">
                                 <%if(ViewData["Message"]!= null)Response.Write(ViewData["Message"].ToString()); %>
                                 <%=Resources.Global.YourName %>:
                             </td>
@@ -86,7 +86,7 @@
                                 <%=Resources.Global.Content %>:
                             </td>
                             <td valign="top">
-                                <%=Html.TextArea("Content", new { @width="500px",@height="200px"})%>
+                                <%=Html.TextArea("Content", new { rows="20", cols="50"})%>
                                 <%=Html.ValidationMessage("Content", "*")%>
                                 
                             </td>
@@ -96,8 +96,8 @@
                                 &nbsp;
                             </td>
                             <td class="paddingTb4">
-                            <span style="float:center">
-                                <input id="Send" name="Send" type="button" value="<%=Resources.Global.Send %>" />
+                            <span style="text-align:center">
+                                <input id="Send" class="abutton" name="Send" type="button" value="<%=Resources.Global.Send %>" />
                                 </span>                               
                             </td>
                         </tr>
