@@ -72,16 +72,18 @@
     </div>
 </div>
 <div class="prevNext">
+ <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+   { %>
     <%=
         NguyenHiep.Utility.PagerExtensions.AjaxPager
               (this.Html,
                 new NguyenHiep.Utility.Pager.PagingOption
                 {
-                  CurrentPage = Model.GetPage(),
-                  PageSize = Model.GetMaxResults(),
-                  TotalRows = Model.TotalRows,
-                  //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
-                  UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
+                    CurrentPage = Model.GetPage(),
+                    PageSize = Model.GetMaxResults(),
+                    TotalRows = Model.TotalRows,
+                    //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
+                    UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
 
                 },
                 new NguyenHiep.Utility.Pager.AjaxPaginationOption
@@ -91,6 +93,29 @@
                 }
             )
     %>
+    <%}
+   else
+   { %>
+   <%=
+        NguyenHiep.Utility.PagerExtensions.AjaxPager
+              (this.Html,
+                new NguyenHiep.Utility.Pager.PagingOption
+                {
+                    CurrentPage = Model.GetPage(),
+                    PageSize = Model.GetMaxResults(),
+                    TotalRows = Model.TotalRows,
+                    //UrlMaker = ((page) => (new NGUYENHIEP.Controllers.NguyenHiepController()).ListAllNews((int)NguyenHiep.Common.Constants.DefautPagingSize,(int)page)),
+                    UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + "&Type=" + NguyenHiep.Common.NewsTypes.News.ToString())
+
+                },
+                new NguyenHiep.Utility.Pager.AjaxPaginationOption
+                {
+                    HtmlID = "ListAllNewsID"
+                  ,
+                }
+                   ).Replace("First", "Trang đầu").Replace("Last", "Trang cuối").Replace("Previous", "Trang trước").Replace("Next", "Trang sau")
+    %>
+    <%} %>
 </div>
 <%if (HttpContext.Current.Session["username"] != null)
   { %>

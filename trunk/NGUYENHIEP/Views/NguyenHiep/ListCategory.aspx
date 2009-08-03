@@ -41,15 +41,17 @@
     </div>
 </div>
 <div class="prevNext">
+ <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+   { %>
     <%=
           NguyenHiep.Utility.PagerExtensions.AjaxPager
           (this.Html,
             new NguyenHiep.Utility.Pager.PagingOption
             {
-              CurrentPage = Model.GetPage(),
-              PageSize = Model.GetMaxResults(),
-              TotalRows = Model.TotalRows,
-              UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListCategory", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))
+                CurrentPage = Model.GetPage(),
+                PageSize = Model.GetMaxResults(),
+                TotalRows = Model.TotalRows,
+                UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListCategory", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))
 
             },
             new NguyenHiep.Utility.Pager.AjaxPaginationOption
@@ -59,6 +61,26 @@
             }
           )
     %>
+    <%}else{ %>
+    <%=
+          NguyenHiep.Utility.PagerExtensions.AjaxPager
+          (this.Html,
+            new NguyenHiep.Utility.Pager.PagingOption
+            {
+                CurrentPage = Model.GetPage(),
+                PageSize = Model.GetMaxResults(),
+                TotalRows = Model.TotalRows,
+                UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListCategory", "NguyenHiep") + "?pageSize=" + (int)NguyenHiep.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))
+
+            },
+            new NguyenHiep.Utility.Pager.AjaxPaginationOption
+            {
+                HtmlID = "ListCategoryID"
+              ,
+            }
+                  ).Replace("First", "Trang đầu").Replace("Last", "Trang cuối").Replace("Previous", "Trang trước").Replace("Next", "Trang sau")
+    %>
+    <%} %>
     <br />
     
 <%if (HttpContext.Current.Session["username"] != null)
