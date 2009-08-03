@@ -156,7 +156,7 @@
         }).responseText;
     })
                     </script>
-                    <div id="ListHotNewsID">
+                    <div id="ListHotNewsID" class="boxNews">
                     </div>
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="LowerMainContent" runat="server">

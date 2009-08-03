@@ -102,7 +102,7 @@
         }).responseText;
     })
                     </script>
-                    <div id="ListHotNewsID">
+                    <div id="ListHotNewsID" class="boxNews">
                     </div>
 </asp:Content>
 
