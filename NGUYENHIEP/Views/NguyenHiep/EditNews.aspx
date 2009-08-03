@@ -172,11 +172,11 @@
             <span style="float:right">
                 <%if (ViewData["AddNews"] != null)
                   { %>
-                <input type="submit" value="<%=Resources.Global.AddNews %>" />
+                <input type="submit" class="abutton" value="<%=Resources.Global.AddNews %>" />
                 <%}
                   else
                   { %>
-                <input type="submit" value="<%=Resources.Global.Update %>" />
+                <input type="submit" class="abutton" value="<%=Resources.Global.Update %>" />
                 <%} %>
                 </span>
             </td>

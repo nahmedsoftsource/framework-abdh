@@ -46,7 +46,7 @@
                                 <%=Resources.Global.RememberPassword %>?</label>
                         </td>
                         <td>
-                            <input type="submit" value="<%=Resources.Global.Logon %>" />
+                            <input type="submit" class="abutton" value="<%=Resources.Global.Logon %>" />
                         </td>
                     </tr>
                 </table>

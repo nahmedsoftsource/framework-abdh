@@ -33,7 +33,7 @@
         <tr>
             <td colspan="2" class="c">
             <span style="float:right">
-                <input type="submit" value="<%=Resources.Global.Update %>" />
+                <input type="submit" class="abutton" value="<%=Resources.Global.Update %>" />
                 </span>
             </td>
         </tr>

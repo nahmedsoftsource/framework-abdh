@@ -52,7 +52,7 @@
                          <tr>
                             <td width:"20%" style="width: 131px">
                             </td>                            <td>                                
-                                <input type="submit" value="<%=Resources.Global.ChangePassword %>" />
+                                <input type="submit" class="abutton" value="<%=Resources.Global.ChangePassword %>" />
                             </td>
                         </tr>
                      </table>                
