@@ -2148,7 +2148,7 @@ namespace NGUYENHIEP.Controllers
                 #endregion Send mail
                 try
                 {
-                    if (mail.From != null && String.IsNullOrEmpty(mail.From.Address) && mail.To != null && mail.To.ToList().Count > 0)
+                    if (mail.From != null && !String.IsNullOrEmpty(mail.From.Address) && mail.To != null && mail.To.ToList().Count > 0)
                     {
                         smpt.Send(mail);
                         if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
