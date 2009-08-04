@@ -18,7 +18,6 @@
 <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>'></script>
      <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
-<script type="text/javascript" src='<%= Url.Content("~/fckeditor/fckeditor.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
 
     <script type="text/javascript" language="javascript">
