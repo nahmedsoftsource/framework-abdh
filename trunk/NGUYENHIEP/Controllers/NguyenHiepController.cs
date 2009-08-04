@@ -2069,8 +2069,32 @@ namespace NGUYENHIEP.Controllers
             }
             if (Request["email"] != null && !String.IsNullOrEmpty(Request["email"]))
             {
-                email.Email = Request["email"].ToString();
-                if (!isEmail(email.Email)) isValid = false;
+              email.Email = Request["email"].ToString();
+              if (!isEmail(email.Email))
+              {
+                isValid = false;
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                  TempData["EmailInvalid"] = "Email is invalid";
+                }
+                else
+                {
+                  TempData["EmailInvalid"] = "Email không hợp lệ";
+                }
+              }
+               
+            }
+            else
+            {
+              isValid = false;
+              if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+              {
+                TempData["EmailInvalid"] = "Email is invalid";
+              }
+              else
+              {
+                TempData["EmailInvalid"] = "Email không hợp lệ";
+              }
             }
             email.SendDate = DateTime.Now;
             if (Request["department"] != null)
@@ -2185,17 +2209,6 @@ namespace NGUYENHIEP.Controllers
                 }
                 
                 
-            }
-            else
-            {
-                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-                {
-                    TempData["EmailInvalid"] = "Email is invalid";
-                }
-                else
-                {
-                    TempData["EmailInvalid"] = "Email không hợp lệ";
-                }
             }
             TempData["Department"] = LoadDataForDropDownList();
             TempData["EmailReload"] = email;
