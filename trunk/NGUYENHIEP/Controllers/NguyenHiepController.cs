@@ -2186,6 +2186,7 @@ namespace NGUYENHIEP.Controllers
                         {
                             TempData["Message"] = "Gửi mail thành công!";
                         }
+                        email = new tblEmail();
                     }
                     else
                     {

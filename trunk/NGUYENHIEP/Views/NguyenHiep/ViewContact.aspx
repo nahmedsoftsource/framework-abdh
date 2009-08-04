@@ -160,7 +160,13 @@
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>--%>
  <script language="javascript" type="text/javascript">
    $(document).ready(function() {
-     //$("#Send").click(function() {
+   //$("#Send").click(function() {
+     $("#Reset").click(function(){
+           document.getElementById("Sender").value="",
+           document.getElementById("Email").value = "",
+           document.getElementById("Title").value = "",
+           document.getElementById("Content").value = ""
+     })
      $("#Send").bind('click', function() {
        $.ajax({
          url: '<%=Url.Content("~/NguyenHiep/Send") %>',
@@ -188,7 +194,13 @@
     );
    function bindNewEvent() {
      $(document).ready(function() {
-       //$("#Send").click(function() {
+     //$("#Send").click(function() {
+     $("#Reset").click(function() {
+         document.getElementById("Sender").value = "",
+           document.getElementById("Email").value = "",
+           document.getElementById("Title").value = "",
+           document.getElementById("Content").value = ""
+     })
      $("#Send").bind('click', function() {
          
 
