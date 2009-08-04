@@ -868,12 +868,14 @@ namespace NGUYENHIEP.Controllers
 
 
             List<SelectListItem> promotionVN = new List<SelectListItem>();
-            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
+            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
+            
 
             List<SelectListItem> promotionEN = new List<SelectListItem>();
-            promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-            promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+            promotionEN.Add((new SelectListItem { Text = "Not Promoted", Value = Promoted.NotHas.ToString() }));
+            promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
+            
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["StoreStatus"] = storeStatusEN;
@@ -1079,7 +1081,7 @@ namespace NGUYENHIEP.Controllers
                         ModelState.Clear();
                         insert = true;
                         TempData["Type"] = tblnew.Type;
-                        if (!typeNews.HasValue)
+                        if (!typeNews.HasValue && !tblnew.Type.HasValue)
                             typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
                         if (typeNews == NguyenHiep.Common.NewsTypes.News)
                         {
@@ -1132,7 +1134,7 @@ namespace NGUYENHIEP.Controllers
                         newsID = tblnew.ID;
                         _nguyenHiepService.InsertNews(tblnew);
                         TempData["Type"] = tblnew.Type;
-                        if (!typeNews.HasValue)
+                        if (!typeNews.HasValue && !tblnew.Type.HasValue)
                             typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
                         if (typeNews == NguyenHiep.Common.NewsTypes.News)
                         {
@@ -1581,7 +1583,7 @@ namespace NGUYENHIEP.Controllers
 
         [ValidateInput(false)]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult EditProduct(Guid? newsID, [Bind(Exclude = "ID,StoreStatus")] tblProduct tblproduct)
+        public ActionResult EditProduct(Guid? newsID, [Bind(Exclude = "ID")] tblProduct tblproduct)
         {
             if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
             {
@@ -1728,12 +1730,13 @@ namespace NGUYENHIEP.Controllers
                         storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
                         storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
 
-
-                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
-
-                        promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-                        promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
+                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
+                        
+                        
+                        promotionEN.Add((new SelectListItem { Text = "NotPromoted", Value = Promoted.NotHas.ToString() }));
+                        promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
+                        
                         if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                         {
                             ViewData["StoreStatus"] = storeStatusEN;
@@ -1803,12 +1806,12 @@ namespace NGUYENHIEP.Controllers
                         storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
                         storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
 
+                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
+                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
+                        
 
-                        promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-                        promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
-
-                        promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-                        promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+                        promotionEN.Add((new SelectListItem { Text = "Not promoted", Value = Promoted.NotHas.ToString() }));
+                        promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
                         if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                         {
                             ViewData["StoreStatus"] = storeStatusEN;
@@ -1856,13 +1859,13 @@ namespace NGUYENHIEP.Controllers
             storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
 
 
+            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
+            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
             
-            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
 
-            
-            promotionEN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = StoreStatuses.Exhausted.ToString() }));
-            promotionEN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = StoreStatuses.NotExhausted.ToString() }));
+
+            promotionEN.Add((new SelectListItem { Text = "Not Promoted", Value = Promoted.NotHas.ToString() }));
+            promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 ViewData["StoreStatus"] = storeStatusEN;

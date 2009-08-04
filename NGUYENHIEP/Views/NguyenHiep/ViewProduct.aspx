@@ -32,10 +32,28 @@
                              { %>
                              <div class="bold fontsize13 textLine"><a href="#" class="color2"><%=(!string.IsNullOrEmpty(Model.ProductNameVN) ? Model.ProductNameVN : "Không có tiêu đề")%></a></div>
 				                    <%} %>
-				                    <div class="textLine"><span class="bold"><%=Resources.Global.PromotionProgram %>:</span><%=(Model.Promoted.HasValue && Model.Promoted.Value) ? Resources.Global.IsPromoted : Resources.Global.NotPromoted%> </div>
+				                    <% String promotion = Resources.Global.NotPromoted;
+                                        if(Model.Promoted.HasValue && Model.Promoted.Value)
+                                        {
+                                            promotion = Resources.Global.Promoted;
+                                        }else if(Model.Promoted.HasValue && !Model.Promoted.Value)
+                                      {
+                                          promotion = Resources.Global.NotPromoted;
+                                      }
+                                        String statusstore = Resources.Global.AvailableInStore;
+                                        if (Model.StoreStatus.HasValue && Model.StoreStatus.Value)
+                                        {
+                                            statusstore = Resources.Global.AvailableInStore;
+                                        }
+                                        else if (Model.StoreStatus.HasValue && !Model.StoreStatus.Value)
+                                        {
+                                            statusstore = Resources.Global.NotAvailable;
+                                        }
+                                     %>
+				                    <div class="textLine"><span class="bold"><%=Resources.Global.PromotionProgram %>:</span><%=promotion%> </div>
 				                    <div class="textLine"><span class="bold"><%=Resources.Global.Warranty %>:</span><%=((Model.WarrantyTime != null) ? Model.WarrantyTime : "")%></div>
 
-			                        <div class="textLine"><span class="bold"><%=Resources.Global.Store %>:</span><%=((Model.StoreStatus.HasValue && Model.StoreStatus.Value) ? Resources.Global.AvailableInStore : Resources.Global.EmptyInStore)%></div>
+			                        <div class="textLine"><span class="bold"><%=Resources.Global.Store %>:</span><%=statusstore%></div>
 			                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                               { %>
                                     <div class="textLine"><span class="bold"><%=Resources.Global.ProductType%>:</span> <a href="#" class="color1"><%=((Model.tblCategory != null) ? Model.tblCategory.CategoryNameEN : Resources.Global.NotAvailable)%></a> </div>
@@ -44,7 +62,14 @@
                               { %>
                               <div class="textLine"><span class="bold"><%=Resources.Global.ProductType%>:</span> <a href="#" class="color1"><%=((Model.tblCategory != null) ? Model.tblCategory.CategoryNameVN : Resources.Global.NotAvailable)%></a> </div>
                                     <%} %>
-			                        <div class="bold textLine"><span class="bold color1"><%=Resources.Global.Price %>: </span><%=(((Model.PriceVN.HasValue) ? Model.PriceVN.ToString() : " ") + "VND")%></div>
+                                    <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                                      { %>
+			                        <div class="bold textLine"><span class="bold color1"><%=Resources.Global.Price%>: </span><%=(((Model.PriceEN.HasValue) ? Model.PriceEN.ToString() : " ") + "USD")%></div>
+			                        <%}
+                                      else
+                                      { %>
+                                      <div class="bold textLine"><span class="bold color1"><%=Resources.Global.Price%>: </span><%=(((Model.PriceVN.HasValue) ? Model.PriceVN.ToString() : " ") + "VND")%></div>
+			                        <%} %>
 				                    <div><%=(Model.Property != null) ? Model.Property : ""%></div>
 
 		                        </div>
