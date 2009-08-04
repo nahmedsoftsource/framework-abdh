@@ -26,7 +26,7 @@
                            <%else
                         Response.Write("<div class='boxSubTin1' style='background: transparent none repeat scroll 0% 0%; -moz-background-clip: border; -moz-background-origin: padding; -moz-background-inline-policy: continuous;'>");%>
                                 
-                        <div style="height:51px">
+                        <div>
                         
                         <%if (!String.IsNullOrEmpty(item.Image))
                           { %>
