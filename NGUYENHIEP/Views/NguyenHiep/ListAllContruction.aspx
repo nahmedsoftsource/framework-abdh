@@ -15,6 +15,7 @@
             <div class="boxCtentSpCtent">
                 <div class="textLeft">
                     <%int counter = 0; %>
+                    <%int counter2=0; %>
                     <% foreach (var item in Model.Items)
                        { %>
                       
@@ -36,7 +37,8 @@
                         </div>
                     </div>
                     <%counter++; %>
-                    <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter >= Model.Items.Count)
+                    <%counter2++; %>
+                    <%if (counter == NguyenHiep.Common.Constants.NumberImagesInRow || counter2 >= Model.Items.Count)
                       {
                           counter = 0; %>
                     <div class="clear">
