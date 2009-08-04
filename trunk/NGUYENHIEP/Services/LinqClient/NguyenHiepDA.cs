@@ -117,6 +117,8 @@ namespace NGUYENHIEP.Services.LinqClient
                     query.First().CategoryID = tblproduct.CategoryID;
                     query.First().Description = tblproduct.Description;
                     query.First().Image = tblproduct.Image;
+                    query.First().StoreStatus = tblproduct.StoreStatus;
+                    query.First().Promoted = tblproduct.Promoted;
                     _dataContext.SubmitChanges();
                 }
             }

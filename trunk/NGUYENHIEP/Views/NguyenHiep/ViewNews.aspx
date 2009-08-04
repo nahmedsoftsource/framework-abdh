@@ -17,12 +17,12 @@
                 <div class="boxCtentSpBtom">
                     <div class="boxCtentSpCtent">
                         <div class="textLeft">
-                            <%if (!String.IsNullOrEmpty(Model.Image))
+                            <%--<%if (!String.IsNullOrEmpty(Model.Image))
                               { %>
                             <span style="float: left"><a href="#">
                                 <img class="imgGthieu" src='<%= Url.Content("~"+Model.Image.Replace("ThumbImagesNewsSmallest", "ThumbImagesNews"))%>' /></a> </span>
-                            <%} %>
-                            <div class="paddingTb4 bold"><%--<a class="color2" href="#">--%>
+                            <%} %>--%>
+                            <div class="paddingTb4"><%--<a class="color2" href="#">--%>
                             <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                               { %>
                             <%=(!String.IsNullOrEmpty(Model.TitleEN)) ? Model.TitleEN : Resources.Global.NoTitle%>

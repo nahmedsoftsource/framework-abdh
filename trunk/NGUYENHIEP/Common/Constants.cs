@@ -31,13 +31,13 @@ namespace NguyenHiep.Common
     }
     public class StoreStatuses
     {
-        public static int Exhausted = 1;
-        public static int NotExhausted = 2;
+        public static bool Exhausted = true;
+        public static bool NotExhausted = false;
     }
     public class Promoted
     {
-        public static int Has = 1;
-        public static int NotHas = 2;
+        public static bool Has = true;
+        public static bool NotHas = false;
     }
 
     public class Department

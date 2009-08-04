@@ -42,7 +42,15 @@
             <%} %>
         </td>
     </tr>
-    
+    <tr>
+        <td>
+        <label ><%=Resources.Global.Promoted %>:</label>
+        </td>
+        <td>
+        <%=Html.DropDownList("Promoted", ((List<SelectListItem>)ViewData["Promotion"]).AsEnumerable(), new { style = "width:100%" })%>
+        <%= Html.ValidationMessage("Promoted")%>
+        </td>
+    </tr>
     <tr>
         <td>
             <label ><%=Resources.Global.Warranty %>:</label>
@@ -84,12 +92,12 @@
         <td>
         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
           { %>
-        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "", new { style = "width:100%" })%>USD 
+        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "0", new { style = "width:100%" })%>USD 
         <%= Html.ValidationMessage("PriceEN","Value is invalid")%>
         <%}
           else
           { %>
-          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "", new { style = "width:100%" })%>VNÐ 
+          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "0", new { style = "width:100%" })%>VNÐ 
         <%= Html.ValidationMessage("PriceVN", "Giá trị nhập không hợp lệ")%>
         <%} %>
         </td>
