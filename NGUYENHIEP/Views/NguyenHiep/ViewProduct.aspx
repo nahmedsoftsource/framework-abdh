@@ -24,7 +24,14 @@
                                     <a href="#"><img class="imgGthieu" src='<%= Url.Content("~"+((Model.Image != null)?Model.Image.Replace("ThumbImagesNewsSmallest", "ThumbImagesNews"):""))%>' /></a>
                                 </div>
 		                        <div class="floatLeft" style="width:530px;">
-				                    <div class="bold fontsize13 textLine"><a href="#" class="color2">Butyl Carbitol (BC)</a></div>
+		                         <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
+                             { %>
+				                    <div class="bold fontsize13 textLine"><a href="#" class="color2"><%=(!string.IsNullOrEmpty(Model.ProductNameEN)?Model.ProductNameEN:"No Title") %></a></div>
+				                    <%}
+                             else
+                             { %>
+                             <div class="bold fontsize13 textLine"><a href="#" class="color2"><%=(!string.IsNullOrEmpty(Model.ProductNameVN) ? Model.ProductNameVN : "Không có tiêu đề")%></a></div>
+				                    <%} %>
 				                    <div class="textLine"><span class="bold"><%=Resources.Global.PromotionProgram %>:</span><%=(Model.Promoted.HasValue && Model.Promoted.Value) ? Resources.Global.IsPromoted : Resources.Global.NotPromoted%> </div>
 				                    <div class="textLine"><span class="bold"><%=Resources.Global.Warranty %>:</span><%=((Model.WarrantyTime != null) ? Model.WarrantyTime : "")%></div>
 
