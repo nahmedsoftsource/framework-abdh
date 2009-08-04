@@ -28,16 +28,18 @@
                               <%= ((Model != null && !String.IsNullOrEmpty(Model.ContactVN)) ? Model.ContactVN : "Thông tin chưa cập nhật")%>
                             <%} %>
                         </div>
-                        <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
-                            class="clear">
+                        
                             <%if (HttpContext.Current.Session["username"] != null)
                               { %>
+                              <div style="padding: 0 0 30px 0; line-height: 18px; margin-bottom: 20px; border-bottom: 1px solid #CCC"
+                            class="clear">
                             <span style="float: right">
                                 <%=NguyenHiep.Utility.UIHelper.ButtonTo(Html, "EditContact", Resources.Global.Edit, (new UrlHelper(ViewContext.RequestContext)).Action("EditContact", "NguyenHiep") + "?newsID=" + ((Model != null ? Model.ID : Guid.Empty)))%>
                                 
                             </span>
+                             </div>
                             <%} %>
-                        </div>
+                       
                         <div class="clear">
                         </div>
                     </div>
@@ -122,7 +124,10 @@
                             <td class="paddingTb4">
                             <span style="text-align:center">
                                 <input id="Send" class="abutton" name="Send" type="button" value="<%=Resources.Global.Send %>" />
-                                </span>                               
+                                </span>  
+                                <span style="text-align:center">
+                                <input id="Reset" class="abutton" name="Reset" type="button" value="<%=Resources.Global.Reset %>" />
+                                </span>                             
                             </td>
                         </tr>
                         <tr>
