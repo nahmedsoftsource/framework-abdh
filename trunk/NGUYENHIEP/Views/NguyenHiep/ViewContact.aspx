@@ -61,7 +61,7 @@
                                 <%=Resources.Global.YourName %>:
                             </td>
                             <td width="64%" valign="top">
-                                <%=Html.TextBox("Sender",(!String.IsNullOrEmpty(email.Sender))?email.Sender:"") %>
+                                <%=Html.TextBox("Sender", (!String.IsNullOrEmpty(email.Sender)) ? email.Sender : "", new  {style="width:100%" })%>
                                 <%if (ViewData["Sender"] != null)
                                   {%>
                                 <span class="input-validation-error"><%=ViewData["Sender"]%></span>
@@ -73,7 +73,7 @@
                                 <%=Resources.Global.EmailAddress %>:
                             </td>
                             <td valign="top">
-                                <%=Html.TextBox("Email", (!String.IsNullOrEmpty(email.Email)) ? email.Email : "")%>
+                                <%=Html.TextBox("Email", (!String.IsNullOrEmpty(email.Email)) ? email.Email : "", new { style = "width:100%" })%>
                                 <%if(ViewData["EmailInvalid"] != null ){%>
                                 <span class="input-validation-error"><%=ViewData["EmailInvalid"]%></span>
                                 <%} %>
@@ -84,7 +84,7 @@
                                 <%=Resources.Global.To %>:
                             </td>
                             <td valign="top">
-                                <%=Html.DropDownList("Department", ((List<SelectListItem>)ViewData["Department"]).AsEnumerable())%>
+                                <%=Html.DropDownList("Department", ((List<SelectListItem>)ViewData["Department"]).AsEnumerable(), new { style = "width:100%" })%>
                                 <%= Html.ValidationMessage("Department", "*")%>
 
                             </td>
@@ -94,7 +94,7 @@
                                 <%=Resources.Global.Title %>:
                             </td>
                             <td valign="top">
-                                <%=Html.TextBox("Title", (!String.IsNullOrEmpty(email.Title)) ? email.Title : "")%>
+                                <%=Html.TextBox("Title", (!String.IsNullOrEmpty(email.Title)) ? email.Title : "", new { style = "width:100%" })%>
                                 
                                 <%if (ViewData["Title"] != null)
                                   {%>
@@ -107,10 +107,9 @@
                                 <%=Resources.Global.Content %>:
                             </td>
                             <td valign="top">
-                                <%=Html.TextArea("Content", (!String.IsNullOrEmpty(email.Content)) ? email.Content : "", new { rows = "20", cols = "50" })%>
+                                <%=Html.TextArea("Content", (!String.IsNullOrEmpty(email.Content)) ? email.Content : "", new {rows = "10", style = "width:100%" })%>
                                  <%if (ViewData["Content"] != null)
                                   {%>
-                                    <br />
                                 <span class="input-validation-error"><%=ViewData["Content"]%></span>
                                 <%} %>
                                 
