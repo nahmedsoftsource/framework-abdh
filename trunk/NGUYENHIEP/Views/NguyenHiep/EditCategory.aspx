@@ -5,7 +5,7 @@
 <%@ Import Namespace="NguyenHiep.Utility" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
-
+<script type="text/javascript" src='<%= Url.Content("~/fckeditor/fckeditor.js")%>'></script>
     <script src="/Editor/fckeditor.js" type="text/javascript"></script>
     <form id="form2" runat="server"  method='POST' enctype='multipart/form-data' action="#" style="width:100%">
     <%if (ViewData["AddNews"] != null)

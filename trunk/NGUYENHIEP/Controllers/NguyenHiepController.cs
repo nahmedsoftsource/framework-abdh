@@ -13,6 +13,7 @@ using System.IO;
 using System.Configuration;
 using NGUYENHIEP.Infrastructure;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace NGUYENHIEP.Controllers
 {
@@ -2047,31 +2048,69 @@ namespace NGUYENHIEP.Controllers
         public ActionResult Send()
         {
            //Step 1: Insert to tblEmail
+            bool isValid = true;
             tblEmail email = new tblEmail();
             email.ID = Guid.NewGuid();
-            if (Request["sender"] != null)
+            if (Request["sender"] != null && !String.IsNullOrEmpty(Request["sender"]))
             {
                 email.Sender = Request["sender"].ToString();
             }
-            if (Request["email"] != null)
+            else
+            {
+                isValid = false;
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    TempData["Sender"] = "Please enter Sender";
+                }
+                else
+                {
+                    TempData["Sender"] = "Cần nhập người gửi";
+                }
+            }
+            if (Request["email"] != null && !String.IsNullOrEmpty(Request["email"]))
             {
                 email.Email = Request["email"].ToString();
+                if (!isEmail(email.Email)) isValid = false;
             }
             email.SendDate = DateTime.Now;
             if (Request["department"] != null)
             {
                 email.SendTo = byte.Parse(Request["department"].ToString());
             }
-            if (Request["title"] != null)
+            if (Request["title"] != null && !String.IsNullOrEmpty(Request["title"]))
             {
                 email.Title = Request["title"].ToString();
             }
-            if (Request["content"] != null)
+            else 
+            {
+                isValid = false;
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    TempData["Title"] = "Please enter Title";
+                }
+                else
+                {
+                    TempData["Title"] = "Cần nhập tiêu đề";
+                }
+            }
+            if (Request["content"] != null && !String.IsNullOrEmpty(Request["content"]))
             {
                 email.Content = Request["content"].ToString();
             }
+            else
+            {
+                isValid = false;
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    TempData["Content"] = "Please enter Content";
+                }
+                else
+                {
+                    TempData["Content"] = "Cần nhập nội dung";
+                }
+            }
             
-            if (_nguyenHiepService.InsertEmail(email))
+            if (isValid &&  _nguyenHiepService.InsertEmail(email))
             {
                 //Step 2: Send Email
                 List<tblUser> allUser = new List<tblUser>();
@@ -2091,9 +2130,15 @@ namespace NGUYENHIEP.Controllers
                 //Build up email message
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("admin.nguyen.hiep@gmail.com", "Nguyen Hiep site Admin");
-                foreach (tblUser user in allUser)
+                if (allUser != null && allUser.Count > 0)
                 {
-                    mail.To.Add(user.Email);
+                    foreach (tblUser user in allUser)
+                    {
+                        if (user.Email != null)
+                        {
+                            mail.To.Add(user.Email);
+                        }
+                    }
                 }
                 mail.Subject = email.Title;
                 mail.Body = String.Format("<b>Customer Name:</b> {0} <br/><b>Date:</b> {1}<br/> <b>From email address:</b> {2}<br/> <b>Person in charge:</b> {3}<br/><br/> <b>Content detail:<b><br/><hr> {4}",
@@ -2103,23 +2148,116 @@ namespace NGUYENHIEP.Controllers
                 #endregion Send mail
                 try
                 {
-                    smpt.Send(mail);
-                    TempData["Message"] = "Send successful!";
+                    if (mail.From != null && String.IsNullOrEmpty(mail.From.Address) && mail.To != null && mail.To.ToList().Count > 0)
+                    {
+                        smpt.Send(mail);
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            TempData["Message"] = "Send successful!";
+                        }
+                        else
+                        {
+                            TempData["Message"] = "Gửi mail thành công!";
+                        }
+                    }
+                    else
+                    {
+                        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                        {
+                            TempData["Message"] = "Send Unsuccessful!";
+                        }
+                        else 
+                        {
+                            TempData["Message"] = "Không gửi mail thành công!";
+                        }
+                    }
                 }
                 catch(SmtpException ex)
                 {
-                    TempData["Message"] = "Send Unsuccessful!";
+                    if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                    {
+                        TempData["Message"] = "Send Unsuccessful!";
+                    }
+                    else
+                    {
+                        TempData["Message"] = "Không gửi mail thành công!";
+                    }
                 }
                 
                 
             }
             else
             {
-                
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    TempData["EmailInvalid"] = "Email is invalid";
+                }
+                else
+                {
+                    TempData["EmailInvalid"] = "Email không hợp lệ";
+                }
             }
             TempData["Department"] = LoadDataForDropDownList();
-            return RedirectToAction("IndexForContact");
+            TempData["EmailReload"] = email;
+            return RedirectToAction("ViewContact");
         }
+    public ActionResult ViewContact()
+    {
+        tblInformation contact = new tblInformation();
+        ViewData["Department"] = LoadDataForDropDownList();
+        if (TempData["EmailReload"] != null)
+        {
+            ViewData["EmailReload"] = TempData["EmailReload"];
+        }
+        if (TempData["Title"] != null)
+        {
+            ViewData["Title"] = TempData["Title"];
+        }
+        if (TempData["Sender"] != null)
+        {
+            ViewData["Sender"] = TempData["Sender"];
+        }
+        if (TempData["Content"] != null)
+        {
+            ViewData["Content"] = TempData["Content"];
+        }
+        if (TempData["EmailInvalid"] != null)
+        {
+            ViewData["EmailInvalid"] = TempData["EmailInvalid"];
+        }
+        if (TempData["Message"] != null)
+        {
+            ViewData["Message"] = TempData["Message"];
+        }
+        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+        {
+            contact = _nguyenHiepService.GetInformation(true);
+        }
+        else
+        {
+            contact = _nguyenHiepService.GetInformation(false);
+        }
+        return View(contact);
+        
+    }
+
+    public bool isEmail(string inputEmail)
+    {
+        if (inputEmail != null)
+        {
+            //inputEmail = NulltoString(inputEmail);
+            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+                  @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
+                  @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+            Regex re = new Regex(strRegex);
+            if (re.IsMatch(inputEmail))
+                return (true);
+            else
+                return (false);
+        }
+        else
+            return false;
+    }
         #endregion
     }
 }

@@ -2,6 +2,8 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
+<script type="text/javascript" src='<%= Url.Content("~/fckeditor/fckeditor.js")%>'></script>
+
 <script type="text/javascript" language="javascript">
     var sBasePath = '<%= Url.Content("~/fckeditor/")%>';
 </script>
