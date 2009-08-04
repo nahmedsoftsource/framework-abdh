@@ -157,9 +157,7 @@
  <script language="javascript" type="text/javascript">
    $(document).ready(function() {
      //$("#Send").click(function() {
-   $("#Send").bind('click',function() {
-       alert("khon kiep");
-
+     $("#Send").bind('click', function() {
        $.ajax({
          url: '<%=Url.Content("~/NguyenHiep/Send") %>',
          global: true,
@@ -173,7 +171,10 @@
          type: "POST",
          dataType: "html",
          success: function(msg) {
-           document.getElementById("ContactID").innerHTML = msg;
+
+         document.getElementById("ContactID").innerHTML = msg;
+         bindNewEvent();
+           
 
          }
        })
@@ -181,6 +182,36 @@
 
    }
     );
+   function bindNewEvent() {
+     $(document).ready(function() {
+       //$("#Send").click(function() {
+     $("#Send").bind('click', function() {
+         
 
+         $.ajax({
+           url: '<%=Url.Content("~/NguyenHiep/Send") %>',
+           global: true,
+           data: { sender: document.getElementById("Sender").value,
+             email: document.getElementById("Email").value,
+             department: document.getElementById("Department").value,
+             title: document.getElementById("Title").value,
+             departmentname: document.getElementById("Department").options[document.getElementById("Department").selectedIndex].text,
+             content: document.getElementById("Content").value
+           },
+           type: "POST",
+           dataType: "html",
+           success: function(msg) {
+
+           document.getElementById("ContactID").innerHTML = msg;
+           bindNewEvent();
+             
+
+           }
+         })
+       })
+
+     }
+    );
+   }
 </script>
 </form>
