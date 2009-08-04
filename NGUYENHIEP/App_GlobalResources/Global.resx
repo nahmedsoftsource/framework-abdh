@@ -423,4 +423,7 @@
   <data name="Name" xml:space="preserve">
     <value>Tên</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Làm lại</value>
+  </data>
 </root>
