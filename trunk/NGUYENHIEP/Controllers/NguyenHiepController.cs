@@ -1024,7 +1024,7 @@ namespace NGUYENHIEP.Controllers
                         flag = true;
                         if (tblnew.Type == NguyenHiep.Common.NewsTypes.HotNew)
                         {
-                            tblnew.Image = pathFolderThumbSmallest;
+                            tblnew.Image = pathImageThumbSmallest;
                         }
                         else
                         {
