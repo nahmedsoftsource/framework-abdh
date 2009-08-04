@@ -123,7 +123,7 @@
                    <%=Resources.Global.Type%>:</label>
             </td>
             <td class="l">
-                <%=Html.DropDownList("Type", ((List<SelectListItem>)ViewData["Type"]).AsEnumerable())%>
+                <%=Html.DropDownList("Type", ((List<SelectListItem>)ViewData["Type"]).AsEnumerable(), new {  style = "width:100%" })%>
                 <%= Html.ValidationMessage("Type")%>
             </td>
         </tr>
@@ -134,7 +134,7 @@
             </td>
             <td class="l">
                 <p>
-                    <input type="file" id="UploadFile" name="UploadFile" size="23" />
+                    <input type="file" id="UploadFile" name="UploadFile" size="23" style="width:100%"/>
                     
                 </p>
                 <%=Html.Hidden("Image", ((Model != null && !String.IsNullOrEmpty(Model.Image)) ? Model.Image : ""))%>
