@@ -1081,8 +1081,13 @@ namespace NGUYENHIEP.Controllers
                         ModelState.Clear();
                         insert = true;
                         TempData["Type"] = tblnew.Type;
-                        if (!typeNews.HasValue && !tblnew.Type.HasValue)
+                        if (tblnew.Type.HasValue)
+                        {
+                            typeNews = tblnew.Type.Value;
+                        }
+                        if (!typeNews.HasValue)
                             typeNews = (byte)NguyenHiep.Common.NewsTypes.News;
+                        
                         if (typeNews == NguyenHiep.Common.NewsTypes.News)
                         {
                             return RedirectToAction("IndexForNews");
