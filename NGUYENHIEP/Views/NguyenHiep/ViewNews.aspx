@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
     <%if (Model != null)
       { %>
