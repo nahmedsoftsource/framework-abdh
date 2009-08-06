@@ -25,10 +25,15 @@
             { %>
                 <%=Resources.Global.AddPromotion%>
           <%}
-            else
+            else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Recruitment))
             { %>      
+            <%=Resources.Global.AddRecruitment%>
+          <% }
+            else if ((ViewData["CurrentType"] != null) && ((byte)ViewData["CurrentType"] == NguyenHiep.Common.NewsTypes.Contruction))
+            {%>
+               <%=Resources.Global.AddConstruction%>
+          <%} else%>
             <%=Resources.Global.AddNews%>
-          <% }%>
           </h2>
     <%}
       else
