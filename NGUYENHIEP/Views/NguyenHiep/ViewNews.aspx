@@ -22,7 +22,8 @@
                             <span style="float: left"><a href="#">
                                 <img class="imgGthieu" src='<%= Url.Content("~"+Model.Image.Replace("ThumbImagesNewsSmallest", "ThumbImagesNews"))%>' /></a> </span>
                             <%} %>--%>
-                            <div class="paddingTb4"><%--<a class="color2" href="#">--%>
+                            <div class="paddingTb4 bold"><%--<a class="color2" href="#">--%>
+                            <h3>
                             <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                               { %>
                             <%=(!String.IsNullOrEmpty(Model.TitleEN)) ? Model.TitleEN : Resources.Global.NoTitle%>
@@ -30,9 +31,10 @@
                             <%}else{ %>
                             <%=(!String.IsNullOrEmpty(Model.TitleVN)) ? Model.TitleVN : Resources.Global.NoTitle%>
                             <%} %>
+                            </h3>
                             </div>
 
-                            <p>
+                            <p class="paddingTb4 bold">
                             <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                               { %>
                               <%=(!String.IsNullOrEmpty(Model.SubjectEN)) ? Model.SubjectEN : Resources.Global.NoSubject%>
