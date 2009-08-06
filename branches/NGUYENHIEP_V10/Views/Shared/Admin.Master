@@ -1,0 +1,167 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    
+            
+    <title><%= Html.Encode(ViewData["Title"]) %></title>
+    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
+     <%--<script type="text/javascript" src="../../Scripts/jquery-1.3.2.min-vsdoc.js"></script>--%>
+     <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>'></script>
+     <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
+    
+    <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>    
+     <%--<script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.min-vsdoc.js")%>'></script>  
+     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>--%>
+    <%--<script type="text/javascript" src="~/Scripts/ui.core.js"></script>
+    <script type="text/javascript" src="~/Scripts/ui.dialog.js"></script>
+    <script type="text/javascript" src="~/Scripts/ui.draggable.js"></script>
+    <script type="text/javascript" src="~/Scripts/ui.resizable.js"></script>--%>
+    <script type="text/javascript" src='<%= Url.Content("~/fckeditor/fckeditor.js")%>'></script>
+    <%--script type="text/javascript" src="~/Scripts/jquery.form.js"></script>--%>
+    <script type="text/javascript" language="javascript">
+        $(document).ready
+        (function()
+            {
+                if($("#SelectedMenuId") != null)
+                {
+                    $(".selected").removeClass("selected");
+                    var selectMenuID = "li:eq("+$("#SelectedMenuId").val() + ")";
+                    $(selectMenuID +">a").addClass("selected");
+                }
+            }
+        );
+    </script>
+    
+    
+</head>
+
+<body>
+    <div id="mainBdy">
+        <div id="header">
+            <div class="boxLogo">
+                <a href="#">
+                    <img src='<%= Url.Content("~/Content/images/logo.jpg")%>' /></a></div>
+            <div class="boxSearchTOp">
+                <div style="padding: 6px;">
+                    <input type="text" class="input floatLeft" style="width: 204px; height: 18px;" value="Tìm kiếm ..."
+                        onfocus="if(this.value=='Tìm kiếm ...'){this.value='';}" onblur="if(this.value==''){this.value='Tìm kiếm ...';}" />
+                    <input type="button" class="input floatLeft" style="width: 20px; height: 20px; cursor: pointer" />
+                </div>
+            </div>
+        </div>
+        <div id="mainCtentBdyBtom">
+            <div id="mainCtentBdy">
+                <div class="banner">
+                    <a href="#">
+                        <img src='<%= Url.Content("~/Content/images/banner.jpg")%>' /></a></div>
+                <div class="barMenuTop">
+                    <div class="barMenuTopLeft">
+                        <div class="barMenuTopRight">
+                            <ul>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.AboutUs %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"><span><%=Resources.Global.News %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForProduct/")%>"><span><%=Resources.Global.Products %> </span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForNews/")%>"<span><%=Resources.Global.Recruitment %></span></a></li>
+                                <li><a href="<%= Url.Content("~/NguyenHiep/IndexForContruction/")%>"><span><%=Resources.Global.ConstructionImages %></span></a></li>
+                                <li><a href="#"><span><%=Resources.Global.MessageBox %></span></a></li>
+                            </ul>
+                            <div class="boxLanguage">
+                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mainColunmLeft" class="clear">
+                    <%
+                        if (HttpContext.Current.Session["UserName"] != null)
+                            LoginPanelLeft.Visible = true;
+                        else
+                            LoginPanelLeft.Visible = false;
+                    %>
+                    <asp:ContentPlaceHolder ID="LoginPanelLeft" runat="server">
+                      <div id="LoginPanel">
+                            <div id="mainMnuLeft">
+                                <div class="mainMnuLeftTOp">
+                                    <div class="mainMnuLeftBtom">
+                                        <div class="mainMnuContent">
+                                            <div class="barTabMnu">
+                                                <div class="barTabMnuLeft">
+                                                    <div class="barTabMnuRight">
+                                                        <div class="ctentBarTab">
+                                                            <%=Resources.Global.LoginInfo %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="contentMnu">
+                                                <div>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <%=Resources.Global.LogonBy %> <%=HttpContext.Current.Session["UserName"]%>
+                                                            </td>
+                                                            <td>
+                                                              | <%=Html.ActionLink(Resources.Global.Logout, "LogOff", "Account")%>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <a href="<%= Url.Content("~/Account/Register/")%>">
+                                                                    <%=Resources.Global.CreateAccount %></a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <%=Html.ActionLink(Resources.Global.ChangePassword, "ChangePassword", "Account")%>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="LeftMenu" runat="server">
+                    </asp:ContentPlaceHolder>
+                    
+                </div>
+                <div id="mainColunmRight">
+                    <div id="mainCtentSpRight">
+                        <asp:ContentPlaceHolder ID="UpperMainContent" runat="server">
+                                        </asp:ContentPlaceHolder>
+                        <asp:ContentPlaceHolder ID="LowerMainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+                <div id="footer">
+                    <div class="floatLeft" style="width: 440px; line-height: 16px; padding-top: 6px;">
+                        <p class="bold">
+                            <%=Resources.Global.CopyRight %>: Aulacdesign media Co.,LTD
+                        </p>
+                        <p class="bold">
+                            <%=Resources.Global.Address %></p>
+                    </div>
+                    <div class="floatRight">
+                        <a href="http://aulacdesign.net">
+                            <img src='<%= Url.Content("~/Content/images/logoalac.jpg")%>' /></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
