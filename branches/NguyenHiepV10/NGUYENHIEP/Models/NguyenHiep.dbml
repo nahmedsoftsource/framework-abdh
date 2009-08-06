@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="NguyenHiep" Class="NguyenHiepDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DUONG-D9EB8AEE5\SQLEXPRESS;Initial Catalog=NguyenHiep;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="NguyenHiepConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblCategory" Member="tblCategories">
+    <Type Name="tblCategory">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryNo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryNameVN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CategoryNameEN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="DescriptionVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="DescriptionEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tblCategory_tblProduct" Member="tblProducts" ThisKey="ID" OtherKey="CategoryID" Type="tblProduct" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblUser" Member="tblUsers">
+    <Type Name="tblUser">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserNo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="Department" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblEmail" Member="tblEmails">
+    <Type Name="tblEmail">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SendDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Sender" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SendTo" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Content" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblInformation" Member="tblInformations">
+    <Type Name="tblInformation">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompanyNameVN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="CompanyNameEN" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Logo" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IntroduceVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IntroduceEN" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="ContactVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ContactEN" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNews" Member="tblNews">
+    <Type Name="tblNew">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TitleVN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="TitleEN" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="SubjectVN" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="SubjectEN" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="ContentVN" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContentEN" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Type" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PostedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PostedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EndedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EndedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblProduct" Member="tblProducts">
+    <Type Name="tblProduct">
+      <Column Name="ID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProductNo" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CategoryID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="ProductNameVN" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ProductNameEN" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PriceVN" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="PriceEN" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Promoted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="StoreStatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WarrantyTime" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Property" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="tblCategory_tblProduct" Member="tblCategory" ThisKey="CategoryID" OtherKey="ID" Type="tblCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

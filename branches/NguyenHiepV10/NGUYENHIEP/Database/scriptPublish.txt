@@ -1,0 +1,1 @@
+SqlPubWiz.exe script -d NguyenHiep -U sa -P snowman09 -S DUONG-D9EB8AEE5\SQLEXPRESS "C:\TESTEXPORT.sql" -f
