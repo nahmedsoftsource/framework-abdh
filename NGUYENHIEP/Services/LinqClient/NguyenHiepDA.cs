@@ -119,6 +119,8 @@ namespace NGUYENHIEP.Services.LinqClient
                     query.First().Image = tblproduct.Image;
                     query.First().StoreStatus = tblproduct.StoreStatus;
                     query.First().Promoted = tblproduct.Promoted;
+                    query.First().WarrantyTime = tblproduct.WarrantyTime;
+                    query.First().Property = tblproduct.Property;
                     _dataContext.SubmitChanges();
                 }
             }
