@@ -31,6 +31,18 @@
                     var selectMenuID = "li:eq("+$("#SelectedMenuId").val() + ")";
                     $(selectMenuID +">a").addClass("selected");
                 }
+                /*Resize image on page*/
+                var lstImage = $("img");
+                if(lstImage.length > 0){
+                    for(var i=0;i<lstImage.length;i++)
+                    {
+                        if(lstImage[i].width > 600 && lstImage[i].height > 500){
+                            var ratio = lstImage[i].width / lstImage[i].height;
+                            lstImage[i].width = 600;
+                            lstImage[i].height = 600 / ratio;
+                        }
+                    }
+                }
             }
         );
     </script>
