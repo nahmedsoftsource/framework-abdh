@@ -20,8 +20,8 @@ namespace NGUYENHIEP.Routing
       _url = url;
     }
     /* Routing for NguyenHiep Controler*/
-    private RoutingNS.NguyenHiep _nguyenHiep;
-    public RoutingNS.NguyenHiep NguyenHiep
+    private  RoutingNS.NguyenHiep _nguyenHiep;
+    public  RoutingNS.NguyenHiep NguyenHiep
     {
       get
       {
