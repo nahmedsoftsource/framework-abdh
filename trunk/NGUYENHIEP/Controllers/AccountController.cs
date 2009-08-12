@@ -10,7 +10,6 @@ using System.Web.UI;
 using NGUYENHIEP.Services;
 using NGUYENHIEP.Models;
 using NGUYENHIEP.Utility.Crypto;
-using NGUYENHIEP.Infrastructure;
 using NguyenHiep.Common;
 
 namespace NGUYENHIEP.Controllers

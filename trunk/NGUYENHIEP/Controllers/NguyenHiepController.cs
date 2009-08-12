@@ -11,7 +11,6 @@ using NguyenHiep.Data;
 using NguyenHiep.Common;
 using System.IO;
 using System.Configuration;
-using NGUYENHIEP.Infrastructure;
 using System.Text;
 using System.Text.RegularExpressions;
 
