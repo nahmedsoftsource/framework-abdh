@@ -50,6 +50,10 @@ namespace NGUYENHIEP.Routing
     {
       return UrlFor("ListAllProduct");
     }
+    public String UrlForListAllProduct(int? pageSize, int? page)
+    {
+        return UrlFor("ListAllProduct", new { pageSize = pageSize, page = page });
+    }
     public String UrlForListCategory()
     {
       return UrlFor("ListCategory");

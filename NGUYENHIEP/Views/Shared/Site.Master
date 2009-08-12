@@ -87,8 +87,8 @@
                                     <%=Resources.Global.ContactUs %></span></a></li>
                             </ul>
                             <div class="boxLanguage">
-                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/vi-VN") %>" class="viet">&nbsp;</a>
-                                <a href="<%=Url.Content("~/NguyenHiep/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
+                                <a href="<%=Url.Content("~/Base/SetCulture/vi-VN") %>" class="viet">&nbsp;</a>
+                                <a href="<%=Url.Content("~/Base/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
                             </div>
                         </div>
                     </div>
