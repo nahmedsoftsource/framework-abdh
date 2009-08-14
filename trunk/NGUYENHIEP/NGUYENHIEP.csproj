@@ -82,14 +82,12 @@
     <Compile Include="Common\Tool.cs" />
     <Compile Include="Common\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BaseViewPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\BaseViewUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\NguyenHiepController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\FckTextBoxExt.cs" />
@@ -116,7 +114,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\BaseRoute.cs" />
-    <Compile Include="Routing\Product.cs" />
     <Compile Include="Routing\NguyenHiep.cs" />
     <Compile Include="Routing\Routing.cs" />
     <Compile Include="Services\LinqClient\NguyenHiepDA.cs" />
