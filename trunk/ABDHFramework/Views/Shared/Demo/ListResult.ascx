@@ -21,7 +21,7 @@
     Name = "Product Name",
     IsSort=true,
     FieldName="ProductNameVN",
-    //Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.Person.FullName +"'>" + (item.Person.FullName.Length > 15 ? item.Person.FullName.Substring(0,15) + "..." : item.Person.FullName) + "</a>" )
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductNameVN +"'>" + (item.ProductNameVN.Length > 15 ? item.ProductNameVN.Substring(0,15) + "..." : item.ProductNameVN) + "</a>" )
   },
   //new ColumnOption<Employee>{
   //  Name = "Abbr",
