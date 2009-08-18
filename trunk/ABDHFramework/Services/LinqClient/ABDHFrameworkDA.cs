@@ -13,29 +13,7 @@ namespace ABDHFramework.Services.LinqClient
     {
         //ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=ABDHFramework;User ID=sa;Password=vubao29");
         ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext();
-        public tblNew GetNewsByID(Guid newID,bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and ContentEN != null", newID.ToString());
-                if (query.ToList().Count() > 0)
-                {
-                    tblNew tblnew = query.ToList().First();
-                    return tblnew;
-                }
-            }
-            else
-            {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0 and ContentVN != null", newID.ToString());
-                if (query.ToList().Count() > 0)
-                {
-                    tblNew tblnew = query.ToList().First();
-                    return tblnew;
-                }
-            }
-
-            return null;
-        }
+       
         public tblProduct GetProductByID(Guid newID,bool isEN)
         {
             if (isEN)
@@ -58,46 +36,7 @@ namespace ABDHFramework.Services.LinqClient
             }
             return null;
         }
-        public void UpdateNews(tblNew tblnew)
-        {
-            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0", tblnew.ID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    query.First().TitleVN = tblnew.TitleVN;
-                    query.First().TitleEN = tblnew.TitleEN;
-                    query.First().Type = tblnew.Type;
-                    query.First().ContentVN = tblnew.ContentVN;
-                    query.First().ContentEN = tblnew.ContentEN;
-                    query.First().Image = tblnew.Image;
-                    query.First().PostedBy = tblnew.PostedBy;
-                    query.First().SubjectEN = tblnew.SubjectEN;
-                    query.First().SubjectVN = tblnew.SubjectVN;
-                    query.First().EndedBy = tblnew.EndedBy;
-                    query.First().EndedDate = tblnew.EndedDate;
-                    _dataContext.SubmitChanges();
-                }
-            }
-        }
-        public void DeleteNews(Guid newsID)
-        {
-            if (newsID != null && !newsID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblNews.Where("ID.ToString()=@0", newsID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    try
-                    {
-                        _dataContext.tblNews.DeleteOnSubmit(query.ToList().First());
-                        _dataContext.SubmitChanges();
-                    }
-                    catch
-                    { 
-                    }
-                }
-            }
-        }
+        
         public void UpdateProduct(tblProduct tblproduct)
         {
             if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
@@ -143,62 +82,9 @@ namespace ABDHFramework.Services.LinqClient
                 }
             }
         }
-        public void UpdateCategory(tblCategory tblcategory)
-        {
-            if (tblcategory != null && tblcategory.ID != null && !tblcategory.ID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0", tblcategory.ID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    query.First().CategoryNameVN = tblcategory.CategoryNameVN;
-                    query.First().CategoryNameEN = tblcategory.CategoryNameEN;
-                    query.First().DescriptionVN = tblcategory.DescriptionVN;
-                    query.First().DescriptionEN = tblcategory.DescriptionEN;
-                    query.First().UpdatedDate = DateTime.Now;
-                    _dataContext.SubmitChanges();
-                }
-            }
-        }
-        public void DeleteCategory(Guid categoryID)
-        {
-            if (categoryID != null && !categoryID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0", categoryID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    try
-                    {
-                        _dataContext.tblCategories.DeleteOnSubmit(query.ToList().First());
-                        _dataContext.SubmitChanges();
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-        }
+      
+      
 
-        public void InsertNews(tblNew tblnew)
-        {
-            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
-            {
-                tblnew.PostedDate = DateTime.Now;
-                tblnew.CreatedDate = DateTime.Now;
-                _dataContext.tblNews.InsertOnSubmit(tblnew);
-                _dataContext.SubmitChanges();
-            }
-        }
-        public void InsertCategory(tblCategory tblnew)
-        {
-            if (tblnew != null && tblnew.ID != null && !tblnew.ID.Equals(Guid.Empty))
-            {
-                tblnew.CreatedDate = DateTime.Now;
-                //todo: auto increment catagoryNo
-                tblnew.CategoryNo = "1";
-                _dataContext.tblCategories.InsertOnSubmit(tblnew);
-                _dataContext.SubmitChanges();
-            }
-        }
         public void InsertProduct(tblProduct tblproduct)
         {
             if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
@@ -209,141 +95,7 @@ namespace ABDHFramework.Services.LinqClient
                 _dataContext.SubmitChanges();
             }
         }
-        public SearchResult<tblNew> GetAllNews(int pageSize, int page,byte type,bool isEN)
-        {
-            SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-            if (!isEN)
-            {
-                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=null", type);
-                var query = _dataContext.tblNews.Where("Type=@0 and SubjectVN!=null", type).Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            else
-            {
-                var query1 = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=null", type);
-                var query = _dataContext.tblNews.Where("Type=@0 and SubjectEN!=null", type).Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            return searchResult;
-        }
-        public tblNew GetSpecialNew(byte type,bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblNews.Where("Type=@0 and ContentEN!= null", type).OrderBy("CreatedDate");
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblNew()));
-            }
-            else
-            {
-                var query = _dataContext.tblNews.Where("Type=@0 and ContentVN!= null", type).OrderBy("CreatedDate");
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblNew()));
-
-            }
-        }
-        public tblInformation GetInformation(bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblInformations.Where("ContactEN!=null").OrderBy("CreatedDate");
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
-            }
-            else
-            {
-                var query = _dataContext.tblInformations.Where("ContactVN!=null").OrderBy("CreatedDate");
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
-            }
-            
-        }
-        public bool InsertInformation(tblInformation infor)
-        {
-            if (infor != null && !infor.ID.Equals(Guid.Empty))
-            {
-                try
-                {
-                    _dataContext.tblInformations.InsertOnSubmit(infor);
-                    _dataContext.SubmitChanges();
-                    return true;
-                }
-                catch
-                {
-                    return false;
-                }
-            }
-            return false;
-        }
-        public tblInformation GetInformation(Guid id,bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblInformations.Where("ID.ToString()=@0 and ContactEN!=null", id.ToString());
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
-            }
-            else
-            {
-                var query = _dataContext.tblInformations.Where("ID.ToString()=@0 and ContactVN!=null", id.ToString());
-                return ((query != null && query.ToList().Count > 0) ? query.ToList().First() : (new tblInformation()));
-            }
-            
-
-        }
-        public void DeleteInformation(Guid informationID)
-        {
-            if (informationID != null && !informationID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblInformations.Where("ID.ToString()=@0", informationID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    try
-                    {
-                        _dataContext.tblInformations.DeleteOnSubmit(query.ToList().First());
-                        _dataContext.SubmitChanges();
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-        }
-
-        public bool UpdateInformation(tblInformation infor)
-        {
-            if (infor != null && !infor.ID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblInformations.Where("ID.ToString()=@0", infor.ID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    if(!String.IsNullOrEmpty(infor.ContactVN))
-                        query.ToList().First().ContactVN = infor.ContactVN;
-                    if (!String.IsNullOrEmpty(infor.ContactEN))
-                        query.ToList().First().ContactEN = infor.ContactEN;
-                    try
-                    {
-                        _dataContext.SubmitChanges();
-                        return true;
-                    }
-                    catch
-                    {
-                        return false;
-                    }
-                }
-                
-            }
-            return false;
-        }
+       
         public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
         {
             SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
@@ -375,59 +127,26 @@ namespace ABDHFramework.Services.LinqClient
             }
             return searchResult;
         }
-        public SearchResult<tblProduct> GetAllProductByCategory(int pageSize, int page, Guid? categoryID)
+        public SearchResult<tblProduct> SearchProduct(int pageSize, int page,String sortColunm,String sortOption)
         {
-            SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
-
-            var query1 = _dataContext.tblProducts.Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString());
-            var query = _dataContext.tblProducts.Where("CategoryID.HasValue and CategoryID.Value.ToString()=@0", ((Guid)categoryID).ToString()).Take(pageSize * page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null && query.ToList().Count > 0)
-            {
-                searchResult.Items = query.ToList();
-                searchResult.Query = query;
-                searchResult.SetMaxResults(pageSize);
-                searchResult.SetPage(page);
-                searchResult.TotalRows = query1.Count();
-            }
+          SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
+          var query1 = _dataContext.tblProducts.Where("ProductNameVN!=null");
+          var query = _dataContext.tblProducts
+                      .Where("ProductNameVN!=null")
+                      .Take(pageSize * page)
+                      .Skip((page - 1) * pageSize)
+                      .OrderBy(sortColunm);
+          if (query != null && query1 != null && query.ToList().Count > 0)
+          {
+            searchResult.Items = query.ToList();
+            searchResult.Query = query;
+            searchResult.SetMaxResults(pageSize);
+            searchResult.SetPage(page);
+            searchResult.TotalRows = query1.Count();
+          }
+          return searchResult;
+        }
         
-            return searchResult;
-        }
-        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameEN!=null", categoryID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    return query.ToList().First();
-                }
-                return new tblCategory();
-            }
-            else
-            {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameVN!=null", categoryID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    return query.ToList().First();
-                }
-                return new tblCategory();
-            }
-        }
-        public List<tblCategory> GetAllCategory(bool isEN)
-        {
-            if (isEN)
-            {
-                var query = _dataContext.tblCategories.Where("CategoryNameEN!=null");
-                return ((query!=null)?query.ToList():(new List<tblCategory>()));
-            }
-            else
-            {
-                var query = _dataContext.tblCategories.Where("CategoryNameVN!=null");
-                return ((query!=null)?query.ToList():(new List<tblCategory>()));
-            }
-           
-            
-        }
 
         #region Data Access tblUser
 
@@ -530,36 +249,6 @@ namespace ABDHFramework.Services.LinqClient
         }
         #endregion
 
-        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page,bool isEN)
-        {
-            SearchResult<tblCategory> searchResult = new SearchResult<tblCategory>();
-            if (isEN)
-            {
-                var query1 = _dataContext.tblCategories.Where("CategoryNameEN!=null");
-                var query = _dataContext.tblCategories.Where("CategoryNameEN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            else 
-            {
-                var query1 = _dataContext.tblCategories.Where("CategoryNameVN!=null");
-                var query = _dataContext.tblCategories.Where("CategoryNameVN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            return searchResult;
-        }
+        
     }
 }
