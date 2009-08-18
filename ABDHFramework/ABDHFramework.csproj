@@ -87,6 +87,7 @@
     <Compile Include="Controllers\BaseViewUserControl.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\FckTextBoxExt.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Data\Queries\SortOrder.cs" />
     <Compile Include="Data\SearchCriteria.cs" />
     <Compile Include="Data\SearchResult.cs" />
+    <Compile Include="Data\SortOption.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -106,6 +108,44 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\FluentHtml\Behaviors\IBehavior.cs" />
+    <Compile Include="Lib\FluentHtml\Behaviors\ValidationBehavior.cs" />
+    <Compile Include="Lib\FluentHtml\Button.cs" />
+    <Compile Include="Lib\FluentHtml\CheckBox.cs" />
+    <Compile Include="Lib\FluentHtml\CheckBoxBase.cs" />
+    <Compile Include="Lib\FluentHtml\ContainerElement.cs" />
+    <Compile Include="Lib\FluentHtml\ContainerElementBase.cs" />
+    <Compile Include="Lib\FluentHtml\DisableableElement.cs" />
+    <Compile Include="Lib\FluentHtml\DisableableElementBase.cs" />
+    <Compile Include="Lib\FluentHtml\Element.cs" />
+    <Compile Include="Lib\FluentHtml\ElementBase.cs" />
+    <Compile Include="Lib\FluentHtml\FluentHtmlExtensions.cs" />
+    <Compile Include="Lib\FluentHtml\FluentHtmlHelper.cs" />
+    <Compile Include="Lib\FluentHtml\FormElement.cs" />
+    <Compile Include="Lib\FluentHtml\HiddenField.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlAttribute.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlBorderStyleAttribute.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlEventAttribute.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlInputType.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlStyle.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlStyleAttribute.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlStyleBase.cs" />
+    <Compile Include="Lib\FluentHtml\HtmlTag.cs" />
+    <Compile Include="Lib\FluentHtml\IElement.cs" />
+    <Compile Include="Lib\FluentHtml\IFormElement.cs" />
+    <Compile Include="Lib\FluentHtml\Input.cs" />
+    <Compile Include="Lib\FluentHtml\InputBase.cs" />
+    <Compile Include="Lib\FluentHtml\Literal.cs" />
+    <Compile Include="Lib\FluentHtml\LiteralBase.cs" />
+    <Compile Include="Lib\FluentHtml\RadioButton.cs" />
+    <Compile Include="Lib\FluentHtml\RadioButtonBase.cs" />
+    <Compile Include="Lib\FluentHtml\SubmitButton.cs" />
+    <Compile Include="Lib\FluentHtml\TextArea.cs" />
+    <Compile Include="Lib\FluentHtml\TextAreaBase.cs" />
+    <Compile Include="Lib\FluentHtml\TextBox.cs" />
+    <Compile Include="Lib\FluentHtml\TextElement.cs" />
+    <Compile Include="Lib\FluentHtml\TextInputBase.cs" />
+    <Compile Include="Lib\FluentHtml\ValidationMessage.cs" />
     <Compile Include="Models\ABDHFramework.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +153,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\BaseRoute.cs" />
+    <Compile Include="Routing\Demo.cs" />
     <Compile Include="Routing\Product.cs" />
     <Compile Include="Routing\Routing.cs" />
     <Compile Include="Services\LinqClient\ABDHFrameworkDA.cs" />
@@ -143,6 +184,7 @@
     <Compile Include="Utility\Pager\AjaxPaginationOption.cs" />
     <Compile Include="Utility\Pager\ColumnCheckbox.cs" />
     <Compile Include="Utility\Pager\ColumnOption.cs" />
+    <Compile Include="Utility\Pager\GridOption.cs" />
     <Compile Include="Utility\Pager\PagingOption.cs" />
     <Compile Include="Utility\Pager\WebPager.cs" />
     <Compile Include="Utility\Reflection.cs" />
@@ -296,8 +338,13 @@
     <Content Include="Images\index1_116.jpg" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
+    <Content Include="Views\Demo\ListResult.aspx" />
+    <Content Include="Views\Demo\IndexForProduct.aspx" />
+    <Content Include="Views\Demo\ListAllProduct.aspx" />
     <Content Include="Views\Product\IndexForProduct.aspx" />
     <Content Include="Views\Product\ListAllProduct.aspx" />
+    <Content Include="Views\Shared\Demo\ListResult.ascx" />
+    <Content Include="Views\Shared\Demo\QuickSearch.ascx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\ABDHFramework.dbml.layout">

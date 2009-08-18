@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ABDHFramework.FrameWork
+namespace ABDHFramework.Framework
 {
   public class Scope<T> : IDisposable
   {

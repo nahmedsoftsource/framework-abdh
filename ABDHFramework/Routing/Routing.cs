@@ -34,7 +34,20 @@ namespace ABDHFramework.Routing
             return _product;
         }
     }
+    //Routing for Demo
+    private RoutingNS.Demo _demo = null;
+    public RoutingNS.Demo Demo
+    {
+      get
+      {
+        if (_demo == null)
+        {
+          _demo = new RoutingNS.Demo(_url);
+        }
 
+        return _demo;
+      }
+    }
     
 
 
