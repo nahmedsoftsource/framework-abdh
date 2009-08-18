@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ABDHFramework.Common;
 
-namespace ABDHFramework.Utility.Javascripts
+namespace ABDHFramework.Lib.Javascripts
 {
   public class AutoCompleteDataItem
   {

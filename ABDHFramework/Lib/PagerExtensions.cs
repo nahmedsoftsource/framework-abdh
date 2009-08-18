@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using ABDHFramework.Common;
 using System.Web.Routing;
 using ABDHFramework.Utility.Javascripts;
-using Framework.Lib.Pager;
+using ABDHFramework.Lib.Pager;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   public static class PagerExtensions
   {

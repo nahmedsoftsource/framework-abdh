@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Framework.Lib;
+using ABDHFramework.Lib;
 using System.Web.Mvc;
 using System.Web.Routing;
 using ABDHFramework.Utility.Javascripts;
 
-namespace Framework.Utility
+namespace ABDHFramework.Lib
 {
   public static class DialogHelper
   {

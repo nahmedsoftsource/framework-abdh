@@ -5,9 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using ABDHFramework.Utility.Javascripts;
 using System.Web.Routing;
-using Framework.Utility;
+using ABDHFramework.Lib;
+using ABDHFramework.Lib.Javascripts;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   public static class JavascriptHelper
   {

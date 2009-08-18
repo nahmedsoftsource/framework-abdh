@@ -1,4 +1,4 @@
-namespace Framework.Lib.FluentHtml
+namespace ABDHFramework.Lib.FluentHtml
 {
 	public static class HtmlEventAttribute
 	{

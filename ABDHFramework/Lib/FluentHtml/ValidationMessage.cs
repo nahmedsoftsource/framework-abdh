@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 
-namespace Framework.Lib.FluentHtml
+namespace ABDHFramework.Lib.FluentHtml
 {
 	/// <summary>
 	/// Generate a validation message (text inside a span element).

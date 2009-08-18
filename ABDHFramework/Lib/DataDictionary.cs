@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 
-namespace Framework.Lib
+namespace ABDHFramework.Lib
 {
   /// <summary>
   ///   This class is to replace the use of object in some place, which brings us more flexibility

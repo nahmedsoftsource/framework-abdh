@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Framework.Lib
+namespace ABDHFramework.Lib
 {
   /// <summary>
   /// options for dialog submit button

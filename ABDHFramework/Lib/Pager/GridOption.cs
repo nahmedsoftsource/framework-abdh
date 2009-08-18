@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
-using Framework.Lib.FluentHtml;
+using ABDHFramework.Lib.FluentHtml;
 using System.Web.Mvc;
 
-namespace Framework.Lib.Pager
+namespace ABDHFramework.Lib.Pager
 {
   public class GridOption<T>
   {

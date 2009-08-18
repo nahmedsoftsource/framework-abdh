@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Reflection;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   public class Reflection
   {

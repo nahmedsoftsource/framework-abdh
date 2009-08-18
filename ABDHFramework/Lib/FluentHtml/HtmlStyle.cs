@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Web.UI.WebControls;
 using ABDHFramework.Lib.FluentHtml;
 
-namespace Framework.Lib.FluentHtml
+namespace ABDHFramework.Lib.FluentHtml
 {
   public class HtmlStyle: HtmlStyleBase<HtmlStyle>
   {

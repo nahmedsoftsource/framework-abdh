@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="ABDHFramework.Controllers.BaseViewUserControl<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
 <%@ Import Namespace="ABDHFramework.Utility" %>
-<%@ Import Namespace="Framework.Lib.Pager" %>
+<%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
 <form method="post" id="ProductListResult">
 <script>

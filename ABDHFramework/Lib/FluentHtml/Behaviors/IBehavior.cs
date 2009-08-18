@@ -1,5 +1,5 @@
 
-namespace Framework.Lib.FluentHtml.Behaviors
+namespace ABDHFramework.Lib.FluentHtml.Behaviors
 {
 	public interface IBehavior
 	{

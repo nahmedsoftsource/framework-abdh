@@ -1,7 +1,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace Framework.Lib.FluentHtml.Behaviors
+namespace ABDHFramework.Lib.FluentHtml.Behaviors
 {
 	public class ValidationBehavior : IBehavior
 	{
