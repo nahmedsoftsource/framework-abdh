@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Mvc.Html;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   public static class UIHelper
   {

@@ -7,7 +7,7 @@ using System.Web.Mvc.Ajax;
 using System.IO;
 using System.Configuration;
 
-namespace Framework.Lib
+namespace ABDHFramework.Lib
 {
   public class DownloadResult : ActionResult
   {

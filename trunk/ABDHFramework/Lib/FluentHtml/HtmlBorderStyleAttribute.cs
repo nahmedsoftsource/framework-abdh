@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Framework.Lib.FluentHtml
+namespace ABDHFramework.Lib.FluentHtml
 {
 	public static class HtmlBorderStyleAttribute
 	{

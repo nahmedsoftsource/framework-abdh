@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ABDHFramework.Common;
 
-namespace Framework.Lib.Pager
+namespace ABDHFramework.Lib.Pager
 {
   public class WebPager<T>: BasePager<T>
   {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Framework.Lib.FluentHtml
+namespace ABDHFramework.Lib.FluentHtml
 {
 	/// <summary>
 	/// Generate a literal (text inside a span element).

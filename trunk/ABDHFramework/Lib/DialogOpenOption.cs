@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using ABDHFramework.Utility;
 using ABDHFramework.Common;
 
-namespace Framework.Lib
+namespace ABDHFramework.Lib
 {
   /// <summary>
   /// contain options for open dialog

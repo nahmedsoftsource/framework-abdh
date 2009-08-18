@@ -32,7 +32,7 @@ namespace ABDHFramework.Routing
     }
     public String UrlForSearchAll()
     {
-      return UrlFor("ListResult", new { Command = "SearchAll" });
+      return UrlFor("ListResult");
     }
     public String UrlForListResutl()
     {

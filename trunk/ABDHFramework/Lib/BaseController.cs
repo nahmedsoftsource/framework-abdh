@@ -10,7 +10,7 @@ using ABDHFramework.Routing;
 using ABDHFramework.Services;
 using ABDHFramework.Utility.ActionFilter;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   [SetCulture]
   public  class BaseController : System.Web.Mvc.Controller

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using ABDHFramework.Common;
 
-namespace ABDHFramework.Utility
+namespace ABDHFramework.Lib
 {
   public class RemoteOption
   {
