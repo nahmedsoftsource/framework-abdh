@@ -5,13 +5,13 @@
 <form method="post" id="ProductListResult">
 <script>
  function Jump(id) {
-    <%--var urlMain = "<%= Routing.InsuranceManagement.UrlForDetails() %>" + "?InsuranceID=" + id;
-    var urlRight = "<%= Routing.InsuranceManagement.UrlForRightDetail() %>" + "?InsuranceID=" + id;
-    $("#Details").load(urlMain);
-    $("#RightDetails").load(urlRight);    
-    Core.refreshPager('#divInsuranceList');
-    InsuranceReloadRecentList();
-    return false;--%>
+    //<%--var urlMain = "<%= Routing.InsuranceManagement.UrlForDetails() %>" + "?InsuranceID=" + id;
+    //var urlRight = "<%= Routing.InsuranceManagement.UrlForRightDetail() %>" + "?InsuranceID=" + id;
+    //$("#Details").load(urlMain);
+    //$("#RightDetails").load(urlRight);    
+    //Core.refreshPager('#divInsuranceList');
+    //InsuranceReloadRecentList();
+    //return false;--%>
   }
   </script>
   <div id="ProductList">
