@@ -12,7 +12,7 @@ namespace ABDHFramework.Services.LinqClient
     public class ABDHFrameworkDA
     {
         //ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=ABDHFramework;User ID=sa;Password=vubao29");
-        ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext();
+      ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext();
        
         public tblProduct GetProductByID(Guid newID,bool isEN)
         {

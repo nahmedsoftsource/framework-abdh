@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="ABDHFramework.Controllers.BaseViewUserControl<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
-<%@ Import Namespace="ABDHFramework.Utility" %>
+<%@ Import Namespace="ABDHFramework.Lib" %>
 <%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
 <form method="post" id="ProductListResult">
@@ -14,7 +14,7 @@
     //return false;--%>
   }
   </script>
-  <div id="ProductList">
+  <div id="ProductList" >
    
    <%= Html.SimpleGrid(Model.Items, new[]{  
   new ColumnOption<tblProduct>{
