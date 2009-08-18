@@ -1,0 +1,6 @@
+D:\Working\ABDH\ABDHFramework\obj\Debug\ResolveAssemblyReference.cache
+D:\Working\ABDH\ABDHFramework\bin\NGUYENHIEP.dll
+D:\Working\ABDH\ABDHFramework\bin\NGUYENHIEP.pdb
+D:\Working\ABDH\ABDHFramework\bin\Dynamic.dll
+D:\Working\ABDH\ABDHFramework\obj\Debug\NGUYENHIEP.dll
+D:\Working\ABDH\ABDHFramework\obj\Debug\NGUYENHIEP.pdb
