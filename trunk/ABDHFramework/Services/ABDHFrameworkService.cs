@@ -82,6 +82,9 @@ namespace ABDHFramework.Services
         {
           return _da.SearchNews(pageSize, page, sortColunm, sortOption);
         }
-       
+        public SearchResult<tblNew> SearchNewsByCriteria(int pageSize, int page, String criteria, String sortColunm, String sortOption)
+        {
+          return _da.SearchNewsByCriteria(pageSize,page,criteria,sortColunm,sortOption);
+        }
     }
 }

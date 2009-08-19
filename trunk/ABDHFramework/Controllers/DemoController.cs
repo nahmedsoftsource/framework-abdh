@@ -38,9 +38,20 @@ namespace ABDHFramework.Controllers
         {
           string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "TitleEN";
           string sortOption = !String.IsNullOrEmpty(Request["SortOption"]) ? Request["SortOption"] : SortOption.Asc.ToString();
-          SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
-          listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), sortColumn, sortOption);
-          return View(listAllNews);
+          string criteria = !String.IsNullOrEmpty(Request["Title"]) ? Request["Title"] : "";
+          if (!String.IsNullOrEmpty(Request["Command"]) && Request["Command"].ToString() == "Search")
+          {
+            criteria = "Event";
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            listAllNews = Service.SearchNewsByCriteria(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), criteria, sortColumn, sortOption);
+            return View(listAllNews);
+          }
+          else
+          {
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), sortColumn, sortOption);
+            return View(listAllNews);
+          }
         }
        
     }

@@ -20,7 +20,7 @@
   <table class="table-form maxwidth" border="0" cellpadding="0" cellspacing="0" >
 	  <tr class="field">
 		  <td><span class="field-label" style="width:70px;">Name</span></td>
-	    <td><span class="field-input"><%=FluentHtml.TextBox("FullName").Id("Agent_QuickSearch_Name").Style("width:200px")%></span></td>
+	    <td><span class="field-input"><%=FluentHtml.TextBox("Title").Id("QuickSearch_Title").Style("width:200px")%></span></td>
     </tr>
     
   </table>
@@ -30,16 +30,16 @@
     {
       URL = Routing.Demo.UrlForSearchAll(),
       Update = "ListResult",
-      Data = new { HtmlID = "ListResult" }
+      Data = new { HtmlID = "ListResult", Command = "SearchAll" }
     })%>
 
 
-	 	<%= Html.SubmitToRemote("Search", "form-button ui-corner-all", new RemoteOption
+	 	<%= Html.ButtonToRemote("Search", "form-button ui-corner-all", new RemoteOption
     {
+      
       URL = Routing.Demo.UrlForSearchAll(),
       Update = "ListResult",
-      Data = new { HtmlID = "ListResult" },
-      CallBefore = "CheckWhiteFields()"
+      Data = new { HtmlID = "ListResult" ,Command = "Search"}
     })%>
 
 
