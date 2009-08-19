@@ -19,26 +19,12 @@ namespace ABDHFramework.Services
             }
         }
        
-        public tblProduct GetProductByID(Guid newID,bool isEN)
-        {
-            return _da.GetProductByID(newID,isEN);
-        }
         
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
-        {
-            return _da.GetAllProduct(pageSize, page,isEN);
-        }
+        
+        
        
         
-        public void UpdateProduct(tblProduct tblproduct)
-        {
-            _da.UpdateProduct(tblproduct);
-        }
-        
-        public void InsertProduct(tblProduct tblProduct)
-        {
-            _da.InsertProduct(tblProduct);
-        }
+       
 
         #region Service tblUser
         public bool Logon(String userName, String password)
@@ -91,9 +77,10 @@ namespace ABDHFramework.Services
         #endregion
 
       
-        public void DeleteProduct(Guid productID)
+        
+        public SearchResult<tblNew> SearchNews(int pageSize, int page, String sortColunm, String sortOption)
         {
-            _da.DeleteProduct(productID);
+          return _da.SearchNews(pageSize, page, sortColunm, sortOption);
         }
        
     }

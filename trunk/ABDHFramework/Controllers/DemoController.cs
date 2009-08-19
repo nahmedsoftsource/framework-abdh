@@ -23,38 +23,21 @@ namespace ABDHFramework.Controllers
     {
         #region
         #endregion
-        public ActionResult IndexForProduct(int? pageSize, int? page)
+        public ActionResult Index(int? pageSize, int? page)
         {
-            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
-            ViewData["Type"] = ABDHFramework.Common.NewsTypes.NormalProduct;
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-            {
-                listAllNews = Service.GetAllProduct(ABDHFramework.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), true);
-            }
-            else
-            {
-                listAllNews = Service.GetAllProduct(ABDHFramework.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), false);
-            }
+            SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+            
+            listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), "","");
+            
             return View(listAllNews);
         }
-        public ActionResult ListAllProduct(int? pageSize, int? page)
+       
+        public ActionResult ListResult(int? page, String sortColunm, String sortOption)
         {
-            SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-            {
-                listAllNews = Service.GetAllProduct(ABDHFramework.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), true);
-            }
-            else
-            {
-                listAllNews = Service.GetAllProduct(ABDHFramework.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), false);
-            }
-            return View(listAllNews);
-        }
-        public ActionResult ListResult(int? page)
-        {
-          SearchResult<tblProduct> listAllNews = new SearchResult<tblProduct>();
-          listAllNews = Service.GetAllProduct(ABDHFramework.Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), false);
+          SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
+          listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1),sortColunm,sortOption);
           return View(listAllNews);
         }
+       
     }
 }
