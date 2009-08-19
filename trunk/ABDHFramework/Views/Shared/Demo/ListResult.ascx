@@ -34,7 +34,7 @@
   DefaultSortColumn = "TitleEN",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
   URL = Routing.Demo.UrlForListResutl(),
-  HtmlID = "ProductList"
+  HtmlID = "List"
   })%>
 <%= Html.AjaxPager(new PagingOption
 {
