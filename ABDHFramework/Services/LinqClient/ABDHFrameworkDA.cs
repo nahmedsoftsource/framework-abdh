@@ -24,17 +24,19 @@ namespace ABDHFramework.Services.LinqClient
             {
               query = _dataContext.tblNews
                 .Where("TitleEN!=null")
+                .OrderByDescending(o => o.TitleEN)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
-                .OrderByDescending(o => o.TitleEN);
+                ;
             }
             else
             {
               query = _dataContext.tblNews
                 .Where("TitleEN!=null")
+                .OrderBy(o => o.TitleEN)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
-                .OrderBy(o => o.TitleEN);
+                ;
             }
           }
           else
@@ -43,6 +45,49 @@ namespace ABDHFramework.Services.LinqClient
               .Where("TitleEN!=null")
               .Take(pageSize * page)
               .Skip((page - 1) * pageSize);
+          }
+          if (query != null && query1 != null && query.ToList().Count > 0)
+          {
+            searchResult.Items = query.ToList();
+            searchResult.Query = query;
+            searchResult.SetMaxResults(pageSize);
+            searchResult.SetPage(page);
+            searchResult.TotalRows = query1.Count();
+          }
+          return searchResult;
+        }
+        public SearchResult<tblNew> SearchNewsByCriteria(int pageSize, int page,String criteria, String sortColunm, String sortOption)
+        {
+          SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
+          var query1 = _dataContext.tblNews.Where("TitleEN like  @0",criteria);
+          var query = query1;
+          if (sortColunm == "TitleEN")
+          {
+            if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
+            {
+              query = _dataContext.tblNews
+                .Where("TitleEN like  @0", criteria)
+                .OrderByDescending(o => o.TitleEN)
+                .Take(pageSize * page)
+                .Skip((page - 1) * pageSize)
+                ;
+            }
+            else
+            {
+              query = _dataContext.tblNews
+                .Where("TitleEN like  @0", criteria)
+                .OrderBy(o => o.TitleEN)
+                .Take(pageSize * page)
+                .Skip((page - 1) * pageSize)
+                ;
+            }
+          }
+          else
+          {
+            query = _dataContext.tblNews
+            .Where("TitleEN like  @0", criteria)
+            .Take(pageSize * page)
+            .Skip((page - 1) * pageSize);
           }
           if (query != null && query1 != null && query.ToList().Count > 0)
           {
