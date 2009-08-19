@@ -12,130 +12,27 @@ namespace ABDHFramework.Services.LinqClient
     public class ABDHFrameworkDA
     {
         //ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext(@"Data Source=VUBAO-PC\SQLEXPRESS;Initial Catalog=ABDHFramework;User ID=sa;Password=vubao29");
-      ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext();
-       
-        public tblProduct GetProductByID(Guid newID,bool isEN)
+        ABDHFrameworkDataContext _dataContext = new ABDHFrameworkDataContext();
+        public SearchResult<tblNew> SearchNews(int pageSize, int page, String sortColunm, String sortOption)
         {
-            if (isEN)
-            {
-                var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductNameEN != null", newID.ToString());
-                if (query.ToList().Count() > 0)
-                {
-                    tblProduct tblnew = query.ToList().First();
-                    return tblnew;
-                }
-            }
-            else
-            {
-                var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductNameVN != null", newID.ToString());
-                if (query.ToList().Count() > 0)
-                {
-                    tblProduct tblnew = query.ToList().First();
-                    return tblnew;
-                }
-            }
-            return null;
-        }
-        
-        public void UpdateProduct(tblProduct tblproduct)
-        {
-            if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblProducts.Where("ID.ToString()=@0", tblproduct.ID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    query.First().PriceEN = tblproduct.PriceEN;
-                    query.First().PriceVN = tblproduct.PriceVN;
-                    query.First().ProductNameEN = tblproduct.ProductNameEN;
-                    query.First().ProductNameVN = tblproduct.ProductNameVN;
-                    query.First().ProductNo = tblproduct.ProductNo;
-                    //query.First().tblCategory= tblproduct.tblCategory;
-                    query.First().UpdatedBy = tblproduct.UpdatedBy;
-                    query.First().UpdatedDate = DateTime.Now;
-                    query.First().CreatedBy = tblproduct.CreatedBy;
-                    query.First().CategoryID = tblproduct.CategoryID;
-                    query.First().Description = tblproduct.Description;
-                    query.First().Image = tblproduct.Image;
-                    query.First().StoreStatus = tblproduct.StoreStatus;
-                    query.First().Promoted = tblproduct.Promoted;
-                    query.First().WarrantyTime = tblproduct.WarrantyTime;
-                    query.First().Property = tblproduct.Property;
-                    _dataContext.SubmitChanges();
-                }
-            }
-        }
-        public void DeleteProduct(Guid productID)
-        {
-            if (productID != null && !productID.Equals(Guid.Empty))
-            {
-                var query = _dataContext.tblProducts.Where("ID.ToString()=@0", productID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    try
-                    {
-                        _dataContext.tblProducts.DeleteOnSubmit(query.ToList().First());
-                        _dataContext.SubmitChanges();
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-        }
-      
-      
-
-        public void InsertProduct(tblProduct tblproduct)
-        {
-            if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
-            {
-                
-                tblproduct.CreatedDate = DateTime.Now;
-                _dataContext.tblProducts.InsertOnSubmit(tblproduct);
-                _dataContext.SubmitChanges();
-            }
-        }
-       
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,bool isEN)
-        {
-            SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
-            if (isEN)
-            {
-                var query1 = _dataContext.tblProducts.Where("ProductNameEN!=null");
-                var query = _dataContext.tblProducts.Where("ProductNameEN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            else
-            {
-                var query1 = _dataContext.tblProducts.Where("ProductNameVN!=null");
-                var query = _dataContext.tblProducts.Where("ProductNameVN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
-                if (query != null && query1 != null && query.ToList().Count > 0)
-                {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
-                }
-            }
-            return searchResult;
-        }
-        public SearchResult<tblProduct> SearchProduct(int pageSize, int page,String sortColunm,String sortOption)
-        {
-          SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
-          var query1 = _dataContext.tblProducts.Where("ProductNameVN!=null");
-          var query = _dataContext.tblProducts
-                      .Where("ProductNameVN!=null")
-                      .Take(pageSize * page)
-                      .Skip((page - 1) * pageSize)
-                      .OrderBy(sortColunm);
+          SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
+          var query1 = _dataContext.tblNews.Where("TitleEN!=null");
+          var query = query1;
+          if (sortColunm == "TitleEN")
+          {
+            query = _dataContext.tblNews
+              .Where("TitleEN!=null")
+              .Take(pageSize * page)
+              .Skip((page - 1) * pageSize)
+              .OrderBy(o=>o.TitleEN);
+          }
+          else
+          {
+              query = _dataContext.tblNews
+              .Where("TitleEN!=null")
+              .Take(pageSize * page)
+              .Skip((page - 1) * pageSize);
+          }
           if (query != null && query1 != null && query.ToList().Count > 0)
           {
             searchResult.Items = query.ToList();
@@ -146,7 +43,6 @@ namespace ABDHFramework.Services.LinqClient
           }
           return searchResult;
         }
-        
 
         #region Data Access tblUser
 

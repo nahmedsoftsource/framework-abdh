@@ -1,8 +1,8 @@
-﻿<%@ Control Language="C#" Inherits="ABDHFramework.Controllers.BaseViewUserControl<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
+﻿<%@ Control Language="C#" Inherits="ABDHFramework.Controllers.BaseViewUserControl<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblNew>>" %>
 <%@ Import Namespace="ABDHFramework.Lib" %>
 <%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
-<form method="post" id="ProductListResult">
+<form method="post" id="ListResult">
 <script>
  function Jump(id) {
     //<%--var urlMain = "<%= Routing.InsuranceManagement.UrlForDetails() %>" + "?InsuranceID=" + id;
@@ -14,29 +14,24 @@
     //return false;--%>
   }
   </script>
-  <div id="ProductList" >
+  <div id="List" >
    
    <%= Html.SimpleGrid(Model.Items, new[]{  
-  new ColumnOption<tblProduct>{
-    Name = "Product Name",
+  new ColumnOption<tblNew>{
+    Name = "New Name",
     IsSort=true,
-    FieldName="ProductNameVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductNameVN +"'>" + (item.ProductNameVN.Length > 15 ? item.ProductNameVN.Substring(0,15) + "..." : item.ProductNameVN) + "</a>" )
+    FieldName="TitleEN",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.TitleEN +"'>" + (item.TitleEN.Length > 15 ? item.TitleEN.Substring(0,15) + "..." : item.TitleEN) + "</a>" )
   },
-  //new ColumnOption<Employee>{
-  //  Name = "Abbr",
-  //  IsSort=true,
-  //  FieldName="Organization.AbbrName",
-  //  Action = (item => @"<span title='" + item.Organization.AbbrName + "'>" + item.Person.AbbrName + "</span>&nbsp;")
-  //},
-  new ColumnOption<tblProduct>
+ 
+  new ColumnOption<tblNew>
   {
     Name = "X",
-    //Action = (item => "<span title='" + (item.Person.Inactive?"Inactive":"Active") + "'>" + (item.Person.Inactive? "X" : "&nbsp;") + "</span>") 
+   
   }
-}, new GridOption<tblProduct>
+}, new GridOption<tblNew>
 {
-  DefaultSortColumn = "ProductNameVN",
+  DefaultSortColumn = "TitleEN",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
   URL = Routing.Demo.UrlForListResutl(),
   HtmlID = "ProductList"
@@ -51,7 +46,7 @@
         ShowIfEmpty = true,
       }, new AjaxPaginationOption
 {
-  HtmlID = "ProductList",
+  HtmlID = "List",
 })%>
 
   </div>

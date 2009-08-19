@@ -89,7 +89,6 @@
     </Compile>
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Data\FckTextBoxExt.cs" />
     <Compile Include="Data\IQueryExpression.cs" />
     <Compile Include="Data\ISearchQuery.cs" />
@@ -154,7 +153,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\BaseRoute.cs" />
     <Compile Include="Routing\Demo.cs" />
-    <Compile Include="Routing\Product.cs" />
     <Compile Include="Routing\Routing.cs" />
     <Compile Include="Services\LinqClient\ABDHFrameworkDA.cs" />
     <Compile Include="Services\ABDHFrameworkService.cs" />
@@ -339,8 +337,7 @@
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
     <Content Include="Views\Demo\ListResult.aspx" />
-    <Content Include="Views\Demo\IndexForProduct.aspx" />
-    <Content Include="Views\Demo\ListAllProduct.aspx" />
+    <Content Include="Views\Demo\Index.aspx" />
     <Content Include="Views\Product\IndexForProduct.aspx" />
     <Content Include="Views\Product\ListAllProduct.aspx" />
     <Content Include="Views\Shared\Demo\ListResult.ascx" />

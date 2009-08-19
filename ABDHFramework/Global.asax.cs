@@ -19,7 +19,7 @@ namespace ABDHFramework
             routes.MapRoute(
                 "Default",                                              // Route name
                 "{controller}/{action}/{id}",                           // URL with parameters
-                new { controller = "ABDHFramework", action = "Index", id = "" }  // Parameter defaults
+                new { controller = "Demo", action = "Index", id = "" }  // Parameter defaults
             );
 
         }

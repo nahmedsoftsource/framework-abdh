@@ -20,20 +20,7 @@ namespace ABDHFramework.Routing
       _url = url;
     }
    
-    /* Routing for Product Controler*/
-    private RoutingNS.Product _product = null;
-    public RoutingNS.Product Product
-    {
-        get
-        {
-            if (_product == null)
-            {
-                _product = new RoutingNS.Product(_url);
-            }
-
-            return _product;
-        }
-    }
+   
     //Routing for Demo
     private RoutingNS.Demo _demo = null;
     public RoutingNS.Demo Demo

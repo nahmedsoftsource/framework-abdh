@@ -37,6 +37,18 @@ namespace ABDHFramework.Routing
     public String UrlForListResutl()
     {
       return UrlFor("ListResult");
-    }  
+    }
+    public String UrlForNewProduct(Guid? id)
+    {
+      return UrlFor("NewProduct", new { ID = id });
+    }
+    public String UrlForListAllNews()
+    {
+      return UrlFor("ListAllNews");
+    }
+    public String UrlForAddNews(Guid? id)
+    {
+      return UrlFor("AddNews", new { ID = id });
+    }
   }
 }
