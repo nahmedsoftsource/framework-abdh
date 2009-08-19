@@ -20,11 +20,22 @@ namespace ABDHFramework.Services.LinqClient
           var query = query1;
           if (sortColunm == "TitleEN")
           {
-            query = _dataContext.tblNews
-              .Where("TitleEN!=null")
-              .Take(pageSize * page)
-              .Skip((page - 1) * pageSize)
-              .OrderBy(o=>o.TitleEN);
+            if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
+            {
+              query = _dataContext.tblNews
+                .Where("TitleEN!=null")
+                .Take(pageSize * page)
+                .Skip((page - 1) * pageSize)
+                .OrderByDescending(o => o.TitleEN);
+            }
+            else
+            {
+              query = _dataContext.tblNews
+                .Where("TitleEN!=null")
+                .Take(pageSize * page)
+                .Skip((page - 1) * pageSize)
+                .OrderBy(o => o.TitleEN);
+            }
           }
           else
           {

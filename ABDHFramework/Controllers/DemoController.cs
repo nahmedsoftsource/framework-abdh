@@ -25,17 +25,21 @@ namespace ABDHFramework.Controllers
         #endregion
         public ActionResult Index(int? pageSize, int? page)
         {
+            string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "TitleEN";
+            string sortOption = !String.IsNullOrEmpty(Request["SortOption"]) ? Request["SortOption"] : SortOption.Asc.ToString();
             SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
-            
-            listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), "","");
+
+            listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), sortColumn, sortOption);
             
             return View(listAllNews);
         }
        
-        public ActionResult ListResult(int? page, String sortColunm, String sortOption)
+        public ActionResult ListResult(int? page)
         {
+          string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "TitleEN";
+          string sortOption = !String.IsNullOrEmpty(Request["SortOption"]) ? Request["SortOption"] : SortOption.Asc.ToString();
           SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
-          listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1),sortColunm,sortOption);
+          listAllNews = Service.SearchNews(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), sortColumn, sortOption);
           return View(listAllNews);
         }
        

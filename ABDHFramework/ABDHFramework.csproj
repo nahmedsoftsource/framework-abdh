@@ -328,6 +328,9 @@
       <LastGenOutput>Global.en-US.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\images\sort_asc.gif" />
+    <Content Include="Content\images\sort_desc.gif" />
+    <Content Include="Content\images\unsorted.gif" />
     <Content Include="Images\image1.jpg" />
     <Content Include="Images\image2.jpg" />
     <Content Include="Images\image3.jpg" />
