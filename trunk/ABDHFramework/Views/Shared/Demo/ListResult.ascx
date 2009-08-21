@@ -12,11 +12,44 @@
     //Core.refreshPager('#divInsuranceList');
     //InsuranceReloadRecentList();
     //return false;--%>
-  }
+ }
+
+ function checkAll() {
+
+     var checkboxs = document.getElementsByTagName('input');
+//     for (var i = 0, inp; inp = checkboxs[i]; i++) if (inp.type.toLowerCase() == 'checkbox' && inp.name.indexOf(cname) == 0) inp.checked = (this.className.search('uncheckall') == -1);
+     for (i = 0; i < checkboxs.length; i++)
+         checkboxs[i].checked = true;
+ }
+
+ function uncheckAll() {
+     var checkboxs = document.getElementsByTagName('input');
+     for (i = 0; i < checkboxs.length; i++)
+         checkboxs[i].checked = false;
+ }
+
   </script>
+  <div>
+  Select: 
+  <span>
+  <%=Html.LinkToRemote("All",new RemoteOption
+    {
+        CallBefore = "checkAll()"
+    })%>
+  </span>, 
+  <span >
+     <%=Html.LinkToRemote("None",new RemoteOption
+    {
+        CallBefore = "uncheckAll()"
+    })%>
+  </span>
+  </div>
   <div id="List" >
    
-   <%= Html.SimpleGrid(Model.Items, new[]{  
+   <%= Html.SimpleGrid(Model.Items, new[]{ 
+    new ColumnOption<tblNew>{
+        Action=(item =>@"<input id=""chkbx_0"" type=""checkbox""/>")
+    }, 
   new ColumnOption<tblNew>{
     Name = "New Name",
     IsSort=true,
