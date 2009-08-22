@@ -10,7 +10,7 @@
     //$("#Details").load(urlMain);
     //$("#RightDetails").load(urlRight);    
     //Core.refreshPager('#divInsuranceList');
-    //InsuranceReloadRecentList();
+    //InsuranceReloadRecentList();dsdsds
     //return false;--%>
  }
 
@@ -82,5 +82,8 @@
   HtmlID = "List",
 })%>
 
+  </div>
+  <div>
+    
   </div>
 </form>
