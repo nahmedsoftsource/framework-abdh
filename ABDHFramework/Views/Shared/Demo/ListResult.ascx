@@ -27,7 +27,29 @@
      for (i = 0; i < checkboxs.length; i++)
          checkboxs[i].checked = false;
  }
+ function confirmDelete() {
+     var checkboxs = document.getElementsByTagName('input');
+     var count = 0;
+     //var listID = document.getElementById("listIDToDelete");
+     var listID = "";
+     for (i = 0; i < checkboxs.length; i++) {
+         if (checkboxs[i].checked == true) {
+             //alert(checkboxs[i].id);
+             
+                 count = count + 1;
+                 listID = listID + checkboxs[i].id;
+                 listID = listID + "|";
+             }
+             }
+             //alert(listID);
 
+             document.getElementById('<%=Html.IdFor("listIDToDelete")%>').value = listID;
+         
+         if (count > 0)
+             return confirm('Do you realy want to delete this item?')
+     
+     return confirm('You must select at least one item?');
+ }
   </script>
   <div>
   Select: 
@@ -45,10 +67,10 @@
   </span>
   </div>
   <div id="List" >
-   
+   <%=Html.Hidden("listIDToDelete") %>
    <%= Html.SimpleGrid(Model.Items, new[]{ 
     new ColumnOption<tblNew>{
-        Action=(item =>@"<input id=""chkbx_0"" type=""checkbox""/>")
+        Action=(item =>@"<input  id=""" +item.ID.ToString()+ @""" type=""checkbox""/>")
     }, 
   new ColumnOption<tblNew>{
     Name = "New Name",
@@ -84,6 +106,18 @@
 
   </div>
   <div>
+  
     
+    <%=Html.ButtonToRemote("Delete", new RemoteOption
+        {
+            CallBefore = "confirmDelete()",
+            URL = Routing.Demo.UrlForDelete(),
+            IsForm=true,
+            CausesValidation = false,
+            Update = "ListResult",
+            
+            
+        }
+        )%>
   </div>
 </form>

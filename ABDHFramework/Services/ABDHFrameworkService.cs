@@ -86,5 +86,9 @@ namespace ABDHFramework.Services
         {
           return _da.SearchNewsByCriteria(pageSize,page,criteria,sortColunm,sortOption);
         }
+        public void Delete(Guid id)
+        {
+             _da.Delete(id);
+        }
     }
 }

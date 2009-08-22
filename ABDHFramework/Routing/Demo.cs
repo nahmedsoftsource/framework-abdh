@@ -50,5 +50,9 @@ namespace ABDHFramework.Routing
     {
       return UrlFor("AddNews", new { ID = id });
     }
+    public String UrlForDelete()
+    {
+        return UrlFor("Delete");
+    }
   }
 }

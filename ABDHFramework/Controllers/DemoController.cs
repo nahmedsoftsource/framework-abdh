@@ -53,6 +53,21 @@ namespace ABDHFramework.Controllers
             return View(listAllNews);
           }
         }
-       
+        public ActionResult Delete(String listIDToDelete)
+       {
+           if (listIDToDelete != null)
+           {
+               string[] listID  = listIDToDelete.Split('|');
+               foreach (string id in listID)
+               {
+                   if (Tool.IsGuid(id))
+                   {
+                       Guid guid = new Guid(id);
+                       Service.Delete(guid);
+                   }
+               }
+           }
+           return RedirectToAction("ListResult") ;
+       }
     }
 }
