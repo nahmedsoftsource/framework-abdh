@@ -99,7 +99,21 @@ namespace ABDHFramework.Services.LinqClient
           }
           return searchResult;
         }
-
+        public void Delete(Guid id)
+        {
+            var query = _dataContext.tblNews.Where("ID.ToString()=@0", id.ToString());
+            if (query != null && query.ToList().Count > 0)
+            {
+                try
+                {
+                    _dataContext.tblNews.DeleteOnSubmit(query.ToList().First());
+                    _dataContext.SubmitChanges();
+                }
+                catch
+                {
+                }
+            }
+        }
         #region Data Access tblUser
 
         public bool Logon(String userName, String password)
