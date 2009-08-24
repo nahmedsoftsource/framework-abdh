@@ -59,7 +59,9 @@ namespace ABDHFramework.Services.LinqClient
         public SearchResult<tblNew> SearchNewsByCriteria(int pageSize, int page,String criteria, String sortColunm, String sortOption)
         {
           SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-          var query1 = _dataContext.tblNews.Where("TitleEN like  @0",criteria);
+          //criteria = "%" + criteria + "%";
+          //var query1 = _dataContext.tblNews.Where("TitleEN like  @0", criteria);
+          var query1 = _dataContext.tblNews.Where(op=>op.TitleEN.Contains(criteria));
           var query = query1;
           if (sortColunm == "TitleEN")
           {
@@ -75,7 +77,7 @@ namespace ABDHFramework.Services.LinqClient
             else
             {
               query = _dataContext.tblNews
-                .Where("TitleEN like  @0", criteria)
+                .Where(op => op.TitleEN.Contains(criteria))
                 .OrderBy(o => o.TitleEN)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
@@ -85,7 +87,7 @@ namespace ABDHFramework.Services.LinqClient
           else
           {
             query = _dataContext.tblNews
-            .Where("TitleEN like  @0", criteria)
+            .Where(op => op.TitleEN.Contains(criteria))
             .Take(pageSize * page)
             .Skip((page - 1) * pageSize);
           }
