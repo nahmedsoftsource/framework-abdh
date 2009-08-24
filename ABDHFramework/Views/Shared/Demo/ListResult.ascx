@@ -2,7 +2,8 @@
 <%@ Import Namespace="ABDHFramework.Lib" %>
 <%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
-<form method="post" id="ListResult">
+<form method="post" >
+<div id="ListResult">
 <script>
  function Jump(id) {
     //<%--var urlMain = "<%= Routing.InsuranceManagement.UrlForDetails() %>" + "?InsuranceID=" + id;
@@ -30,7 +31,6 @@
  function confirmDelete() {
      var checkboxs = document.getElementsByTagName('input');
      var count = 0;
-     //var listID = document.getElementById("listIDToDelete");
      var listID = "";
      for (i = 0; i < checkboxs.length; i++) {
          if (checkboxs[i].checked == true) {
@@ -41,8 +41,6 @@
                  listID = listID + "|";
              }
              }
-             //alert(listID);
-
              document.getElementById('<%=Html.IdFor("listIDToDelete")%>').value = listID;
          
          if (count > 0)
@@ -89,7 +87,7 @@
   DefaultSortColumn = "TitleEN",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
   URL = Routing.Demo.UrlForListResutl(),
-  HtmlID = "List"
+  HtmlID = "ListResult"
   })%>
 <%= Html.AjaxPager(new PagingOption
 {
@@ -101,7 +99,7 @@
         ShowIfEmpty = true,
       }, new AjaxPaginationOption
 {
-  HtmlID = "List",
+  HtmlID = "ListResult",
 })%>
 
   </div>
@@ -119,5 +117,6 @@
             
         }
         )%>
+  </div>
   </div>
 </form>
