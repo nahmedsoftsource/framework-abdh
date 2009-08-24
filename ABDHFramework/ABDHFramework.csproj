@@ -145,6 +145,8 @@
     <Compile Include="Lib\FluentHtml\TextElement.cs" />
     <Compile Include="Lib\FluentHtml\TextInputBase.cs" />
     <Compile Include="Lib\FluentHtml\ValidationMessage.cs" />
+    <Compile Include="Lib\TabPane.cs" />
+    <Compile Include="Lib\TabPanelExtensions.cs" />
     <Compile Include="Models\ABDHFramework.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
