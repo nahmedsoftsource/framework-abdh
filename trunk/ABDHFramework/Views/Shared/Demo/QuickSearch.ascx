@@ -16,7 +16,7 @@
 
 </script>
 
-<form method="post" id="AgentSearchForm">
+<form method="post" id="SearchForm">
   <table class="table-form maxwidth" border="0" cellpadding="0" cellspacing="0" >
 	  <tr class="field">
 		  <td><span class="field-label" style="width:70px;">Name</span></td>
@@ -39,7 +39,9 @@
       
       URL = Routing.Demo.UrlForSearchAll(),
       Update = "ListResult",
-      Data = new { HtmlID = "ListResult" ,Command = "Search"}
+      Data = new { HtmlID = "ListResult" ,Command = "Search"},
+      IsForm = true,
+      CausesValidation = false
     })%>
 
 
