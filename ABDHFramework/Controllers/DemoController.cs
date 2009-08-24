@@ -41,7 +41,6 @@ namespace ABDHFramework.Controllers
           string criteria = !String.IsNullOrEmpty(Request["Title"]) ? Request["Title"] : "";
           if (!String.IsNullOrEmpty(Request["Command"]) && Request["Command"].ToString() == "Search")
           {
-            criteria = "Event";
             SearchResult<tblNew> listAllNews = new SearchResult<tblNew>();
             listAllNews = Service.SearchNewsByCriteria(ABDHFramework.Common.Constants.DefautPagingSizeForNews, (page.HasValue ? (int)page : 1), criteria, sortColumn, sortOption);
             return View(listAllNews);

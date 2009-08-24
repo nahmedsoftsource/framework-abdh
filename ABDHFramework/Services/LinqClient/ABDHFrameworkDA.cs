@@ -68,7 +68,7 @@ namespace ABDHFramework.Services.LinqClient
             if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
             {
               query = _dataContext.tblNews
-                .Where("TitleEN like  @0", criteria)
+                .Where(op => op.TitleEN.Contains(criteria))
                 .OrderByDescending(o => o.TitleEN)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
