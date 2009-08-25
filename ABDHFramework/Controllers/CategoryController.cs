@@ -61,6 +61,43 @@ namespace ABDHFramework.Controllers
 
             return View(listAllNews);
         }
+        public ActionResult EditCategory(Guid? categoryID)
+        {
+            if (Request["Delete"] != null)
+            {
+                if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+                {
+                    Service.DeleteCategory((Guid)categoryID);
+                    return RedirectToAction("IndexForProduct");
+                }
+            }
+            if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
+            {
+                tblCategory tblCategory = new tblCategory();
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    tblCategory = Service.GetCategoryByID((Guid)categoryID, true);
+                }
+                else
+                {
+                    tblCategory = Service.GetCategoryByID((Guid)categoryID, false);
+                }
+
+                ViewData["NameVN"] = tblCategory.CategoryNameVN;
+                ViewData["NameEN"] = tblCategory.CategoryNameVN;
+                ViewData["DescriptionVN"] = tblCategory.DescriptionVN;
+                ViewData["DescriptionEN"] = tblCategory.DescriptionEN;
+                ViewData["command"] = "upload";
+                return View(tblCategory);
+            }
+            else
+            {
+                ViewData["AddNews"] = true;
+                tblCategory tblCategory = new tblCategory();
+                return View(tblCategory);
+            }
+        }
+
 
     }
 }

@@ -228,6 +228,28 @@ namespace ABDHFramework.Services.LinqClient
 
             return searchResult;
         }
+        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
+        {
+            if (isEN)
+            {
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameEN!=null", categoryID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    return query.ToList().First();
+                }
+                return new tblCategory();
+            }
+            else
+            {
+                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameVN!=null", categoryID.ToString());
+                if (query != null && query.ToList().Count > 0)
+                {
+                    return query.ToList().First();
+                }
+                return new tblCategory();
+            }
+        }
+        
         #endregion
         #region Data Access tblUser
 
