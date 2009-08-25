@@ -90,5 +90,14 @@ namespace ABDHFramework.Services
         {
              _da.Delete(id);
         }
+
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN)
+        {
+            return _da.GetAllCategory(pageSize, page, isEN);
+        }
+        public SearchResult<tblProduct> GetAllProductByCategory(int pageSize, int page, Guid? categoryID)
+        {
+            return _da.GetAllProductByCategory(pageSize, page, categoryID);
+        }
     }
 }

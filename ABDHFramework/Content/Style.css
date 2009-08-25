@@ -597,124 +597,6 @@ table.table-list tbody tr td.emptyrow
 	-moz-background-inline-policy: -moz-initial;
 }
 
-/* Floating Menu */
-ul#menu {
-	position: fixed;
-	top: 30px;
-	margin-left: 800px;
-	list-style-type: square;
-	list-style-position: inside;
-	padding: 5px;
-	border: 1px solid black;
-	background-color: #f1f1f1;
-}
-
-ul#menu li {
-	padding: 1px 25px 1px 5px;
-}
-
-ul#menu li.title {
-	list-style: none;
-	font-weight: bold;
-	color: #696969;
-}
-
-ul#menu li.back {
-	margin-top: 20px;
-	list-style: none;
-	font-size: 8pt;
-	font-style: italic;
-}
-
-/**
- * Multi-level Drop Down Menu 2.0 - CSS Temp
- * August 22, 2009
- * Corey Hart @ http://www.codenothing.com
- */ 
-
-#multi-ddm {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-}
-
-#multi-ddm > li {
-	float: left;
-}
-
-#multi-ddm > li > a {
-	display: block;
-	width: 100px;
-	text-align:center;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	text-decoration: none;
-	color: #232323;
-	font-weight: bold;
-	background-color: #f1f1f1;
-	border: 1px solid #c5c5c5;
-}
-
-#multi-ddm > li > .parent-hover {
-	background-color: #c5c5c5;
-	border-left: 1px solid #545454;
-}
-
-#multi-ddm > li ul {
-	display: none;
-	list-style: none;
-	position: absolute;
-	margin: -1px 0 0 0;
-	z-index: 90;
-	padding: 0;
-}
-
-#multi-ddm > li ul a {
-	display: block;
-	width: 152px;
-	padding: 5px;
-	border-bottom: 1px solid #545454;
-	border-right: 1px solid #545454;
-	border-left: 1px solid #545454;
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 10pt;
-	color: #232323;
-	background-color: #c5c5c5;
-}
-
-#multi-ddm > li ul li a.first {
-	border-top: 1px solid #545454;
-}
-
-#multi-ddm > li ul .child-hover1 {
-	background-color: #f1f1f1;
-}
-
-#multi-ddm > li ul .child-hover2 {
-	background-color: black;
-	color: white;
-}
-
-#multi-ddm > li ul .child-hover3 {
-	background-color: purple;
-	color: white;
-}
-
-#multi-ddm > li ul .child-hover4 {
-	background-color: blue;
-	color: white;
-}
-
-#multi-ddm > li ul li ul {
-	margin: -29px 0 0 163px;
-	position: absolute;
-}
-
-#multi-ddm span {
-	float: right;
-}
-
 
 p {
 	padding: 0 0 1em;
@@ -732,6 +614,10 @@ p {
 	margin:1px;
 }
 .msg_body {
-	padding: 5px 10px 15px;
+	
+	background-color:#F4F4F8;
+}
+.sub_msg_body {
+	padding: 5px 10px 5px;
 	background-color:#F4F4F8;
 }

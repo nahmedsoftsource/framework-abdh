@@ -35,7 +35,20 @@ namespace ABDHFramework.Routing
         return _demo;
       }
     }
-    
+    //Routing for Category
+    private RoutingNS.Category _category = null;
+    public RoutingNS.Category Category
+    {
+        get
+        {
+            if (_category == null)
+            {
+                _category = new RoutingNS.Category(_url);
+            }
+
+            return _category;
+        }
+    }
 
 
   }
