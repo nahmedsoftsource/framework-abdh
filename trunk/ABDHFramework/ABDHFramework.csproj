@@ -343,6 +343,8 @@
     <Content Include="Images\index1_116.jpg" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
+    <Content Include="Views\Category\Admin\EditCategory.aspx" />
+    <Content Include="Views\Category\Admin\ListCategory.aspx" />
     <Content Include="Views\Category\IndexForProductByCategory.aspx" />
     <Content Include="Views\Category\ListAllProductByCategory.aspx" />
     <Content Include="Views\Category\ListCategory.aspx" />
