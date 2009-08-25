@@ -97,6 +97,10 @@ namespace ABDHFramework.Controllers
                 return View(tblCategory);
             }
         }
+        public ActionResult Admin()
+        {
+            return View("Admin/AdminCategory");
+        }
 
 
     }
