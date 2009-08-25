@@ -73,7 +73,7 @@ namespace ABDHFramework.Controllers
             }
             else
             {
-                return RedirectToAction("IndexForNews", "ABDHFramework");
+                return RedirectToAction("Index", "Home");
             }
         }
 

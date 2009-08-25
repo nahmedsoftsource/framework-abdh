@@ -19,8 +19,21 @@ namespace ABDHFramework.Routing
     {
       _url = url;
     }
-   
-   
+
+    //Routing for Home
+    private RoutingNS.Home _home = null;
+    public RoutingNS.Home Home
+    {
+        get
+        {
+            if (_home == null)
+            {
+                _home = new RoutingNS.Home(_url);
+            }
+
+            return _home;
+        }
+    }
     //Routing for Demo
     private RoutingNS.Demo _demo = null;
     public RoutingNS.Demo Demo
