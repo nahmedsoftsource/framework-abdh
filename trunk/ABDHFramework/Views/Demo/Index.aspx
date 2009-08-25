@@ -12,6 +12,9 @@
                     <div id="QuickSearchID">
                     <%Html.RenderPartial("~/Views/Shared/Demo/QuickSearch.ascx"); %>
                     </div>
+                    <div>
+                    <%Html.RenderPartial("~/Views/Shared/LeftMenu.ascx"); %>
+                    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
 
