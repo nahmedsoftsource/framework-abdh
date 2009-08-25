@@ -13,7 +13,14 @@ namespace ABDHFramework.Controllers
     {
         public ActionResult Index()
         {
-            return View("Admin/Admin");
+            if (HttpContext.Session["UserName"] != null)
+            {
+                return View("Admin/Admin");
+            }
+            else
+            {
+                return RedirectToAction("", "");
+            }
         }
 
         public ActionResult About()
