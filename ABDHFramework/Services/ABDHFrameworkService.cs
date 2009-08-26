@@ -90,22 +90,29 @@ namespace ABDHFramework.Services
         {
              _da.Delete(id);
         }
-
-        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN)
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN,String criteria, String sortColunm, String sortOption)
         {
-            return _da.GetAllCategory(pageSize, page, isEN);
+          return _da.GetAllCategory(pageSize, page, isEN,criteria, sortColunm,sortOption);
         }
         public SearchResult<tblProduct> GetAllProductByCategory(int pageSize, int page, Guid? categoryID)
         {
             return _da.GetAllProductByCategory(pageSize, page, categoryID);
         }
-        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
+        public tblCategory GetCategoryByID(Guid categoryID)
         {
-            return _da.GetCategoryByID(categoryID, isEN);
+            return _da.GetCategoryByID(categoryID);
         }
         public void DeleteCategory(Guid categoryID)
         {
             _da.DeleteCategory(categoryID);
+        }
+        public void UpdateCategory(tblCategory tblnew)
+        {
+          _da.UpdateCategory(tblnew);
+        }
+        public void InsertCategory(tblCategory tblnew)
+        {
+          _da.InsertCategory(tblnew);
         }
     }
 }

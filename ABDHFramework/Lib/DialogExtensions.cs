@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ABDHFramework.Lib;
-using ABDHFramework.Utility.Javascripts;
+using ABDHFramework.Lib.Javascripts;
 
 namespace ABDHFramework.Lib
 {
@@ -180,7 +180,17 @@ type='button' value='{0}' onclick=""Core.openDialog('{1}')"" class={2}/>", name,
       sb.Append("</div>");
       return String.Format(sb.ToString(), DialogHelper.OpenDialogScript(option));
     }
-
+    public static String DeleteButtonForList(this HtmlHelper html, DialogOpenOption option)
+    {
+      System.Text.StringBuilder sb = new System.Text.StringBuilder();
+      sb.Append("<div style='width: 90px;float:right; margin:5px'>");
+      sb.Append("<div style='margin-right: 1px;' onclick='{0}' class='iadd ibutton'>");
+      sb.Append("<span></span>");
+      sb.Append("</div>");
+      sb.Append("<div style='margin-top: 6px;'>DELETE</div>");
+      sb.Append("</div>");
+      return String.Format(sb.ToString(), DialogHelper.OpenDialogScript(option));
+    }
     public static String EditLinkForList(this HtmlHelper html, DialogOpenOption option)
     {
       return LinkToRemoteDialog(html, "", option, "ui-icon ui-icon-pencil");

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using ABDHFramework.Lib;
 
-namespace ABDHFramework.Utility.Javascripts
+namespace ABDHFramework.Lib.Javascripts
 {
   public static class Javascript
   {
@@ -117,7 +117,19 @@ namespace ABDHFramework.Utility.Javascripts
 
       return builder.ToString();
     }
+    public static String EditToRemoteForList(String name,String cssClass, RemoteOption option)
+    {
+      var onClick = RemoteFunc(option);
+      var builder = new TagBuilder("a");
 
+      if (cssClass != "")
+        builder.MergeAttribute("class", cssClass);
+      builder.MergeAttribute("href", "javascript:void(0)");
+      builder.MergeAttribute("onClick", onClick);
+
+      return builder.ToString();
+    }
+    
     public static String LinkForSort(String content, RemoteOption option)
     {
       var onClick = RemoteFunc(option);
@@ -152,6 +164,10 @@ namespace ABDHFramework.Utility.Javascripts
     public static String LinkToRemote(String name, RemoteOption option)
     {
       return LinkToRemote(name,"", option);
+    }
+    public static String EditToRemoteForList(String name, RemoteOption option)
+    {
+      return EditToRemoteForList(name, "ui-icon ui-icon-pencil", option);
     }
     /// <summary>
     /// load remote content

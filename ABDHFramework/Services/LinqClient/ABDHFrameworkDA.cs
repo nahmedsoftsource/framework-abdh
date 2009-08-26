@@ -116,7 +116,7 @@ namespace ABDHFramework.Services.LinqClient
                 }
             }
         }
-
+        
 
         #region Category
         public void UpdateCategory(tblCategory tblcategory)
@@ -179,21 +179,54 @@ namespace ABDHFramework.Services.LinqClient
 
 
         }
-        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN)
+        public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN, string criteria, String sortColunm, String sortOption)
         {
             isEN = false;
             SearchResult<tblCategory> searchResult = new SearchResult<tblCategory>();
-            if (isEN)
+            if (!isEN)
             {
-                var query1 = _dataContext.tblCategories.Where("CategoryNameEN!=null");
-                var query = _dataContext.tblCategories.Where("CategoryNameEN!=null").Take(pageSize * page).Skip((page - 1) * pageSize);
+              var query1 = _dataContext.tblCategories.Where("CategoryNameVN!=null");
+                var query = query1;
+                if (sortColunm == "CategoryNameVN")
+                {
+                  if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
+                  {
+                    query = _dataContext.tblCategories
+                    .Where(op => op.CategoryNameVN.Contains(criteria))
+                    .OrderByDescending(o => o.CategoryNameVN)
+                    .Take(pageSize * page)
+                    .Skip((page - 1) * pageSize)
+                    ;
+                  }
+                  else
+                  {
+                    query = _dataContext.tblCategories
+                   .Where(op => op.CategoryNameVN.Contains(criteria))
+                   .OrderBy(o => o.CategoryNameVN)
+                   .Take(pageSize * page)
+                   .Skip((page - 1) * pageSize)
+                   ;
+                  }
+                  
+                  
+                }
+                else
+                {
+
+                    query = _dataContext.tblCategories
+                    .Where(op => op.CategoryNameVN.Contains(criteria))
+                    .OrderByDescending(o => o.CategoryNameVN)
+                    .Take(pageSize * page)
+                    .Skip((page - 1) * pageSize)
+                    ;
+                }
                 if (query != null && query1 != null && query.ToList().Count > 0)
                 {
-                    searchResult.Items = query.ToList();
-                    searchResult.Query = query;
-                    searchResult.SetMaxResults(pageSize);
-                    searchResult.SetPage(page);
-                    searchResult.TotalRows = query1.Count();
+                  searchResult.Items = query.ToList();
+                  searchResult.Query = query;
+                  searchResult.SetMaxResults(pageSize);
+                  searchResult.SetPage(page);
+                  searchResult.TotalRows = query1.Count();
                 }
             }
             else
@@ -228,26 +261,15 @@ namespace ABDHFramework.Services.LinqClient
 
             return searchResult;
         }
-        public tblCategory GetCategoryByID(Guid categoryID, bool isEN)
+        public tblCategory GetCategoryByID(Guid categoryID)
         {
-            if (isEN)
+            
+            var query = _dataContext.tblCategories.Where("ID.ToString()=@0", categoryID.ToString());
+            if (query != null && query.ToList().Count > 0)
             {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameEN!=null", categoryID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    return query.ToList().First();
-                }
-                return new tblCategory();
+                return query.ToList().First();
             }
-            else
-            {
-                var query = _dataContext.tblCategories.Where("ID.ToString()=@0 and  CategoryNameVN!=null", categoryID.ToString());
-                if (query != null && query.ToList().Count > 0)
-                {
-                    return query.ToList().First();
-                }
-                return new tblCategory();
-            }
+            return new tblCategory();
         }
         
         #endregion

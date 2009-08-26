@@ -814,15 +814,12 @@
     <Content Include="Images\image4.jpg" />
     <Content Include="Images\image5.jpg" />
     <Content Include="Images\index1_116.jpg" />
+    <Content Include="Content\jquery-ui-1.7.1.custom.css" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
-    <Content Include="Scripts\Menu\jquery-1.3.1.min.js" />
-    <Content Include="Scripts\Menu\jquery.history.js" />
-    <Content Include="Scripts\Menu\jquery.multi-ddm.js" />
-    <Content Include="Scripts\Menu\jquery.multi-ddm.min.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
     <Content Include="Views\Category\Admin\EditCategory.aspx" />
     <Content Include="Views\Category\Admin\AdminCategory.aspx" />
-    <Content Include="Views\Category\Admin\ListCategory.aspx" />
+    <Content Include="Views\Category\Admin\AdminListCategory.aspx" />
     <Content Include="Views\Category\IndexForProductByCategory.aspx" />
     <Content Include="Views\Category\ListAllProductByCategory.aspx" />
     <Content Include="Views\Category\ListCategory.aspx" />

@@ -621,3 +621,90 @@ p {
 	padding: 5px 10px 5px;
 	background-color:#F4F4F8;
 }
+
+/*Css for Title Bar*/
+.detail-title
+{
+	font-size:18px;
+	font-weight:bold;
+	color:#990000;
+	background-color:#E8E8E8;
+	border:1px solid #3366CC;
+	height:22px;
+	padding:2px 2px 2px 8px;
+	margin:0px;
+	display:block;
+}
+.table-container
+{
+  overflow:auto;
+  background-color:#FFFFFF;
+}
+.maxwidth
+{
+	width:100%;
+}
+.layout-form
+{
+	padding: 3px;
+	background-color:#FFFFFF;
+	font-size:11px;
+}
+
+
+/*Duong add*/
+/* Customized JQueryUI theme */
+.ui-widget { font-family: tahoma, sans-serif;font-size:9px; margin-bottom:5px;}
+.ui-widget-header .icon-button { float: right; text-transform:uppercase; font-size:10px;}
+.ui-widget .buttonpane { border-top: solid 1px #a6c9e2; padding: 3px; text-align: right; }
+.ui-widget .buttonpanetop {padding: 3px; margin-top: -10px; text-align: right; }
+.ui-widget .buttonpane .form-button-1{ float: left; }
+.ui-widget .horizontal-line { display:block; border-top: solid 1px #a6c9e2; margin-top:5px; margin-bottom:3px; }
+.buttonpane { border-top: solid 1px #a6c9e2; padding: 3px; text-align: right; text-transform:uppercase;}
+.buttonpanetop { padding: 3px; margin-top: -10px; text-align: right; text-transform:uppercase; border-bottom:solid 1px #cccccc;}
+/* need for clear the float style*/
+.buttonpanetop:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.buttonpanetop { display: inline-block; }
+/* required comment for clearfix to work in Opera \*/
+* html .buttonpanetop { height:1%; }
+.buttonpanetop { display:block; }
+/* end clearfix */
+.mark-special
+{
+  font-weight:bold;
+  color:Red  
+}
+.ui-tabs { padding:0px;margin:0px; margin-top:4px;}
+.ui-tabs .ui-tabs-nav { padding:0px; margin:0px; background-color:#FFFFFF; border:none; }
+.ui-tabs .ui-tabs-nav li { display:inline; }
+.ui-tabs .ui-tabs-nav li a { padding: 0.5px 5px; text-decoration:none; text-transform:uppercase;}
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a { color:#FFFFFF; font-weight:bold; background-color:#3366CC; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: pointer;}
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { padding: 1em 0em; display: block; border:solid 1px #3366CC; background-color:#F7EFDE; color:#000000; margin-top:4px; overflow:hidden;padding:5px;}
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a{ background-color:#CCCCCC; color:#FFFFFF; cursor: pointer; }
+.ui-state-focus { outline:0px; }
+.ui-dialog.ui-widget-content { border:1px solid #A8A8A8; }
+.ui-dialog .ui-dialog-titlebar  { font-size:18px; font-weight:bold; color:#FFFFFF; background-color:#CC9966; border:solid 1px #996633; height:22px; padding:2px 2px 2px 8px; margin:0px;}
+.ui-dialog .ui-dialog-titlebar-close .ui-icon { background-image: url(../theme/images/ui-icons_ffffff_256x240.png);  }
+.ui-dialog .ui-dialog-titlebar-close.ui-state-hover { background:none; border:none; }
+
+
+
+div.ireload 
+{
+	background:transparent url(../images/reload.gif) no-repeat scroll center center;
+	margin-right:2px;
+}
+div.iadd 
+{
+	background:transparent url(../images/add.gif) no-repeat scroll center center;
+	margin-right:2px;
+}
+div.ibutton 
+{
+	float:left; width:22px; height:22px; border:0px; cursor:pointer; overflow:hidden;
+}
+
+.TitleAction { padding: 3px; text-align: left;  border-bottom:solid 1px #cccccc;}
+/*Duong add*/
