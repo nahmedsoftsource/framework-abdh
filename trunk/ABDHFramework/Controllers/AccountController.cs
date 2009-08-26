@@ -82,7 +82,7 @@ namespace ABDHFramework.Controllers
 
             FormsAuth.SignOut();
             _accountController.Logoff();
-            return RedirectToAction("IndexForNews", "ABDHFramework");
+            return RedirectToAction("Index", "Home");
         }
 
         private List<SelectListItem> LoadDataForDropDownList()
@@ -145,7 +145,7 @@ namespace ABDHFramework.Controllers
                 if (_accountController.CreateUser(userName, password, email,department))
                 {
                     FormsAuth.SignIn(userName, false /* createPersistentCookie */);
-                    return RedirectToAction("IndexForNews", "ABDHFramework");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
