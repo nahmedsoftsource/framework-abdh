@@ -5,7 +5,7 @@ using System.Web;
 using ABDHFramework.Data;
 using System.Web.Mvc;
 using ABDHFramework.Common;
-using ABDHFramework.Utility.Javascripts;
+using ABDHFramework.Lib.Javascripts;
 using ABDHFramework.Routing;
 using ABDHFramework.Services;
 using ABDHFramework.Utility.ActionFilter;

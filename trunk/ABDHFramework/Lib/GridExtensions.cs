@@ -8,7 +8,7 @@ using ABDHFramework.Lib.Pager;
 using ABDHFramework.Lib.FluentHtml;
 using ABDHFramework.Common;
 using ABDHFramework.Data;
-using ABDHFramework.Utility.Javascripts;
+using ABDHFramework.Lib.Javascripts;
 
 namespace ABDHFramework.Lib
 {

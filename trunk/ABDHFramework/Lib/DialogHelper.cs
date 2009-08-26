@@ -5,7 +5,7 @@ using System.Web;
 using ABDHFramework.Lib;
 using System.Web.Mvc;
 using System.Web.Routing;
-using ABDHFramework.Utility.Javascripts;
+using ABDHFramework.Lib.Javascripts;
 
 namespace ABDHFramework.Lib
 {

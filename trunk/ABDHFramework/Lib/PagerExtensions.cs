@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ABDHFramework.Common;
 using System.Web.Routing;
-using ABDHFramework.Utility.Javascripts;
+using ABDHFramework.Lib.Javascripts;
 using ABDHFramework.Lib.Pager;
 
 namespace ABDHFramework.Lib
