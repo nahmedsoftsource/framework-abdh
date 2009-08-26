@@ -1,10 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
-    
+    <div class="mainCtentSpRight" id="ListSearchResult">
+        
+        <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="3" />
+    </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
-
+  
+<div id="QuickSearchID">
+<%Html.RenderPartial("~/Views/Shared/Demo/QuickSearch.ascx"); %>
+</div>
                     
 <script language="javascript" type="text/javascript">
     var a = "";

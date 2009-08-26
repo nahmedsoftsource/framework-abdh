@@ -29,8 +29,8 @@
 	 	<%= Html.ButtonToRemote("Show All", "form-button ui-corner-all", new RemoteOption
     {
       URL = Routing.Demo.UrlForSearchAll(),
-      Update = "ListResult",
-      Data = new { HtmlID = "ListResult", Command = "SearchAll" }
+      Update = "ListSearchResult",
+      Data = new { HtmlID = "ListSearchResult", Command = "SearchAll" }
     })%>
 
 
@@ -38,8 +38,8 @@
     {
       
       URL = Routing.Demo.UrlForSearchAll(),
-      Update = "ListResult",
-      Data = new { HtmlID = "ListResult" ,Command = "Search"},
+      Update = "ListSearchResult",
+      Data = new { HtmlID = "ListSearchResult", Command = "Search" },
       IsForm = true,
       CausesValidation = false
     })%>

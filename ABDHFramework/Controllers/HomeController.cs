@@ -19,7 +19,7 @@ namespace ABDHFramework.Controllers
             }
             else
             {
-                return RedirectToAction("", "");
+                return View();
             }
         }
 
