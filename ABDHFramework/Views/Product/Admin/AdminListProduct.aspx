@@ -84,8 +84,8 @@ Select:
   new ColumnOption<tblProduct>{
     Name = "Product Name",
     IsSort=true,
-    FieldName="ProductNameVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductNameVN +"'>" + (item.ProductNameVN.Length > 15 ? item.ProductNameVN.Substring(0,15) + "..." : item.ProductNameVN) + "</a>" )
+    FieldName="ProductName",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductName +"'>" + (item.ProductName.Length > 15 ? item.ProductName.Substring(0,15) + "..." : item.ProductName) + "</a>" )
   },
  new ColumnOption<tblProduct>{
     Name = "Description",
