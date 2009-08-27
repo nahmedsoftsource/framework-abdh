@@ -30,6 +30,11 @@ namespace ABDHFramework.Common
         public static byte MAX = 7;
 
     }
+    public class Languages
+    {
+        public static byte VN = 1;
+        public static byte EN = 2;
+    }
     public class StoreStatuses
     {
         public static bool Exhausted = true;

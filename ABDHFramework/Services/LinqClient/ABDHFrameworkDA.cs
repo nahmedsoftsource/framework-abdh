@@ -178,6 +178,21 @@ namespace ABDHFramework.Services.LinqClient
 
 
         }
+        public List<tblCategory> GetAllCategory(bool isEN,byte level)
+        {
+            if (isEN)
+            {
+                var query = _dataContext.tblCategories.Where(item=>(item.Language.HasValue && item.Language.Value.Equals(ABDHFramework.Common.Languages.EN) && item.Level.Equals(level)));
+                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
+            }
+            else
+            {
+                var query = _dataContext.tblCategories.Where(item => (item.Language.HasValue && item.Language.Value.Equals(ABDHFramework.Common.Languages.VN) && item.Level.Equals(level)));
+                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
+            }
+
+
+        }
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN, string criteria, String sortColunm, String sortOption)
         {
             isEN = false;

@@ -22,53 +22,19 @@
     <table  class="layout-form  maxwidth" cellspacing="2" cellpadding="0" border="0">
     <tr>
         <td>
-            <label for="ProductNameVN"><%=Resources.Global.ProductName %></label>
+            <label for="ProductName"><%=Resources.Global.ProductName %></label>
         </td>
         
         <td>
-        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-          { %>
-            <%= Html.TextBox("ProductNameEN", (Model != null && Model.ProductNameEN != null) ? Model.ProductNameEN : "", new { style = "width:100%" })%>
-            <%= Html.ValidationMessage("ProductNameEN")%>
-            <%}
-          else
-          { %>
-          <%= Html.TextBox("ProductNameVN", (Model != null && Model.ProductNameVN != null) ? Model.ProductNameVN : "", new { style = "width:100%" })%>
-            <%= Html.ValidationMessage("ProductNameVN")%>
-            <%} %>
+        
+            <%= Html.TextBox("ProductName", (Model != null && Model.ProductName != null) ? Model.ProductName : "", new { style = "width:100%" })%>
+            <%= Html.ValidationMessage("ProductName")%>
+        
         </td>
     </tr>
-    <tr>
-        <td>
-        <label ><%=Resources.Global.Promoted %>:</label>
-        </td>
-        <td>
-        <%=Html.DropDownList("Promoted", ((List<SelectListItem>)ViewData["Promotion"]).AsEnumerable(), new { style = "width:100%" })%>
-        <%= Html.ValidationMessage("Promoted")%>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <label ><%=Resources.Global.Warranty %>:</label>
-        </td>
-        
-        <td>
-        <%=Html.TextBox("WarrantyTime", ((Model != null && Model.WarrantyTime != null) ? Model.WarrantyTime : ""), new { style = "width:100%" })%>
-        <%= Html.ValidationMessage("WarrantyTime")%>
-        </td>
-        
-     </tr>
-     <tr>
-        <td>
-            <label ><%=Resources.Global.Store %>:</label>
-        </td>
-        
-        <td>
-        <%=Html.DropDownList("StoreStatus", ((List<SelectListItem>)ViewData["StoreStatus"]).AsEnumerable(), new { style = "width:100%" })%>
-        <%= Html.ValidationMessage("StoreStatus")%>
-        </td>
-        
-     </tr>
+    
+    
+     
      <tr>
         <td>
             <label ><%=Resources.Global.TypeName %>:</label>
@@ -86,16 +52,10 @@
         </td>
         
         <td>
-        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-          { %>
-        <%=Html.TextBox("PriceEN", (Model != null && Model.PriceEN.HasValue && String.IsNullOrEmpty(Model.PriceEN.ToString())) ? Model.PriceEN.ToString() : "0", new { style = "width:100%" })%>USD 
-        <%= Html.ValidationMessage("PriceEN","Value is invalid")%>
-        <%}
-          else
-          { %>
-          <%=Html.TextBox("PriceVN", (Model != null && Model.PriceVN.HasValue && String.IsNullOrEmpty(Model.PriceVN.ToString())) ? Model.PriceVN.ToString() : "0", new { style = "width:100%" })%>VNÐ 
-        <%= Html.ValidationMessage("PriceVN", "Giá trị nhập không hợp lệ")%>
-        <%} %>
+       
+        <%=Html.TextBox("Price", (Model != null && Model.Price.HasValue && String.IsNullOrEmpty(Model.Price.ToString())) ? Model.Price.ToString() : "0", new { style = "width:100%" })%>USD 
+        <%= Html.ValidationMessage("Price","Value is invalid")%>
+       
         </td>
         
      </tr>

@@ -2,6 +2,7 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
+
 <div class="detail-title">
     Manage Category
 </div>

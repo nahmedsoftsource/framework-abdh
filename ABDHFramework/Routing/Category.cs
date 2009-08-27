@@ -19,7 +19,10 @@ namespace ABDHFramework.Routing
     {
       return UrlFor("IndexForProductByCategory", new { CategoryID = categoryID });
     }
-
+    public String UrlForListCategoryByLevel()
+    {
+        return UrlFor("ListCategoryByLevel");
+    }
     public String UrlForListAllProductByCategory(int? page, Guid? categoryID)
     {
       return UrlFor("ListAllProductByCategory", new { Page = page, CategoryID = categoryID });
