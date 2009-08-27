@@ -308,11 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\images\pspbrwse.jbf" />
-    <None Include="Models\ABDHFramework.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>ABDHFramework.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -932,6 +927,13 @@
     <None Include="Admin\fckeditor\_samples\php\sampleposteddata.php" />
     <None Include="Admin\fckeditor\_samples\py\sample01.py" />
     <None Include="Admin\fckeditor\_samples\py\sampleposteddata.py" />
+    <None Include="Models\ABDHFramework.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>ABDHFramework.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Models\ABDHFramework.dbml.layout">
       <DependentUpon>ABDHFramework.dbml</DependentUpon>
     </None>

@@ -33,6 +33,9 @@ namespace ABDHFramework.Models
     partial void InserttblCategory(tblCategory instance);
     partial void UpdatetblCategory(tblCategory instance);
     partial void DeletetblCategory(tblCategory instance);
+    partial void InserttblUser(tblUser instance);
+    partial void UpdatetblUser(tblUser instance);
+    partial void DeletetblUser(tblUser instance);
     partial void InserttblEmail(tblEmail instance);
     partial void UpdatetblEmail(tblEmail instance);
     partial void DeletetblEmail(tblEmail instance);
@@ -42,12 +45,6 @@ namespace ABDHFramework.Models
     partial void InserttblNew(tblNew instance);
     partial void UpdatetblNew(tblNew instance);
     partial void DeletetblNew(tblNew instance);
-    partial void InserttblProduct(tblProduct instance);
-    partial void UpdatetblProduct(tblProduct instance);
-    partial void DeletetblProduct(tblProduct instance);
-    partial void InserttblUser(tblUser instance);
-    partial void UpdatetblUser(tblUser instance);
-    partial void DeletetblUser(tblUser instance);
     #endregion
 		
 		public ABDHFrameworkDataContext() : 
@@ -88,6 +85,14 @@ namespace ABDHFramework.Models
 			}
 		}
 		
+		public System.Data.Linq.Table<tblUser> tblUsers
+		{
+			get
+			{
+				return this.GetTable<tblUser>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tblEmail> tblEmails
 		{
 			get
@@ -119,14 +124,6 @@ namespace ABDHFramework.Models
 				return this.GetTable<tblProduct>();
 			}
 		}
-		
-		public System.Data.Linq.Table<tblUser> tblUsers
-		{
-			get
-			{
-				return this.GetTable<tblUser>();
-			}
-		}
 	}
 	
 	[Table(Name="dbo.tblCategory")]
@@ -137,15 +134,13 @@ namespace ABDHFramework.Models
 		
 		private System.Guid _ID;
 		
+		private System.Nullable<System.Guid> _ParentID;
+		
 		private string _CategoryNo;
 		
-		private string _CategoryNameVN;
+		private string _CategoryName;
 		
-		private string _CategoryNameEN;
-		
-		private string _DescriptionVN;
-		
-		private string _DescriptionEN;
+		private string _Description;
 		
 		private System.Nullable<System.DateTime> _CreatedDate;
 		
@@ -157,11 +152,11 @@ namespace ABDHFramework.Models
 		
 		private System.Nullable<bool> _Deleted;
 		
-		private System.Nullable<System.Guid> _ParentID;
+		private System.Nullable<byte> _Language;
+		
+		private byte _Level;
 		
 		private EntitySet<tblCategory> _tblCategories;
-		
-		private EntitySet<tblProduct> _tblProducts;
 		
 		private EntityRef<tblCategory> _tblCategory1;
 		
@@ -171,16 +166,14 @@ namespace ABDHFramework.Models
     partial void OnCreated();
     partial void OnIDChanging(System.Guid value);
     partial void OnIDChanged();
+    partial void OnParentIDChanging(System.Nullable<System.Guid> value);
+    partial void OnParentIDChanged();
     partial void OnCategoryNoChanging(string value);
     partial void OnCategoryNoChanged();
-    partial void OnCategoryNameVNChanging(string value);
-    partial void OnCategoryNameVNChanged();
-    partial void OnCategoryNameENChanging(string value);
-    partial void OnCategoryNameENChanged();
-    partial void OnDescriptionVNChanging(string value);
-    partial void OnDescriptionVNChanged();
-    partial void OnDescriptionENChanging(string value);
-    partial void OnDescriptionENChanged();
+    partial void OnCategoryNameChanging(string value);
+    partial void OnCategoryNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateChanged();
     partial void OnCreatedByChanging(string value);
@@ -191,14 +184,15 @@ namespace ABDHFramework.Models
     partial void OnUpdatedByChanged();
     partial void OnDeletedChanging(System.Nullable<bool> value);
     partial void OnDeletedChanged();
-    partial void OnParentIDChanging(System.Nullable<System.Guid> value);
-    partial void OnParentIDChanged();
+    partial void OnLanguageChanging(System.Nullable<byte> value);
+    partial void OnLanguageChanged();
+    partial void OnLevelChanging(byte value);
+    partial void OnLevelChanged();
     #endregion
 		
 		public tblCategory()
 		{
 			this._tblCategories = new EntitySet<tblCategory>(new Action<tblCategory>(this.attach_tblCategories), new Action<tblCategory>(this.detach_tblCategories));
-			this._tblProducts = new EntitySet<tblProduct>(new Action<tblProduct>(this.attach_tblProducts), new Action<tblProduct>(this.detach_tblProducts));
 			this._tblCategory1 = default(EntityRef<tblCategory>);
 			OnCreated();
 		}
@@ -223,6 +217,30 @@ namespace ABDHFramework.Models
 			}
 		}
 		
+		[Column(Storage="_ParentID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> ParentID
+		{
+			get
+			{
+				return this._ParentID;
+			}
+			set
+			{
+				if ((this._ParentID != value))
+				{
+					if (this._tblCategory1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnParentIDChanging(value);
+					this.SendPropertyChanging();
+					this._ParentID = value;
+					this.SendPropertyChanged("ParentID");
+					this.OnParentIDChanged();
+				}
+			}
+		}
+		
 		[Column(Storage="_CategoryNo", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string CategoryNo
 		{
@@ -243,82 +261,42 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		[Column(Storage="_CategoryNameVN", DbType="NVarChar(200)")]
-		public string CategoryNameVN
+		[Column(Storage="_CategoryName", DbType="NVarChar(200)")]
+		public string CategoryName
 		{
 			get
 			{
-				return this._CategoryNameVN;
+				return this._CategoryName;
 			}
 			set
 			{
-				if ((this._CategoryNameVN != value))
+				if ((this._CategoryName != value))
 				{
-					this.OnCategoryNameVNChanging(value);
+					this.OnCategoryNameChanging(value);
 					this.SendPropertyChanging();
-					this._CategoryNameVN = value;
-					this.SendPropertyChanged("CategoryNameVN");
-					this.OnCategoryNameVNChanged();
+					this._CategoryName = value;
+					this.SendPropertyChanged("CategoryName");
+					this.OnCategoryNameChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_CategoryNameEN", DbType="NVarChar(200)")]
-		public string CategoryNameEN
+		[Column(Storage="_Description", DbType="NVarChar(500)")]
+		public string Description
 		{
 			get
 			{
-				return this._CategoryNameEN;
+				return this._Description;
 			}
 			set
 			{
-				if ((this._CategoryNameEN != value))
+				if ((this._Description != value))
 				{
-					this.OnCategoryNameENChanging(value);
+					this.OnDescriptionChanging(value);
 					this.SendPropertyChanging();
-					this._CategoryNameEN = value;
-					this.SendPropertyChanged("CategoryNameEN");
-					this.OnCategoryNameENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DescriptionVN", DbType="NVarChar(500)")]
-		public string DescriptionVN
-		{
-			get
-			{
-				return this._DescriptionVN;
-			}
-			set
-			{
-				if ((this._DescriptionVN != value))
-				{
-					this.OnDescriptionVNChanging(value);
-					this.SendPropertyChanging();
-					this._DescriptionVN = value;
-					this.SendPropertyChanged("DescriptionVN");
-					this.OnDescriptionVNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_DescriptionEN", DbType="NVarChar(500)")]
-		public string DescriptionEN
-		{
-			get
-			{
-				return this._DescriptionEN;
-			}
-			set
-			{
-				if ((this._DescriptionEN != value))
-				{
-					this.OnDescriptionENChanging(value);
-					this.SendPropertyChanging();
-					this._DescriptionEN = value;
-					this.SendPropertyChanged("DescriptionEN");
-					this.OnDescriptionENChanged();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
 				}
 			}
 		}
@@ -423,26 +401,42 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		[Column(Storage="_ParentID", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> ParentID
+		[Column(Storage="_Language", DbType="TinyInt")]
+		public System.Nullable<byte> Language
 		{
 			get
 			{
-				return this._ParentID;
+				return this._Language;
 			}
 			set
 			{
-				if ((this._ParentID != value))
+				if ((this._Language != value))
 				{
-					if (this._tblCategory1.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnParentIDChanging(value);
+					this.OnLanguageChanging(value);
 					this.SendPropertyChanging();
-					this._ParentID = value;
-					this.SendPropertyChanged("ParentID");
-					this.OnParentIDChanged();
+					this._Language = value;
+					this.SendPropertyChanged("Language");
+					this.OnLanguageChanged();
+				}
+			}
+		}
+		
+		[Column(Name="[Level]", Storage="_Level", DbType="TinyInt NOT NULL")]
+		public byte Level
+		{
+			get
+			{
+				return this._Level;
+			}
+			set
+			{
+				if ((this._Level != value))
+				{
+					this.OnLevelChanging(value);
+					this.SendPropertyChanging();
+					this._Level = value;
+					this.SendPropertyChanged("Level");
+					this.OnLevelChanged();
 				}
 			}
 		}
@@ -457,19 +451,6 @@ namespace ABDHFramework.Models
 			set
 			{
 				this._tblCategories.Assign(value);
-			}
-		}
-		
-		[Association(Name="tblCategory_tblProduct", Storage="_tblProducts", ThisKey="ID", OtherKey="CategoryID")]
-		public EntitySet<tblProduct> tblProducts
-		{
-			get
-			{
-				return this._tblProducts;
-			}
-			set
-			{
-				this._tblProducts.Assign(value);
 			}
 		}
 		
@@ -538,17 +519,331 @@ namespace ABDHFramework.Models
 			this.SendPropertyChanging();
 			entity.tblCategory1 = null;
 		}
+	}
+	
+	[Table(Name="dbo.tblUser")]
+	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_tblProducts(tblProduct entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private string _UserNo;
+		
+		private System.Nullable<byte> _Status;
+		
+		private string _UserName;
+		
+		private string _Password;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private string _CreatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDate;
+		
+		private string _UpdatedBy;
+		
+		private System.Nullable<bool> _Deleted;
+		
+		private string _Email;
+		
+		private System.Nullable<byte> _Department;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnUserNoChanging(string value);
+    partial void OnUserNoChanged();
+    partial void OnStatusChanging(System.Nullable<byte> value);
+    partial void OnStatusChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnCreatedByChanging(string value);
+    partial void OnCreatedByChanged();
+    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateChanged();
+    partial void OnUpdatedByChanging(string value);
+    partial void OnUpdatedByChanged();
+    partial void OnDeletedChanging(System.Nullable<bool> value);
+    partial void OnDeletedChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnDepartmentChanging(System.Nullable<byte> value);
+    partial void OnDepartmentChanged();
+    #endregion
+		
+		public tblUser()
 		{
-			this.SendPropertyChanging();
-			entity.tblCategory = this;
+			OnCreated();
 		}
 		
-		private void detach_tblProducts(tblProduct entity)
+		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
 		{
-			this.SendPropertyChanging();
-			entity.tblCategory = null;
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserNo", DbType="VarChar(50)")]
+		public string UserNo
+		{
+			get
+			{
+				return this._UserNo;
+			}
+			set
+			{
+				if ((this._UserNo != value))
+				{
+					this.OnUserNoChanging(value);
+					this.SendPropertyChanging();
+					this._UserNo = value;
+					this.SendPropertyChanged("UserNo");
+					this.OnUserNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Status", DbType="TinyInt")]
+		public System.Nullable<byte> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserName", DbType="VarChar(50)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Password", DbType="VarChar(50)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreatedBy", DbType="VarChar(50)")]
+		public string CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UpdatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDate
+		{
+			get
+			{
+				return this._UpdatedDate;
+			}
+			set
+			{
+				if ((this._UpdatedDate != value))
+				{
+					this.OnUpdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDate = value;
+					this.SendPropertyChanged("UpdatedDate");
+					this.OnUpdatedDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UpdatedBy", DbType="VarChar(50)")]
+		public string UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Deleted", DbType="Bit")]
+		public System.Nullable<bool> Deleted
+		{
+			get
+			{
+				return this._Deleted;
+			}
+			set
+			{
+				if ((this._Deleted != value))
+				{
+					this.OnDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._Deleted = value;
+					this.SendPropertyChanged("Deleted");
+					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="NChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Department", DbType="TinyInt")]
+		public System.Nullable<byte> Department
+		{
+			get
+			{
+				return this._Department;
+			}
+			set
+			{
+				if ((this._Department != value))
+				{
+					this.OnDepartmentChanging(value);
+					this.SendPropertyChanging();
+					this._Department = value;
+					this.SendPropertyChanged("Department");
+					this.OnDepartmentChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1531,10 +1826,8 @@ namespace ABDHFramework.Models
 	}
 	
 	[Table(Name="dbo.tblProduct")]
-	public partial class tblProduct : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tblProduct
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Guid _ID;
 		
@@ -1542,15 +1835,11 @@ namespace ABDHFramework.Models
 		
 		private System.Nullable<System.Guid> _CategoryID;
 		
-		private string _ProductNameVN;
-		
-		private string _ProductNameEN;
+		private string _ProductName;
 		
 		private string _Description;
 		
-		private System.Nullable<double> _PriceVN;
-		
-		private System.Nullable<double> _PriceEN;
+		private System.Nullable<double> _Price;
 		
 		private string _Image;
 		
@@ -1564,65 +1853,15 @@ namespace ABDHFramework.Models
 		
 		private System.Nullable<bool> _Deleted;
 		
-		private System.Nullable<bool> _Promoted;
-		
-		private System.Nullable<bool> _StoreStatus;
-		
-		private string _WarrantyTime;
-		
 		private string _Property;
 		
-		private EntityRef<tblCategory> _tblCategory;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(System.Guid value);
-    partial void OnIDChanged();
-    partial void OnProductNoChanging(string value);
-    partial void OnProductNoChanged();
-    partial void OnCategoryIDChanging(System.Nullable<System.Guid> value);
-    partial void OnCategoryIDChanged();
-    partial void OnProductNameVNChanging(string value);
-    partial void OnProductNameVNChanged();
-    partial void OnProductNameENChanging(string value);
-    partial void OnProductNameENChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnPriceVNChanging(System.Nullable<double> value);
-    partial void OnPriceVNChanged();
-    partial void OnPriceENChanging(System.Nullable<double> value);
-    partial void OnPriceENChanged();
-    partial void OnImageChanging(string value);
-    partial void OnImageChanged();
-    partial void OnCreatedByChanging(string value);
-    partial void OnCreatedByChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnUpdatedByChanging(string value);
-    partial void OnUpdatedByChanged();
-    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedDateChanged();
-    partial void OnDeletedChanging(System.Nullable<bool> value);
-    partial void OnDeletedChanged();
-    partial void OnPromotedChanging(System.Nullable<bool> value);
-    partial void OnPromotedChanged();
-    partial void OnStoreStatusChanging(System.Nullable<bool> value);
-    partial void OnStoreStatusChanged();
-    partial void OnWarrantyTimeChanging(string value);
-    partial void OnWarrantyTimeChanged();
-    partial void OnPropertyChanging(string value);
-    partial void OnPropertyChanged();
-    #endregion
+		private System.Nullable<byte> _Language;
 		
 		public tblProduct()
 		{
-			this._tblCategory = default(EntityRef<tblCategory>);
-			OnCreated();
 		}
 		
-		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL")]
 		public System.Guid ID
 		{
 			get
@@ -1633,11 +1872,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._ID != value))
 				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
 					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
 				}
 			}
 		}
@@ -1653,11 +1888,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._ProductNo != value))
 				{
-					this.OnProductNoChanging(value);
-					this.SendPropertyChanging();
 					this._ProductNo = value;
-					this.SendPropertyChanged("ProductNo");
-					this.OnProductNoChanged();
 				}
 			}
 		}
@@ -1673,55 +1904,23 @@ namespace ABDHFramework.Models
 			{
 				if ((this._CategoryID != value))
 				{
-					if (this._tblCategory.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnCategoryIDChanging(value);
-					this.SendPropertyChanging();
 					this._CategoryID = value;
-					this.SendPropertyChanged("CategoryID");
-					this.OnCategoryIDChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_ProductNameVN", DbType="NVarChar(200)")]
-		public string ProductNameVN
+		[Column(Storage="_ProductName", DbType="NVarChar(500)")]
+		public string ProductName
 		{
 			get
 			{
-				return this._ProductNameVN;
+				return this._ProductName;
 			}
 			set
 			{
-				if ((this._ProductNameVN != value))
+				if ((this._ProductName != value))
 				{
-					this.OnProductNameVNChanging(value);
-					this.SendPropertyChanging();
-					this._ProductNameVN = value;
-					this.SendPropertyChanged("ProductNameVN");
-					this.OnProductNameVNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ProductNameEN", DbType="VarChar(200)")]
-		public string ProductNameEN
-		{
-			get
-			{
-				return this._ProductNameEN;
-			}
-			set
-			{
-				if ((this._ProductNameEN != value))
-				{
-					this.OnProductNameENChanging(value);
-					this.SendPropertyChanging();
-					this._ProductNameEN = value;
-					this.SendPropertyChanged("ProductNameEN");
-					this.OnProductNameENChanged();
+					this._ProductName = value;
 				}
 			}
 		}
@@ -1737,51 +1936,23 @@ namespace ABDHFramework.Models
 			{
 				if ((this._Description != value))
 				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
 					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_PriceVN", DbType="Float")]
-		public System.Nullable<double> PriceVN
+		[Column(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
 		{
 			get
 			{
-				return this._PriceVN;
+				return this._Price;
 			}
 			set
 			{
-				if ((this._PriceVN != value))
+				if ((this._Price != value))
 				{
-					this.OnPriceVNChanging(value);
-					this.SendPropertyChanging();
-					this._PriceVN = value;
-					this.SendPropertyChanged("PriceVN");
-					this.OnPriceVNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_PriceEN", DbType="Float")]
-		public System.Nullable<double> PriceEN
-		{
-			get
-			{
-				return this._PriceEN;
-			}
-			set
-			{
-				if ((this._PriceEN != value))
-				{
-					this.OnPriceENChanging(value);
-					this.SendPropertyChanging();
-					this._PriceEN = value;
-					this.SendPropertyChanged("PriceEN");
-					this.OnPriceENChanged();
+					this._Price = value;
 				}
 			}
 		}
@@ -1797,11 +1968,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._Image != value))
 				{
-					this.OnImageChanging(value);
-					this.SendPropertyChanging();
 					this._Image = value;
-					this.SendPropertyChanged("Image");
-					this.OnImageChanged();
 				}
 			}
 		}
@@ -1817,11 +1984,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._CreatedBy != value))
 				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
 					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
 				}
 			}
 		}
@@ -1837,11 +2000,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._CreatedDate != value))
 				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
 					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
 				}
 			}
 		}
@@ -1857,11 +2016,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._UpdatedBy != value))
 				{
-					this.OnUpdatedByChanging(value);
-					this.SendPropertyChanging();
 					this._UpdatedBy = value;
-					this.SendPropertyChanged("UpdatedBy");
-					this.OnUpdatedByChanged();
 				}
 			}
 		}
@@ -1877,11 +2032,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._UpdatedDate != value))
 				{
-					this.OnUpdatedDateChanging(value);
-					this.SendPropertyChanging();
 					this._UpdatedDate = value;
-					this.SendPropertyChanged("UpdatedDate");
-					this.OnUpdatedDateChanged();
 				}
 			}
 		}
@@ -1897,71 +2048,7 @@ namespace ABDHFramework.Models
 			{
 				if ((this._Deleted != value))
 				{
-					this.OnDeletedChanging(value);
-					this.SendPropertyChanging();
 					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Promoted", DbType="Bit")]
-		public System.Nullable<bool> Promoted
-		{
-			get
-			{
-				return this._Promoted;
-			}
-			set
-			{
-				if ((this._Promoted != value))
-				{
-					this.OnPromotedChanging(value);
-					this.SendPropertyChanging();
-					this._Promoted = value;
-					this.SendPropertyChanged("Promoted");
-					this.OnPromotedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_StoreStatus", DbType="Bit")]
-		public System.Nullable<bool> StoreStatus
-		{
-			get
-			{
-				return this._StoreStatus;
-			}
-			set
-			{
-				if ((this._StoreStatus != value))
-				{
-					this.OnStoreStatusChanging(value);
-					this.SendPropertyChanging();
-					this._StoreStatus = value;
-					this.SendPropertyChanged("StoreStatus");
-					this.OnStoreStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_WarrantyTime", DbType="NVarChar(50)")]
-		public string WarrantyTime
-		{
-			get
-			{
-				return this._WarrantyTime;
-			}
-			set
-			{
-				if ((this._WarrantyTime != value))
-				{
-					this.OnWarrantyTimeChanging(value);
-					this.SendPropertyChanging();
-					this._WarrantyTime = value;
-					this.SendPropertyChanged("WarrantyTime");
-					this.OnWarrantyTimeChanged();
 				}
 			}
 		}
@@ -1977,392 +2064,24 @@ namespace ABDHFramework.Models
 			{
 				if ((this._Property != value))
 				{
-					this.OnPropertyChanging(value);
-					this.SendPropertyChanging();
 					this._Property = value;
-					this.SendPropertyChanged("Property");
-					this.OnPropertyChanged();
 				}
 			}
 		}
 		
-		[Association(Name="tblCategory_tblProduct", Storage="_tblCategory", ThisKey="CategoryID", OtherKey="ID", IsForeignKey=true)]
-		public tblCategory tblCategory
+		[Column(Storage="_Language", DbType="TinyInt")]
+		public System.Nullable<byte> Language
 		{
 			get
 			{
-				return this._tblCategory.Entity;
+				return this._Language;
 			}
 			set
 			{
-				tblCategory previousValue = this._tblCategory.Entity;
-				if (((previousValue != value) 
-							|| (this._tblCategory.HasLoadedOrAssignedValue == false)))
+				if ((this._Language != value))
 				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tblCategory.Entity = null;
-						previousValue.tblProducts.Remove(this);
-					}
-					this._tblCategory.Entity = value;
-					if ((value != null))
-					{
-						value.tblProducts.Add(this);
-						this._CategoryID = value.ID;
-					}
-					else
-					{
-						this._CategoryID = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("tblCategory");
+					this._Language = value;
 				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[Table(Name="dbo.tblUser")]
-	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _ID;
-		
-		private string _UserNo;
-		
-		private System.Nullable<byte> _Status;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private string _CreatedBy;
-		
-		private System.Nullable<System.DateTime> _UpdatedDate;
-		
-		private string _UpdatedBy;
-		
-		private System.Nullable<bool> _Deleted;
-		
-		private string _Email;
-		
-		private System.Nullable<byte> _Department;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(System.Guid value);
-    partial void OnIDChanged();
-    partial void OnUserNoChanging(string value);
-    partial void OnUserNoChanged();
-    partial void OnStatusChanging(System.Nullable<byte> value);
-    partial void OnStatusChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnCreatedByChanging(string value);
-    partial void OnCreatedByChanged();
-    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedDateChanged();
-    partial void OnUpdatedByChanging(string value);
-    partial void OnUpdatedByChanged();
-    partial void OnDeletedChanging(System.Nullable<bool> value);
-    partial void OnDeletedChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnDepartmentChanging(System.Nullable<byte> value);
-    partial void OnDepartmentChanged();
-    #endregion
-		
-		public tblUser()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UserNo", DbType="VarChar(50)")]
-		public string UserNo
-		{
-			get
-			{
-				return this._UserNo;
-			}
-			set
-			{
-				if ((this._UserNo != value))
-				{
-					this.OnUserNoChanging(value);
-					this.SendPropertyChanging();
-					this._UserNo = value;
-					this.SendPropertyChanged("UserNo");
-					this.OnUserNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Status", DbType="TinyInt")]
-		public System.Nullable<byte> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UserName", DbType="VarChar(50)")]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Password", DbType="VarChar(50)")]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreatedBy", DbType="VarChar(50)")]
-		public string CreatedBy
-		{
-			get
-			{
-				return this._CreatedBy;
-			}
-			set
-			{
-				if ((this._CreatedBy != value))
-				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UpdatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdatedDate
-		{
-			get
-			{
-				return this._UpdatedDate;
-			}
-			set
-			{
-				if ((this._UpdatedDate != value))
-				{
-					this.OnUpdatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedDate = value;
-					this.SendPropertyChanged("UpdatedDate");
-					this.OnUpdatedDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UpdatedBy", DbType="VarChar(50)")]
-		public string UpdatedBy
-		{
-			get
-			{
-				return this._UpdatedBy;
-			}
-			set
-			{
-				if ((this._UpdatedBy != value))
-				{
-					this.OnUpdatedByChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedBy = value;
-					this.SendPropertyChanged("UpdatedBy");
-					this.OnUpdatedByChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Deleted", DbType="Bit")]
-		public System.Nullable<bool> Deleted
-		{
-			get
-			{
-				return this._Deleted;
-			}
-			set
-			{
-				if ((this._Deleted != value))
-				{
-					this.OnDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="NChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Department", DbType="TinyInt")]
-		public System.Nullable<byte> Department
-		{
-			get
-			{
-				return this._Department;
-			}
-			set
-			{
-				if ((this._Department != value))
-				{
-					this.OnDepartmentChanging(value);
-					this.SendPropertyChanging();
-					this._Department = value;
-					this.SendPropertyChanged("Department");
-					this.OnDepartmentChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

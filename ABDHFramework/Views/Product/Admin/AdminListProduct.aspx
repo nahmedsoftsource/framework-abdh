@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Management Catefory"  Language="C#" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblCategory>>" %>
+﻿<%@ Page Title="Manage Product"  Language="C#" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
 
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="ABDHFramework.Lib" %>
@@ -76,60 +76,54 @@ Select:
    %>
    <%=Html.Hidden("listIDToDelete") %>
    <%= Html.SimpleGrid(Model.Items, new[]{ 
-    new ColumnOption<tblCategory>{
+    new ColumnOption<tblProduct>{
       Name = "All",
       
         Action=(item =>@"<input  id=""" +item.ID.ToString()+ @""" type=""checkbox""/>")
     }, 
-  new ColumnOption<tblCategory>{
-    Name = "Category Name",
+  new ColumnOption<tblProduct>{
+    Name = "Product Name",
     IsSort=true,
-    FieldName="CategoryNameVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.CategoryNameVN +"'>" + (item.CategoryNameVN.Length > 15 ? item.CategoryNameVN.Substring(0,15) + "..." : item.CategoryNameVN) + "</a>" )
+    FieldName="ProductNameVN",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductNameVN +"'>" + (item.ProductNameVN.Length > 15 ? item.ProductNameVN.Substring(0,15) + "..." : item.ProductNameVN) + "</a>" )
   },
- new ColumnOption<tblCategory>{
+ new ColumnOption<tblProduct>{
     Name = "Description",
-    FieldName="DescriptionVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.DescriptionVN +"'>" + (item.DescriptionVN.Length > 50 ? item.DescriptionVN.Substring(0,50) + "..." : item.DescriptionVN) + "</a>" )
+    FieldName="Description",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.Description +"'>" + (item.Description.Length > 50 ? item.Description.Substring(0,50) + "..." : item.Description) + "</a>" )
   },
-  new ColumnOption<tblCategory>
-  {
-    Name = "Is Parent",
-    Action = (item=>(item.tblCategory1 == null)?UIHelper.FormatBoolValue(true):UIHelper.FormatBoolValue(false))
-   
-  },
-  new ColumnOption<tblCategory>
+  new ColumnOption<tblProduct>
   {
     Name = "Edit",
     
     Action = (item=>ABDHFramework.Lib.Javascripts.Javascript.EditToRemoteForList("",new RemoteOption
       {
-        URL = Routing.Category.UrlForEditCategory(item.ID),
+        URL = Routing.Product.UrlForEditProduct(item.ID,null),
         Update = "ListID",
         Method = "GET"
       })
       
     )
   },
-  new ColumnOption<tblCategory>
+  new ColumnOption<tblProduct>
   {
     Name = "Delete",
     
     Action = (item=>Html.LinkDeleteForList(new RemoteOption
     {
       CallBefore = "Confirm()",
-      URL = Routing.Category.UrlForDeleteCategory(item.ID),
+      URL = Routing.Product.UrlForDeleteProduct(item.ID),
       
       Update = "ListID",
       
     })
     )
   }
-}, new GridOption<tblCategory>
+}, new GridOption<tblProduct>
 {
   DefaultSortColumn = "CategoryNameVN",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
-  URL = Routing.Category.UrlForAdminListCategory(1),
+  URL = Routing.Product.UrlForAdminListProduct(1),
   HtmlID = "ListID"
   })%>
 <%= Html.AjaxPager(new PagingOption
@@ -138,7 +132,7 @@ Select:
         CurrentPage = Model.GetPage(),
         PageSize = Model.GetMaxResults(),
         TotalRows = Model.TotalRows,
-        UrlMaker = (page) => (Routing.Category.UrlForAdminListCategory(page)),
+        UrlMaker = (page) => (Routing.Product.UrlForAdminListProduct(page)),
         ShowIfEmpty = true,
       }, new AjaxPaginationOption
 {
@@ -149,7 +143,7 @@ Select:
   <%=Html.ButtonToRemote("Delete", new RemoteOption
         {
             CallBefore = "confirmDelete()",
-            URL = Routing.Category.UrlForDeleteListCategory(),
+            URL = Routing.Product.UrlForDeleteListProduct(),
             IsForm=true,
             CausesValidation = false,
             Update = "ListID",
@@ -159,10 +153,10 @@ Select:
         )%>
  </span>
  <span style="float:right">
- <%=Html.ButtonToRemote(Resources.Global.AddCategory,new RemoteOption
+ <%=Html.ButtonToRemote(Resources.Global.AddProduct,new RemoteOption
    {
      Method = "GET",
-     URL = Routing.Category.UrlForEditCategory(null),
+     URL = Routing.Product.UrlForEditProduct(null,null),
      Update = "ListID",
    }) %>
  </span>

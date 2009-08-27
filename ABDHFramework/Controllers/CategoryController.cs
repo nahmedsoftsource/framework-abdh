@@ -49,10 +49,10 @@ namespace ABDHFramework.Controllers
                 tblCategory = Service.GetCategoryByID((Guid)categoryID);
                
 
-                ViewData["NameVN"] = tblCategory.CategoryNameVN;
-                ViewData["NameEN"] = tblCategory.CategoryNameVN;
-                ViewData["DescriptionVN"] = tblCategory.DescriptionVN;
-                ViewData["DescriptionEN"] = tblCategory.DescriptionEN;
+                ViewData["NameVN"] = tblCategory.CategoryName;
+                ViewData["NameEN"] = tblCategory.CategoryName;
+                ViewData["Description"] = tblCategory.Description;
+                ViewData["Description"] = tblCategory.Description;
                 return View("Admin/EditCategory", tblCategory);
             }
             else
@@ -67,32 +67,32 @@ namespace ABDHFramework.Controllers
         {
           if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
           {
-            if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryNameEN))
+            if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryName))
             {
-              ModelState.AddModelError("CategoryNameEN", "Category name is required");
+              ModelState.AddModelError("CategoryName", "Category name is required");
             }
-            else if (tblcategory != null && tblcategory.CategoryNameEN.Length >= 100)
+            else if (tblcategory != null && tblcategory.CategoryName.Length >= 100)
             {
-              ModelState.AddModelError("CategoryNameEN", "Input no more than 100 characters");
+              ModelState.AddModelError("CategoryName", "Input no more than 100 characters");
             }
-            if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.DescriptionEN) && tblcategory.DescriptionEN.Length >= 250)
+            if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.Description) && tblcategory.Description.Length >= 250)
             {
-              ModelState.AddModelError("CategoryNameEN", "Input no more than 250 characters");
+              ModelState.AddModelError("CategoryName", "Input no more than 250 characters");
             }
           }
           else
           {
-            if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryNameVN))
+            if (tblcategory != null && String.IsNullOrEmpty(tblcategory.CategoryName))
             {
-              ModelState.AddModelError("CategoryNameVN", "Cần nhập tên loại sản phẩm");
+              ModelState.AddModelError("CategoryName", "Cần nhập tên loại sản phẩm");
             }
-            else if (tblcategory != null && tblcategory.CategoryNameVN.Length >= 100)
+            else if (tblcategory != null && tblcategory.CategoryName.Length >= 100)
             {
-              ModelState.AddModelError("CategoryNameVN", "Không nhập quá 100 ký tự");
+              ModelState.AddModelError("CategoryName", "Không nhập quá 100 ký tự");
             }
-            if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.DescriptionVN) && tblcategory.DescriptionVN.Length >= 250)
+            if (tblcategory != null && !String.IsNullOrEmpty(tblcategory.Description) && tblcategory.Description.Length >= 250)
             {
-              ModelState.AddModelError("DescriptionVN", "Không nhập quá 250 ký tự");
+              ModelState.AddModelError("Description", "Không nhập quá 250 ký tự");
             }
           }
           if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty) && ModelState.IsValid)
@@ -110,15 +110,15 @@ namespace ABDHFramework.Controllers
             //todo: view one category
             return RedirectToAction("AdminListCategory");
           }
-          ViewData["NameVN"] = tblcategory.CategoryNameVN;
-          ViewData["NameEN"] = tblcategory.CategoryNameVN;
-          ViewData["DescriptionVN"] = tblcategory.DescriptionVN;
-          ViewData["DescriptionEN"] = tblcategory.DescriptionEN;
+          ViewData["NameVN"] = tblcategory.CategoryName;
+          ViewData["NameEN"] = tblcategory.CategoryName;
+          ViewData["Description"] = tblcategory.Description;
+          ViewData["Description"] = tblcategory.Description;
           return View("Admin/EditCategory", tblcategory);
         }
         public ActionResult AdminCategory(int? page)
         {
-          string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "CategoryNameVN";
+          string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "CategoryName";
           string sortOption = !String.IsNullOrEmpty(Request["SortOption"]) ? Request["SortOption"] : SortOption.Asc.ToString();
             SearchResult<tblCategory> listAllCategory = new SearchResult<tblCategory>();
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
@@ -134,7 +134,7 @@ namespace ABDHFramework.Controllers
         }
         public ActionResult AdminListCategory(int? page)
         {
-          string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "CategoryNameVN";
+          string sortColumn = !String.IsNullOrEmpty(Request["sortColumn"]) ? Request["sortColumn"] : "CategoryName";
           string sortOption = !String.IsNullOrEmpty(Request["SortOption"]) ? Request["SortOption"] : SortOption.Asc.ToString();
           SearchResult<tblCategory> listAllCategory = new SearchResult<tblCategory>();
           if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")

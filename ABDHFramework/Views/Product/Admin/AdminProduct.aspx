@@ -1,13 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblCategory>>" %>
+﻿<%@ Page Title="Manage Product" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
 <div class="detail-title">
-    Management Category
+    Manage Product
 </div>
 <br />
-<div id="ListID" >
-<%Html.RenderPartial("Admin/AdminListCategory",ViewData); %>
+<div id="ListID" class="content-border">
+<%Html.RenderPartial("Admin/AdminListProduct",ViewData); %>
 </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">

@@ -5,8 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>
-        <%=Html.Encode(ViewData["Title"]) %></title>
+    <%--<title>
+    <%if (ViewData["Title"] != null)
+      { %>
+        <%=Html.Encode(ViewData["Title"])%>
+        <%} %>
+        </title>--%>
     <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/fontsize.css" rel="stylesheet" type="text/css" />
 
