@@ -15,15 +15,15 @@ namespace ABDHFramework.Services.LinqClient
         public SearchResult<tblNew> SearchNews(int pageSize, int page, String sortColunm, String sortOption)
         {
           SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
-          var query1 = _dataContext.tblNews.Where("TitleEN!=null");
+          var query1 = _dataContext.tblNews.Where("Title!=null");
           var query = query1;
-          if (sortColunm == "TitleEN")
+          if (sortColunm == "Title")
           {
             if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
             {
               query = _dataContext.tblNews
-                .Where("TitleEN!=null")
-                .OrderByDescending(o => o.TitleEN)
+                .Where("Title!=null")
+                .OrderByDescending(o => o.Title)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
                 ;
@@ -31,8 +31,8 @@ namespace ABDHFramework.Services.LinqClient
             else
             {
               query = _dataContext.tblNews
-                .Where("TitleEN!=null")
-                .OrderBy(o => o.TitleEN)
+                .Where("Title!=null")
+                .OrderBy(o => o.Title)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
                 ;
@@ -41,7 +41,7 @@ namespace ABDHFramework.Services.LinqClient
           else
           {
               query = _dataContext.tblNews
-              .Where("TitleEN!=null")
+              .Where("Title!=null")
               .Take(pageSize * page)
               .Skip((page - 1) * pageSize);
           }
@@ -59,16 +59,16 @@ namespace ABDHFramework.Services.LinqClient
         {
           SearchResult<tblNew> searchResult = new SearchResult<tblNew>();
           //criteria = "%" + criteria + "%";
-          //var query1 = _dataContext.tblNews.Where("TitleEN like  @0", criteria);
-          var query1 = _dataContext.tblNews.Where(op=>op.TitleEN.Contains(criteria));
+          //var query1 = _dataContext.tblNews.Where("Title like  @0", criteria);
+          var query1 = _dataContext.tblNews.Where(op=>op.Title.Contains(criteria));
           var query = query1;
-          if (sortColunm == "TitleEN")
+          if (sortColunm == "Title")
           {
             if (sortOption == ABDHFramework.Data.SortOption.Desc.ToString())
             {
               query = _dataContext.tblNews
-                .Where(op => op.TitleEN.Contains(criteria))
-                .OrderByDescending(o => o.TitleEN)
+                .Where(op => op.Title.Contains(criteria))
+                .OrderByDescending(o => o.Title)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
                 ;
@@ -76,8 +76,8 @@ namespace ABDHFramework.Services.LinqClient
             else
             {
               query = _dataContext.tblNews
-                .Where(op => op.TitleEN.Contains(criteria))
-                .OrderBy(o => o.TitleEN)
+                .Where(op => op.Title.Contains(criteria))
+                .OrderBy(o => o.Title)
                 .Take(pageSize * page)
                 .Skip((page - 1) * pageSize)
                 ;
@@ -86,7 +86,7 @@ namespace ABDHFramework.Services.LinqClient
           else
           {
             query = _dataContext.tblNews
-            .Where(op => op.TitleEN.Contains(criteria))
+            .Where(op => op.Title.Contains(criteria))
             .Take(pageSize * page)
             .Skip((page - 1) * pageSize);
           }

@@ -33,9 +33,6 @@ namespace ABDHFramework.Models
     partial void InserttblCategory(tblCategory instance);
     partial void UpdatetblCategory(tblCategory instance);
     partial void DeletetblCategory(tblCategory instance);
-    partial void InserttblUser(tblUser instance);
-    partial void UpdatetblUser(tblUser instance);
-    partial void DeletetblUser(tblUser instance);
     partial void InserttblEmail(tblEmail instance);
     partial void UpdatetblEmail(tblEmail instance);
     partial void DeletetblEmail(tblEmail instance);
@@ -45,6 +42,9 @@ namespace ABDHFramework.Models
     partial void InserttblNew(tblNew instance);
     partial void UpdatetblNew(tblNew instance);
     partial void DeletetblNew(tblNew instance);
+    partial void InserttblUser(tblUser instance);
+    partial void UpdatetblUser(tblUser instance);
+    partial void DeletetblUser(tblUser instance);
     #endregion
 		
 		public ABDHFrameworkDataContext() : 
@@ -85,14 +85,6 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<tblUser> tblUsers
-		{
-			get
-			{
-				return this.GetTable<tblUser>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tblEmail> tblEmails
 		{
 			get
@@ -122,6 +114,14 @@ namespace ABDHFramework.Models
 			get
 			{
 				return this.GetTable<tblProduct>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tblUser> tblUsers
+		{
+			get
+			{
+				return this.GetTable<tblUser>();
 			}
 		}
 	}
@@ -518,332 +518,6 @@ namespace ABDHFramework.Models
 		{
 			this.SendPropertyChanging();
 			entity.tblCategory1 = null;
-		}
-	}
-	
-	[Table(Name="dbo.tblUser")]
-	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _ID;
-		
-		private string _UserNo;
-		
-		private System.Nullable<byte> _Status;
-		
-		private string _UserName;
-		
-		private string _Password;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		private string _CreatedBy;
-		
-		private System.Nullable<System.DateTime> _UpdatedDate;
-		
-		private string _UpdatedBy;
-		
-		private System.Nullable<bool> _Deleted;
-		
-		private string _Email;
-		
-		private System.Nullable<byte> _Department;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(System.Guid value);
-    partial void OnIDChanged();
-    partial void OnUserNoChanging(string value);
-    partial void OnUserNoChanged();
-    partial void OnStatusChanging(System.Nullable<byte> value);
-    partial void OnStatusChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnCreatedByChanging(string value);
-    partial void OnCreatedByChanged();
-    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedDateChanged();
-    partial void OnUpdatedByChanging(string value);
-    partial void OnUpdatedByChanged();
-    partial void OnDeletedChanging(System.Nullable<bool> value);
-    partial void OnDeletedChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnDepartmentChanging(System.Nullable<byte> value);
-    partial void OnDepartmentChanged();
-    #endregion
-		
-		public tblUser()
-		{
-			OnCreated();
-		}
-		
-		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UserNo", DbType="VarChar(50)")]
-		public string UserNo
-		{
-			get
-			{
-				return this._UserNo;
-			}
-			set
-			{
-				if ((this._UserNo != value))
-				{
-					this.OnUserNoChanging(value);
-					this.SendPropertyChanging();
-					this._UserNo = value;
-					this.SendPropertyChanged("UserNo");
-					this.OnUserNoChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Status", DbType="TinyInt")]
-		public System.Nullable<byte> Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UserName", DbType="VarChar(50)")]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Password", DbType="VarChar(50)")]
-		public string Password
-		{
-			get
-			{
-				return this._Password;
-			}
-			set
-			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_CreatedBy", DbType="VarChar(50)")]
-		public string CreatedBy
-		{
-			get
-			{
-				return this._CreatedBy;
-			}
-			set
-			{
-				if ((this._CreatedBy != value))
-				{
-					this.OnCreatedByChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UpdatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdatedDate
-		{
-			get
-			{
-				return this._UpdatedDate;
-			}
-			set
-			{
-				if ((this._UpdatedDate != value))
-				{
-					this.OnUpdatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedDate = value;
-					this.SendPropertyChanged("UpdatedDate");
-					this.OnUpdatedDateChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_UpdatedBy", DbType="VarChar(50)")]
-		public string UpdatedBy
-		{
-			get
-			{
-				return this._UpdatedBy;
-			}
-			set
-			{
-				if ((this._UpdatedBy != value))
-				{
-					this.OnUpdatedByChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedBy = value;
-					this.SendPropertyChanged("UpdatedBy");
-					this.OnUpdatedByChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Deleted", DbType="Bit")]
-		public System.Nullable<bool> Deleted
-		{
-			get
-			{
-				return this._Deleted;
-			}
-			set
-			{
-				if ((this._Deleted != value))
-				{
-					this.OnDeletedChanging(value);
-					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Email", DbType="NChar(50)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Department", DbType="TinyInt")]
-		public System.Nullable<byte> Department
-		{
-			get
-			{
-				return this._Department;
-			}
-			set
-			{
-				if ((this._Department != value))
-				{
-					this.OnDepartmentChanging(value);
-					this.SendPropertyChanging();
-					this._Department = value;
-					this.SendPropertyChanged("Department");
-					this.OnDepartmentChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -1411,19 +1085,13 @@ namespace ABDHFramework.Models
 		
 		private System.Guid _ID;
 		
-		private string _TitleVN;
+		private string _Title;
 		
-		private string _TitleEN;
+		private string _Subject;
 		
-		private string _SubjectVN;
+		private string _Content;
 		
-		private string _SubjectEN;
-		
-		private string _ContentVN;
-		
-		private string _ContentEN;
-		
-		private System.Nullable<byte> _Type;
+		private System.Nullable<byte> _Language;
 		
 		private System.Nullable<System.DateTime> _CreatedDate;
 		
@@ -1433,11 +1101,11 @@ namespace ABDHFramework.Models
 		
 		private string _PostedBy;
 		
-		private string _EndedBy;
-		
 		private System.Nullable<System.DateTime> _EndedDate;
 		
-		private System.Nullable<bool> _Deleted;
+		private string _EndedBy;
+		
+		private System.Nullable<byte> _Status;
 		
 		private string _Image;
 		
@@ -1447,20 +1115,14 @@ namespace ABDHFramework.Models
     partial void OnCreated();
     partial void OnIDChanging(System.Guid value);
     partial void OnIDChanged();
-    partial void OnTitleVNChanging(string value);
-    partial void OnTitleVNChanged();
-    partial void OnTitleENChanging(string value);
-    partial void OnTitleENChanged();
-    partial void OnSubjectVNChanging(string value);
-    partial void OnSubjectVNChanged();
-    partial void OnSubjectENChanging(string value);
-    partial void OnSubjectENChanged();
-    partial void OnContentVNChanging(string value);
-    partial void OnContentVNChanged();
-    partial void OnContentENChanging(string value);
-    partial void OnContentENChanged();
-    partial void OnTypeChanging(System.Nullable<byte> value);
-    partial void OnTypeChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnSubjectChanging(string value);
+    partial void OnSubjectChanged();
+    partial void OnContentChanging(string value);
+    partial void OnContentChanged();
+    partial void OnLanguageChanging(System.Nullable<byte> value);
+    partial void OnLanguageChanged();
     partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnCreatedDateChanged();
     partial void OnCreatedByChanging(string value);
@@ -1469,12 +1131,12 @@ namespace ABDHFramework.Models
     partial void OnPostedDateChanged();
     partial void OnPostedByChanging(string value);
     partial void OnPostedByChanged();
-    partial void OnEndedByChanging(string value);
-    partial void OnEndedByChanged();
     partial void OnEndedDateChanging(System.Nullable<System.DateTime> value);
     partial void OnEndedDateChanged();
-    partial void OnDeletedChanging(System.Nullable<bool> value);
-    partial void OnDeletedChanged();
+    partial void OnEndedByChanging(string value);
+    partial void OnEndedByChanged();
+    partial void OnStatusChanging(System.Nullable<byte> value);
+    partial void OnStatusChanged();
     partial void OnImageChanging(string value);
     partial void OnImageChanged();
     #endregion
@@ -1504,142 +1166,82 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		[Column(Storage="_TitleVN", DbType="NVarChar(500)")]
-		public string TitleVN
+		[Column(Storage="_Title", DbType="NVarChar(2000)")]
+		public string Title
 		{
 			get
 			{
-				return this._TitleVN;
+				return this._Title;
 			}
 			set
 			{
-				if ((this._TitleVN != value))
+				if ((this._Title != value))
 				{
-					this.OnTitleVNChanging(value);
+					this.OnTitleChanging(value);
 					this.SendPropertyChanging();
-					this._TitleVN = value;
-					this.SendPropertyChanged("TitleVN");
-					this.OnTitleVNChanged();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_TitleEN", DbType="NVarChar(500)")]
-		public string TitleEN
+		[Column(Storage="_Subject", DbType="NVarChar(MAX)")]
+		public string Subject
 		{
 			get
 			{
-				return this._TitleEN;
+				return this._Subject;
 			}
 			set
 			{
-				if ((this._TitleEN != value))
+				if ((this._Subject != value))
 				{
-					this.OnTitleENChanging(value);
+					this.OnSubjectChanging(value);
 					this.SendPropertyChanging();
-					this._TitleEN = value;
-					this.SendPropertyChanged("TitleEN");
-					this.OnTitleENChanged();
+					this._Subject = value;
+					this.SendPropertyChanged("Subject");
+					this.OnSubjectChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_SubjectVN", DbType="NVarChar(1000)")]
-		public string SubjectVN
+		[Column(Storage="_Content", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Content
 		{
 			get
 			{
-				return this._SubjectVN;
+				return this._Content;
 			}
 			set
 			{
-				if ((this._SubjectVN != value))
+				if ((this._Content != value))
 				{
-					this.OnSubjectVNChanging(value);
+					this.OnContentChanging(value);
 					this.SendPropertyChanging();
-					this._SubjectVN = value;
-					this.SendPropertyChanged("SubjectVN");
-					this.OnSubjectVNChanged();
+					this._Content = value;
+					this.SendPropertyChanged("Content");
+					this.OnContentChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_SubjectEN", DbType="VarChar(1000)")]
-		public string SubjectEN
+		[Column(Storage="_Language", DbType="TinyInt")]
+		public System.Nullable<byte> Language
 		{
 			get
 			{
-				return this._SubjectEN;
+				return this._Language;
 			}
 			set
 			{
-				if ((this._SubjectEN != value))
+				if ((this._Language != value))
 				{
-					this.OnSubjectENChanging(value);
+					this.OnLanguageChanging(value);
 					this.SendPropertyChanging();
-					this._SubjectEN = value;
-					this.SendPropertyChanged("SubjectEN");
-					this.OnSubjectENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContentVN", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string ContentVN
-		{
-			get
-			{
-				return this._ContentVN;
-			}
-			set
-			{
-				if ((this._ContentVN != value))
-				{
-					this.OnContentVNChanging(value);
-					this.SendPropertyChanging();
-					this._ContentVN = value;
-					this.SendPropertyChanged("ContentVN");
-					this.OnContentVNChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_ContentEN", DbType="NText", UpdateCheck=UpdateCheck.Never)]
-		public string ContentEN
-		{
-			get
-			{
-				return this._ContentEN;
-			}
-			set
-			{
-				if ((this._ContentEN != value))
-				{
-					this.OnContentENChanging(value);
-					this.SendPropertyChanging();
-					this._ContentEN = value;
-					this.SendPropertyChanged("ContentEN");
-					this.OnContentENChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_Type", DbType="TinyInt")]
-		public System.Nullable<byte> Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this.OnTypeChanging(value);
-					this.SendPropertyChanging();
-					this._Type = value;
-					this.SendPropertyChanged("Type");
-					this.OnTypeChanged();
+					this._Language = value;
+					this.SendPropertyChanged("Language");
+					this.OnLanguageChanged();
 				}
 			}
 		}
@@ -1724,26 +1326,6 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		[Column(Storage="_EndedBy", DbType="VarChar(50)")]
-		public string EndedBy
-		{
-			get
-			{
-				return this._EndedBy;
-			}
-			set
-			{
-				if ((this._EndedBy != value))
-				{
-					this.OnEndedByChanging(value);
-					this.SendPropertyChanging();
-					this._EndedBy = value;
-					this.SendPropertyChanged("EndedBy");
-					this.OnEndedByChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_EndedDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> EndedDate
 		{
@@ -1764,27 +1346,47 @@ namespace ABDHFramework.Models
 			}
 		}
 		
-		[Column(Storage="_Deleted", DbType="Bit")]
-		public System.Nullable<bool> Deleted
+		[Column(Storage="_EndedBy", DbType="VarChar(50)")]
+		public string EndedBy
 		{
 			get
 			{
-				return this._Deleted;
+				return this._EndedBy;
 			}
 			set
 			{
-				if ((this._Deleted != value))
+				if ((this._EndedBy != value))
 				{
-					this.OnDeletedChanging(value);
+					this.OnEndedByChanging(value);
 					this.SendPropertyChanging();
-					this._Deleted = value;
-					this.SendPropertyChanged("Deleted");
-					this.OnDeletedChanged();
+					this._EndedBy = value;
+					this.SendPropertyChanged("EndedBy");
+					this.OnEndedByChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_Image", DbType="NVarChar(200)")]
+		[Column(Storage="_Status", DbType="TinyInt")]
+		public System.Nullable<byte> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Image", DbType="VarChar(200)")]
 		public string Image
 		{
 			get
@@ -2082,6 +1684,332 @@ namespace ABDHFramework.Models
 				{
 					this._Language = value;
 				}
+			}
+		}
+	}
+	
+	[Table(Name="dbo.tblUser")]
+	public partial class tblUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ID;
+		
+		private string _UserNo;
+		
+		private System.Nullable<byte> _Status;
+		
+		private string _UserName;
+		
+		private string _Password;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private string _CreatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDate;
+		
+		private string _UpdatedBy;
+		
+		private System.Nullable<bool> _Deleted;
+		
+		private string _Email;
+		
+		private System.Nullable<byte> _Department;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(System.Guid value);
+    partial void OnIDChanged();
+    partial void OnUserNoChanging(string value);
+    partial void OnUserNoChanged();
+    partial void OnStatusChanging(System.Nullable<byte> value);
+    partial void OnStatusChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnCreatedByChanging(string value);
+    partial void OnCreatedByChanged();
+    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateChanged();
+    partial void OnUpdatedByChanging(string value);
+    partial void OnUpdatedByChanged();
+    partial void OnDeletedChanging(System.Nullable<bool> value);
+    partial void OnDeletedChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnDepartmentChanging(System.Nullable<byte> value);
+    partial void OnDepartmentChanged();
+    #endregion
+		
+		public tblUser()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_ID", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserNo", DbType="VarChar(50)")]
+		public string UserNo
+		{
+			get
+			{
+				return this._UserNo;
+			}
+			set
+			{
+				if ((this._UserNo != value))
+				{
+					this.OnUserNoChanging(value);
+					this.SendPropertyChanging();
+					this._UserNo = value;
+					this.SendPropertyChanged("UserNo");
+					this.OnUserNoChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Status", DbType="TinyInt")]
+		public System.Nullable<byte> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserName", DbType="VarChar(50)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Password", DbType="VarChar(50)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_CreatedBy", DbType="VarChar(50)")]
+		public string CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UpdatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDate
+		{
+			get
+			{
+				return this._UpdatedDate;
+			}
+			set
+			{
+				if ((this._UpdatedDate != value))
+				{
+					this.OnUpdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDate = value;
+					this.SendPropertyChanged("UpdatedDate");
+					this.OnUpdatedDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UpdatedBy", DbType="VarChar(50)")]
+		public string UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Deleted", DbType="Bit")]
+		public System.Nullable<bool> Deleted
+		{
+			get
+			{
+				return this._Deleted;
+			}
+			set
+			{
+				if ((this._Deleted != value))
+				{
+					this.OnDeletedChanging(value);
+					this.SendPropertyChanging();
+					this._Deleted = value;
+					this.SendPropertyChanged("Deleted");
+					this.OnDeletedChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Email", DbType="NChar(50)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Department", DbType="TinyInt")]
+		public System.Nullable<byte> Department
+		{
+			get
+			{
+				return this._Department;
+			}
+			set
+			{
+				if ((this._Department != value))
+				{
+					this.OnDepartmentChanging(value);
+					this.SendPropertyChanging();
+					this._Department = value;
+					this.SendPropertyChanged("Department");
+					this.OnDepartmentChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
