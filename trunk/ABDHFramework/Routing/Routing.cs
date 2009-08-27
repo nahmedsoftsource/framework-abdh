@@ -63,6 +63,19 @@ namespace ABDHFramework.Routing
         }
     }
 
+    //Routing for Product
+    private RoutingNS.Product _product = null;
+    public RoutingNS.Product Product
+    {
+      get
+      {
+        if (_product == null)
+        {
+          _product = new RoutingNS.Product(_url);
+        }
 
+        return _product;
+      }
+    }
   }
 }

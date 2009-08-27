@@ -707,4 +707,105 @@ div.ibutton
 }
 
 .TitleAction { padding: 3px; text-align: left;  border-bottom:solid 1px #cccccc;}
+
+
+
+/**************************************************
+ * for jquery.autocomplete
+ **************************************************/
+.ac_results
+{
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+	z-index:2000;
+}
+
+.ac_results ul
+{
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	height:100px;
+}
+
+.ac_results iframe
+{
+	display: none; /*sorry for IE5*/
+	display: /**/ block; /*sorry for IE5*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	filter: mask();
+	width: 3000px;
+	height: 3000px;
+}
+
+.ac_results li
+{
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+
+.ac_loading
+{
+	background: Window url('../images/loading_indicator.gif') right center no-repeat;
+}
+
+.ac_over
+{
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+.content-border
+{
+	border:1px solid #3366CC;
+	padding:5px;
+	background-color:#F7EFDE;
+}
+
+.content-border-top
+{
+	border-top:1px solid #3366CC;
+	padding-top:5px;
+}
+
+.content-border-bottom
+{
+	border-bottom:1px solid #3366CC;
+	padding-bottom:5px;
+}
+
+.content-border-left
+{
+	border-left:1px solid #3366CC;
+	padding-left:5px;
+}
+
+.content-border-right
+{
+	border-right:1px solid #3366CC;
+	padding-right:5px;
+}
+
+.panel-content
+{
+	border:1px solid #3366CC;
+	border-top:none;
+	overflow:hidden;
+	background-color:#F7EFDE;
+	padding:5px;
+}
+
 /*Duong add*/

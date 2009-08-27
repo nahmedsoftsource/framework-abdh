@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
-
+<%@ Import Namespace="ABDHFramework.Lib" %>
+<%@ Import Namespace="ABDHFramework.Lib.Pager" %>
+<%@ Import Namespace="ABDHFramework.Models" %>
 <div class="barCterTab">
     <div class="barCterTabLleft">
         <div class="barCterTabRight">
@@ -27,11 +29,19 @@
                                 <div class="paddingTb4 paddingLr18px bold">
                                     <%if (HttpContext.Current.Response.Cookies["Culture"] != null && !String.IsNullOrEmpty(HttpContext.Current.Response.Cookies["Culture"].Value) && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
                                      { %>
-                                    <%=Html.ActionLink(item.ProductNameEN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                                     <%=Html.LinkToRemote(item.ProductNameEN,new RemoteOption
+                                       {
+                                         Update = "ListAllID",
+                                         URL = Routing.Product.UrlForViewProduct(item.ID,null)
+                                         })%>
                                     <%}
                                     else
                                     { %>
-                                    <%=Html.ActionLink(item.ProductNameVN, "ViewProduct", new { newsID = item.ID }, new { @class = "color2" })%>
+                                     <%=Html.LinkToRemote(item.ProductNameVN,new RemoteOption
+                                       {
+                                         Update = "ListAllID",
+                                         URL = Routing.Product.UrlForViewProduct(item.ID,null)
+                                         })%>
                                     <%} %>
                                 </div>
                                 <div class="clear">
@@ -56,20 +66,20 @@
  <%if (HttpContext.Current.Response.Cookies["Culture"] != null && !String.IsNullOrEmpty(HttpContext.Current.Response.Cookies["Culture"].Value) &&  HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
    { %>
     <%=
-          ABDHFramework.Utility.PagerExtensions.AjaxPager
+          PagerExtensions.AjaxPager
           (this.Html,
-            new ABDHFramework.Utility.Pager.PagingOption
+            new PagingOption
             {
                 CurrentPage = Model.GetPage(),
                 PageSize = Model.GetMaxResults(),
                 TotalRows = Model.TotalRows,
                 //UrlMaker = ((page) => (new ABDHFramework.Controllers.ABDHFrameworkController()).ListAllNews((int)ABDHFramework.Common.Constants.DefautPagingSize,(int)page)),
                 //UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllProduct", "ABDHFramework") + "?pageSize=" + (int)ABDHFramework.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))
-                UrlMaker=(page)=>Routing.Product.UrlForListAllProduct()
+                UrlMaker=(page)=>Routing.Product.UrlForListProduct(null,null,page,"","")
             },
-            new ABDHFramework.Utility.Pager.AjaxPaginationOption
+            new AjaxPaginationOption
             {
-                HtmlID = "ListAllProductID"
+                HtmlID = "ListAllID"
               ,
             }
           )
@@ -78,32 +88,23 @@
    else
    { %>
    <%=
-          ABDHFramework.Utility.PagerExtensions.AjaxPager
+          PagerExtensions.AjaxPager
           (this.Html,
-            new ABDHFramework.Utility.Pager.PagingOption
+            new PagingOption
             {
                 CurrentPage = Model.GetPage(),
                 PageSize = Model.GetMaxResults(),
                 TotalRows = Model.TotalRows,
                 //UrlMaker = ((page) => (new ABDHFramework.Controllers.ABDHFrameworkController()).ListAllNews((int)ABDHFramework.Common.Constants.DefautPagingSize,(int)page)),
-                UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllProduct", "ABDHFramework") + "?pageSize=" + (int)ABDHFramework.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))
+                UrlMaker = (page) => Routing.Product.UrlForListProduct(null,null, page, "", "")
 
             },
-            new ABDHFramework.Utility.Pager.AjaxPaginationOption
+            new AjaxPaginationOption
             {
-                HtmlID = "ListAllProductID"
+                HtmlID = "ListAllID"
               ,
             }
                  ).Replace("First", "Trang đầu").Replace("Last", "Trang cuối").Replace("Previous", "Trang trước").Replace("Next", "Trang sau")
     %>
     <%} %>
 </div>
-<%if (HttpContext.Current.Session["username"] != null)
-  { %>
- <div>
- 
-                <span style="float: right">
-                    <%=ABDHFramework.Utility.UIHelper.ButtonTo(Html, "AddProduct", Resources.Global.AddProduct, (new UrlHelper(ViewContext.RequestContext)).Action("EditProduct", "ABDHFramework") + "?newsID=" + null + ((ViewData["Type"] != null) ? ("&Type=" + ViewData["Type"]) : ""))%>
-                </span>
-                </div>
-                <%} %>

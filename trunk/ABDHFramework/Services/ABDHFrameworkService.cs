@@ -90,6 +90,11 @@ namespace ABDHFramework.Services
         {
              _da.Delete(id);
         }
+        #region Category
+        public List<tblCategory> GetAllCategory(bool isEN)
+        {
+          return _da.GetAllCategory(isEN);
+        }
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN,String criteria, String sortColunm, String sortOption)
         {
           return _da.GetAllCategory(pageSize, page, isEN,criteria, sortColunm,sortOption);
@@ -114,5 +119,35 @@ namespace ABDHFramework.Services
         {
           _da.InsertCategory(tblnew);
         }
+
+       
+        #endregion
+
+      #region Product
+        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page, bool isEN, String criteria, String sortColunm, String sortOption)
+        {
+          return _da.GetAllProduct(pageSize, page, isEN,criteria,sortColunm,sortOption);
+        }
+        public tblProduct GetProductByID(Guid productID, bool isEN)
+        {
+          return _da.GetProductByID(productID, isEN);
+        }
+        public void DeleteProduct(Guid productID)
+        {
+          _da.DeleteProduct(productID);
+        }
+        public void InsertProduct(tblProduct tblProduct)
+        {
+          _da.InsertProduct(tblProduct);
+        }
+        public void UpdateProduct(tblProduct tblproduct)
+        {
+          _da.UpdateProduct(tblproduct);
+        }
+        public IList<tblProduct> ProductSuggestForField(string value, int limit)
+        {
+          return _da.ProductSuggestForField(value, limit);
+        }
+      #endregion
     }
 }

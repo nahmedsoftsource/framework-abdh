@@ -88,6 +88,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\DemoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Data\FckTextBoxExt.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\BaseRoute.cs" />
     <Compile Include="Routing\Category.cs" />
+    <Compile Include="Routing\Product.cs" />
     <Compile Include="Routing\Home.cs" />
     <Compile Include="Routing\Demo.cs" />
     <Compile Include="Routing\Routing.cs" />
@@ -805,6 +807,7 @@
       <LastGenOutput>Global.en-US.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\images\loading_indicator.gif" />
     <Content Include="Content\images\sort_asc.gif" />
     <Content Include="Content\images\sort_desc.gif" />
     <Content Include="Content\images\unsorted.gif" />
@@ -816,18 +819,23 @@
     <Content Include="Images\index1_116.jpg" />
     <Content Include="Content\jquery-ui-1.7.1.custom.css" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
+    <Content Include="Scripts\jquery.autocomplete.modified.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
     <Content Include="Views\Category\Admin\EditCategory.aspx" />
     <Content Include="Views\Category\Admin\AdminCategory.aspx" />
     <Content Include="Views\Category\Admin\AdminListCategory.aspx" />
-    <Content Include="Views\Category\IndexForProductByCategory.aspx" />
-    <Content Include="Views\Category\ListAllProductByCategory.aspx" />
     <Content Include="Views\Category\ListCategory.aspx" />
     <Content Include="Views\Demo\ListResult.aspx" />
     <Content Include="Views\Demo\Index.aspx" />
     <Content Include="Views\Home\Admin\Admin.aspx" />
+    <Content Include="Views\Product\Admin\AdminProduct.aspx" />
+    <Content Include="Views\Product\Admin\AdminListProduct.aspx" />
+    <Content Include="Views\Product\Admin\EditProduct.aspx" />
+    <Content Include="Views\Product\SuggestForField.aspx" />
+    <Content Include="Views\Product\QuickSearch.aspx" />
     <Content Include="Views\Product\IndexForProduct.aspx" />
-    <Content Include="Views\Product\ListAllProduct.aspx" />
+    <Content Include="Views\Product\ListProduct.aspx" />
+    <Content Include="Views\Product\ViewProduct.aspx" />
     <Content Include="Views\Shared\LeftMenu.ascx" />
     <Content Include="Views\Shared\Demo\ListResult.ascx" />
     <Content Include="Views\Shared\Demo\QuickSearch.ascx" />
