@@ -19,21 +19,31 @@
 
     <table class="layout-form  maxwidth" cellspacing="2" cellpadding="0" border="0">
     <tr>
+        <td>
+        Cấp
+        </td>
+        <td>
+        <span>
+        <%if(ViewData["ListLevelCategory"] != null){ %>
+        <%=Html.DropDownList("Level",((List<SelectListItem>)ViewData["ListLevelCategory"]).AsEnumerable()) %>
+        <%} %>
+        </span>
+        
+        <span>
+        <div id="ListCategoryByLevel"></div> 
+        </span>
+        </td>
+    </tr>
+    <tr>
         <td class="l" style="width:30%">
-            <label for="CategoryNameVN"><%=Resources.Global.Name %>:</label>
+            <label for="CategoryName"><%=Resources.Global.Name %>:</label>
         </td>
         
         <td class="l">
-        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-          { %>
-            <%= Html.TextBox("CategoryNameEN", Model.CategoryNameEN, new {  style = "width:100%", @class = "noidung" })%>
-            <%= Html.ValidationMessage("CategoryNameEN")%>
-            <%}
-          else
-          { %>
-          <%= Html.TextBox("CategoryNameVN", Model.CategoryNameVN, new {  style = "width:100%", @class = "noidung" })%>
-            <%= Html.ValidationMessage("CategoryNameVN")%>
-            <%} %>
+        
+            <%= Html.TextBox("CategoryName", Model.CategoryName, new {  style = "width:100%", @class = "noidung" })%>
+            <%= Html.ValidationMessage("CategoryName")%>
+        
         </td>
     </tr>
     
@@ -45,14 +55,10 @@
         </td>
         
         <td class="l">
-        <%if (HttpContext.Current.Response.Cookies["Culture"] != null && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-          { %>
-            <%= Html.TextBox("DescriptionEN", Model.DescriptionEN, new { rows="5", style = "width:100%", @class = "noidung" })%>
-            <%= Html.ValidationMessage("DescriptionEN")%>
-            <%}else{ %>
-            <%= Html.TextArea("DescriptionVN", Model.DescriptionVN, new { rows="5",style="width:100%",@class="noidung" })%>
-            <%= Html.ValidationMessage("DescriptionVN")%>
-            <%} %>
+        
+            <%= Html.TextBox("Description", Model.Description, new { rows="5", style = "width:100%", @class = "noidung" })%>
+            <%= Html.ValidationMessage("Description")%>
+        
         </td>
     </tr>
     
@@ -90,9 +96,44 @@
         </span>
         </td>
     </tr>
-    </table>
     
+    </table>
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        var content = "";
+
+        $("select").change(function() {
+            var options = document.getElementsByTagName("option");
+            var level;
+            for (i = 0; i < options.length; i++)
+                if (options[i].selected)
+                level = options[i].value;
+            content = $.ajax({
+                url: '<%=Routing.Category.UrlForListCategoryByLevel() %>',
+                data: "level=" + level,
+                global: false,
+                type: "POST",
+                dataType: "html",
+                async: false,
+                success: function(msg) {
+                    if (document.layers) {
+                        document.getElementById('ListCategoryByLevel').open();
+                        document.getElementById('ListCategoryByLevel').write(msg);
+                        document.getElementById('ListCategoryByLevel').close();
+                        document.getElementById('ListCategoryByLevel').innerHTML = msg;
+                    }
+                    else {
+                        document.getElementById('ListCategoryByLevel').innerHTML = msg;
+                    }
+
+                }
+            }).responseText;
+        })
+    })
+    </script>    
     </form>
+    
+    
 </div>
 
 

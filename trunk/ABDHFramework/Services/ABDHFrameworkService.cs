@@ -95,6 +95,10 @@ namespace ABDHFramework.Services
         {
           return _da.GetAllCategory(isEN);
         }
+        public List<tblCategory> GetAllCategory(bool isEN, byte level)
+        {
+            return _da.GetAllCategory(isEN, level);
+        }
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN,String criteria, String sortColunm, String sortOption)
         {
           return _da.GetAllCategory(pageSize, page, isEN,criteria, sortColunm,sortOption);

@@ -137,20 +137,8 @@ namespace ABDHFramework.Controllers
       {
         if (productID.HasValue && !productID.Equals(Guid.Empty))
         {
-          Service.DeleteProduct((Guid)productID);
-
-          if (tmpType == NewsTypes.NormalProduct)
-          {
+            Service.DeleteProduct((Guid)productID);
             return RedirectToAction("IndexForProduct");
-          }
-          else if (tmpType == NewsTypes.PromotionNew)
-          {
-            return RedirectToAction("IndexForPromotionNews");
-          }
-          else
-          {
-            return RedirectToAction("IndexForProduct");
-          }
         }
       }
       #endregion
@@ -177,36 +165,7 @@ namespace ABDHFramework.Controllers
         }
 
       }
-      List<SelectListItem> storeStatusVN = new List<SelectListItem>();
-      storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
-      storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
-      List<SelectListItem> storeStatusEN = new List<SelectListItem>();
-      storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
-      storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
-
-
-      List<SelectListItem> promotionVN = new List<SelectListItem>();
-      promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
-      promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
-
-
-      List<SelectListItem> promotionEN = new List<SelectListItem>();
-      promotionEN.Add((new SelectListItem { Text = "Not Promoted", Value = Promoted.NotHas.ToString() }));
-      promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
-
-      if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-      {
-        ViewData["StoreStatus"] = storeStatusEN;
-
-        ViewData["Promotion"] = promotionEN;
-      }
-      else
-      {
-        ViewData["Promotion"] = promotionVN;
-        ViewData["StoreStatus"] = storeStatusVN;
-      }
-
-
+      
       ViewData["Categories"] = categories;
 
       if (productID != null)
@@ -255,10 +214,7 @@ namespace ABDHFramework.Controllers
         listCategory = Service.GetAllCategory(false);
       }
 
-      List<SelectListItem> storeStatusVN = new List<SelectListItem>();
-      List<SelectListItem> storeStatusEN = new List<SelectListItem>();
-      List<SelectListItem> promotionVN = new List<SelectListItem>();
-      List<SelectListItem> promotionEN = new List<SelectListItem>();
+      
       if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
       {
 
@@ -373,31 +329,7 @@ namespace ABDHFramework.Controllers
               }
 
             }
-            storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
-            storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
-            storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
-            storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
-
-            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
-            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
-
-
-            promotionEN.Add((new SelectListItem { Text = "NotPromoted", Value = Promoted.NotHas.ToString() }));
-            promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
-
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-            {
-              ViewData["StoreStatus"] = storeStatusEN;
-
-              ViewData["Promotion"] = promotionEN;
-            }
-            else
-            {
-              ViewData["Promotion"] = promotionVN;
-              ViewData["StoreStatus"] = storeStatusVN;
-            }
-
-
+      
             ViewData["Categories"] = categories;
             if (productID == null)
             {
@@ -449,29 +381,7 @@ namespace ABDHFramework.Controllers
                 categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
               }
             }
-            storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
-            storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
-            storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
-            storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
-
-            promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
-            promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
-
-
-            promotionEN.Add((new SelectListItem { Text = "Not promoted", Value = Promoted.NotHas.ToString() }));
-            promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-            {
-              ViewData["StoreStatus"] = storeStatusEN;
-
-              ViewData["Promotion"] = promotionEN;
-            }
-            else
-            {
-              ViewData["Promotion"] = promotionVN;
-              ViewData["StoreStatus"] = storeStatusVN;
-            }
-
+      
 
             ViewData["Categories"] = categories;
             if (productID == null)
@@ -500,31 +410,7 @@ namespace ABDHFramework.Controllers
         }
       }
 
-      storeStatusVN.Add((new SelectListItem { Text = "Còn hàng", Value = StoreStatuses.Exhausted.ToString() }));
-      storeStatusVN.Add((new SelectListItem { Text = "Hết hàng", Value = StoreStatuses.NotExhausted.ToString() }));
-
-      storeStatusEN.Add((new SelectListItem { Text = "Available", Value = StoreStatuses.Exhausted.ToString() }));
-      storeStatusEN.Add((new SelectListItem { Text = "Not Available", Value = StoreStatuses.NotExhausted.ToString() }));
-
-
-      promotionVN.Add((new SelectListItem { Text = "Không có khuyến mãi", Value = Promoted.NotHas.ToString() }));
-      promotionVN.Add((new SelectListItem { Text = "Có khuyến mãi", Value = Promoted.Has.ToString() }));
-
-
-
-      promotionEN.Add((new SelectListItem { Text = "Not Promoted", Value = Promoted.NotHas.ToString() }));
-      promotionEN.Add((new SelectListItem { Text = "Promoted", Value = Promoted.Has.ToString() }));
-      if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-      {
-        ViewData["StoreStatus"] = storeStatusEN;
-
-        ViewData["Promotion"] = promotionEN;
-      }
-      else
-      {
-        ViewData["Promotion"] = promotionVN;
-        ViewData["StoreStatus"] = storeStatusVN;
-      }
+      
 
 
       ViewData["Categories"] = categories;

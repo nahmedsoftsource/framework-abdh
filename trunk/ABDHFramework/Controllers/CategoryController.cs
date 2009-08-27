@@ -36,23 +36,45 @@ namespace ABDHFramework.Controllers
 
             return View(listAllCategory);
         }
-        
+        public ActionResult ListCategoryByLevel(byte? level)
+        {
+            
+            List<tblCategory> listAllCategory = new List<tblCategory>();
+            List<SelectListItem> listCategory = new List<SelectListItem>();
+            if (level.HasValue && level.Value > 1)
+            {
+                level--;
+                if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+                {
+                    listAllCategory = Service.GetAllCategory(true, (byte)level);
+                }
+                else
+                {
+                    listAllCategory = Service.GetAllCategory(false, (byte)level);
+                }
+                
+                foreach (tblCategory category in listAllCategory)
+                {
+                    listCategory.Add(new SelectListItem { Text = category.CategoryName, Value = category.ID.ToString() });
+                }
+            }
+            ViewData["ListCategory"] = listCategory;
+            return View("Admin/ListCategoryByLevel");
+        }
         #endregion
         #region Admin
         public ActionResult EditCategory(Guid? categoryID)
         {
-           
+            List<SelectListItem> listLevelCategory = new List<SelectListItem>();
+            listLevelCategory.Add(new SelectListItem { Text = "Mức 1", Value = "1" });
+            listLevelCategory.Add(new SelectListItem { Text = "Mức 2", Value = "2" });
+            //listLevelCategory.Add(new SelectListItem { Text = "Mức 3", Value = "3" });
+            ViewData["ListLevelCategory"] = listLevelCategory;
             if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty))
             {
                 tblCategory tblCategory = new tblCategory();
                 
                 tblCategory = Service.GetCategoryByID((Guid)categoryID);
-               
-
-                ViewData["NameVN"] = tblCategory.CategoryName;
-                ViewData["NameEN"] = tblCategory.CategoryName;
-                ViewData["Description"] = tblCategory.Description;
-                ViewData["Description"] = tblCategory.Description;
                 return View("Admin/EditCategory", tblCategory);
             }
             else
@@ -95,6 +117,14 @@ namespace ABDHFramework.Controllers
               ModelState.AddModelError("Description", "Không nhập quá 250 ký tự");
             }
           }
+          if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+          {
+              tblcategory.Language = Languages.EN;
+          }
+          else 
+          {
+              tblcategory.Language = Languages.VN;
+          }
           if (categoryID.HasValue && !categoryID.Value.Equals(Guid.Empty) && ModelState.IsValid)
           {
             tblcategory.ID = (Guid)categoryID;
@@ -110,10 +140,12 @@ namespace ABDHFramework.Controllers
             //todo: view one category
             return RedirectToAction("AdminListCategory");
           }
-          ViewData["NameVN"] = tblcategory.CategoryName;
-          ViewData["NameEN"] = tblcategory.CategoryName;
-          ViewData["Description"] = tblcategory.Description;
-          ViewData["Description"] = tblcategory.Description;
+          List<SelectListItem> listLevelCategory = new List<SelectListItem>();
+          listLevelCategory.Add(new SelectListItem { Text = "Mức 1", Value = "1" });
+          listLevelCategory.Add(new SelectListItem { Text = "Mức 2", Value = "2" });
+          //listLevelCategory.Add(new SelectListItem { Text = "Mức 3", Value = "3" });
+          ViewData["ListLevelCategory"] = listLevelCategory;
+          
           return View("Admin/EditCategory", tblcategory);
         }
         public ActionResult AdminCategory(int? page)

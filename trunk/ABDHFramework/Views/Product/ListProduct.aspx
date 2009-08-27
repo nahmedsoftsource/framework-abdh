@@ -20,29 +20,19 @@
                     <%int counter2=0; %>
                     <% foreach (var item in Model.Items)
                        { %>
-                        <%if (String.IsNullOrEmpty(item.ProductNameVN)) item.ProductNameVN = Resources.Global.NoTitle; %>
+                        <%if (String.IsNullOrEmpty(item.ProductName)) item.ProductName = Resources.Global.NoTitle; %>
                         <div class="subSp">
                                 <div class="clear">
                                     <a href="#">
                                         <img src='<%= Url.Content("~"+item.Image)%>' /></a>
                                 </div>
                                 <div class="paddingTb4 paddingLr18px bold">
-                                    <%if (HttpContext.Current.Response.Cookies["Culture"] != null && !String.IsNullOrEmpty(HttpContext.Current.Response.Cookies["Culture"].Value) && HttpContext.Current.Response.Cookies["Culture"].Value.Equals("en-US"))
-                                     { %>
-                                     <%=Html.LinkToRemote(item.ProductNameEN,new RemoteOption
+                                   
+                                     <%=Html.LinkToRemote(item.ProductName,new RemoteOption
                                        {
                                          Update = "ListAllID",
                                          URL = Routing.Product.UrlForViewProduct(item.ID,null)
                                          })%>
-                                    <%}
-                                    else
-                                    { %>
-                                     <%=Html.LinkToRemote(item.ProductNameVN,new RemoteOption
-                                       {
-                                         Update = "ListAllID",
-                                         URL = Routing.Product.UrlForViewProduct(item.ID,null)
-                                         })%>
-                                    <%} %>
                                 </div>
                                 <div class="clear">
                                 </div>
@@ -73,8 +63,7 @@
                 CurrentPage = Model.GetPage(),
                 PageSize = Model.GetMaxResults(),
                 TotalRows = Model.TotalRows,
-                //UrlMaker = ((page) => (new ABDHFramework.Controllers.ABDHFrameworkController()).ListAllNews((int)ABDHFramework.Common.Constants.DefautPagingSize,(int)page)),
-                //UrlMaker = ((page) => (new UrlHelper(ViewContext.RequestContext)).Action("ListAllProduct", "ABDHFramework") + "?pageSize=" + (int)ABDHFramework.Common.Constants.DefautPagingSize + "&page=" + page + ((ViewData["Type"] != null) ? ("&Type" + ViewData["Type"]) : ""))
+
                 UrlMaker=(page)=>Routing.Product.UrlForListProduct(null,null,page,"","")
             },
             new AjaxPaginationOption

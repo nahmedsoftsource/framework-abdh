@@ -17,13 +17,13 @@
                   %>
                   <%if (!category.ParentID.HasValue)
                     { %>
-                    <p class="msg_head"><%=category.CategoryNameVN%></p>  
+                    <p class="msg_head"><%=category.CategoryName%></p>  
                     <%} %>
                     <%if(category.tblCategories != null && category.tblCategories.Count > 0){ %>  
                     <div class="msg_body">
                         <%foreach(tblCategory  subCategory in category.tblCategories){ %>
                             <div class="sub_msg_body">
-                                <%=Html.LinkToRemote(subCategory.CategoryNameVN,new RemoteOption
+                                <%=Html.LinkToRemote(subCategory.CategoryName,new RemoteOption
                                   {
                                     Update = "ListAllID",
                                     URL=Routing.Product.UrlForListProduct(subCategory.ID,null,null,"","")
