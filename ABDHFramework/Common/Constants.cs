@@ -14,6 +14,7 @@ namespace ABDHFramework.Common
         public static int DefautPagingSizeForContructionImages = 8;
         public static int DefautPagingSizeForNews = 6;
         public static int DefautPagingSizeForProduct = 12;
+        public static int DefautSizeSuggestion = 3;
 
   }
     public class NewsTypes

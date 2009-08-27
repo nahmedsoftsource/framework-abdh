@@ -16,6 +16,7 @@
      <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
+    <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery.autocomplete.modified.js")%>'></script>
 
     <script type="text/javascript" language="javascript">
         $(document).ready
@@ -73,7 +74,7 @@
                                     <%=Resources.Global.AboutUs %></span></a></li>
                                 <li><a href="<%= Url.Content("~/ABDHFramework/IndexForNews/")%>"><span>
                                     <%=Resources.Global.News%></span></a></li>
-                                <li><a href="<%= Url.Content("~/ABDHFramework/IndexForProduct/")%>"><span>
+                                <li><a href="<%= Url.Content("~/Product/IndexForProduct/")%>"><span>
                                     <%=Resources.Global.OurProducts %></span></a></li>
                                 <li><a href="<%= Url.Content("~/ABDHFramework/IndexForRecruitment/")%>"><span>
                                     <%=Resources.Global.Recruitment%></span></a></li>

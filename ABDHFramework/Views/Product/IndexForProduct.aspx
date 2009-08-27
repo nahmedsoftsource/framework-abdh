@@ -1,42 +1,63 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
-
+<%@ Page Title="Product"  Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
+<%@ Import Namespace="ABDHFramework.Lib" %>
+<%@ Import Namespace="ABDHFramework.Lib.Pager" %>
+<%@ Import Namespace="ABDHFramework.Models" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
-    <%--<%ABDHFramework.Utility.UIHelper.RenderRemotePartial(Html, "ListAllNewsID", "", (new UrlHelper(ViewContext.RequestContext)).Action("ListAllNews", "ABDHFramework") + "?pageSize=" + (int)ABDHFramework.Common.Constants.DefautPagingSize + "&page=1");%>--%>
-    <div class="mainCtentSpRight" id="ListAllProductID">
-        <%Html.RenderPartial("ListAllProduct", ViewData); %>
+    <div class="mainCtentSpRight" id="ListAllID">
+        <%Html.RenderPartial("ListProduct", ViewData); %>
         <input type="hidden" id="SelectedMenuId" name="SelectedMenuId" value="3" />
     </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
+  
+  <% Html.RenderTabPanel("LeftTabs",
+      new TabPane[]{
+        new TabPane{ ID="L_QuickFind", Title="Search",ViewName="QuickSearch"}
+      }
+        
+      ); %>
+      <div>
+      <br />
+      </div>
+      <div class="detail-title">
+        Category
+      </div>
    <script language="javascript" type="text/javascript">
+    var a= "";
+    $(document).ready(function() {
+        $.ajaxSetup();
+        $.ajax({
+            url: '<%=Url.Content("~/Category/ListCategory") %>',
+            global: false,
+            type: "POST",
+            async: false,
+            dataType: "html",
+            success: function(msg) {
+                
+                if (document.layers) {
+                    document.getElementById('ListCategoryID').open();
+                    document.getElementById('ListCategoryID').write(msg);
+                    document.getElementById('ListCategoryID').close();
+                    document.getElementById('ListCategoryID').innerHTML = msg;
+                }
+                else {
+                    document.getElementById('ListCategoryID').innerHTML = msg;
+                }
 
-       var content = "";
-       $(document).ready(function() {
-           content = $.ajax({
-               url: '<%=Url.Content("~/ABDHFramework/ListCategory") %>',
-               global: false,
-               type: "POST",
-               dataType: "html",
-               async: false,
-               success: function(msg) {
-                   
-                   if (document.layers) {
-                       document.getElementById('ListCategoryID').open();
-                       document.getElementById('ListCategoryID').write(msg);
-                       document.getElementById('ListCategoryID').close();
-                       document.getElementById('ListCategoryID').innerHTML = msg;
-                   }
-                   else {
-                       document.getElementById('ListCategoryID').innerHTML = msg;
-                   }
+            }
 
-               }
-
-           }).responseText;
-       })
-                    </script>
-                    <div id="ListCategoryID">
-                    </div>
+        });
+        $(".msg_body").hide();
+        //toggle the componenet with class msg_body
+        $(".msg_head").click(function() {
+        $(this).next(".msg_body").slideToggle(600);
+        });
+    })
+    
+    
+    </script>
+    <div id="ListCategoryID" class="content-border" >
+    </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PromotionAnnoucement" runat="server">
 <script language="javascript" type="text/javascript">

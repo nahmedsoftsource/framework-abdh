@@ -21,6 +21,18 @@ namespace ABDHFramework.Controllers
         return _routing;
       }
     }
+    private FluentHtmlHelper _fluentHtml;
+    public FluentHtmlHelper FluentHtml
+    {
+      get
+      {
+        if (_fluentHtml == null)
+        {
+          _fluentHtml = new FluentHtmlHelper(ViewContext, this);
+        }
+        return _fluentHtml;
+      }
+    }
   }
 
   public class BaseViewPage<T> : System.Web.Mvc.ViewPage<T> where T : class
@@ -50,6 +62,18 @@ namespace ABDHFramework.Controllers
         return _helper;
       }
       set { _helper = value; }
+    }
+    private FluentHtmlHelper _fluentHtml;
+    public FluentHtmlHelper FluentHtml
+    {
+      get
+      {
+        if (_fluentHtml == null)
+        {
+          _fluentHtml = new FluentHtmlHelper(ViewContext, this);
+        }
+        return _fluentHtml;
+      }
     }
 
   }

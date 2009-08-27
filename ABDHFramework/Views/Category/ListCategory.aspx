@@ -23,7 +23,12 @@
                     <div class="msg_body">
                         <%foreach(tblCategory  subCategory in category.tblCategories){ %>
                             <div class="sub_msg_body">
-                                <%=Html.LinkTo(subCategory.CategoryNameVN,subCategory.CategoryNameVN,Routing.Category.UrlForIndexForProductByCategory(subCategory.ID))%>
+                                <%=Html.LinkToRemote(subCategory.CategoryNameVN,new RemoteOption
+                                  {
+                                    Update = "ListAllID",
+                                    URL=Routing.Product.UrlForListProduct(subCategory.ID,null,null,"","")
+                                  })%>
+                                
 		                    </div>                        
                         <%} %>
                         </div>      
