@@ -31,7 +31,7 @@
                                      <%=Html.LinkToRemote(item.ProductName,new RemoteOption
                                        {
                                          Update = "ListAllID",
-                                         URL = Routing.Product.UrlForViewProduct(item.ID,null)
+                                         URL = Routing.Product.UrlForViewProduct(item.ID)
                                          })%>
                                 </div>
                                 <div class="clear">
