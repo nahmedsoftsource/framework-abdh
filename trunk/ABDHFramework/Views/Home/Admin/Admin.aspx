@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage" %>
+﻿<%@ Page Title="Admin"  Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">

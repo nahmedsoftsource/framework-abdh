@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Title="Home"  Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ABDHFramework.Controllers.BaseViewPage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
     <div class="mainCtentSpRight" id="ListSearchResult">

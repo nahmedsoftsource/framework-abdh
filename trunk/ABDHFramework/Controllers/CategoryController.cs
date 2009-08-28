@@ -46,11 +46,11 @@ namespace ABDHFramework.Controllers
                 level--;
                 if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
                 {
-                    listAllCategory = Service.GetAllCategory(true, (byte)level);
+                    listAllCategory = Service.GetAllCategory(Languages.EN, (byte)level);
                 }
                 else
                 {
-                    listAllCategory = Service.GetAllCategory(false, (byte)level);
+                  listAllCategory = Service.GetAllCategory(Languages.VN, (byte)level);
                 }
                 
                 foreach (tblCategory category in listAllCategory)

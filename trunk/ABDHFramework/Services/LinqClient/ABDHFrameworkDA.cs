@@ -163,35 +163,17 @@ namespace ABDHFramework.Services.LinqClient
                 _dataContext.SubmitChanges();
             }
         }
-        public List<tblCategory> GetAllCategory(bool isEN)
+        public List<tblCategory> GetAllCategory(byte language)
         {
-            if (isEN)
-            {
-                var query = _dataContext.tblCategories.Where("CategoryName!=null");
-                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
-            }
-            else
-            {
-                var query = _dataContext.tblCategories.Where("CategoryName!=null");
-                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
-            }
-
-
+            var query = _dataContext.tblCategories.Where(item => item.Language.HasValue && (item.Language.Value.Equals(language)));
+            return ((query != null) ? query.ToList() : (new List<tblCategory>()));
         }
-        public List<tblCategory> GetAllCategory(bool isEN,byte level)
+        public List<tblCategory> GetAllCategory(byte language, byte level)
         {
-            if (isEN)
-            {
-                var query = _dataContext.tblCategories.Where(item=>(item.Language.HasValue && item.Language.Value.Equals(ABDHFramework.Common.Languages.EN) && item.Level.Equals(level)));
-                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
-            }
-            else
-            {
-                var query = _dataContext.tblCategories.Where(item => (item.Language.HasValue && item.Language.Value.Equals(ABDHFramework.Common.Languages.VN) && item.Level.Equals(level)));
-                return ((query != null) ? query.ToList() : (new List<tblCategory>()));
-            }
-
-
+        
+            var query = _dataContext.tblCategories.Where(item => (item.Language.HasValue && item.Language.Value.Equals(language) && item.Level.Equals(level)));
+            return ((query != null) ? query.ToList() : (new List<tblCategory>()));
+           
         }
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN, string criteria, String sortColunm, String sortOption)
         {
@@ -288,33 +270,22 @@ namespace ABDHFramework.Services.LinqClient
         
         #endregion
         #region Product
-        public tblProduct GetProductByID(Guid productID, bool isEN)
+        public tblProduct GetProductByID(Guid productID)
         {
-          if (isEN)
-          {
-            var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductName != null", productID.ToString());
+            var query = _dataContext.tblProducts.Where(item=>item.ID.Equals(productID));
             if (query.ToList().Count() > 0)
             {
-              tblProduct tblnew = query.ToList().First();
-              return tblnew;
+              tblProduct tblproduct = query.ToList().First();
+              return tblproduct;
             }
-          }
-          else
-          {
-            var query = _dataContext.tblProducts.Where("ID.ToString()=@0 and ProductName != null", productID.ToString());
-            if (query.ToList().Count() > 0)
-            {
-              tblProduct tblnew = query.ToList().First();
-              return tblnew;
-            }
-          }
-          return null;
+         
+          return new tblProduct();
         }
         public void UpdateProduct(tblProduct tblproduct)
         {
           if (tblproduct != null && tblproduct.ID != null && !tblproduct.ID.Equals(Guid.Empty))
           {
-            var query = _dataContext.tblProducts.Where("ID.ToString()=@0", tblproduct.ID.ToString());
+            var query = _dataContext.tblProducts.Where(item=>item.ID.Equals(tblproduct.ID));
             if (query != null && query.ToList().Count > 0)
             {
               query.First().Price = tblproduct.Price;
@@ -338,7 +309,7 @@ namespace ABDHFramework.Services.LinqClient
         {
           if (productID != null && !productID.Equals(Guid.Empty))
           {
-            var query = _dataContext.tblProducts.Where("ID.ToString()=@0", productID.ToString());
+            var query = _dataContext.tblProducts.Where(item=>item.ID.Equals(productID));
             if (query != null && query.ToList().Count > 0)
             {
               try
@@ -362,13 +333,12 @@ namespace ABDHFramework.Services.LinqClient
             _dataContext.SubmitChanges();
           }
         }
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page, bool isEN, String criteria, String sortColunm, String sortOption)
+        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,byte language, String criteria, String sortColunm, String sortOption)
         {
           SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
-          if (isEN)
-          {
-            var query1 = _dataContext.tblProducts.Where(item=>item.ProductName.Contains(criteria));
-            var query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria)).Take(pageSize * page).Skip((page - 1) * pageSize);
+          
+            var query1 = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language));
+            var query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language)).Take(pageSize * page).Skip((page - 1) * pageSize);
             if (query != null && query1 != null && query.ToList().Count > 0)
             {
               searchResult.Items = query.ToList();
@@ -377,20 +347,7 @@ namespace ABDHFramework.Services.LinqClient
               searchResult.SetPage(page);
               searchResult.TotalRows = query1.Count();
             }
-          }
-          else
-          {
-            var query1 = _dataContext.tblProducts.Where(item=>item.ProductName.Contains(criteria));
-            var query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria)).Take(pageSize * page).Skip((page - 1) * pageSize);
-            if (query != null && query1 != null && query.ToList().Count > 0)
-            {
-              searchResult.Items = query.ToList();
-              searchResult.Query = query;
-              searchResult.SetMaxResults(pageSize);
-              searchResult.SetPage(page);
-              searchResult.TotalRows = query1.Count();
-            }
-          }
+          
           return searchResult;
         }
         public IList<tblProduct> ProductSuggestForField(string value, int limit)

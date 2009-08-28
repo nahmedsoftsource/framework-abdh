@@ -91,13 +91,13 @@ namespace ABDHFramework.Services
              _da.Delete(id);
         }
         #region Category
-        public List<tblCategory> GetAllCategory(bool isEN)
+        public List<tblCategory> GetAllCategory(byte language)
         {
-          return _da.GetAllCategory(isEN);
+          return _da.GetAllCategory(language);
         }
-        public List<tblCategory> GetAllCategory(bool isEN, byte level)
+        public List<tblCategory> GetAllCategory(byte language, byte level)
         {
-            return _da.GetAllCategory(isEN, level);
+          return _da.GetAllCategory(language, level);
         }
         public SearchResult<tblCategory> GetAllCategory(int pageSize, int page, bool isEN,String criteria, String sortColunm, String sortOption)
         {
@@ -128,13 +128,13 @@ namespace ABDHFramework.Services
         #endregion
 
       #region Product
-        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page, bool isEN, String criteria, String sortColunm, String sortOption)
+        public SearchResult<tblProduct> GetAllProduct(int pageSize, int page,byte language, String criteria, String sortColunm, String sortOption)
         {
-          return _da.GetAllProduct(pageSize, page, isEN,criteria,sortColunm,sortOption);
+          return _da.GetAllProduct(pageSize, page, language, criteria, sortColunm, sortOption);
         }
-        public tblProduct GetProductByID(Guid productID, bool isEN)
+        public tblProduct GetProductByID(Guid productID)
         {
-          return _da.GetProductByID(productID, isEN);
+          return _da.GetProductByID(productID);
         }
         public void DeleteProduct(Guid productID)
         {
