@@ -138,7 +138,7 @@ Select:
 {
   HtmlID = "ListID",
 })%>
- <div >
+ <div  class="detail-title">
  <span style="float:left">
   <%=Html.ButtonToRemote("Delete", new RemoteOption
         {

@@ -126,7 +126,6 @@ namespace ABDHFramework.Controllers
       }
 
       ViewData["Categories"] = categories;
-      ViewData["Description"] = "test choi";
       if (productID != null)
       {
         tblProduct tblproduct = new tblProduct();
