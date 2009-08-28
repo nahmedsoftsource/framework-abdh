@@ -71,7 +71,7 @@ namespace ABDHFramework.Lib.Javascripts
       if (htmlAttr != null)
         _htmlAttr = new RouteValueDictionary(htmlAttr);
 
-      builder.MergeAttribute("type", "button");
+      builder.MergeAttribute("type", "submit");
       builder.MergeAttribute("onClick", onClick);
       builder.MergeAttribute("value", name);
 

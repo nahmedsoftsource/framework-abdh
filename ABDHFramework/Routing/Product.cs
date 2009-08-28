@@ -26,9 +26,9 @@ namespace ABDHFramework.Routing
       return UrlFor("ListProduct", new { CategoryID = categoryID, PageSize = pageSize, Page = page, SortColunm = sortColunm, SortOption = sortOption });
 
     }
-    public String UrlForViewProduct(Guid? productID, byte? type)
+    public String UrlForViewProduct(Guid? productID)
     {
-      return UrlFor("ViewProduct", new { ProductID = productID, Type = type});
+      return UrlFor("ViewProduct", new { ProductID = productID});
 
     }
     public String UrlForViewProduct()
@@ -69,11 +69,17 @@ namespace ABDHFramework.Routing
       return UrlFor("DeleteProduct", new { Id = id });
 
     }
-    public String UrlForEditProduct(Guid? productID, byte? type)
+    public String UrlForEditProduct(Guid? productID)
     {
-      return UrlFor("EditProduct", new { ProductID = productID, Type = type });
+      return UrlFor("EditProduct", new { ProductID = productID});
 
     }
+    public String UrlForIframeEditProduct(Guid? productID)
+    {
+      return UrlFor("IframeEditProduct", new { ProductID = productID });
+
+    }
+    
     #endregion
   }
 }

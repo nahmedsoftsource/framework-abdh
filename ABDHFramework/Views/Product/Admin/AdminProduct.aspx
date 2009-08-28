@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Manage Product" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
+﻿<%@ Page    Title="Manage Product" Language="C#" MasterPageFile="~/Views/Shared/Admin.Master" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Data.SearchResult<ABDHFramework.Models.tblProduct>>" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">

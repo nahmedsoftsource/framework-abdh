@@ -36,11 +36,11 @@ namespace ABDHFramework.Controllers
       {
         if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
         {
-          listAllProduct = Service.GetAllProduct(Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), true, "", "", "");
+          listAllProduct = Service.GetAllProduct(Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), Languages.EN, "", "", "");
         }
         else
         {
-          listAllProduct = Service.GetAllProduct(Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), false, "", "", "");
+          listAllProduct = Service.GetAllProduct(Constants.DefautPagingSizeForProduct, (page.HasValue ? (int)page : 1), Languages.VN, "", "", "");
         }
       }
       return View(listAllProduct);
@@ -60,45 +60,29 @@ namespace ABDHFramework.Controllers
       {
         if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
         {
-          listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), true, criteria, sortColunm, sortOption);
+          listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), Languages.EN, criteria, sortColunm, sortOption);
         }
         else
         {
-          listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), false, criteria, sortColunm, sortOption);
+          listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForCategory, (page.HasValue ? (int)page : 1), Languages.VN, criteria, sortColunm, sortOption);
         }
       }
 
       return View(listAllProduct);
     }
-    public ActionResult ViewProduct(Guid? productID, byte? type)
+    public ActionResult ViewProduct(Guid? productID)
     {
-      ViewData["Type"] = type;
       if (productID != null && !productID.Equals(Guid.Empty))
       {
-        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-        {
-          tblProduct tblproduct = Service.GetProductByID((Guid)productID, true);
+          tblProduct tblproduct = Service.GetProductByID((Guid)productID);
           return View(tblproduct);
-        }
-        else
-        {
-          tblProduct tblproduct = Service.GetProductByID((Guid)productID, false);
-          return View(tblproduct);
-        }
-
       }
       else if (TempData["ProductID"] != null)
       {
-        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-        {
-          tblProduct tblproduct = Service.GetProductByID((Guid)TempData["ProductID"], true);
+       
+          tblProduct tblproduct = Service.GetProductByID((Guid)TempData["ProductID"]);
           return View(tblproduct);
-        }
-        else
-        {
-          tblProduct tblproduct = Service.GetProductByID((Guid)TempData["ProductID"], false);
-          return View(tblproduct);
-        }
+        
       }
       tblProduct tblpro = new tblProduct();
       return View(tblpro);
@@ -124,67 +108,37 @@ namespace ABDHFramework.Controllers
     }
     #endregion
     #region Admin
-    public ActionResult EditProduct(Guid? productID, byte? type)
+    public ActionResult EditProduct(Guid? productID)
     {
-      ViewData["Type"] = type;
-      byte tmpType = NewsTypes.NormalProduct;
-      if (type.HasValue)
-      {
-        tmpType = (byte)type;
-      }
-      #region delete
-      if (Request["Delete"] != null)
-      {
-        if (productID.HasValue && !productID.Equals(Guid.Empty))
-        {
-            Service.DeleteProduct((Guid)productID);
-            return RedirectToAction("IndexForProduct");
-        }
-      }
-      #endregion
       List<SelectListItem> categories = new List<SelectListItem>();
       List<tblCategory> listCategory = new List<tblCategory>();
       if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
       {
-        listCategory = Service.GetAllCategory(true);
+        listCategory = Service.GetAllCategory(Languages.EN);
       }
       else
       {
-        listCategory = Service.GetAllCategory(false);
+        listCategory = Service.GetAllCategory(Languages.VN);
       }
-      int counter = 0;
       foreach (tblCategory cat in listCategory)
       {
-        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-        {
-          categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-        }
-        else
-        {
-          categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-        }
-
+        categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
       }
-      
-      ViewData["Categories"] = categories;
 
+      ViewData["Categories"] = categories;
+      ViewData["Description"] = "test choi";
       if (productID != null)
       {
         tblProduct tblproduct = new tblProduct();
-        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-        {
-          tblproduct = Service.GetProductByID((Guid)productID, true);
-        }
-        else
-        {
-          tblproduct = Service.GetProductByID((Guid)productID, false);
-        }
+        
+         tblproduct = Service.GetProductByID((Guid)productID);
         if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
         {
-          ViewData["Description"] = tblproduct.Description;
+          //ViewData["Description"] = tblproduct.Description;
+          ViewData["Description"] = "test choi";
         }
 
-        return View("Admin/EditProduct",tblproduct);
+        return View("Admin/EditProduct", tblproduct);
       }
       else
       {
@@ -194,86 +148,119 @@ namespace ABDHFramework.Controllers
         return View("Admin/EditProduct", tblproduct);
       }
     }
+    
     [ValidateInput(false)]
     [AcceptVerbs(HttpVerbs.Post)]
     public ActionResult EditProduct(Guid? productID, [Bind(Exclude = "ID")] tblProduct tblproduct)
     {
+      #region delete
+      if (Request["Delete"] != null)
+      {
+        if (productID.HasValue && !productID.Equals(Guid.Empty))
+        {
+          Service.DeleteProduct((Guid)productID);
+          return RedirectToAction("IndexForProduct");
+        }
+      }
+      #endregion
       if (tblproduct != null && !string.IsNullOrEmpty(tblproduct.Description))
       {
         ViewData["Description"] = tblproduct.Description;
       }
-
+      if (tblproduct == null)
+      {
+        tblproduct = new tblProduct();
+      }
       List<SelectListItem> categories = new List<SelectListItem>();
       List<tblCategory> listCategory = new List<tblCategory>();
       if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
       {
-        listCategory = Service.GetAllCategory(true);
+        tblproduct.Language = Languages.EN;
+        listCategory = Service.GetAllCategory(Languages.EN);
       }
       else
       {
-        listCategory = Service.GetAllCategory(false);
+        tblproduct.Language = Languages.VN;
+        listCategory = Service.GetAllCategory(Languages.VN);
       }
 
-      
-      if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+      foreach (tblCategory cat in listCategory)
       {
+          categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
+      }
+      ViewData["Categories"] = categories;
 
-        if (String.IsNullOrEmpty(tblproduct.ProductName))
+      if (String.IsNullOrEmpty(tblproduct.ProductName))
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
         {
           ModelState.AddModelError("ProductName", "Product name field is required");
         }
-        else if (tblproduct.ProductName.Length >= 100)
-        {
-          ModelState.AddModelError("ProductName", "Input no more than 100 characters");
-        }
-        
-        if (String.IsNullOrEmpty(tblproduct.Property))
-        {
-          ModelState.AddModelError("Property", "Property field is required");
-        }
-        else if (tblproduct.Property.Length > 250)
-        {
-          ModelState.AddModelError("Property", "Input no more than 250 characters");
-        }
-        if (String.IsNullOrEmpty(tblproduct.Description))
-        {
-          ModelState.AddModelError("Description", "Description field is required");
-        }
-        else if (tblproduct.Description.Length > 16000)
-        {
-          ModelState.AddModelError("Description", "Input no more than 16000 characters");
-        }
-
-
-      }
-      else
-      {
-        if (String.IsNullOrEmpty(tblproduct.ProductName))
+        else
         {
           ModelState.AddModelError("ProductName", "Cần nhập tên sản phẩm");
         }
-        else if (tblproduct.ProductName.Length >= 100)
+      }
+      else if (tblproduct.ProductName.Length >= 100)
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+        {
+          ModelState.AddModelError("ProductName", "Input no more than 100 characters");
+        }
+        else
         {
           ModelState.AddModelError("ProductName", "Không nhập quá 100 ký tự");
         }
-        
-        if (String.IsNullOrEmpty(tblproduct.Property))
+      }
+
+      if (String.IsNullOrEmpty(tblproduct.Property))
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+        {
+          ModelState.AddModelError("Property", "Property field is required");
+        }
+        else
         {
           ModelState.AddModelError("Property", "Cần mô tả ngắn gọn");
         }
-        else if (tblproduct.Property.Length > 250)
+
+      }
+      else if (tblproduct.Property.Length > 250)
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+        {
+          ModelState.AddModelError("Property", "Input no more than 250 characters");
+        }
+        else
         {
           ModelState.AddModelError("Property", "Không nhập quá 250 ký tự");
         }
-        if (String.IsNullOrEmpty(tblproduct.Description))
+      }
+      if (String.IsNullOrEmpty(tblproduct.Description))
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+        {
+          ModelState.AddModelError("Description", "Description field is required");
+        }
+        else
         {
           ModelState.AddModelError("Description", "Cần nhập chi tiết ");
         }
-        else if (tblproduct.Description.Length > 16000)
+      }
+      else if (tblproduct.Description.Length > 16000)
+      {
+        if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+        {
+          ModelState.AddModelError("Description", "Input no more than 16000 characters");
+        }
+        else
         {
           ModelState.AddModelError("Description", "Không nhập quá 16000 ký tự");
         }
       }
+
+
+
       string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
       string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
       string pathFolderThumbSmallest = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNewsSmallest"]);
@@ -300,7 +287,7 @@ namespace ABDHFramework.Controllers
           }
           if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
           {
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
             {
               ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
             }
@@ -317,25 +304,7 @@ namespace ABDHFramework.Controllers
           }
           else
           {
-            foreach (tblCategory cat in listCategory)
-            {
-              if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-              {
-                categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-              }
-              else
-              {
-                categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-              }
-
-            }
-      
-            ViewData["Categories"] = categories;
-            if (productID == null)
-            {
-              ViewData["AddNews"] = true;
-            }
-            return View(tblproduct);
+            return View("Admin/EditProduct", tblproduct);
           }
         }
         else if ((productID == null || productID.Value.Equals(Guid.Empty)) && ModelState.IsValid)
@@ -353,7 +322,7 @@ namespace ABDHFramework.Controllers
           }
           if (tblproduct != null && String.IsNullOrEmpty(tblproduct.Image))
           {
-            if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
+            if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
             {
               ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
             }
@@ -369,56 +338,22 @@ namespace ABDHFramework.Controllers
           }
           else
           {
-
-            foreach (tblCategory cat in listCategory)
-            {
-              if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-              {
-                categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-              }
-              else
-              {
-                categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-              }
-            }
-      
-
-            ViewData["Categories"] = categories;
-            if (productID == null)
-            {
-              ViewData["AddNews"] = true;
-            }
-            return View(tblproduct);
+            tblproduct.ID = Guid.Empty;
+            return View("Admin/EditProduct", tblproduct);
           }
 
-
         }
 
       }
-
-
-
-      foreach (tblCategory cat in listCategory)
-      {
-        if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
-        {
-          categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-        }
-        else
-        {
-          categories.Add(new SelectListItem { Text = cat.CategoryName, Value = cat.ID.ToString() });
-        }
-      }
-
-      
-
-
+      ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
       ViewData["Categories"] = categories;
-      if (productID == null)
-      {
-        ViewData["AddNews"] = true;
-      }
-      return View(tblproduct);
+
+      return View("Admin/EditProduct", tblproduct);
+    }
+    public ActionResult IframeEditProduct(Guid? productID)
+    {
+      var url = Url.Content("~/Product/EditProduct") + "?productID=" + productID.ToString();
+      return Content(String.Format("<iframe width=\"100%\" scrolling=\"no\" height=\"1200px\" frameborder=\"0\" src=\"{0}\" />", Routing.Product.UrlForEditProduct(productID)));
     }
     public ActionResult AdminProduct(int? page)
     {
@@ -427,11 +362,11 @@ namespace ABDHFramework.Controllers
       SearchResult<tblProduct> listAllProduct = new SearchResult<tblProduct>();
       if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
       {
-        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), true, "", sortColumn, sortOption);
+        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), Languages.EN, "", sortColumn, sortOption);
       }
       else
       {
-        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), false, "", sortColumn, sortOption);
+        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), Languages.VN, "", sortColumn, sortOption);
       }
       ViewData["Page"] = (page.HasValue ? page.Value : 1);
       return View("Admin/AdminProduct", listAllProduct);
@@ -443,11 +378,11 @@ namespace ABDHFramework.Controllers
       SearchResult<tblProduct> listAllProduct = new SearchResult<tblProduct>();
       if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
       {
-        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), true, "", sortColumn, sortOption);
+        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), Languages.EN, "", sortColumn, sortOption);
       }
       else
       {
-        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), false, "", sortColumn, sortOption);
+        listAllProduct = Service.GetAllProduct(Common.Constants.DefautPagingSizeForProduct, (page.HasValue ? page.Value : 1), Languages.VN, "", sortColumn, sortOption);
       }
       ViewData["Page"] = (page.HasValue ? page.Value : 1);
       return View("Admin/AdminListProduct", listAllProduct);

@@ -98,7 +98,7 @@ Select:
     
     Action = (item=>ABDHFramework.Lib.Javascripts.Javascript.EditToRemoteForList("",new RemoteOption
       {
-        URL = Routing.Product.UrlForEditProduct(item.ID,null),
+        URL = Routing.Product.UrlForIframeEditProduct(item.ID),
         Update = "ListID",
         Method = "GET"
       })
@@ -156,7 +156,7 @@ Select:
  <%=Html.ButtonToRemote(Resources.Global.AddProduct,new RemoteOption
    {
      Method = "GET",
-     URL = Routing.Product.UrlForEditProduct(null,null),
+     URL = Routing.Product.UrlForIframeEditProduct(null),
      Update = "ListID",
    }) %>
  </span>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Title="Account"  Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ABDHFramework.Controllers.BaseViewPage" %>
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="UpperMainContent" runat="server">
     <div class="barCterTab">
