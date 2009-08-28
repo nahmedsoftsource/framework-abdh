@@ -144,12 +144,11 @@ Select:
         {
             CallBefore = "confirmDelete()",
             URL = Routing.Product.UrlForDeleteListProduct(),
-            IsForm=true,
+            IsForm = true,
             CausesValidation = false,
             Update = "ListID",
-            
-            
-        }
+
+        }, new { @class="buttonlogin" }
         )%>
  </span>
  <span style="float:right">
@@ -158,7 +157,7 @@ Select:
      Method = "GET",
      URL = Routing.Product.UrlForIframeEditProduct(null),
      Update = "ListID",
-   }) %>
+   }, new { @class = "buttonlogin" })%>
  </span>
 </div>
 </div>

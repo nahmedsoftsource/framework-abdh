@@ -809,3 +809,20 @@ div.ibutton
 }
 
 /*Duong add*/
+
+/*button*/
+input.buttonlogin {
+	background: url(images/bg_button2.jpg) repeat-x scroll center bottom;
+	border:1px solid #B8CFEB;
+	color:#000000;
+	height:18px;
+	padding:0 3px;
+	text-align:center;
+	text-decoration:none;
+	width:auto;
+	font-weight: bold;
+}
+input.buttonlogin:hover {
+	border:1px solid #990000;
+	color:#990000;
+}
