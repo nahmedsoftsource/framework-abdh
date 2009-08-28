@@ -84,13 +84,13 @@ Select:
   new ColumnOption<tblCategory>{
     Name = "Category Name",
     IsSort=true,
-    FieldName="CategoryNameVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.CategoryNameVN +"'>" + (item.CategoryNameVN.Length > 15 ? item.CategoryNameVN.Substring(0,15) + "..." : item.CategoryNameVN) + "</a>" )
+    FieldName="CategoryName",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.CategoryName +"'>" + (item.CategoryName.Length > 15 ? item.CategoryName.Substring(0,15) + "..." : item.CategoryName) + "</a>" )
   },
  new ColumnOption<tblCategory>{
     Name = "Description",
-    FieldName="DescriptionVN",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.DescriptionVN +"'>" + (item.DescriptionVN.Length > 50 ? item.DescriptionVN.Substring(0,50) + "..." : item.DescriptionVN) + "</a>" )
+    FieldName="Description",
+    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.Description +"'>" + (item.Description.Length > 50 ? item.Description.Substring(0,50) + "..." : item.Description) + "</a>" )
   },
   new ColumnOption<tblCategory>
   {
@@ -127,7 +127,7 @@ Select:
   }
 }, new GridOption<tblCategory>
 {
-  DefaultSortColumn = "CategoryNameVN",
+  DefaultSortColumn = "CategoryName",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
   URL = Routing.Category.UrlForAdminListCategory(1),
   HtmlID = "ListID"
