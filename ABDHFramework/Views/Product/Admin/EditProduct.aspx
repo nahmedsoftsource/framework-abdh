@@ -3,19 +3,73 @@
 <%@ Import Namespace="ABDHFramework.Lib" %>
 <%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
-    <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/theme/jquery-ui-1.7.1.custom.css" rel="stylesheet" type="text/css" />
+<head>
+    
      <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>'></script>
      <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
     <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
      <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
     <script type="text/javascript" language="javascript" src='<%= Url.Content("~/Admin/fckeditor/fckeditor.js")%>'></script>
+    </head>
 <script type="text/javascript" language="javascript">
     var sBasePath = '<%= Url.Content("~/Admin/fckeditor/")%>';
 </script>
 
+<script language="javascript" type="text/javascript">
+    function removeIframe() {
+    $(document).ready(function() {
+        alert("hehheh");
+        })
+    }
+    function ReloadAfterEdit() {
+        //parent.document.getElementById("IframeEditProduct").style.display = 'none';
+        $(document).ready(function() {
+            var content;
+            parent.document.getElementById("IframeEditProduct").style.display = 'none';
+            //alert(parent.document.getElementById("IframeEditProduct"));
+            content = $.ajax({
+                url: '<%=Routing.Product.UrlForAdminListProduct() %>',
+                type: "POST",
+                dataType: "html",
+                async: false,
+                success: function(msg) {
+                alert(msg);
+                    if (parent.document.layers) {
+                        parent.document.getElementById('ListID').open();
+                        parent.document.getElementById('ListID').write(msg);
+                        parent.document.getElementById('ListID').close();
+                        parent.document.getElementById('ListID').innerHTML = msg;
+                    }
+                    else {
+                        parent.document.getElementById('ListID').innerHTML = msg;
+                    }
+
+                }
+            }).responseText;
+        })
+    }
+    function ShowProgress() {
+        //parent.document.getElementById("IframeEditProduct").style.display = 'block';
+        parent.document.getElementById("IframeEditProduct").style.display = 'none';
+    }
+</script>
+
 <form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
+<style>
+.maxwidth
+{
+	width:100%;
+}
+.layout-form
+{
+	padding: 3px;
+	background-color:#FFFFFF;
+	font-size:11px;
+}
+
+</style>
+
     <%if (Model.ID == null || Model.ID.Equals(Guid.Empty))
           { %>
             <h2><%=Resources.Global.AddProduct %></h2>
@@ -25,7 +79,7 @@
         <h2><%=Resources.Global.EditProduct %></h2>
         <%} %>
     
-    <table  width="100%" cellspacing="2" cellpadding="0" border="0">
+    <table  class="layout-form maxwidth" cellspacing="2" cellpadding="0" border="0">
     <tr>
         <td>
             <label for="ProductName"><%=Resources.Global.ProductName %></label>
@@ -128,13 +182,12 @@
           <span style="float:right">
           <%--<input type="submit" class="abutton" value="<%=label%>" />--%>
             <%=Html.SubmitToRemote(label, new RemoteOption
-            {
-              
+            { 
               CausesValidation=false,
               Method = "POST",
               URL = Routing.Product.UrlForEditProduct(Model.ID),
               Update = "ListID",
-              
+                OnSuccess = "ReloadAfterEdit",
             }) %>
             </span>
         </td>

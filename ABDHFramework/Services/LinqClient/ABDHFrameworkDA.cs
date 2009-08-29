@@ -338,7 +338,15 @@ namespace ABDHFramework.Services.LinqClient
           SearchResult<tblProduct> searchResult = new SearchResult<tblProduct>();
           
             var query1 = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language));
-            var query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language)).Take(pageSize * page).Skip((page - 1) * pageSize);
+            var query = query1;
+            if (sortOption == "Desc")
+            {
+                query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language)).Take(pageSize * page).Skip((page - 1) * pageSize).OrderBy(item=>item.ProductName);
+            }
+            else
+            {
+                query = _dataContext.tblProducts.Where(item => item.ProductName.Contains(criteria) && item.Language.HasValue && item.Language.Value.Equals(language)).Take(pageSize * page).Skip((page - 1) * pageSize).OrderByDescending(item=>item.ProductName);
+            }
             if (query != null && query1 != null && query.ToList().Count > 0)
             {
               searchResult.Items = query.ToList();

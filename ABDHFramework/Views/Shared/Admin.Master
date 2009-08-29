@@ -68,7 +68,7 @@
                                 <li><a href="#"><span><%=Resources.Global.MessageBox %></span></a></li>
                             </ul>
                             <div class="boxLanguage">
-                                <a href="<%=Url.Content("~/ABDHFramework/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/ABDHFramework/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
+                                <a href="<%=Url.Content("~/Base/SetCulture/vi-VN") %>" class="viet">&nbsp;</a> <a href="<%=Url.Content("~/Base/SetCulture/en-US")%>" class="Eng">&nbsp;</a>
                             </div>
                         </div>
                     </div>
