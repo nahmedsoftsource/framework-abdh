@@ -47,8 +47,9 @@
              document.getElementById('<%=Html.IdFor("listIDToDelete")%>').value = listID;
          if (count > 0)
              return confirm('Do you realy want to delete this item?')
-     
-     return confirm('You must select at least one item?');
+
+         alert('You must select at least one item');
+         return false;
    }
    function Confirm() {
      return confirm('Do you realy want to delete this item?');
