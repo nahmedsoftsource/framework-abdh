@@ -17,7 +17,20 @@
                   %>
                   <%if (!category.ParentID.HasValue)
                     { %>
-                    <p class="msg_head"><%=category.CategoryName%></p>  
+                    <p class="msg_head">
+                    <%if ( category.tblCategories.Count < 1)
+                      {%>
+                      <%=Html.LinkToRemote(category.CategoryName, new RemoteOption
+                                  {
+                                      Update = "ListAllID",
+                                      URL = Routing.Product.UrlForListProduct(category.ID, null, null, "", "")
+                                  })%>
+                    <%}
+                      else
+                      { %>
+                    <%=category.CategoryName%>
+                    <%} %>
+                    </p>  
                     <%} %>
                     <%if(category.tblCategories != null && category.tblCategories.Count > 0){ %>  
                     <div class="msg_body">
