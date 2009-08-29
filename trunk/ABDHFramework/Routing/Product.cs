@@ -49,14 +49,20 @@ namespace ABDHFramework.Routing
     
     #endregion
     #region Admin
-    public String UrlForAdminProduct(int? page)
+    public String UrlForAdminProductForIframe(int? page)
     {
-      return UrlFor("AdminProduct", new { Page = page });
+        return UrlFor("AdminProductForIframe", new { Page = page });
 
     }
+      
     public String UrlForAdminListProduct(int? page)
     {
       return UrlFor("AdminListProduct", new { Page = page });
+
+    }
+    public String UrlForAdminListProduct()
+    {
+        return UrlFor("AdminListProduct");
 
     }
     public String UrlForDeleteListProduct()

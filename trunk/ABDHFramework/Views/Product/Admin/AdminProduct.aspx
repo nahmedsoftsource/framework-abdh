@@ -2,12 +2,17 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="UpperMainContent" runat="server">
+<script language="javascript" type="text/javascript">
+   
+    </script>
 <div class="detail-title">
     Manage Product
 </div>
 <br />
 <div id="ListID" class="content-border">
-<%Html.RenderPartial("Admin/AdminListProduct",ViewData); %>
+<%Html.RenderPartial("Admin/AdminListProduct", ViewData); %>
+</div>
+<div id="EditProductID" class="content-border">
 </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">

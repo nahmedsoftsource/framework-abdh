@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.75" name="ABDHFramework">
+  <DataContextMoniker Name="/ABDHFrameworkDataContext" />
+  <nestedChildShapes>
+    <classShape Id="7762867f-03c3-4a77-b064-b314070f623d" absoluteBounds="0.75, 1.125, 2, 2.7396264648437496">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="99906753-3985-4513-ad76-55e13840737f" absoluteBounds="0.765, 1.585, 1.9700000000000002, 2.17962646484375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d5b2444f-8564-4f82-8f28-1b25381ab2f0" absoluteBounds="0.75, 5.75, 2, 2.7396264648437505">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3463650b-3d07-47b7-af94-8d543049a397" absoluteBounds="0.765, 6.21, 1.9700000000000002, 2.17962646484375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e63b4eb-f7eb-45ee-84cb-536c3d5c6960" absoluteBounds="3.75, 5.75, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblEmail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="25e0979d-abea-4613-a756-a9da196d052a" absoluteBounds="3.765, 6.21, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9a51b19f-0bb4-45d9-97c8-41070b8ab91c" absoluteBounds="6.75, 0.75, 2, 2.9039737955729166">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblInformation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ac45a0aa-029a-48d0-810c-6beeed5f0231" absoluteBounds="6.765, 1.21, 1.9700000000000002, 2.3439737955729165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4bd29f93-31af-4289-98f0-5ebf7de34869" absoluteBounds="6.75, 4.75, 2, 2.9039737955729166">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblNew" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5e57ae12-2edf-47c6-8d2e-cc1947e75536" absoluteBounds="6.765, 5.21, 1.9700000000000002, 2.3439737955729165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f7bb62c9-5ca6-4665-9616-1b4c8d161ebf" absoluteBounds="3.5, 1, 2, 3.0683211263020831">
+      <DataClassMoniker Name="/ABDHFrameworkDataContext/tblProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="52fda1a2-e4b6-46e4-8043-1e19131a2329" absoluteBounds="3.515, 1.46, 1.9700000000000002, 2.508321126302083" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.45923076923077 : 3.86462646484375); (1.45923076923077 : 4.11462646484375); (2.05461538461538 : 4.11462646484375); (2.05461538461538 : 3.86462646484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ABDHFrameworkDataContext/tblCategory/tblCategory_tblCategory" />
+      <nodes>
+        <classShapeMoniker Id="7762867f-03c3-4a77-b064-b314070f623d" />
+        <classShapeMoniker Id="7762867f-03c3-4a77-b064-b314070f623d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.49481323242187); (3.5 : 2.49481323242187)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ABDHFrameworkDataContext/tblCategory/tblCategory_tblProduct" />
+      <nodes>
+        <classShapeMoniker Id="7762867f-03c3-4a77-b064-b314070f623d" />
+        <classShapeMoniker Id="f7bb62c9-5ca6-4665-9616-1b4c8d161ebf" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

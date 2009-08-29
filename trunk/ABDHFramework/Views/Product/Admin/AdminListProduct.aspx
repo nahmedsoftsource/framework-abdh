@@ -7,6 +7,7 @@
 <form>
 <div>
 <script>
+    
  function Jump(id) {
     //<%--var urlMain = "<%= Routing.InsuranceManagement.UrlForDetails() %>" + "?InsuranceID=" + id;
     //var urlRight = "<%= Routing.InsuranceManagement.UrlForRightDetail() %>" + "?InsuranceID=" + id;
@@ -99,7 +100,7 @@ Select:
     Action = (item=>ABDHFramework.Lib.Javascripts.Javascript.EditToRemoteForList("",new RemoteOption
       {
         URL = Routing.Product.UrlForIframeEditProduct(item.ID),
-        Update = "ListID",
+        Update = "EditProductID",
         Method = "GET"
       })
       
@@ -121,7 +122,7 @@ Select:
   }
 }, new GridOption<tblProduct>
 {
-  DefaultSortColumn = "CategoryNameVN",
+    DefaultSortColumn = "ProductName",
   DefaultSortOption = ABDHFramework.Data.SortOption.Asc.ToString(),
   URL = Routing.Product.UrlForAdminListProduct(1),
   HtmlID = "ListID"
@@ -136,7 +137,7 @@ Select:
         ShowIfEmpty = true,
       }, new AjaxPaginationOption
 {
-  HtmlID = "ListID",
+    HtmlID = "ListID",
 })%>
  <div  class="detail-title">
  <span style="float:left">
@@ -156,7 +157,7 @@ Select:
    {
      Method = "GET",
      URL = Routing.Product.UrlForIframeEditProduct(null),
-     Update = "ListID",
+     Update = "EditProductID",
    }, new { @class = "buttonlogin" })%>
  </span>
 </div>
