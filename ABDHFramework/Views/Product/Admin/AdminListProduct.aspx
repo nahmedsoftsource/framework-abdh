@@ -101,7 +101,7 @@ Select:
     Action = (item=>ABDHFramework.Lib.Javascripts.Javascript.EditToRemoteForList("",new RemoteOption
       {
         URL = Routing.Product.UrlForIframeEditProduct(item.ID),
-        Update = "EditProductID",
+        Update = "ListID",
         Method = "GET"
       })
       
@@ -158,7 +158,7 @@ Select:
    {
      Method = "GET",
      URL = Routing.Product.UrlForIframeEditProduct(null),
-     Update = "EditProductID",
+     Update = "ListID",
    }, new { @class = "buttonlogin" })%>
  </span>
 </div>
