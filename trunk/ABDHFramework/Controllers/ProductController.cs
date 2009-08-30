@@ -302,6 +302,8 @@ namespace ABDHFramework.Controllers
                     }
                     else
                     {
+                        ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
+                        //return Json(new  {success="true" });
                         return View("Admin/EditProduct", tblproduct);
                     }
                 }
@@ -338,6 +340,8 @@ namespace ABDHFramework.Controllers
                     else
                     {
                         tblproduct.ID = Guid.Empty;
+                        ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
+                        //return Json(new { success = "true" });
                         return View("Admin/EditProduct", tblproduct);
                     }
 
@@ -347,6 +351,7 @@ namespace ABDHFramework.Controllers
             ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
             ViewData["Categories"] = categories;
 
+            //return Json(new { success = "true" });
             return View("Admin/EditProduct", tblproduct);
         }
         public ActionResult IframeEditProduct(Guid? productID)

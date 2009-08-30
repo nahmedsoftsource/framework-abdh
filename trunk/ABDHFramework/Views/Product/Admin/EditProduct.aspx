@@ -22,31 +22,47 @@
         alert("hehheh");
         })
     }
-    function ReloadAfterEdit() {
+    function ReloadAfterEdit(data) {
+        
+
         //parent.document.getElementById("IframeEditProduct").style.display = 'none';
         $(document).ready(function() {
-            var content;
-            parent.document.getElementById("IframeEditProduct").style.display = 'none';
-            //alert(parent.document.getElementById("IframeEditProduct"));
-            content = $.ajax({
-                url: '<%=Routing.Product.UrlForAdminListProduct() %>',
-                type: "POST",
-                dataType: "html",
-                async: false,
-                success: function(msg) {
-                alert(msg);
-                    if (parent.document.layers) {
-                        parent.document.getElementById('ListID').open();
-                        parent.document.getElementById('ListID').write(msg);
-                        parent.document.getElementById('ListID').close();
-                        parent.document.getElementById('ListID').innerHTML = msg;
-                    }
-                    else {
-                        parent.document.getElementById('ListID').innerHTML = msg;
-                    }
-
+        var content;
+            alert(data)
+            if (data != null && data != undefined && data != '') {
+                if (parent.document.layers) {
+                    parent.document.getElementById('IframeEditProduct').open();
+                    parent.document.getElementById('IframeEditProduct').write(data);
+                    parent.document.getElementById('IframeEditProduct').close();
+                    parent.document.getElementById('IframeEditProduct').innerHTML = data;
                 }
-            }).responseText;
+                else {
+                    parent.document.getElementById('IframeEditProduct').innerHTML = data;
+                }
+            } else {
+                parent.document.removeChild(parent.document.getElementById("IframeEditProduct"));
+                //parent.document.getElementById("IframeEditProduct").style.display = 'none';
+                //alert(parent.document.getElementById("IframeEditProduct"));
+                content = $.ajax({
+                    url: '<%=Routing.Product.UrlForAdminListProduct() %>',
+                    type: "POST",
+                    dataType: "html",
+                    async: false,
+                    success: function(msg) {
+                        alert(msg);
+                        if (parent.document.layers) {
+                            parent.document.getElementById('ListID').open();
+                            parent.document.getElementById('ListID').write(msg);
+                            parent.document.getElementById('ListID').close();
+                            parent.document.getElementById('ListID').innerHTML = msg;
+                        }
+                        else {
+                            parent.document.getElementById('ListID').innerHTML = msg;
+                        }
+
+                    }
+                }).responseText;
+            }
         })
     }
     function ShowProgress() {
@@ -183,6 +199,7 @@
           <%--<input type="submit" class="abutton" value="<%=label%>" />--%>
             <%=Html.SubmitToRemote(label, new RemoteOption
             { 
+                
               CausesValidation=false,
               Method = "POST",
               URL = Routing.Product.UrlForEditProduct(Model.ID),
