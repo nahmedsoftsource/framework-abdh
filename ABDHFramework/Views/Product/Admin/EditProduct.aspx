@@ -19,18 +19,18 @@
 </script>
 
 <script language="javascript" type="text/javascript">
-    function removeIframe() {
+  function removeIframe(data) {
     $(document).ready(function() {
         alert("hehheh");
         })
     }
     function ReloadAfterEdit(data) {
 
-
+    
       //parent.document.getElementById("IframeEditProduct").style.display = 'none';
       $(document).ready(function() {
         var content;
-        //alert(data);
+        alert(data);
 //        if (data != null && data != undefined && data != '0') {
 //          
 //          if (parent.document.layers) {
@@ -206,7 +206,7 @@
               Method = "POST",
               URL = Routing.Product.UrlForEditProduct(Model.ID),
               Update = "ListID",
-              OnSuccess = "ReloadAfterEdit",
+              OnSuccess = "removeIframe",
             }) %>
             </span>
         </td>
