@@ -2,7 +2,7 @@
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<%@ Import Namespace="ABDHFramework.Lib" %>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -11,12 +11,11 @@
     <%--<title><%= Html.Encode(ViewData["Title"]) %></title>--%>
     <link href="~/Content/Style.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/theme/jquery-ui-1.7.1.custom.css" rel="stylesheet" type="text/css" />
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>
-    <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>'></script>
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
-    <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
-    <%--<script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>--%>
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
+     <%=Html.LoadJavascript("MicrosoftAjax.js") %>
+     <%=Html.LoadJavascript("jquery-1.3.2.js") %>
+     <%=Html.LoadJavascript("Core.js") %>
+     <%=Html.LoadJavascript("MicrosoftMvcAjax.js") %>
+     <%=Html.LoadJavascript("jquery-ui-1.7.2.custom.min.js") %>
     <script type="text/javascript" language="javascript" src='<%= Url.Content("~/Admin/fckeditor/fckeditor.js")%>'></script>
     
     <script type="text/javascript" language="javascript">

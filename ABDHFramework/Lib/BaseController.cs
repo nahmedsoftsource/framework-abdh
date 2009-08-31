@@ -15,6 +15,37 @@ namespace ABDHFramework.Lib
   [SetCulture]
   public  class BaseController : System.Web.Mvc.Controller
   {
+    protected ContentResult CloseFrameDialog(DialogCloseOption option)
+    {
+      var ret = "";
+      var builder = new TagBuilder("script");
+
+      builder.MergeAttribute("type", "text/javascript");
+
+      if (Request["ReloadURL"] != null && Request["ReloadID"] != null)
+      {
+        ret += "parent." + Javascript.RemoteFunc(new RemoteOption
+        {
+          URL = Request["ReloadURL"],
+          Update = Request["ReloadID"]
+        });
+      }
+      builder.InnerHtml += ret + ";";
+      if (option.Message != null)
+      {
+        builder.InnerHtml += "alert(\"" + option.Message + "\");";
+      }
+      if (option.RunJS == null)
+      {
+        option.RunJS = Request.Params.Get("RunJS");
+      }
+      if (!string.IsNullOrEmpty(option.RunJS))
+      {
+        builder.InnerHtml += "parent." + option.RunJS + ";";
+      }
+      builder.InnerHtml += "parent.Core.dialog.closeBox();";
+      return Content(builder.ToString());
+    }
     public ActionResult SetCulture(string id)
     {
 

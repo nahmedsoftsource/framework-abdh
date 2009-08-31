@@ -278,54 +278,57 @@ Core.prototype.DialogCallback = function(data) {
 * SubmitToRemote
 ******************************************************************************/
 Core.prototype.SubmitToRemote = function(button, options, onSuccessCallback) {
-    var params = {};
-    if (options.isForm) {
-        if (options.causesValidation) {
-            if (!$(button).parents('form').valid()) {
-                return false;
-            }
-        }
-        var formArray = $(button).parents('form').serializeArray();
-        for (var i in formArray) {
-            if (formArray[i]) {
-                if ($.isArray(params[formArray[i].name])) {
-                    params[formArray[i].name][params[formArray[i].name].length] = formArray[i].value;
-                }
-                else {
-                    params[formArray[i].name] = [formArray[i].value];
-                }
-            }
-        }
+  var params = {};
+  if (options.isForm) {
+    if (options.causesValidation) {
+      if (!$(button).parents('form').valid()) {
+        return false;
+      }
     }
-
-    if (options.data) {
-        $.extend(true, params, options.data);
-    }
-
-    if (options["with"]) {
-        for (var i in options["with"]) {
-            if (typeof (options["with"][i]) == 'string') {
-                params[options["with"][i]] = $("#" + options["with"][i]).val();
-            }
+    var formArray = $(button).parents('form').serializeArray();
+    for (var i in formArray) {
+      if (formArray[i]) {
+        if ($.isArray(params[formArray[i].name])) {
+          params[formArray[i].name][params[formArray[i].name].length] = formArray[i].value;
         }
-    }
-
-    $.ajax({
-        url: options.url,
-        type: options.method,
-        data: params,
-        success: function(data, textStatus) {
-            if (options.update) {
-                $("#" + options.update).html(data);
-            }
-            if (typeof (onSuccessCallback) == 'function') {
-                onSuccessCallback(data, textStatus);
-            }
-            else if (typeof (onSuccessCallback) == 'string') {
-                eval(onSuccessCallback);
-            }
+        else {
+          params[formArray[i].name] = [formArray[i].value];
         }
-    });
+      }
+    }
+  }
+
+  if (options.data) {
+    $.extend(true, params, options.data);
+  }
+
+  if (options["with"]) {
+    for (var i in options["with"]) {
+      if (typeof (options["with"][i]) == 'string') {
+        params[options["with"][i]] = $("#" + options["with"][i]).val();
+      }
+    }
+  }
+
+  $.ajax({
+    url: options.url,
+    type: options.method,
+    data: params,
+    success: function(data, textStatus) {
+      alert(data);
+      if (options.update) {
+        $("#" + options.update).html(data);
+      }
+      if (typeof (onSuccessCallback) == 'function') {
+        alert("function");
+        onSuccessCallback(data, textStatus);
+      }
+      else if (typeof (onSuccessCallback) == 'string') {
+      alert("not function function");
+        eval(onSuccessCallback);
+      }
+    }
+  });
 }
 
 /******************************************************************************
