@@ -5,11 +5,13 @@
 <%@ Import Namespace="ABDHFramework.Models" %>
 <head>
     
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-1.3.2.js")%>'></script>
-    <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftAjax.js")%>'></script>
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/MicrosoftMvcAjax.js")%>'></script>
-    <script type="text/javascript" src='<%= Url.Content("~/Scripts/Core.js")%>'></script>
-     <script type="text/javascript" src='<%= Url.Content("~/Scripts/jquery-ui-1.7.2.custom.min.js")%>'></script>
+     
+     <%=Html.LoadJavascript("MicrosoftAjax.js") %>
+     <%=Html.LoadJavascript("jquery-1.3.2.js") %>
+     <%=Html.LoadJavascript("Core.js") %>
+     <%=Html.LoadJavascript("MicrosoftMvcAjax.js") %>
+     <%=Html.LoadJavascript("jquery-ui-1.7.2.custom.min.js") %>
+   
     <script type="text/javascript" language="javascript" src='<%= Url.Content("~/Admin/fckeditor/fckeditor.js")%>'></script>
     </head>
 <script type="text/javascript" language="javascript">
@@ -23,47 +25,48 @@
         })
     }
     function ReloadAfterEdit(data) {
-        
 
-        //parent.document.getElementById("IframeEditProduct").style.display = 'none';
-        $(document).ready(function() {
+
+      //parent.document.getElementById("IframeEditProduct").style.display = 'none';
+      $(document).ready(function() {
         var content;
-            alert(data)
-            if (data != null && data != undefined && data != '') {
-                if (parent.document.layers) {
-                    parent.document.getElementById('IframeEditProduct').open();
-                    parent.document.getElementById('IframeEditProduct').write(data);
-                    parent.document.getElementById('IframeEditProduct').close();
-                    parent.document.getElementById('IframeEditProduct').innerHTML = data;
-                }
-                else {
-                    parent.document.getElementById('IframeEditProduct').innerHTML = data;
-                }
-            } else {
-                parent.document.removeChild(parent.document.getElementById("IframeEditProduct"));
-                //parent.document.getElementById("IframeEditProduct").style.display = 'none';
-                //alert(parent.document.getElementById("IframeEditProduct"));
-                content = $.ajax({
-                    url: '<%=Routing.Product.UrlForAdminListProduct() %>',
-                    type: "POST",
-                    dataType: "html",
-                    async: false,
-                    success: function(msg) {
-                        alert(msg);
-                        if (parent.document.layers) {
-                            parent.document.getElementById('ListID').open();
-                            parent.document.getElementById('ListID').write(msg);
-                            parent.document.getElementById('ListID').close();
-                            parent.document.getElementById('ListID').innerHTML = msg;
-                        }
-                        else {
-                            parent.document.getElementById('ListID').innerHTML = msg;
-                        }
+        //alert(data);
+//        if (data != null && data != undefined && data != '0') {
+//          
+//          if (parent.document.layers) {
+//            parent.document.getElementById('IframeEditProduct').open();
+//            parent.document.getElementById('IframeEditProduct').write(data);
+//            parent.document.getElementById('IframeEditProduct').close();
+//            parent.document.getElementById('IframeEditProduct').innerHTML = data;
+//          }
+//          else {
+//            parent.document.getElementById('IframeEditProduct').innerHTML = data;
+//          }
+//        } else {
+          parent.document.removeChild(parent.document.getElementById("IframeEditProduct"));
+          //parent.document.getElementById("IframeEditProduct").style.display = 'none';
+          //alert(parent.document.getElementById("IframeEditProduct"));
+          content = $.ajax({
+            url: '<%=Routing.Product.UrlForAdminListProduct() %>',
+            type: "POST",
+            dataType: "html",
+            async: false,
+            success: function(msg) {
+              alert(msg);
+              if (parent.document.layers) {
+                parent.document.getElementById('ListID').open();
+                parent.document.getElementById('ListID').write(msg);
+                parent.document.getElementById('ListID').close();
+                parent.document.getElementById('ListID').innerHTML = msg;
+              }
+              else {
+                parent.document.getElementById('ListID').innerHTML = msg;
+              }
 
-                    }
-                }).responseText;
             }
-        })
+          }).responseText;
+        //}
+      })
     }
     function ShowProgress() {
         //parent.document.getElementById("IframeEditProduct").style.display = 'block';
@@ -199,12 +202,11 @@
           <%--<input type="submit" class="abutton" value="<%=label%>" />--%>
             <%=Html.SubmitToRemote(label, new RemoteOption
             { 
-                
               CausesValidation=false,
               Method = "POST",
               URL = Routing.Product.UrlForEditProduct(Model.ID),
               Update = "ListID",
-                OnSuccess = "ReloadAfterEdit",
+              OnSuccess = "ReloadAfterEdit",
             }) %>
             </span>
         </td>

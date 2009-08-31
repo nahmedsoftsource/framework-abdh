@@ -207,7 +207,7 @@ namespace ABDHFramework.Lib
       }
 
       var urlHelper = new UrlHelper(html.ViewContext.RequestContext);
-      var url = urlHelper.Content("~/Content/js/" + file);
+      var url = urlHelper.Content("~/Scripts/" + file);
 
       var b = new TagBuilder("script");
       b.MergeAttribute("type", "text/javascript");
