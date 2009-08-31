@@ -315,16 +315,13 @@ Core.prototype.SubmitToRemote = function(button, options, onSuccessCallback) {
     type: options.method,
     data: params,
     success: function(data, textStatus) {
-      alert(data);
       if (options.update) {
         $("#" + options.update).html(data);
       }
       if (typeof (onSuccessCallback) == 'function') {
-        alert("function");
         onSuccessCallback(data, textStatus);
       }
       else if (typeof (onSuccessCallback) == 'string') {
-      alert("not function function");
         eval(onSuccessCallback);
       }
     }
