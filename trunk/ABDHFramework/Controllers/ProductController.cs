@@ -298,6 +298,7 @@ namespace ABDHFramework.Controllers
                     {
                         Service.UpdateProduct(tblproduct);
                         TempData["ProductID"] = productID;
+                        //return CloseFrameDialog(new DialogCloseOption { RunJS = "ReloadAfterEdit" });
                         return new EmptyResult();
                     }
                     else
@@ -334,14 +335,15 @@ namespace ABDHFramework.Controllers
                     if (ModelState.IsValid)
                     {
                         Service.InsertProduct(tblproduct);
-
                         return new EmptyResult();
+                        //return CloseFrameDialog(new DialogCloseOption { RunJS = "ReloadAfterEdit" });
                     }
                     else
                     {
                         tblproduct.ID = Guid.Empty;
                         ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
                         //return Json(new { success = "true" });
+                        
                         return View("Admin/EditProduct", tblproduct);
                     }
 

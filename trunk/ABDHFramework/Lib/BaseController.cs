@@ -43,7 +43,7 @@ namespace ABDHFramework.Lib
       {
         builder.InnerHtml += "parent." + option.RunJS + ";";
       }
-      builder.InnerHtml += "parent.Core.dialog.closeBox();";
+      //builder.InnerHtml += "parent.Core.dialog.closeBox();";
       return Content(builder.ToString());
     }
     public ActionResult SetCulture(string id)
