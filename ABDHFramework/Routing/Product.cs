@@ -80,6 +80,11 @@ namespace ABDHFramework.Routing
       return UrlFor("EditProduct", new { ProductID = productID});
 
     }
+    public String UrlForEditProduct()
+    {
+      return UrlFor("EditProduct");
+
+    }
     public String UrlForIframeEditProduct(Guid? productID)
     {
       return UrlFor("IframeEditProduct", new { ProductID = productID });

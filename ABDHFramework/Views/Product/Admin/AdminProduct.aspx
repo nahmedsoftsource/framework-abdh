@@ -12,8 +12,6 @@
 <div id="ListID" class="content-border">
 <%Html.RenderPartial("Admin/AdminListProduct", ViewData); %>
 </div>
-<div id="EditProductID" class="content-border">
-</div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">
 
