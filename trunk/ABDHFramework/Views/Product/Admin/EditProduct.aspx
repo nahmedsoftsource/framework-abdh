@@ -1,9 +1,9 @@
-﻿<%@ Page  Title="Edit Product" Language="C#" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Models.tblProduct>" %>
+﻿<%@ Page  Title="Edit Product"   ValidateRequest=false Language="C#" Inherits="ABDHFramework.Controllers.BaseViewPage<ABDHFramework.Models.tblProduct>" %>
 <%@ Register Assembly="FredCK.FCKeditorV2" Namespace="FredCK.FCKeditorV2" TagPrefix="FCKeditorV2" %>
 <%@ Import Namespace="ABDHFramework.Lib" %>
 <%@ Import Namespace="ABDHFramework.Lib.Pager" %>
 <%@ Import Namespace="ABDHFramework.Models" %>
-<head>
+<%--<head>
     
      
      <%=Html.LoadJavascript("MicrosoftAjax.js") %>
@@ -13,24 +13,29 @@
      <%=Html.LoadJavascript("jquery-ui-1.7.2.custom.min.js") %>
    
     <script type="text/javascript" language="javascript" src='<%= Url.Content("~/Admin/fckeditor/fckeditor.js")%>'></script>
-    </head>
-<script type="text/javascript" language="javascript">
-    var sBasePath = '<%= Url.Content("~/Admin/fckeditor/")%>';
-</script>
+    </head>--%>
+
 
 <script language="javascript" type="text/javascript">
-  function removeIframe(data) {
-    $(document).ready(function() {
-        alert("hehheh");
-        })
-    }
-    function ReloadAfterEdit(data) {
 
+  $(document).ready(function() {
+  new AjaxUpload('#upload_button_id', {
+    // Location of the server-side upload script
+    // NOTE: You are not allowed to upload files to another domain
+  action: '<%=Routing.Product.UrlForEditProduct()%>',
+  onComplete: function(file) {
+    $('#').appendTo($('#example3 .files')).text(file);
+  }
+  
+  });
+  })
+    function ReloadAfterEdit(data) {
+      alert(data);
     
       //parent.document.getElementById("IframeEditProduct").style.display = 'none';
       $(document).ready(function() {
         var content;
-        alert(data);
+        
 //        if (data != null && data != undefined && data != '0') {
 //          
 //          if (parent.document.layers) {
@@ -74,20 +79,7 @@
     }
 </script>
 
-<form id="form1" runat="server"  method='POST' enctype='multipart/form-data' action="#">
-<style>
-.maxwidth
-{
-	width:100%;
-}
-.layout-form
-{
-	padding: 3px;
-	background-color:#FFFFFF;
-	font-size:11px;
-}
-
-</style>
+<form   id="EditProductID"  method='POST' enctype='multipart/form-data' action="<%=Routing.Product.UrlForEditProduct(Model.ID)%>">
 
     <%if (Model.ID == null || Model.ID.Equals(Guid.Empty))
           { %>
@@ -154,21 +146,30 @@
         </td>
         
         <td>
-        <%=Html.FckTextBox("Description")%>
+        <%=Html.FckTextBox("Description",Model.Description)%>
         <%= Html.ValidationMessage("Description")%>
         </td>
         
      </tr>
     
     <tr>
+    
+    <tr>
         <td>
             <label ><%=Resources.Global.Image %>:</label>
         </td>
         <td>
-        <p><input type="file" id="UploadFile" name="UploadFile" style="width:100%"/> </p>
+        
+        <p>
+        <%=Html.IdFor("FileUpload")%>
+        <%=Html.TextBox("FileUpload") %>
+        <%--<input type="file" id="UploadFile" name="UploadFile" style="width:100%"/> --%>
+        </p>
        <%=Html.Hidden("Image",((Model != null && !String.IsNullOrEmpty(Model.Image))?Model.Image:"")) %>
                 <%=Html.ValidationMessage("Image")%>
+                
       </td>
+      </tr>
       <%if (Model != null && !String.IsNullOrEmpty(Model.Image) )
         { %>
       <tr>
@@ -182,8 +183,7 @@
         </td>
       </tr>
       <%} %>
-    
-       
+   
     </tr>
     <tr>
         <td colspan="2">
@@ -199,21 +199,23 @@
            %>
        
           <span style="float:right">
+          
           <%--<input type="submit" class="abutton" value="<%=label%>" />--%>
-            <%=Html.SubmitToRemote(label, new RemoteOption
+        <input   type="submit" class="abutton" value="<%=label%> " />
+           <%-- <%=Html.SubmitToRemote(label, new RemoteOption
             { 
               CausesValidation=false,
               Method = "POST",
               URL = Routing.Product.UrlForEditProduct(Model.ID),
               Update = "ListID",
-              OnSuccess = "removeIframe",
-            }) %>
+              OnSuccess = "ReloadAfterEdit",
+            }) %>--%>
             </span>
         </td>
     </tr>
     </table>
     
-    </form>
+</form>
 
 
 

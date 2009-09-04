@@ -870,6 +870,7 @@
     <Content Include="Content\jquery-ui-1.7.1.custom.css" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Scripts\jquery.autocomplete.modified.js" />
+    <Content Include="Scripts\ajaxupload.3.5.js" />
     <Content Include="Utility\ActionFilter\test_commit.txt" />
     <Content Include="Views\Category\Admin\EditCategory.aspx" />
     <Content Include="Views\Category\Admin\AdminCategory.aspx" />
@@ -882,6 +883,7 @@
     <Content Include="Views\Product\Admin\AdminProduct.aspx" />
     <Content Include="Views\Product\Admin\AdminListProduct.aspx" />
     <Content Include="Views\Product\Admin\EditProduct.aspx" />
+    <Content Include="Views\Product\IframeEditProduct.aspx" />
     <Content Include="Views\Product\SuggestForField.aspx" />
     <Content Include="Views\Product\QuickSearch.aspx" />
     <Content Include="Views\Product\IndexForProduct.aspx" />

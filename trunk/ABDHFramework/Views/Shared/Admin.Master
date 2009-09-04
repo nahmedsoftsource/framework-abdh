@@ -16,8 +16,11 @@
      <%=Html.LoadJavascript("Core.js") %>
      <%=Html.LoadJavascript("MicrosoftMvcAjax.js") %>
      <%=Html.LoadJavascript("jquery-ui-1.7.2.custom.min.js") %>
+     <%=Html.LoadJavascript("ajaxupload.3.5.js")%>
     <script type="text/javascript" language="javascript" src='<%= Url.Content("~/Admin/fckeditor/fckeditor.js")%>'></script>
-    
+    <script type="text/javascript" language="javascript">
+    var sBasePath = '<%= Url.Content("~/Admin/fckeditor/")%>';
+    </script>
     <script type="text/javascript" language="javascript">
         $(document).ready
         (function()
