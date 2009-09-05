@@ -108,6 +108,7 @@ namespace ABDHFramework.Controllers
         }
         #endregion
         #region Admin
+        [ValidateInput(false)]
         public ActionResult EditProduct(Guid? productID)
         {
             List<SelectListItem> categories = new List<SelectListItem>();
@@ -147,10 +148,12 @@ namespace ABDHFramework.Controllers
             }
         }
 
-        [ValidateInput(false)]
+        
         [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult EditProduct(Guid? productID, [Bind(Exclude = "ID")] tblProduct tblproduct)
         {
+            tblproduct.Description = HttpUtility.HtmlEncode(tblproduct.Description);
             #region delete
             if (Request["Delete"] != null)
             {
@@ -171,12 +174,6 @@ namespace ABDHFramework.Controllers
             }
             List<SelectListItem> categories = new List<SelectListItem>();
             List<tblCategory> listCategory = new List<tblCategory>();
-            bool isUpdate = false;
-            if (productID.HasValue && productID.Value != Guid.Empty)
-            {
-              isUpdate = true;
-            }
-           
             if (Request.Cookies["Culture"] != null && Request.Cookies["Culture"].Value == "en-US")
             {
                 tblproduct.Language = Languages.EN;
@@ -264,107 +261,131 @@ namespace ABDHFramework.Controllers
             }
 
 
-            if (!isUpdate && Request.Files.Count < 1)
-            {
-              if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
-              {
-                ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
-              }
-              else
-              {
-                ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
-              }
-            }
-            
+
             string pathFolder = Server.MapPath(ConfigurationManager.AppSettings["ImagesNews"]);
             string pathFolderThumb = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNews"]);
             string pathFolderThumbSmallest = Server.MapPath(ConfigurationManager.AppSettings["ThumbImagesNewsSmallest"]);
+            bool isUpdate = false;
+            if (productID.HasValue && productID.Value != Guid.Empty)
+            {
+                isUpdate = true;
+            }
             if (!Directory.Exists(pathFolder)) Directory.CreateDirectory(pathFolder);
             if (!Directory.Exists(pathFolderThumb)) Directory.CreateDirectory(pathFolderThumb);
             if (!Directory.Exists(pathFolderThumbSmallest)) Directory.CreateDirectory(pathFolderThumbSmallest);
             if (ModelState.IsValid)
             {
-              foreach (string inputTagName in Request.Files)
-              {
-                HttpPostedFileBase file = Request.Files[inputTagName];
-
-                if (productID != null && !productID.Value.Equals(Guid.Empty))
+                if (Request.Files.Count < 1 && (!productID.HasValue || productID.Value.Equals(Guid.Empty)))
                 {
-                  tblproduct.ID = (Guid)productID;
-                  string pathImage;
-                  string pathImageThumb;
-                  string pathImageThumbSmallest;
-                  if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)productID, pathFolder, Request.PhysicalApplicationPath))
-                  {
-                    tblproduct.Image = pathImageThumb;
-                  }
-                  else
-                  {
-                    if (String.IsNullOrEmpty(tblproduct.Image))
+                    if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
                     {
-                      if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
-                      {
                         ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
-                      }
-                      else
-                      {
-                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
-                      }
                     }
-                  }
-
-
+                    else
+                    {
+                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                    }
                 }
-                else if ((productID == null || productID.Value.Equals(Guid.Empty)))
+                else
                 {
-                  tblproduct.ID = Guid.NewGuid();
-                  productID = tblproduct.ID;
-                  string pathImage;
-                  string pathImageThumb;
-                  string pathImageThumbSmallest;
-                  if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)productID, pathFolder, Request.PhysicalApplicationPath))
-                  {
-                    tblproduct.Image = pathImageThumb;
-
-                  }
-                  else
-                  {
-                    if (String.IsNullOrEmpty(tblproduct.Image))
+                    foreach (string inputTagName in Request.Files)
                     {
-                      if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
-                      {
-                        ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
-                      }
-                      else
-                      {
-                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
-                      }
+                        HttpPostedFileBase file = Request.Files[inputTagName];
+                        
+                        if (productID != null && !productID.Value.Equals(Guid.Empty))
+                        {
+                            tblproduct.ID = (Guid)productID;
+                            string pathImage;
+                            string pathImageThumb;
+                            string pathImageThumbSmallest;
+                            if (file != null && file.ContentLength > 0 && !String.IsNullOrEmpty(file.FileName)  && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)productID, pathFolder, Request.PhysicalApplicationPath))
+                            {
+                                tblproduct.Image = pathImageThumb;
+
+                            }
+                            else
+                            {
+                                if (String.IsNullOrEmpty(tblproduct.Image))
+                                {
+                                    if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+                                    {
+                                        ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                                    }
+                                }
+                                else if (file != null && file.ContentLength > 0 && !String.IsNullOrEmpty(file.FileName))
+                                {
+                                    if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+                                    {
+                                        ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                                    }
+                                    else
+                                    {
+                                        ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                                    }
+                                }
+                            }
+
+
+                        }
+                        else if ((productID == null || productID.Value.Equals(Guid.Empty)))
+                        {
+                            tblproduct.ID = Guid.NewGuid();
+                            productID = tblproduct.ID;
+                            string pathImage;
+                            string pathImageThumb;
+                            string pathImageThumbSmallest;
+                            if (file != null && Utility.File.File.SaveFile(file, out pathImage, out pathImageThumb, out pathImageThumbSmallest, (Guid)productID, pathFolder, Request.PhysicalApplicationPath))
+                            {
+                                tblproduct.Image = pathImageThumb;
+
+                            }
+                            else
+                            {
+                                if (tblproduct.Language.HasValue && tblproduct.Language.Value.Equals(Languages.EN))
+                                {
+                                    ModelState.AddModelError("Image", "This image is not support or  haven't pick up");
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("Image", "Định dạng hình ảnh này không trợ giúp hoặc chưa chọn");
+                                }
+                            }
+
+
+                        }
 
                     }
-                  }
-
                 }
-
-              }
             }
             if (ModelState.IsValid)
             {
-              if (isUpdate)
-              {
-                Service.UpdateProduct(tblproduct);
-                tblproduct.ID = (Guid)productID;
-              }
-              else
-              {
-                tblproduct.ID = Guid.Empty;
-                Service.InsertProduct(tblproduct);
-              }
-              return new EmptyResult();
+                if (isUpdate)
+                {
+                    Service.UpdateProduct(tblproduct);
+                }
+                else
+                {
+                    Service.InsertProduct(tblproduct);
+                }
+                return RedirectToAction("AdminProduct");
+                //return new JavaScriptResult { Script = "<script language='javascript' type='text/javascript'> $(document).ready(function() {alert('hehheh222');}) </script>" };
+               // return JavaScript("<script language='javascript' type='text/javascript'> $(document).ready(function() {alert('hehheh222');}) </script>");
+                //return new EmptyResult();
             }
-
+            if (!isUpdate)
+            {
+                tblproduct.ID = Guid.Empty;
+            }
             ViewData["Description"] = (String.IsNullOrEmpty(tblproduct.Description) ? "" : tblproduct.Description);
             ViewData["Categories"] = categories;
-            return View("Admin/EditProduct", tblproduct);
+            return JavaScript("<script>alert('heheh');</script>");
+            
+            //return Json(new { success = "true" });
+            //return View("Admin/EditProduct", tblproduct);
         }
         public ActionResult IframeEditProduct(Guid? productID)
         {

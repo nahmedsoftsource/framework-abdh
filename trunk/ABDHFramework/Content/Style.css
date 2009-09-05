@@ -343,16 +343,16 @@ a.color1:hover{
 }
 .boxCtentSp{
 	background:url(images/bgSpCter.jpg) top left repeat-y;
-	width:724px;
+	width:100%;
 	margin-bottom:10px;
 }
 .boxCtentSpTop{
 	background:url(images/bgspTop.jpg) top left no-repeat;
-	width:724px;
+	width:100%;
 }
 .boxCtentSpBtom{
 	background:url(images/bgSpBtom.jpg) bottom left no-repeat;
-	width:724px;
+	width:100%;
 }
 .boxCtentSpCtent{
 	padding: 10px;
