@@ -10,7 +10,13 @@
 </div>
 <br />
 <div id="ListID" class="content-border">
+<%if (ViewData["ID"] != null)
+  { %>
+<%}
+  else
+  { %>
 <%Html.RenderPartial("Admin/AdminListProduct", ViewData); %>
+<%} %>
 </div>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="LeftMenu" runat="server">

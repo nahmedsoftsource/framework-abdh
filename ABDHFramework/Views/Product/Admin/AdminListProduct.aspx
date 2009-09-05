@@ -87,7 +87,16 @@ Select:
     Name = "Product Name",
     IsSort=true,
     FieldName="ProductName",
-    Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductName +"'>" + (item.ProductName.Length > 15 ? item.ProductName.Substring(0,15) + "..." : item.ProductName) + "</a>" )
+    Action = (item=>Html.LinkToRemote(item.ProductName,new RemoteOption
+        {
+            URL=Routing.Product.UrlForViewProduct(item.ID),
+            Update="ListID"
+        }
+        ))
+      
+    
+    //Action = (item => @"<a href=""#"" onclick=""return Jump('" + item.ID.ToString() + @"')"" title='"+ item.ProductName +"'>" + (item.ProductName.Length > 15 ? item.ProductName.Substring(0,15) + "..." : item.ProductName) + "</a>" )
+    
   },
  new ColumnOption<tblProduct>{
     Name = "Description",

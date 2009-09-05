@@ -51,6 +51,17 @@
             </div>
            
 </div>
+    <div>
+    <%if (HttpContext.Current.Session["UserName"] != null)
+      { %>
+      <%=Html.LinkToRemote("Back",new RemoteOption
+          {
+              URL=Routing.Product.UrlForAdminListProduct(),
+              Update = "ListID"
+          })%>
+    <%} %>
+      
+    </div>
 <%} %>
 
 
