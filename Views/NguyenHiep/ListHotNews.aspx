@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblNew>>" %>
+﻿<%@ Page Title="Hot News" Language="C#" Inherits="System.Web.Mvc.ViewPage<NguyenHiep.Data.SearchResult<NGUYENHIEP.Models.tblNew>>" %>
 <%@ Import Namespace="NguyenHiep.Utility" %>
 
     <div class="boxNewsTop">

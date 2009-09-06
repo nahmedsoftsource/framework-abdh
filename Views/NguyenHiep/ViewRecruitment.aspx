@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#"  Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
+﻿<%@ Page Title="Recruitment" Language="C#"  Inherits="System.Web.Mvc.ViewPage<NGUYENHIEP.Models.tblNew>" %>
 
 
 <%if (Model != null)
