@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <domain
+    name="BillingInfo"
+    package="InsuranceManagement"
+    controller="BillingInformationSurcharge"
+    parent1="Insurance"
+    parentIDType1="Guid"
+  ></domain>
+  <actions>
+    <Create>
+      <field name="GasSurcharge" label="Gas Surcharge" />
+      <field name="AdminFee" label="Admin Fee" />      
+      <field name="DocumentFee" label="Document Fee" />            
+      <field name="MaxExtraFee" label="Max Extra Fee" />                  
+    </Create>
+    <Edit>
+      <field name="GasSurcharge" label="Gas Surcharge" type="money" />
+      <field name="AdminFee" label="Admin Fee" type="money" />
+      <field name="DocumentFee" label="Document Fee" type="money" />
+      <field name="MaxExtraFee" label="Max Extra Fee" type="money" />
+    </Edit>
+    <List>
+      <field name="Name" />
+    </List>
+  </actions>
+</info>

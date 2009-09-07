@@ -1,0 +1,16 @@
+﻿<%@ Page Language="C#" Inherits="Superior.MobileMedics.MainWebSite.Lib.BaseViewPage<__DOMAIN__>" %>
+<%
+  __PARENT_PARAM_5__
+%>
+<form>
+  <%= Html.ValidationSummary() %>
+  <table class="table-form" cellpadding="0" cellpadding="0" border="0">
+__CREATE_FIELDS__
+  </table>
+  <div class="buttonpane">
+	<%= Html.DialogSubmit(new DialogSubmitOption{
+  URL = Routing.__CONTROLLER__.URLForCreate(__PARENT_ID__)
+}) %>
+	<%= Html.DialogCloseButton() %>
+  </div>
+</form>

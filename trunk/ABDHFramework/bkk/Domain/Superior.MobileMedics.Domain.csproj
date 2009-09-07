@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6EC20E9F-3BAD-4F50-942A-9F9040C8E332}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Superior.MobileMedics.Domain</RootNamespace>
+    <AssemblyName>Superior.MobileMedics.Domain</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\System.Web.Abstractions.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionItems\SmmAssemblyInfo.cs">
+      <Link>SmmAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Accounting\AccountPayable.cs" />
+    <Compile Include="Accounting\AccountPayableDetail.cs" />
+    <Compile Include="Accounting\AccountPayableDetailFee.cs" />
+    <Compile Include="Accounting\InvoiceCriteria.cs" />
+    <Compile Include="Accounting\OrderWriteOffPayment.cs" />
+    <Compile Include="Accounting\SearchPaymentCriteria.cs" />
+    <Compile Include="Accounting\OrderAdjustmentCriteria.cs" />
+    <Compile Include="Accounting\SearchInvoiceOrderCriteria.cs" />
+    <Compile Include="Accounting\InvoiceOrder.cs" />
+    <Compile Include="Accounting\InvoiceOrderFee.cs" />
+    <Compile Include="Accounting\ReimbursementCriteria.cs" />
+    <Compile Include="Accounting\OrderReimbursement.cs" />
+    <Compile Include="Accounting\OrderWriteOffCriteria.cs" />
+    <Compile Include="Accounting\PaymentRefund.cs" />
+    <Compile Include="Accounting\InvoicePayment.cs" />
+    <Compile Include="Accounting\InvoicePaymentDetail.cs" />
+    <Compile Include="Accounting\Payment.cs" />
+    <Compile Include="Accounting\SearchInvoiceCriteria.cs" />
+    <Compile Include="EmployeeManagement\Department.cs" />
+    <Compile Include="EmployeeManagement\Group.cs" />
+    <Compile Include="EmployeeManagement\SearchEmpByOrderInfoCriteria.cs" />
+    <Compile Include="InsuranceManagement\BillingCompany.cs" />
+    <Compile Include="InsuranceManagement\BillingCompanyType.cs" />
+    <Compile Include="InsuranceManagement\BillingInfo.cs" />
+    <Compile Include="InsuranceManagement\BillingCompanySearchCriteria.cs" />
+    <Compile Include="InsuranceManagement\DocumentItem.cs" />
+    <Compile Include="InsuranceManagement\GeoSurcharge.cs" />
+    <Compile Include="InsuranceManagement\Insurance.cs" />
+    <Compile Include="InsuranceManagement\InsuranceForm.cs" />
+    <Compile Include="InsuranceManagement\InsuranceFormCriteria.cs" />
+    <Compile Include="InsuranceManagement\InsuranceFormItem.cs" />
+    <Compile Include="InsuranceManagement\InsuranceLab.cs" />
+    <Compile Include="InsuranceManagement\InsuranceListItem.cs" />
+    <Compile Include="InsuranceManagement\InsuranceLocation.cs" />
+    <Compile Include="InsuranceManagement\InsuranceMailingInstruction.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductType.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductTypeRequirement.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductTypeRequirementColumn.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductTypeRequirementCommand.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductTypeRequirementRow.cs" />
+    <Compile Include="InsuranceManagement\InsuranceProductTypeRequirementTable.cs" />
+    <Compile Include="InsuranceManagement\InsuranceSearchCriteria.cs" />
+    <Compile Include="InsuranceManagement\Lab.cs" />
+    <Compile Include="InsuranceManagement\Price.cs" />
+    <Compile Include="InsuranceManagement\PriceChart.cs" />
+    <Compile Include="InsuranceManagement\PriceChartItem.cs" />
+    <Compile Include="InsuranceManagement\PriceChartItemRequirement.cs" />
+    <Compile Include="InsuranceManagement\Requirement.cs" />
+    <Compile Include="InsuranceManagement\RequirementType.cs" />
+    <Compile Include="InsuranceManagement\Search\SearchField.cs" />
+    <Compile Include="InsuranceManagement\Search\SearchFieldContainer.cs" />
+    <Compile Include="InventoryManagement\SalesOrderDetailCriteria.cs" />
+    <Compile Include="InventoryManagement\SalesOrderCriteria.cs" />
+    <Compile Include="InventoryManagement\SupplierMedicalItemType.cs" />
+    <Compile Include="InventoryManagement\Item.cs" />
+    <Compile Include="InventoryManagement\ItemBatch.cs" />
+    <Compile Include="InventoryManagement\MedicalItem.cs" />
+    <Compile Include="InventoryManagement\MedicalItemType.cs" />
+    <Compile Include="InventoryManagement\OrderStatus.cs" />
+    <Compile Include="InventoryManagement\PurchaseOrder.cs" />
+    <Compile Include="InventoryManagement\PurchaseOrderDetail.cs" />
+    <Compile Include="InventoryManagement\SaleOrder.cs" />
+    <Compile Include="InventoryManagement\SaleOrderDetail.cs" />
+    <Compile Include="InventoryManagement\SPMedicalItem.cs" />
+    <Compile Include="InventoryManagement\Supplier.cs" />
+    <Compile Include="InventoryManagement\SupplyOrder.cs" />
+    <Compile Include="InventoryManagement\SupplyOrderDetail.cs" />
+    <Compile Include="Accounting\Invoice.cs" />
+    <Compile Include="Notification\DeptAssignmentStatus.cs" />
+    <Compile Include="Notification\DeptOrderPaperworkStatus.cs" />
+    <Compile Include="Notification\DeptOrderStatus.cs" />
+    <Compile Include="OrderingPartyManagement\Agency.cs" />
+    <Compile Include="OrderingPartyManagement\AgencyInsurance.cs" />
+    <Compile Include="OrderingPartyManagement\SearchOPAgencyCriteria.cs" />
+    <Compile Include="OrderingPartyManagement\SearchOPAgentCriteria.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingPartyAgent.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingPartyAgency.cs" />
+    <Compile Include="OrderingPartyManagement\InsurancePagingCriteria.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingParty.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingPartyInsurance.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingPartyUser.cs" />
+    <Compile Include="OrderingPartyManagement\SearchAgencyCriteria.cs" />
+    <Compile Include="OrderingPartyManagement\OPSearchCriteria.cs" />
+    <Compile Include="OrderingPartyManagement\SearchCriteriaAgency.cs" />
+    <Compile Include="OrderingPartyManagement\Agent.cs" />
+    <Compile Include="OrderingPartyManagement\AgentInsurance.cs" />
+    <Compile Include="OrderingPartyManagement\SearchAgentCriteria.cs" />
+    <Compile Include="OrderManagement\Applicant.cs" />
+    <Compile Include="OrderManagement\ApplicantAddress.cs" />
+    <Compile Include="OrderManagement\ApplicantEmailAddress.cs" />
+    <Compile Include="OrderManagement\ApplicantPhone.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentRelativeItem.cs" />
+    <Compile Include="OrderManagement\OrderCriteria.cs" />
+    <Compile Include="Accounting\OrderAdjustment.cs" />
+    <Compile Include="OrderManagement\OrderRelativeCriteria.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentStatusHistoryCriteria.cs" />
+    <Compile Include="Accounting\OrderWriteOff.cs" />
+    <Compile Include="OrderManagement\IncompleteOrderRelative.cs" />
+    <Compile Include="OrderManagement\FavouriteList.cs" />
+    <Compile Include="OrderManagement\IncompleteOrder.cs" />
+    <Compile Include="OrderManagement\IncompleteOrderDocument.cs" />
+    <Compile Include="OrderManagement\IncompleteOrderDocumentItem.cs" />
+    <Compile Include="OrderManagement\IncompleteOrderRequirement.cs" />
+    <Compile Include="OrderManagement\IncompleteOrderSchedule.cs" />
+    <Compile Include="OrderManagement\InsurancePagingCriteria.cs" />
+    <Compile Include="OrderManagement\OfficeNote.cs" />
+    <Compile Include="OrderManagement\OfficeNoteGroupNotified.cs" />
+    <Compile Include="OrderManagement\Order.cs" />
+    <Compile Include="OrderManagement\OrderAssignment.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentFee.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentItem.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentRequirement.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentRequirementItem.cs" />
+    <Compile Include="OrderManagement\OrderAssignmentStatusHistory.cs" />
+    <Compile Include="OrderManagement\OrderDocument.cs" />
+    <Compile Include="OrderManagement\OrderRelative.cs" />
+    <Compile Include="OrderManagement\OrderReportSearchOption.cs" />
+    <Compile Include="OrderManagement\OrderRequirement.cs" />
+    <Compile Include="OrderManagement\OrderSchedule.cs" />
+    <Compile Include="OrderManagement\OrderSearchOptions.cs" />
+    <Compile Include="OrderManagement\OrderStatusHistory.cs" />
+    <Compile Include="OrderManagement\OrderStatusNote.cs" />
+    <Compile Include="OrderManagement\OrderStatusPosted.cs" />
+    <Compile Include="OrderManagement\OrderSurcharge.cs" />
+    <Compile Include="OrderManagement\PaperworkStatusHistory.cs" />
+    <Compile Include="PartnerManagement\PartnerUser.cs" />
+    <Compile Include="PartnerManagement\Partner.cs" />
+    <Compile Include="PartnerManagement\PartnerSearchCriteria.cs" />
+    <Compile Include="PartyManagement\Address.cs" />
+    <Compile Include="PartyManagement\PartyNetwork.cs" />
+    <Compile Include="PartyManagement\EmailAddress.cs" />
+    <Compile Include="EmployeeManagement\Employee.cs" />
+    <Compile Include="PartyManagement\Organization.cs" />
+    <Compile Include="PartyManagement\Party.cs" />
+    <Compile Include="PartyManagement\PartySearchCriteria.cs" />
+    <Compile Include="PartyManagement\Person.cs" />
+    <Compile Include="PartyManagement\Phone.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionAnswerManagement\DiscussionThread.cs" />
+    <Compile Include="QuestionAnswerManagement\DiscussionPost.cs" />
+    <Compile Include="QuestionAnswerManagement\QAView.cs" />
+    <Compile Include="RatingManagement\ErrorLog.cs" />
+    <Compile Include="RatingManagement\PartyRating.cs" />
+    <Compile Include="RatingManagement\PartyRatingThread.cs" />
+    <Compile Include="RatingManagement\PartyRatingThreadView.cs" />
+    <Compile Include="RatingManagement\PartyRatingView.cs" />
+    <Compile Include="RatingManagement\ThreadView.cs" />
+    <Compile Include="ReminderManagement\AssignedReminder.cs" />
+    <Compile Include="ReminderManagement\ReminderSearchCriteria.cs" />
+    <Compile Include="ReminderManagement\Reminder.cs" />
+    <Compile Include="Security\User.cs" />
+    <Compile Include="Security\UserRole.cs" />
+    <Compile Include="OrderingPartyManagement\OrderingPartyReferral.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderFeeCriteria.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderOrderingPartyBlacklist.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderInsuranceBlacklist.cs" />
+    <Compile Include="ServiceProviderManagement\Credentialing.cs" />
+    <Compile Include="ServiceProviderManagement\CredentialingItem.cs" />
+    <Compile Include="ServiceProviderManagement\DocumentSearchCriteria.cs" />
+    <Compile Include="Notification\EmailQueue.cs" />
+    <Compile Include="Notification\EmailStatus.cs" />
+    <Compile Include="Notification\EmailTemplate.cs" />
+    <Compile Include="Notification\EmailValue.cs" />
+    <Compile Include="ServiceProviderManagement\FeeLevel.cs" />
+    <Compile Include="ServiceProviderManagement\FeeLevelItem.cs" />
+    <Compile Include="ServiceProviderManagement\FeeLevelItemReq.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProvider.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderApproval.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderApprovalStatus.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderBlacklist.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderArea.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderFee.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderFeeReq.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderQuickSearchItem.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderSchedule.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderSearchCriteria.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderSearchItem.cs" />
+    <Compile Include="ServiceProviderManagement\ServiceProviderView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Superior.Data.csproj">
+      <Project>{F18F78C1-B6E7-4CDD-B8AD-6FD55A8CB644}</Project>
+      <Name>Superior.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Superior.Framework.csproj">
+      <Project>{C4AB8529-7DB3-4BFB-9435-3BF004BB3C72}</Project>
+      <Name>Superior.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Domain\Superior.MobileMedics.Common.Domain.csproj">
+      <Project>{E6BBAA6B-8F27-42D1-ABA8-AEA7D8EA110A}</Project>
+      <Name>Superior.MobileMedics.Common.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Superior.MobileMedics.Common.csproj">
+      <Project>{8E36703E-B983-47B1-8A45-B1FEABA48753}</Project>
+      <Name>Superior.MobileMedics.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

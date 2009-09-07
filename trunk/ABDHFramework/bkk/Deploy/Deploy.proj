@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Deploy" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <PropertyGroup Condition="$(DeployConfigFile) == ''">
+    <DeployConfigFile>C:\smm-deploy.config</DeployConfigFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(LogFolder) == ''">
+    <LogFolder>.</LogFolder>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DbScriptPath>..\dbscripts</DbScriptPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <SmmWebFiles Include="..\www\**\*.*" />
+  </ItemGroup>
+
+  <!-- Read config file -->
+  <Target Name="ReadDeployConfigFile">
+    <XmlRead XPath="/deploy/environment"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="DeployEnvironment" />
+    </XmlRead>
+    <Error Condition="!Exists('$(DeployEnvironment).config.tmpl')" Text="Deploy environment configuration cannot be found. Please make sure that you choose the correct environment." />
+    <XmlRead XPath="/deploy/smmWebDir"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="SmmWebDir" />
+    </XmlRead>
+    <!--<XmlRead XPath="/deploy/smmLogDir"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="SmmLogDir" />
+    </XmlRead>-->
+    <XmlRead XPath="/deploy/dbServer"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="DbServer" />
+    </XmlRead>
+    <XmlRead XPath="/deploy/dbName"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="DbName" />
+    </XmlRead>
+    <XmlRead XPath="/deploy/dbUserName"
+    XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="DbUserName" />
+    </XmlRead>
+    <XmlRead XPath="/deploy/dbPassword"
+        XmlFileName="$(DeployConfigFile)">
+      <Output TaskParameter="Value" PropertyName="DbPassword" />
+    </XmlRead>
+  </Target>
+
+  <!-- Deploy DB -->
+  <PropertyGroup>
+    <DeployDbDependsOn>
+      ReadDeployConfigFile;
+    </DeployDbDependsOn>
+  </PropertyGroup>
+  
+  <Target Name="DeployDb" DependsOnTargets="$(DeployDbDependsOn)">
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\dbexec.bat&quot; -s &quot;$(DbServer)&quot; -d &quot;$(DbName)&quot; -u &quot;$(DbUserName)&quot; -p &quot;$(DbPassword)&quot; -l &quot;$(LogFolder)&quot;" WorkingDirectory="$(DbScriptPath)" IgnoreExitCode="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="$(ErrorCode) > 0" Text="Database deployed failed. Please check the log file for more details."></Error>
+  </Target>
+
+  <!-- Deploy Sample Data -->
+  <PropertyGroup>
+    <DeploySampleDataDependsOn>
+      ReadDeployConfigFile;
+    </DeploySampleDataDependsOn>
+  </PropertyGroup>
+  <Target Name="DeploySampleData" DependsOnTargets="$(DeploySampleDataDependsOn)">
+    <Message Text="Deploying sample data" />
+    <Exec Command="sqlcmd -W -S &quot;$(DbServer)&quot; -d &quot;$(DbName)&quot; -U &quot;$(DbUserName)&quot; -P &quot;$(DbPassword)&quot; -b -i CreationScripts\sampledata.sql" WorkingDirectory="$(DbScriptPath)"></Exec>
+  </Target>
+  
+  <!-- Deploy Web -->
+  <PropertyGroup>
+    <DeployWebDependsOn>
+      ReadDeployConfigFile;
+    </DeployWebDependsOn>
+  </PropertyGroup>
+  <Target Name="DeployWeb" DependsOnTargets="$(DeployWebDependsOn)">
+    <RemoveDir Directories="$(SmmWebDir)" Condition="Exists('$(SmmWebDir)')" />
+    <MakeDir Directories="$(SmmWebDir)" />
+    <Copy SourceFiles="@(SmmWebFiles)" DestinationFiles="@(SmmWebFiles->'$(SmmWebDir)\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <PropertyGroup>
+      <SmmWebConfigTemplate>$(SmmWebDir)\web.config.tmpl</SmmWebConfigTemplate>
+    </PropertyGroup>
+    <ItemGroup>
+      <ConfigTokens Include="ConnectionString">
+        <ReplacementValue>Data Source=$(DbServer);Initial Catalog=$(DbName);Persist Security Info=False;User ID=$(DbUserName);Password=$(DbPassword)</ReplacementValue>
+      </ConfigTokens>
+    </ItemGroup>
+    <TemplateFile Template="$(SmmWebConfigTemplate)" OutputFilename="$(SmmWebDir)\web.config" Tokens="@(ConfigTokens)"/>
+    <XmlMassUpdate ContentFile="$(SmmWebDir)\web.config"
+                   SubstitutionsFile="$(DeployEnvironment).config.tmpl"
+                   ContentRoot="/configuration"
+                   SubstitutionsRoot="/template/configuration"
+/>
+    <XmlMassUpdate ContentFile="$(SmmWebDir)\web.config"
+                   SubstitutionsFile="$(DeployConfigFile)"
+                   ContentRoot="/configuration"
+                   SubstitutionsRoot="/deploy/configuration" />
+  </Target>
+
+  <!-- Deploy -->
+  <PropertyGroup>
+    <DeployDependsOn>
+      ReadDeployConfigFile;
+      DeployWeb;
+    </DeployDependsOn>
+  </PropertyGroup>
+  <Target Name="Deploy" DependsOnTargets="$(DeployDependsOn)">
+  </Target>
+
+  <!-- Deploy -->
+  <PropertyGroup>
+    <DeploySampleDependsOn>
+      ReadDeployConfigFile;
+      DeploySampleData;
+    </DeploySampleDependsOn>
+  </PropertyGroup>
+  <Target Name="DeploySample" DependsOnTargets="$(DeploySampleDependsOn)">
+  </Target>
+</Project>

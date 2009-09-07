@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <domain
+    name="RequirementType"
+    package="InsuranceManagement"
+    controller="IMRequirementType"
+    parent1="Insurance"
+    parentIDType1="Guid"
+  ></domain>
+  <actions>
+    <Create>
+      <field name="Name" />
+    </Create>
+    <Edit>
+      <field name="Name" />
+    </Edit>
+    <List>
+      <field name="Name" />
+    </List>
+  </actions>
+</info>

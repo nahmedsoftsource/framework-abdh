@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7AC51D40-7407-4439-B165-50BD6BFAF63D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Superior.MobileMedics.DataAccess</RootNamespace>
+    <AssemblyName>Superior.MobileMedics.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NHibernate, Version=1.2.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\SolutionItems\SmmAssemblyInfo.cs">
+      <Link>SmmAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Accounting\IInvoiceOrderDA.cs" />
+    <Compile Include="Accounting\IInvoiceOrderFeeDA.cs" />
+    <Compile Include="Accounting\IPaymentRefundDA.cs" />
+    <Compile Include="Accounting\IInvoicePaymentDetailDA.cs" />
+    <Compile Include="Accounting\IAccountPayableDA.cs" />
+    <Compile Include="Accounting\IAccountPayableDetailDA.cs" />
+    <Compile Include="Accounting\IAccountPayableDetailFeeDA.cs" />
+    <Compile Include="Accounting\IInvoiceDA.cs" />
+    <Compile Include="Accounting\IInvoicePaymentDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\AccountPayableDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\AccountPayableDetailDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\AccountPayableDetailFeeDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\InvoiceOrderDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\InvoiceOrderFeeDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\PaymentRefundDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\InvoicePaymentDetailDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\InvoiceDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\InvoicePaymentDA.cs" />
+    <Compile Include="InsuranceManagement\IBillingCompanyTypeDA.cs" />
+    <Compile Include="InsuranceManagement\IGeoSurchargeDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceProductTypeDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceProductTypeRequirementColumnDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceProductTypeRequirementCommandDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceProductTypeRequirementRowDA.cs" />
+    <Compile Include="InsuranceManagement\ILabDA.cs" />
+    <Compile Include="InsuranceManagement\IPriceChartItemDA.cs" />
+    <Compile Include="InsuranceManagement\IPriceChartDA.cs" />
+    <Compile Include="InsuranceManagement\IPriceChartItemRequirementDA.cs" />
+    <Compile Include="InsuranceManagement\IPriceDA.cs" />
+    <Compile Include="InsuranceManagement\LinqClient\BillingCompanyDA.cs" />
+    <Compile Include="InsuranceManagement\DocumentItemDA.cs" />
+    <Compile Include="InsuranceManagement\IBillingCompanyDA.cs" />
+    <Compile Include="InsuranceManagement\IBillingInfoDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceFormItemDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceLabDA.cs" />
+    <Compile Include="InsuranceManagement\IRequirementTypeDA.cs" />
+    <Compile Include="InsuranceManagement\LinqClient\BillingInfoDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceLocationDA.cs" />
+    <Compile Include="InsuranceManagement\LinqClient\InsuranceLocationDA.cs" />
+    <Compile Include="InsuranceManagement\LinqClient\RequirementDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InsuranceManagement\NHibernateClient\BillingCompanyDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\BillingCompanyTypeDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\GeoSurchargeDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceLocationDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceProductTypeDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\BillingInfoDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceFormItemDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceLabDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceProductTypeRequirementDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceProductTypeRequirementRowDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\LabDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\PriceChartDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\PriceChartItemDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\PriceChartItemRequirementDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\PriceDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\RequirementTypeDA.cs" />
+    <Compile Include="InventoryManagement\IItemBatchDA.cs" />
+    <Compile Include="InventoryManagement\IItemDA.cs" />
+    <Compile Include="InventoryManagement\IMedicalItemDA.cs" />
+    <Compile Include="InventoryManagement\IMedicalItemTypeDA.cs" />
+    <Compile Include="InventoryManagement\IPurchaseOrderDA.cs" />
+    <Compile Include="InventoryManagement\IPurchaseOrderDetailsDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InventoryManagement\ISaleOrderDA.cs" />
+    <Compile Include="InventoryManagement\ISalesOrderDetailsDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\RequirementDA.cs" />
+    <Compile Include="InventoryManagement\ISPMedicalItemDA.cs" />
+    <Compile Include="InventoryManagement\ISupplierDA.cs" />
+    <Compile Include="InventoryManagement\ISupplyOrderDA.cs" />
+    <Compile Include="InventoryManagement\ISupplyOrderDetailDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\ItemBatchDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\ItemDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\MedicalItemDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\MedicalItemTypeDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\PurchaseOrderDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InventoryManagement\NHibernateClient\PurchaseOrderDetailsDA.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InventoryManagement\NHibernateClient\SaleOrderDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\SPMedicalItemDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\SalesOrderDetailsDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\SupplierDA.cs" />
+    <Compile Include="Notification\IDeptAssignmentStatusDA.cs" />
+    <Compile Include="Notification\NHibernateClient\DeptAssignmentStatusDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyAgentDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyAgencyDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyAgentDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyAgencyDA.cs" />
+    <Compile Include="Notification\IEmailTemplateDA.cs" />
+    <Compile Include="Notification\IEmailQueueDA.cs" />
+    <Compile Include="Notification\IEmailValueDA.cs" />
+    <Compile Include="Notification\NHibernateClient\EmailQueueDA.cs" />
+    <Compile Include="Notification\NHibernateClient\EmailTemplateDA.cs" />
+    <Compile Include="Notification\NHibernateClient\EmailValueDA.cs" />
+    <Compile Include="Accounting\IOrderWriteOffDA.cs" />
+    <Compile Include="OrderManagement\IOrderSurchargeDA.cs" />
+    <Compile Include="OrderManagement\IIncompleteOrderDocumentItemDA.cs" />
+    <Compile Include="OrderManagement\IOfficeNoteGroupNotifiedDA.cs" />
+    <Compile Include="OrderManagement\IPaperworkStatusHistoryDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\ApplicantAddressDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\ApplicantEmailAddressDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\OrderAdjustmentDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\OrderWriteOffDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderScheduleDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderSurchargeDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderStatusHistoryDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\IncompleteOrderDocumentItemDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\IncompleteOrderDocumentDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\IncompleteOrderScheduleDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\IncompleteOrderRequirementDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OfficeNoteGroupNotifiedDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\PaperworkStatusHistoryDA.cs" />
+    <Compile Include="PartnerManagement\IPartnerUserDA.cs" />
+    <Compile Include="PartnerManagement\IPartnerDA.cs" />
+    <Compile Include="PartnerManagement\NHibernateClient\PartnerUserDA.cs" />
+    <Compile Include="PartnerManagement\NHibernateClient\PartnerDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyInsuranceDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyInsuranceDA.cs" />
+    <Compile Include="OrderManagement\IOrderAssignmentFeeDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderRequirementDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderRelativeDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderAssignmentFeeDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderAssignmentStatusHistoryDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\SupplyOrderDA.cs" />
+    <Compile Include="InventoryManagement\NHibernateClient\SupplyOrderDetailDA.cs" />
+    <Compile Include="PartyManagement\IAddressDA.cs" />
+    <Compile Include="PartyManagement\IPhoneDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\AddressDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\PhoneDA.cs" />
+    <Compile Include="Accounting\IPaymentDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\PaymentDA.cs" />
+    <Compile Include="QuestionAnswerManagement\IDiscussionThreadDA.cs" />
+    <Compile Include="QuestionAnswerManagement\IDiscussionPostDA.cs" />
+    <Compile Include="QuestionAnswerManagement\NHibernateClient\DiscussionThreadDA.cs" />
+    <Compile Include="QuestionAnswerManagement\NHibernateClient\DiscussionPostDA.cs" />
+    <Compile Include="ReminderManagement\IAssignedReminderDA.cs" />
+    <Compile Include="ReminderManagement\IReminderDA.cs" />
+    <Compile Include="ReminderManagement\NHibernateClient\AssignedReminderDA.cs" />
+    <Compile Include="ReminderManagement\NHibernateClient\ReminderDA.cs" />
+    <Compile Include="ReportManagement\ReportDA.cs" />
+    <Compile Include="Security\IUserDA.cs" />
+    <Compile Include="Security\IUserRoleDA.cs" />
+    <Compile Include="Security\NHibernateClient\UserDA.cs" />
+    <Compile Include="Security\NHibernateClient\UserRoleDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderOrderingPartyBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderInsuranceBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\IFeeLevelDA.cs" />
+    <Compile Include="ServiceProviderManagement\IFeeLevelItemDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderApprovalDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderAreaDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderScheduleDA.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderFeeDA.cs" />
+    <Compile Include="ServiceProviderManagement\ICredentialingDA.cs" />
+    <Compile Include="EmployeeManagement\IDepartmentDA.cs" />
+    <Compile Include="EmployeeManagement\IEmployeeDA.cs" />
+    <Compile Include="EmployeeManagement\IGroupDA.cs" />
+    <Compile Include="EmployeeManagement\NHibernateClient\DepartmentDA.cs" />
+    <Compile Include="EmployeeManagement\NHibernateClient\EmployeeDA.cs" />
+    <Compile Include="EmployeeManagement\NHibernateClient\GroupDA.cs" />
+    <Compile Include="InsuranceManagement\IDocumentItemDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\DocumentItemDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceDA.cs" />
+    <Compile Include="InsuranceManagement\NHibernateClient\InsuranceDA.cs" />
+    <Compile Include="InsuranceManagement\IInsuranceProductTypeRequirementDA.cs" />
+    <Compile Include="InsuranceManagement\IRequirementDA.cs" />
+    <Compile Include="OrderingPartyManagement\IAgencyDA.cs" />
+    <Compile Include="OrderingPartyManagement\IAgencyInsuranceDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyUserDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\AgencyDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\AgencyInsuranceDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyUserDA.cs" />
+    <Compile Include="OrderingPartyManagement\IAgentDA.cs" />
+    <Compile Include="OrderingPartyManagement\IAgentInsuranceDA.cs" />
+    <Compile Include="OrderManagement\IApplicantDA.cs" />
+    <Compile Include="OrderManagement\IOfficeNoteDA.cs" />
+    <Compile Include="OrderManagement\IOrderAssignmentRequirementDA.cs" />
+    <Compile Include="OrderManagement\IAgencyDA.cs" />
+    <Compile Include="OrderManagement\IAgentDA.cs" />
+    <Compile Include="OrderManagement\IApplicantAddressDA.cs" />
+    <Compile Include="OrderManagement\IApplicantEmailAddressDA.cs" />
+    <Compile Include="OrderManagement\IApplicantPhoneDA.cs" />
+    <Compile Include="OrderManagement\IEmployeeDA.cs" />
+    <Compile Include="OrderManagement\IIncompleteOrderDA.cs" />
+    <Compile Include="OrderManagement\IIncompleteOrderDocumentDA.cs" />
+    <Compile Include="OrderManagement\IIncompleteOrderRequirementDA.cs" />
+    <Compile Include="OrderManagement\IIncompleteOrderScheduleDA.cs" />
+    <Compile Include="OrderManagement\IOrderAssignmentDA.cs" />
+    <Compile Include="OrderManagement\IOrderAssignmentStatusHistoryDA.cs" />
+    <Compile Include="OrderManagement\IOrderDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\AgentDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\AgentInsuranceDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\ApplicantDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\IncompleteOrderDA.cs" />
+    <Compile Include="OrderManagement\OfficeNoteDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderAssignmentRequirementDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderAssignmentDA.cs" />
+    <Compile Include="OrderManagement\IOrderDocumentDA.cs" />
+    <Compile Include="OrderManagement\IOrderRelativeDA.cs" />
+    <Compile Include="OrderManagement\IOrderRequirementDA.cs" />
+    <Compile Include="OrderManagement\IOrderScheduleDA.cs" />
+    <Compile Include="OrderManagement\IOrderStatusHistoryDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderDA.cs" />
+    <Compile Include="OrderManagement\NHibernateClient\OrderDocumentDA.cs" />
+    <Compile Include="PartyManagement\IEmailAddressDA.cs" />
+    <Compile Include="PartyManagement\IOrganizationDA.cs" />
+    <Compile Include="PartyManagement\IPartyDA.cs" />
+    <Compile Include="PartyManagement\IPersonDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\EmailAddressDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\OrganizationDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\PartyDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\PersonDA.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceProviderManagement\IServiceProviderDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderOrderingPartyBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderInsuranceBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\FeeLevelDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderBlacklistDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderScheduleDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderFeeDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderAreaDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderApprovalDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\CredentialingDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\FeeLevelItemDA.cs" />
+    <Compile Include="ServiceProviderManagement\NHibernateClient\ServiceProviderDA.cs" />
+    <Compile Include="RatingManagement\IErrorLogDA.cs" />
+    <Compile Include="RatingManagement\IPartyRatingDA.cs" />
+    <Compile Include="RatingManagement\IPartyRatingThreadDA.cs" />
+    <Compile Include="RatingManagement\NHibernateClient\ErrorLogDA.cs" />
+    <Compile Include="RatingManagement\NHibernateClient\PartyRatingDA.cs" />
+    <Compile Include="RatingManagement\NHibernateClient\PartyRatingThreadDA.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\Superior.Data.csproj">
+      <Project>{F18F78C1-B6E7-4CDD-B8AD-6FD55A8CB644}</Project>
+      <Name>Superior.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\Superior.Data.csproj">
+      <Project>{F18F78C1-B6E7-4CDD-B8AD-6FD55A8CB644}</Project>
+      <Name>Superior.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Superior.Framework.csproj">
+      <Project>{C4AB8529-7DB3-4BFB-9435-3BF004BB3C72}</Project>
+      <Name>Superior.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\InsuranceManagement\DataAccess\Superior.MobileMedics.InsuranceManagement.DataAccess.csproj">
+      <Project>{97B43AEA-707F-4C81-B993-C5A9B23037E0}</Project>
+      <Name>Superior.MobileMedics.InsuranceManagement.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PartyManagement\DataAccess\Superior.MobileMedics.PartyManagement.DataAccess.csproj">
+      <Project>{5C1C0FFF-BCF7-4A28-A94B-952CB535C6EB}</Project>
+      <Name>Superior.MobileMedics.PartyManagement.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\DataAccess\Superior.MobileMedics.Common.DataAccess.csproj">
+      <Project>{A5C637AF-770E-489B-BF4C-9A831F03A404}</Project>
+      <Name>Superior.MobileMedics.Common.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Domain\Superior.MobileMedics.Common.Domain.csproj">
+      <Project>{E6BBAA6B-8F27-42D1-ABA8-AEA7D8EA110A}</Project>
+      <Name>Superior.MobileMedics.Common.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Service\Superior.MobileMedics.Common.Service.csproj">
+      <Project>{4AF0AC18-BDB4-48C1-ABFC-9889815CCE92}</Project>
+      <Name>Superior.MobileMedics.Common.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Superior.MobileMedics.Common.csproj">
+      <Project>{8E36703E-B983-47B1-8A45-B1FEABA48753}</Project>
+      <Name>Superior.MobileMedics.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataMappers\LinqDataMapper\Superior.MobileMedics.DataMappers.LinqDataMapper.csproj">
+      <Project>{6AA74C9F-7739-4DE2-B6C7-DF1F8EBABAC3}</Project>
+      <Name>Superior.MobileMedics.DataMappers.LinqDataMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Superior.MobileMedics.Domain.csproj">
+      <Project>{6EC20E9F-3BAD-4F50-942A-9F9040C8E332}</Project>
+      <Name>Superior.MobileMedics.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OrderingParty\DataAccess\Superior.MobileMedics.OrderingPartyManagement.DataAccess.csproj">
+      <Project>{044F79C3-4FC5-4987-9618-BD7D698EBC90}</Project>
+      <Name>Superior.MobileMedics.OrderingPartyManagement.DataAccess</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounting\IOrderWriteOffPaymentDA.cs" />
+    <Compile Include="Accounting\IOrderReimbursementDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\OrderWriteOffPaymentDA.cs" />
+    <Compile Include="Accounting\NHibernateClient\OrderReimbursementDA.cs" />
+    <Compile Include="Accounting\IOrderAdjustmentDA.cs" />
+    <Compile Include="Notification\IDeptOrderPaperworkStatusDA.cs" />
+    <Compile Include="Notification\IDeptOrderStatusDA.cs" />
+    <Compile Include="Notification\NHibernateClient\DeptOrderPaperworkStatusDA.cs" />
+    <Compile Include="Notification\NHibernateClient\DeptOrderStatusDA.cs" />
+    <Compile Include="OrderingPartyManagement\IOrderingPartyReferralDA.cs" />
+    <Compile Include="OrderingPartyManagement\NHibernateClient\OrderingPartyReferralDA.cs" />
+    <Compile Include="PartyManagement\IPartyNetworkDA.cs" />
+    <Compile Include="PartyManagement\NHibernateClient\PartyNetworkDA.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

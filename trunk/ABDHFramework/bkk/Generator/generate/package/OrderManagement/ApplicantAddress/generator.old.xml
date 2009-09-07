@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <domain
+    name="ApplicantAddress"
+    package="OrderManagement"
+    controller="ApplicantAddress"
+    service="ApplicantAddressService"
+    parent="Applicant"
+    parentIDType="Guid"
+  ></domain>
+  <actions>
+    <Create>
+
+    </Create>
+    <Edit>
+    </Edit>
+    <List>
+    </List>
+  </actions>
+</info>

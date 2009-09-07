@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+  <domain
+    name="InsuranceFormItem"
+    package="InsuranceManagement"
+    controller="IMForm"
+    service="InsuranceFormService"
+    parent="Insurance"
+    parentIDType="Guid"
+  ></domain>
+  <actions>
+    <Create>
+      <field name="File" label="File" type="file" />
+      <field name="Document.Name" label="Document Name" type="text" /> 
+      <field name="Document.DocumentTypeID" label="Document Type" type="select" init="DocumentType.DocumentTypes.Select(kvp => kvp.Value), &quot;ID&quot;, &quot;Name&quot;" />
+      <field name="Document.SubmissionTypeID" label="Submission Type" type="select" init="SubmissionType.SubmissionTypes.Select(kvp => kvp.Value), &quot;ID&quot;, &quot;Name&quot;" />
+      <field name="Document.Description" label="Description" type="text" />
+      <field name="Document.ReceivedDate" label="Received Date" type="date" />      
+      <field name="Document.RevisionDate" label="Revision Date" type="date" />            
+      <field name="Document.ExpiredDate" label="Expired Date" type="date" />                 
+      <field name="Document.VersionReference" label="Document version" type="text" />
+      <field name="StateID" label="States" type="select-multiple" init="State.States.Select(kvp => kvp.Value), &quot;ID&quot;, &quot;Name&quot;" />
+    </Create>
+    <Edit>
+    </Edit>
+    <List>
+    </List>
+  </actions>
+</info>

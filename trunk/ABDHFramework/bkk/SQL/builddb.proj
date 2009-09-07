@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+  <ItemGroup>
+    <DbPatchFiles Include="UpgradeDB.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <DbCreateFiles Include="CreationScripts\schema.sql" />
+    <DbCreateFiles Include="CreationScripts\metadata.sql" />
+    <DbCreateFiles Include="CreationScripts\zipcode.dat" />
+    <DbCreateFiles Include="CreationScripts\zipcode.bat" />
+    <DbCreateFiles Include="SampleData\sampledata.sql" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <Exec Command="xConcat -wf ChangeScripts -out @(DbPatchFiles->'%(FullPath)')" />
+
+    <Copy SourceFiles="@(DbPatchFiles)" DestinationFolder="$(OutDir)" Condition="$(OutDir) != ''"/>
+    <Copy SourceFiles="@(DbCreateFiles)" DestinationFolder="$(OutDir)\CreationScripts" Condition="$(OutDir) != ''"/>
+  </Target>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿<%@ Page Language="C#" Inherits="Superior.MobileMedics.MainWebSite.Lib.BaseViewPage<__DOMAIN__>" %>
+
+<form>
+  <%= Html.ValidationSummary() %>
+  <%= Html.RenderClientSideValidation<__DOMAIN__>()%>
+  <table class="table-form" cellpadding="0" cellpadding="0" border="0">
+__EDIT_FIELDS__
+  </table>
+  <div class="buttonpane">
+        <%= Html.DialogSubmit(new DialogSubmitOption
+{
+  URL = Routing.__CONTROLLER__.URLForDelete(Model),
+  ConfirmMessage = "Are you sure?",
+  Name = "Delete"
+})%>
+	<%= Html.DialogSubmit(new DialogSubmitOption{
+  URL = Routing.__CONTROLLER__.URLForEdit(Model)
+}) %>
+	<%= Html.DialogCloseButton() %>
+  </div>
+</form>

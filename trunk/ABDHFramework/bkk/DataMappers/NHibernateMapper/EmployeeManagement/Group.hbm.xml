@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Superior.MobileMedics.Domain.EmployeeManagement.Group, Superior.MobileMedics.Domain" table="`Group`" lazy="false">
+		<id name="ID" column="ID">
+			<generator class="assigned" />
+		</id>
+		<property name="Name" type="String">
+			<column name="Name" length="100" sql-type="nvarchar" not-null="true"/>
+		</property>
+		<property name="Description" type="String">
+			<column name="Description" length="255" sql-type="nvarchar" not-null="false"/>
+		</property>
+    <property name="OwnerID" type="Guid">
+      <column name="OwnerID" sql-type="uniqueidentifier" length="16" not-null="false"/>
+    </property>
+		<bag name="GroupUsers" table="PartyGroup" inverse="false">
+			<key column="GroupID" />
+			<many-to-many column="PartyID" class="Superior.MobileMedics.Domain.PartyManagement.Party, Superior.MobileMedics.Domain" where="DeletedDate IS NULL"/>
+		</bag>
+	</class>
+</hibernate-mapping>
+

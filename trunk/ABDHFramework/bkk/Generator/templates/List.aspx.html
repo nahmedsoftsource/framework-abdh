@@ -1,0 +1,6 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Master/Site.Master" Inherits="Superior.MobileMedics.MainWebSite.Lib.BaseViewPage<Superior.MobileMedics.MainWebSite.Lib.Pager.WebPager<__DOMAIN__>>" %>
+<%@ Import Namespace="__DOMAIN_NAMESPACE__" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat=server>
+<% Html.RenderPartial(PartialViews.Shared.Base.__CONTROLLER__.List, Model); %>
+</asp:Content>

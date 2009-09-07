@@ -1,0 +1,301 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Ajax;
+using Superior.MobileMedics.MainWebSite.Lib;
+using Superior.MobileMedics.Common.Service;
+using Superior.MobileMedics.Common.Domain;
+using Superior.Data;
+using Superior.Framework.Exception;
+using Superior.Framework.DesignByContract;
+using Superior.MobileMedics.MainWebSite.Utility;
+using Superior.MobileMedics.MainWebSite.Lib.Pager;
+using Superior.MobileMedics.Common.Validation;
+using Superior.MobileMedics.Service;
+using __DOMAIN_NAMESPACE__;
+using __SERVICE_NAMESPACE__;
+
+namespace Superior.MobileMedics.MainWebSite.Controllers.Base
+{
+  public class Base__CONTROLLER__Controller : BaseController<__DOMAIN_TYPE__, __DOMAIN__, __ISERVICE__>
+	{
+		#region Contructor
+		/// <summary>
+		/// constructor
+		/// </summary>
+		public Base__CONTROLLER__Controller() : base(__SERVICE__.Instance)
+		{
+	
+		}
+    #endregion
+    
+    /// <summary>
+    /// render iframe for create action
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <returns></returns>
+    public ActionResult CreateIFrame(__PARENT_PARAM__){
+      var url = Url.Content("~/__CONTROLLER__/Create");
+      foreach (var item in Request.Params.AllKeys){
+        url = Javascript.addParamToURL(url, item, Request[item]);
+      }
+
+      return Content(String.Format("<iframe width=\"100%\" height=\"430px\" frameborder=\"0\"  src=\"{0}\" />", url));
+    }
+    
+    /// <summary>
+    /// render iframe for edit action
+    /// </summary>
+    /// <returns></returns>
+    public ActionResult EditIFrame(__DOMAIN_TYPE__ __DOMAIN__ID){
+      var url = Url.Content("~/__CONTROLLER__/Edit") + "?__DOMAIN__ID=" + __DOMAIN__ID.ToString();
+      foreach (var item in Request.Params.AllKeys){
+        url = Javascript.addParamToURL(url, item, Request[item]);
+      }
+
+      return Content(String.Format("<iframe src=\"{0}\" />", url));
+    }
+		
+		#region Create Action
+		/// <summary>
+		/// create new __DOMAIN__
+		/// </summary>__PARENT_COMMENT_PARAM__
+		/// <returns></returns>
+		public ActionResult Create(__PARENT_PARAM__)
+		{
+      __DOMAIN__ __DOMAIN_OBJECT__ = Service.CreateNewTransientDomain();__DOMAIN_OBJECT_UPDATE_PARENT_ID__
+      __PARENT_PARAM_6__
+
+      if (IsRequestPost())
+      {
+        CreateAction_BeforeBindMainObject(__DOMAIN_OBJECT__);
+        
+        if (!CreateAction_BindMainObject(__DOMAIN_OBJECT__))
+        {
+          return CloseDialog(new DialogCloseOption { Message = "Error when binding" });
+        }
+        
+        try {
+          CreateAction_BeforeSaveMainObject(__DOMAIN_OBJECT__);
+
+          CreateAction_InsertMainObject(__DOMAIN_OBJECT__);
+          
+          CreateAction_AfterSaveMainObject(__DOMAIN_OBJECT__);
+        }
+        catch (ValidationException ex)
+        {
+          ModelState.AddModelStateErrors(ex.Errors);
+        }
+
+        if (ModelState.IsValid)
+        {
+          return CreateAction_Success(__DOMAIN_OBJECT__);
+        }
+      }
+
+      ViewData.Model = __DOMAIN_OBJECT__;
+
+      InitializeAttributes(__DOMAIN_OBJECT__);
+
+      return View();
+    }
+    #endregion
+    
+    /// <summary>
+    /// Create Action: Befor bind main object
+    /// </summary>
+    /// <param name="insuranceFormItem"></param>    
+    protected virtual void CreateAction_BeforeBindMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      
+    }
+
+    /// <summary>
+    /// Create Action: Bind main object
+    /// </summary>
+    /// <param name="insuranceFormItem"></param>
+    /// <returns></returns>    
+    protected virtual bool CreateAction_BindMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      return TryUpdateModel<__DOMAIN__>(__DOMAIN_OBJECT__);
+    }
+    
+    /// <summary>
+    /// Create Action: Before save main object
+    /// </summary>
+    /// <param name="insuranceFormItem"></param>    
+    protected virtual void CreateAction_BeforeSaveMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      
+    }
+
+    /// <summary>
+    /// after save main object
+    /// </summary>
+    /// <param name="insuranceFormItem"></param>    
+    protected virtual void CreateAction_AfterSaveMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+    
+    }
+
+    /// <summary>
+    /// action result when create success
+    /// </summary>
+    /// <returns></returns>
+    protected virtual ActionResult CreateAction_Success(__DOMAIN__ __DOMAIN_OBJECT__){
+        return CloseDialog(new DialogCloseOption { Close = true });
+    }
+    
+    /// <summary>
+    /// insert main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    protected virtual void CreateAction_InsertMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      Insert(__DOMAIN_OBJECT__);
+    }
+
+    #region Edit Action
+    /// <summary>
+    /// edit
+    /// </summary>
+    /// <param name="__DOMAIN__ID"></param>
+    /// <returns></returns>
+    public ActionResult Edit(__DOMAIN_TYPE__ __DOMAIN__ID)
+    {
+      __DOMAIN__ __DOMAIN_OBJECT__ = Service.GetByID(__DOMAIN__ID);
+      if (__DOMAIN_OBJECT__ == null)
+      {
+        throw new ObjectNotFoundException();
+      }
+      
+      ViewData["__DOMAIN__ID"] = __DOMAIN__ID;
+
+      if (IsRequestPost())
+      {
+        EditAction_BeforeBindMainObject(__DOMAIN_OBJECT__);
+        
+        if (!EditAction_BindMainObject(__DOMAIN_OBJECT__))
+        {
+          return CloseDialog(new DialogCloseOption { Message = "Error when binding" });
+        }
+
+        try {
+          EditAction_BeforeSaveMainObject(__DOMAIN_OBJECT__);
+
+          EditAction_UpdateMainObject(__DOMAIN_OBJECT__);
+          
+          EditAction_AfterSaveMainObject(__DOMAIN_OBJECT__);
+        }
+        catch (ValidationException ex)
+        {
+          ModelState.AddModelStateErrors(ex.Errors);
+        }
+
+        if (ModelState.IsValid)
+        {
+          return EditAction_Success(__DOMAIN_OBJECT__);
+        }
+      }
+
+      ViewData.Model = __DOMAIN_OBJECT__;
+
+      InitializeAttributes(__DOMAIN_OBJECT__);
+
+      return View();
+    }
+   
+    /// <summary>
+    /// Edit Action: Befor bind main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>    
+    protected virtual void EditAction_BeforeBindMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      
+    }
+
+    /// <summary>
+    /// Edit Action: Bind main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    /// <returns></returns>    
+    protected virtual bool EditAction_BindMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      return TryUpdateModel<__DOMAIN__>(__DOMAIN_OBJECT__);
+    }
+    
+    /// <summary>
+    /// Edit Action: Before save main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>    
+    protected virtual void EditAction_BeforeSaveMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      
+    }
+
+    /// <summary>
+    /// after save main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>    
+    protected virtual void EditAction_AfterSaveMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+    
+    }
+
+    /// <summary>
+    /// action result when create success
+    /// </summary>
+    /// <returns></returns>
+    protected virtual ActionResult EditAction_Success(__DOMAIN__ __DOMAIN_OBJECT__){
+        return CloseDialog(new DialogCloseOption { Close = true });
+    }
+    
+    /// <summary>
+    /// update main object
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    protected virtual void EditAction_UpdateMainObject(__DOMAIN__ __DOMAIN_OBJECT__){
+      Update(__DOMAIN_OBJECT__);
+    }
+    #endregion
+    
+		#region List Action
+		/// <summary>
+		/// list
+		/// </summary>__PARENT_COMMENT_PARAM__
+		/// <returns></returns>
+		public ActionResult List(int? page)
+		{
+			int pageSize = ConfigurationSettings.DefaultPageSize;
+		
+			var query = SearchQuery
+			.OrderByDescending("ID")
+			.SetPage(page ?? 1)
+			.SetMaxResults(pageSize);
+		
+			var pager = Service.Search(query).ToBasePager();
+		
+			ViewData.Model = new WebPager<__DOMAIN__>(pager);
+		
+		  if (Request.IsAjaxRequest()){
+        return View("ListWithoutLayout");
+      }
+		
+			return View();
+		}
+		#endregion
+		
+    #region Delete Action
+    /// <summary>
+    /// delete
+    /// </summary>
+    /// <param name="__DOMAIN__ID"></param>
+    /// <returns></returns>
+    public ActionResult Delete(__DOMAIN_TYPE__ __DOMAIN__ID)
+    {
+      Service.Delete(__DOMAIN__ID);
+
+      return CloseDialog(new DialogCloseOption { Close = true });
+    }
+    #endregion
+
+		#region Support methods
+		protected virtual void InitializeAttributes(__DOMAIN__ __DOMAIN_OBJECT__)
+		{
+__INIT_ATTR_CONTROLLER__
+		}
+		#endregion
+  }
+}

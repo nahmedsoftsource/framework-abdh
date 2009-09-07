@@ -1,0 +1,28 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Master/Site.Master" Inherits="Superior.MobileMedics.MainWebSite.Lib.BaseViewPage<Superior.MobileMedics.MainWebSite.Lib.Pager.WebPager<__DOMAIN__>>" %>
+<%@ Import Namespace="__DOMAIN_NAMESPACE__" %>
+
+<asp:Content ContentPlaceHolderID="MainContent" runat=server>
+<%
+	var ReloadID = "__DOMAIN__List";
+	var ReloadURL = Routing.__CONTROLLER__.URLForList(__PARENT_ID__);
+%>
+
+<div id="__DOMAIN__List">
+<% if (Model != null) { %>
+	<%= Html.ShowWebPager(Model, new [] {
+    __LIST_FIELDS__
+		new ColumnOption<__DOMAIN__>{
+			Name = "Actions",
+			Action = (item => Routing.__CONTROLLER__.ButtonToDialogEdit(item, ReloadID, ReloadURL))
+		}
+	}, new AjaxPaginationOption {
+		URL = Routing.__CONTROLLER__.URLForList(__PARENT_ID__),
+		HtmlID = "__DOMAIN__List"
+	})  %>
+  
+<%} %>
+	<div class="buttonpane">
+		<%=Routing.__CONTROLLER__.ButtonToDialogCreate(ReloadID, ReloadURL) %>
+	</div>
+</div>
+</asp:Content>
