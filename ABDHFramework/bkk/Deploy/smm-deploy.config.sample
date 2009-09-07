@@ -1,0 +1,63 @@
+<deploy>
+  <!-- 
+    Copy this file to C:\ and rename to 'smm-deploy.config' before running deploy.bat.
+    If you don't want to put it in C:\, you can put it anywhere then put the full path, include 
+    file name into DeployConfigFile environment variable, or run "deploy.bat -c path\to\filename.config"
+  -->
+
+  <!-- 
+    Set the deploy environment. Available values are:
+      test: if you are deploying on a test machine.
+      production: if you are deploying on production
+  -->
+  <environment>production</environment>
+  
+  <!-- Set the location of the SMM Web directory-->
+  <smmWebDir>c:\inetpub\wwwroot</smmWebDir>
+
+  <!-- Set the database server connection information-->
+  <dbServer>localhost</dbServer>
+  <dbName>smm-db</dbName>
+  <dbUserName>sa</dbUserName>
+  <dbPassword>admin</dbPassword>
+
+  <!-- The configuration modification -->
+  <configuration xmlns:xmu="urn:msbuildcommunitytasks-xmlmassupdate">
+    <appSettings>
+    </appSettings>
+
+    <!-- The superior global settings section -->
+    <superior>
+      <!--
+        insuranceFormFolder: location for storing Insurance Form
+        orderDocumentFolder: location for storing Order Document
+        credentialFolder   : location for storing Credential
+        hostName           : the base location of the website
+        IntervalReminder   : the interval to check the reminder (minute)
+      -->
+      <globalSettings
+        insuranceFormFolder="C:\FormUpload"
+        orderDocumentFolder="C:\OrderUpload"
+        credentialFolder="C:\CredentialUpload"
+        hostName="http://localhost"
+        IntervalReminder ="5"
+      />
+      <!--
+      Email Service settings:
+        interval : the interval to check the email need to be sent (minute)
+      -->
+      <emailService
+        interval="300"
+      />
+    </superior>
+
+    <!-- Configuration the smtp mail server for the application sends emails -->
+    <system.net>
+      <mailSettings>
+        <smtp deliveryMethod="Network">
+          <network host="localhost" port="25" />
+        </smtp>
+      </mailSettings>
+    </system.net>
+  </configuration>
+</deploy>

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8295BC0D-F4B9-4077-AFB8-9A267DB7FBCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Superior.MobileMedics.DataMappers.NHibernateMapper</RootNamespace>
+    <AssemblyName>Superior.MobileMedics.DataMappers.NHibernateMapper</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SolutionItems\SmmAssemblyInfo.cs">
+      <Link>SmmAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\ApprovalStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\Country.hbm.xml" />
+    <EmbeddedResource Include="Common\CredentialingStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\DocumentClassifier.hbm.xml" />
+    <EmbeddedResource Include="Common\DocumentFormat.hbm.xml" />
+    <EmbeddedResource Include="Common\DocumentType.hbm.xml" />
+    <EmbeddedResource Include="Common\EmailFormat.hbm.xml" />
+    <EmbeddedResource Include="Common\EmailType.hbm.xml" />
+    <EmbeddedResource Include="Common\Gender.hbm.xml" />
+    <EmbeddedResource Include="Common\GovIDType.hbm.xml" />
+    <EmbeddedResource Include="Common\Language.hbm.xml" />
+    <EmbeddedResource Include="Common\OrderPriority.hbm.xml" />
+    <EmbeddedResource Include="Common\OrderStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\OrderType.hbm.xml" />
+    <EmbeddedResource Include="Common\PartyType.hbm.xml" />
+    <EmbeddedResource Include="Common\PermissionType.hbm.xml" />
+    <EmbeddedResource Include="Common\PhoneType.hbm.xml" />
+    <EmbeddedResource Include="Common\PricingUnit.hbm.xml" />
+    <EmbeddedResource Include="Common\SmokeStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\State.hbm.xml" />
+    <EmbeddedResource Include="Common\SubmissionType.hbm.xml" />
+    <EmbeddedResource Include="Common\ZipCode.hbm.xml" />
+    <EmbeddedResource Include="EmployeeManagement\Employee.hbm.xml" />
+    <EmbeddedResource Include="PartyManagement\Party.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\EmployeeStatus.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmployeeManagement\Group.hbm.xml" />
+    <EmbeddedResource Include="EmployeeManagement\Department.hbm.xml" />
+    <EmbeddedResource Include="Security\User.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\EmployeeTitle.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\Insurance.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingParty.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\DocumentItem.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\MedicalItemType.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\PurchaseOrder.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\PurchaseOrderDetail.hbm.xml" />
+    <EmbeddedResource Include="Common\PurchaseOrderStatus.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SaleOrder.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SaleOrderDetail.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\Item.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\Credentialing.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProvider.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\Agency.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingPartyUser.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\Agent.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\AgentInsurance.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InsuranceManagement\Lab.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InventoryManagement\Supplier.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SupplyOrder.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SupplyOrderDetail.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RatingManagement\ErrorLog.hbm.xml" />
+    <EmbeddedResource Include="RatingManagement\PartyRating.hbm.xml" />
+    <EmbeddedResource Include="RatingManagement\PartyRatingThread.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PartnerManagement\Partner.hbm.xml" />
+    <EmbeddedResource Include="PartnerManagement\PartnerUser.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\Requirement.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\Order.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderAssignmentStatusHistory.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceProductType.hbm.xml" />
+    <EmbeddedResource Include="Common\SupplyOrderStatus.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OfficeNote.hbm.xml" />
+    <EmbeddedResource Include="Common\ObjectType.hbm.xml" />
+    <EmbeddedResource Include="Common\Configuration.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\AgencyInsurance.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderAssignment.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderDocument.hbm.xml" />
+    <EmbeddedResource Include="Common\SaleOrderStatus.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceLab.hbm.xml" />
+    <EmbeddedResource Include="Notification\EmailQueue.hbm.xml" />
+    <EmbeddedResource Include="Common\EmailStatus.hbm.xml" />
+    <EmbeddedResource Include="Notification\EmailTemplate.hbm.xml" />
+    <EmbeddedResource Include="Notification\EmailValue.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingPartyInsurance.hbm.xml" />
+    <EmbeddedResource Include="PartyManagement\PartyAddress.hbm.xml" />
+    <EmbeddedResource Include="PartyManagement\PartyPhone.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceForm.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderRelative.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingPartyAgency.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingPartyAgent.hbm.xml" />
+    <EmbeddedResource Include="Common\ReminderType.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\RequirementType.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\ApplicantAddress.hbm.xml" />
+    <EmbeddedResource Include="Common\Priority.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\ApplicantEmailAddress.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderSchedule.hbm.xml" />
+    <EmbeddedResource Include="PartyManagement\PartyEmailAddress.hbm.xml" />
+    <EmbeddedResource Include="Security\UserRole.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\IncompleteOrderRequirement.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\IncompleteOrderSchedule.hbm.xml" />
+    <EmbeddedResource Include="Reminder\Reminder.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\FeeLevel.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\FeeLevelItem.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderApproval.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderInsuranceBlacklist.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderCoverArea.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderFee.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderSchedule.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OrderManagement\Applicant.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OrderManagement\OrderAssignmentFee.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Common\OrderAssignmentStatus.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OrderManagement\IncompleteOrder.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="OrderManagement\IncompleteOrderDocumentItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Accounting\PaymentRefund.hbm.xml" />
+    <EmbeddedResource Include="Common\AddressType.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\ApplicantPhone.hbm.xml" />
+    <EmbeddedResource Include="Common\PaymentType.hbm.xml" />
+    <EmbeddedResource Include="Accounting\Payment.hbm.xml" />
+    <EmbeddedResource Include="Accounting\Invoice.hbm.xml" />
+    <EmbeddedResource Include="Accounting\InvoicePayment.hbm.xml" />
+    <EmbeddedResource Include="Common\SurchargeType.hbm.xml" />
+    <EmbeddedResource Include="Common\ReminderTime.hbm.xml" />
+    <EmbeddedResource Include="Accounting\AccountPayable.hbm.xml" />
+    <EmbeddedResource Include="Accounting\AccountPayableDetail.hbm.xml" />
+    <EmbeddedResource Include="Accounting\AccountPayableDetailFee.hbm.xml" />
+    <EmbeddedResource Include="Common\OrderAssignmentFeeType.hbm.xml" />
+    <EmbeddedResource Include="Common\PaymentCode.hbm.xml" />
+    <EmbeddedResource Include="Common\ItemType.hbm.xml" />
+    <EmbeddedResource Include="Accounting\InvoicePaymentDetail.hbm.xml" />
+    <EmbeddedResource Include="Common\OrderRelationship.hbm.xml" />
+    <EmbeddedResource Include="Common\PaymentStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\PaperworkStatus.hbm.xml" />
+    <EmbeddedResource Include="Common\RequestStatus.hbm.xml" />
+    <EmbeddedResource Include="Accounting\InvoiceOrder.hbm.xml" />
+    <EmbeddedResource Include="Accounting\InvoiceOrderFee.hbm.xml" />
+    <EmbeddedResource Include="Accounting\OrderReimbursement.hbm.xml" />
+    <EmbeddedResource Include="Common\PermissionTypeGroup.hbm.xml" />
+    <EmbeddedResource Include="Accounting\OrderWriteOffPayment.hbm.xml" />
+    <EmbeddedResource Include="Common\Module.hbm.xml" />
+    <EmbeddedResource Include="Common\NetworkRole.hbm.xml" />
+    <Content Include="InsuranceManagement\BillingCompany.hbm.xml" />
+	<EmbeddedResource Include="ServiceProviderManagement\ServiceProviderBillingCompanySearchItem.hbm.xml" />
+    <EmbeddedResource Include="PartyManagement\PartyNetwork.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderAssignmentRequirement.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\OrderingPartyReferral.hbm.xml" />
+    <EmbeddedResource Include="Notification\DeptOrderPaperworkStatus.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\GetForNotifyFromCredentialingExpired.hbm.xml" />
+    <EmbeddedResource Include="Notification\DeptOrderStatus.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\BillingCompanyType.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceProductTypeRequirementCommand.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceProductTypeRequirementColumn.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceProductTypeRequirementRow.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceProductTypeRequirement.hbm.xml" />
+    <EmbeddedResource Include="Accounting\OrderAdjustment.hbm.xml" />
+    <EmbeddedResource Include="Accounting\OrderWriteOff.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\PaperworkStatusHistory.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\Geosurcharge.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SupplierMedicalItemType.hbm.xml" />
+    <EmbeddedResource Include="QuestionAnswerManagement\DiscussionPost.hbm.xml" />
+    <EmbeddedResource Include="QuestionAnswerManagement\DiscussionThread.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderOrderingPartyBlacklist.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\AgentInsuranceOPList.hbm.xml" />
+    <EmbeddedResource Include="OrderingPartyManagement\AgencyInsuranceOPList.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderApprovalSearch.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderStatusHistory.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OfficeNoteGroupNotified.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\PriceChartItemRequirement.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\PriceChartItem.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\ItemBatch.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderOrderByZipCode.hbm.xml" />
+    <EmbeddedResource Include="InventoryManagement\SPMedicalItem.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderSucharge.hbm.xml" />
+    <EmbeddedResource Include="Notification\DeptAssignmentStatus.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\InsuranceLocation.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\BillingCompany.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\BillingInformation.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\Price.hbm.xml" />
+    <EmbeddedResource Include="InsuranceManagement\PriceChart.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\IncompleteOrderDocument.hbm.xml" />
+    <EmbeddedResource Include="OrderManagement\OrderRequirement.hbm.xml" />
+    <EmbeddedResource Include="Reminder\AssignedReminder.hbm.xml" />
+    <EmbeddedResource Include="ServiceProviderManagement\ServiceProviderSearchItem.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

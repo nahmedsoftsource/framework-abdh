@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A5C637AF-770E-489B-BF4C-9A831F03A404}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Superior.MobileMedics.Common.DataAccess</RootNamespace>
+    <AssemblyName>Superior.MobileMedics.Common.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.0.3, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=1.2.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\References\System.Web.Routing.dll</HintPath>
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\SolutionItems\SmmAssemblyInfo.cs">
+      <Link>SmmAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="IBaseDA.cs" />
+    <Compile Include="ICommonDA.cs" />
+    <Compile Include="LinqClient\CommonDA.cs" />
+    <Compile Include="NHibernateClient\BaseDA.cs" />
+    <Compile Include="NHibernateClient\CommonDA.cs" />
+    <Compile Include="NHibernateClient\ICommonDA.cs" />
+    <Compile Include="NHibernateClient\NHibernateInitializer.cs" />
+    <Compile Include="NHibernateClient\NHibernateSessionManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Data\Superior.Data.csproj">
+      <Project>{F18F78C1-B6E7-4CDD-B8AD-6FD55A8CB644}</Project>
+      <Name>Superior.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Framework\Superior.Framework.csproj">
+      <Project>{C4AB8529-7DB3-4BFB-9435-3BF004BB3C72}</Project>
+      <Name>Superior.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DataMappers\LinqDataMapper\Superior.MobileMedics.DataMappers.LinqDataMapper.csproj">
+      <Project>{6AA74C9F-7739-4DE2-B6C7-DF1F8EBABAC3}</Project>
+      <Name>Superior.MobileMedics.DataMappers.LinqDataMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Superior.MobileMedics.Common.Domain.csproj">
+      <Project>{E6BBAA6B-8F27-42D1-ABA8-AEA7D8EA110A}</Project>
+      <Name>Superior.MobileMedics.Common.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Superior.MobileMedics.Common.csproj">
+      <Project>{8E36703E-B983-47B1-8A45-B1FEABA48753}</Project>
+      <Name>Superior.MobileMedics.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

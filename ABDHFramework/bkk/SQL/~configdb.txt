@@ -1,0 +1,6 @@
+#This is your first time running this script.
+#Please config your local database server, then run this script again.
+DBSERVER=TVDUONG\SQLEXPRESS
+DBNAME=SMM-TRUNK
+DBUSER=SA
+DBPASSWORD=snowman09

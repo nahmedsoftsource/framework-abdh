@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{253B60A1-C213-4B7D-AE78-A6BE01AC35FD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Superior.MobileMedics.Generator</RootNamespace>
+    <AssemblyName>Superior.MobileMedics.Generator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="generate\package\InsuranceManagement\BillingInformation\generator.xml" />
+    <Content Include="generate\package\OrderManagement\ApplicantAddress\generator.old.xml" />
+    <Content Include="generator.xml" />
+    <Content Include="templates\BaseController.html" />
+    <Content Include="templates\BaseController\InitAttr\SelectMultipleList.html" />
+    <Content Include="templates\BaseController\InitAttr\SelectList.html" />
+    <Content Include="templates\BaseRoute.html" />
+    <Content Include="templates\Create\SelectMultipleField.html" />
+    <Content Include="templates\Create\SelectField.html" />
+    <Content Include="templates\Create\InfoField.html" />
+    <Content Include="templates\Create\FileField.html" />
+    <Content Include="templates\Edit\Required.html" />
+    <Content Include="templates\Edit\TextField.html" />
+    <Content Include="templates\Edit.html" />
+    <Content Include="templates\ListWithoutLayout.aspx.html" />
+    <Content Include="templates\List.aspx.html" />
+    <Content Include="templates\List.ascx.html" />
+    <Content Include="templates\List.html" />
+    <Content Include="templates\List\TextField.html" />
+    <Content Include="templates\Route.html" />
+    <Content Include="templates\Create.html" />
+    <Content Include="templates\Create\Required.html" />
+    <Content Include="templates\Create\TextField.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Superior.MobileMedics.Domain.csproj">
+      <Project>{6EC20E9F-3BAD-4F50-942A-9F9040C8E332}</Project>
+      <Name>Superior.MobileMedics.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="generate\package\InsuranceManagement\Form\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

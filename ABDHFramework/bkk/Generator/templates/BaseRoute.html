@@ -1,0 +1,162 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Superior.MobileMedics.MainWebSite.Lib;
+using Superior.MobileMedics.MainWebSite.Utility;
+using __DOMAIN_NAMESPACE__;
+
+namespace Superior.MobileMedics.MainWebSite.Routing.Base
+{
+  public class Base__CONTROLLER__Route : BaseRoute
+  {
+    public Base__CONTROLLER__Route(UrlHelper url)
+      : base(url, "__CONTROLLER__")
+    {
+
+    }
+	
+    /// <summary>
+    /// url for create
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <returns></returns>
+    public virtual String URLForCreate(__PARENT_PARAM__){
+      return UrlFor("Create", new {__PARENT_PARAM_4__});
+    }
+	
+    /// <summary>
+    /// url for create iframe
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <returns></returns>
+    public virtual String URLForCreateIFrame(__PARENT_PARAM__){
+      return UrlFor("CreateIFrame", new {__PARENT_PARAM_4__});
+    }
+	
+    /// <summary>
+    /// url for edit iframe
+    /// </summary>
+    /// <returns></returns>
+    public virtual String URLForEditIFrame(__DOMAIN__ __DOMAIN_OBJECT__){
+      return URLForEditIFrame(__DOMAIN_OBJECT__.ID);
+    }
+	
+    /// <summary>
+    /// url for edit iframe
+    /// </summary>
+    /// <returns></returns>
+    public virtual String URLForEditIFrame(__DOMAIN_TYPE__ __DOMAIN__ID){
+      return UrlFor("EditIFrame", new {__DOMAIN__ID = __DOMAIN__ID});
+    }
+	
+    /// <summary>
+    /// url for list
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <returns></returns>
+    public virtual String URLForList(__PARENT_PARAM__){
+      return UrlFor("List");
+    }
+	
+    /// <summary>
+    /// url for edit
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    /// <returns></returns>
+    public virtual String URLForEdit(__DOMAIN__ __DOMAIN_OBJECT__){
+      return UrlFor("Edit", new { __DOMAIN__ID = __DOMAIN_OBJECT__.ID});
+    }
+	
+    /// <summary>
+    /// url for delete
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    /// <returns></returns>
+    public virtual String URLForDelete(__DOMAIN__ __DOMAIN_OBJECT__){
+      return UrlFor("Delete", new { __DOMAIN__ID = __DOMAIN_OBJECT__.ID});
+    }
+
+    /// <summary>
+    /// button to dialog edit
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    /// <param name="ReloadID"></param>
+    /// <param name="ReloadURL"></param>
+    /// <returns></returns>
+    public virtual String ButtonToDialogEdit(__DOMAIN__ __DOMAIN_OBJECT__, String ReloadID, String ReloadURL)
+    {
+      var url = URLForEdit(__DOMAIN_OBJECT__);
+      return DialogHelper.ButtonToRemote("Edit", new DialogOpenOption { 
+        ReloadID = ReloadID, 
+        URL = url, 
+        ReloadURL = ReloadURL
+      });
+    }
+
+    /// <summary>
+    /// button to dialog create
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <param name="ReloadID"></param>
+    /// <param name="ReloadURL"></param>
+    /// <returns></returns>
+    public virtual String ButtonToDialogCreate(__PARENT_PARAM_2__String ReloadID, String ReloadURL)
+    {
+      var url = URLForCreate(__PARENT_ID__);
+      return DialogHelper.ButtonToRemote("Create", new DialogOpenOption { 
+        ReloadID = ReloadID, 
+        URL = url, 
+        ReloadURL = ReloadURL
+      });
+    }
+
+    /// <summary>
+    /// button to dialog iframe create
+    /// </summary>__PARENT_COMMENT_PARAM__
+    /// <param name="ReloadID"></param>
+    /// <param name="ReloadURL"></param>
+    /// <returns></returns>
+    public virtual String ButtonToDialogIFrameCreate(__PARENT_PARAM_2__String ReloadID, String ReloadURL)
+    {
+      var url = URLForCreateIFrame(__PARENT_ID__);
+      return DialogHelper.ButtonToRemote("Create", new DialogOpenOption { 
+        ReloadID = ReloadID, 
+        URL = url,
+        ReloadURL = ReloadURL
+      });
+    }
+
+    /// <summary>
+    /// button to dialog iframe edit
+    /// </summary>
+    /// <param name="__DOMAIN_OBJECT__"></param>
+    /// <param name="ReloadID"/></param>    
+    /// <param name="ReloadURL"></param>
+    /// <returns></returns>
+    public virtual String ButtonToDialogIFrameEdit(__DOMAIN__ __DOMAIN_OBJECT__, String ReloadID, String ReloadURL)
+    {
+      var url = URLForEditIFrame(__DOMAIN_OBJECT__);
+      return DialogHelper.ButtonToRemote("Edit", new DialogOpenOption { 
+        ReloadID = ReloadID, 
+        URL = url,
+        ReloadURL = ReloadURL
+      });
+    }
+
+    /// <summary>
+    /// button to dialog iframe edit
+    /// </summary>
+    /// <param name="__DOMAIN__ID"></param>
+    /// <param name="ReloadID"/></param>    
+    /// <param name="ReloadURL"></param>
+    /// <returns></returns>
+    public virtual String ButtonToDialogIFrameEdit(__DOMAIN_TYPE__ __DOMAIN__ID, String ReloadID, String ReloadURL)
+    {
+      var url = URLForEditIFrame(__DOMAIN__ID);
+      return DialogHelper.ButtonToRemote("Edit", new DialogOpenOption { 
+        ReloadID = ReloadID, 
+        URL = url,
+        ReloadURL = ReloadURL
+      });
+    }
+  }	
+}

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+	<class name="Superior.MobileMedics.Domain.EmployeeManagement.Employee,Superior.MobileMedics.Domain" table="Employee" lazy="false">
+		<id name="ID" column="ID">
+			<generator class="assigned" />
+		</id>
+		<property name="IsSupervisor" column="IsSupervisor" not-null="true" />
+		<property name="SupervisorID" column="SupervisorID" not-null="false"/>
+		<many-to-one name="Person" fetch="select" column="PersonID" not-null="true"
+		  class="Superior.MobileMedics.Domain.PartyManagement.Person, Superior.MobileMedics.Domain" />
+		<many-to-one name="EmployeeStatus" fetch="select" column="EmployeeStatusID" not-null="true"
+			class="Superior.MobileMedics.Common.Domain.EmployeeStatus, Superior.MobileMedics.Common.Domain"/>
+		<many-to-one name="Department" fetch="select" column="DepartmentID" not-null="false"
+			class="Superior.MobileMedics.Domain.EmployeeManagement.Department, Superior.MobileMedics.Domain"/>
+    <many-to-one name="EmployeeTitle" fetch="select" column="EmployeeTitleID" not-null="true"
+			class="Superior.MobileMedics.Common.Domain.EmployeeTitle, Superior.MobileMedics.Common.Domain"/>
+	</class>
+</hibernate-mapping>
+
